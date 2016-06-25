@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="bin\standalone.swf" />
+    <movie fps="30" />
+    <movie width="800" />
+    <movie height="600" />
+    <movie version="14" />
+    <movie minorVersion="0" />
+    <movie platform="Flash Player" />
+    <movie background="#FFFFFF" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="unit" />
+    <class path="src\main" />
+    <class path="src\test" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option directives="" />
+    <option flashStrict="False" />
+    <option noInlineOnDebug="False" />
+    <option mainClass="haxe.TestMain" />
+    <option enabledebug="True" />
+    <option additional="-debug&#xA;-D fdb" />
+  </build>
+  <!-- haxelib libraries -->
+  <haxelib>
+    <library name="munit" />
+    <library name="hamcrest" />
+  </haxelib>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="unit\TestStandalone.hx" />
+    <compile path="src\test\haxe\TestMain.hx" />
+  </compileTargets>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <hidden path="obj" />
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand />
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="Default" />
+    <option testMovieCommand="bin/standalone.swf" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>

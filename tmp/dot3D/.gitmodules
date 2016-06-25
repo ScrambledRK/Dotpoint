@@ -1,0 +1,3 @@
+[submodule "lib/hxsl"]
+	path = lib/hxsl
+	url = https://github.com/ScrambledRK/hxsl.git

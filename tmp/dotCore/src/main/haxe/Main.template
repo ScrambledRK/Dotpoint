@@ -1,0 +1,52 @@
+package ;
+
+import at.dotpoint.core.bootstrapper.Bootstrapper;
+
+
+/**
+ * ...
+ * @author RK
+ */
+
+class Main extends Bootstrapper 
+{
+	
+	/**
+	 * 
+	 */
+	public static var instance:Main;
+	
+	// ************************************************************************ //
+	// Constructor
+	// ************************************************************************ //	
+	
+	static function main() 
+	{
+		Main.instance = new Main();
+	}
+	
+	public function new() 
+	{
+		super();		
+		
+		// this.startURL( "assets/config.json" );
+		// this.startData( JSON.parse( data ) );
+		
+		this.start();
+	}
+	
+	// ************************************************************************ //
+	// Methodes
+	// ************************************************************************ //
+	
+	/**
+	 * 
+	 */
+	private override function initialize():Void 
+	{	
+		super.initialize();	
+
+	}
+	
+}
+
