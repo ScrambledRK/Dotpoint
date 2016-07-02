@@ -1,0 +1,31 @@
+buildscript 
+{
+    repositories 
+	{
+        mavenLocal()
+		mavenCentral()
+    }
+    dependencies 
+	{
+        classpath group: 'at.dotpoint', name: 'gradle-haxe-plugin', version: '1.0-SNAPSHOT'
+    }
+}
+
+// /////////////////////////////////////////////// //
+// /////////////////////////////////////////////// //
+
+allprojects
+{
+	//apply plugin: 'haxe';
+	
+	//
+	group = "at.dotpoint";
+	version = "0.1-SNAPSHOT";
+	
+	//
+	repositories 
+	{
+        mavenLocal()
+		mavenCentral()
+    }
+}

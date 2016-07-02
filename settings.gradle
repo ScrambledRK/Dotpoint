@@ -1,0 +1,25 @@
+include "bootstrapper";
+include "controls";
+include "datastructure";
+include "dispatcher";
+include "display";
+include "loader";
+include "logger";
+include "math";
+include "network";
+include "rendering";
+include "spatial";
+include "utilities";
+
+//
+rootProject.name = 'dotpoint';
+
+//
+rootProject.children.each { project ->
+
+    project.projectDir = new File( settingsDir, "subprojects/" + project.name );
+    project.buildFileName  = project.name + ".gradle";
+
+    assert project.projectDir.isDirectory();
+    assert project.buildFile.isFile();
+}
