@@ -37,7 +37,7 @@ model
 		library(LibraryComponentSpec)
 		{
 			platform "java","flash"
-			flavor "debug"
+			flavor "debug", "release"
 			
 			sources
 			{		
@@ -58,7 +58,6 @@ model
 		//
 		flash(IPlatform)
 		{
-			configuration.add( "-as3", "build/flash/debug/" + rootProject.name );	
 			configuration.add( "--macro", "include('flash.at.dotpoint')" );
 			configuration.add( "-cp", "subprojects/rendering/lib/hxsl" );
 			configuration.add( "-lib", "format" );
@@ -68,7 +67,6 @@ model
 		//
 		java(IPlatform)
 		{
-			configuration.add( "-java", "build/java/debug/" + rootProject.name );	
 			configuration.add( "-java-lib", "subprojects/rendering/lib/lwjgl/lwjgl.jar" );
 			configuration.add( "--macro", "include('lwjgl.at.dotpoint')" );
 			configuration.add( "-D", "lwjgl" );						
@@ -85,7 +83,7 @@ model
 		}		
 	}
 	
-	 flavors
+	flavors
 	{
 		debug(ILibraryFlavor)
 		{
