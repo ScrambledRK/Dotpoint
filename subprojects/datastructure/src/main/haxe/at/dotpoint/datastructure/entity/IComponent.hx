@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.core.datastructure.entity;
+package haxe.at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 
 /**
  * ...

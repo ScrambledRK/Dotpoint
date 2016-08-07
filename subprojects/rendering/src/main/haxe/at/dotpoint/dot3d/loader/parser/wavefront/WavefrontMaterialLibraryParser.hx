@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.dot3d.loader.parser.wavefront;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.display.renderable.geometry.material.IMaterial;
 import haxe.at.dotpoint.loader.processor.ADataProcessor;
 import haxe.at.dotpoint.loader.processor.IDataProcessor;

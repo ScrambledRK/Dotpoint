@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.spatial;
 
-import haxe.at.dotpoint.core.datastructure.entity.IEntity;
-import haxe.at.dotpoint.core.datastructure.graph.TreeNode;
+import haxe.at.dotpoint.datastructure.entity.IEntity;
+import haxe.at.dotpoint.datastructure.graph.TreeNode;
 import haxe.at.dotpoint.spatial.boundings.IBoundings;
 import haxe.at.dotpoint.spatial.transform.ITransform;
 

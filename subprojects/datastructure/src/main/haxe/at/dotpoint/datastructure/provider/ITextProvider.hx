@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.core.datastructure.provider;
+package haxe.at.dotpoint.datastructure.provider;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 
 // TODO: l10n hook
 interface ITextProvider extends IDataProvider<String>

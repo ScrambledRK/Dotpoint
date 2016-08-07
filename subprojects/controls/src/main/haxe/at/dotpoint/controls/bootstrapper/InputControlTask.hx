@@ -39,7 +39,7 @@ class InputControlTask extends BootstrapperTask<Dynamic>
 	/**
 	 *
 	 */
-	public static var ID:String = "inputControl";
+	@:isVar public static var ID(default,never):String = "inputControl";
 
 	/**
 	 *

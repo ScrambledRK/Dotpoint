@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.rendering.context;
 
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
 import haxe.at.dotpoint.display.event.DisplayEvent;
 
 /**

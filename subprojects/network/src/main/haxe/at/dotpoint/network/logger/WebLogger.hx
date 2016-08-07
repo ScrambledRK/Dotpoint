@@ -1,8 +1,8 @@
 package haxe.at.dotpoint.network.logger;
 
 import haxe.at.dotpoint.bootstrapper.Bootstrapper;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.network.RequestResult;
 import haxe.at.dotpoint.network.ServerTool;
 import haxe.at.dotpoint.loader.DataRequest;

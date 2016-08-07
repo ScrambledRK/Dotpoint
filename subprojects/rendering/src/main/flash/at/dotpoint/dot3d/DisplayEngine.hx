@@ -2,8 +2,8 @@ package flash.at.dotpoint.dot3d;
 
 import flash.at.dotpoint.dot3d.rendering.RenderContext;
 import flash.at.dotpoint.dot3d.rendering.Renderer;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.display.ADisplayEngine;
 import haxe.at.dotpoint.display.IDisplayEngine;
 import haxe.at.dotpoint.display.renderable.RenderableFactory;

@@ -1,5 +1,5 @@
 package haxe.at.dotpoint.loader.event ;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.logger.Log;
 
 class HTTPStatusEvent extends Event

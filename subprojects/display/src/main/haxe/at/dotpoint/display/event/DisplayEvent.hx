@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.event;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 
 /**
  * 08.03.15

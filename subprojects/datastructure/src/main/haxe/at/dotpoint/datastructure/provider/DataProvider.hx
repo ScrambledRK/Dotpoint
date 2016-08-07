@@ -1,12 +1,12 @@
-package haxe.at.dotpoint.core.datastructure.provider;
-import haxe.at.dotpoint.core.datastructure.provider.ITextProvider;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
+package haxe.at.dotpoint.datastructure.provider;
+
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 
 /**
  * ...
  * @author RK
  */
-class DataProvider<T> implements IDataProvider<T>
+class DataProvider<T:Dynamic> implements IDataProvider<T>
 {
 
 	/**

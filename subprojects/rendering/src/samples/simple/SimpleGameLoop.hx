@@ -1,6 +1,6 @@
 package;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.display.IDisplayEngine;
 
 /**

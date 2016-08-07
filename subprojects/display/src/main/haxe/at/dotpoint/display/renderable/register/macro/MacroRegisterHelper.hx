@@ -24,13 +24,20 @@ class MacroRegisterHelper
 	 * @param	configPath
 	 * @return
 	 */
-	macro static public function build( configPath:String ):Array<Field>
+	macro static public function build( ?configPath:String ):Array<Field>
 	{
 		var fields:Array<Field> = Context.getBuildFields();
 
 		// ----------- //
+        // config:
 
-		var config:Dynamic = Json.parse( File.getContent( configPath ) );
+        var config:Dynamic = null;
+
+        if( configPath != null )    config = Json.parse( File.getContent( configPath ) );
+        else                        config = Json.parse( haxe.Resource.getString("register.cfg") );
+
+        // ------------ //
+        // types:
 
 		var typeList:Array<Dynamic> = cast config.types;
 

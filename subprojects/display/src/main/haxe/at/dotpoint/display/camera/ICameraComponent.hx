@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.camera;
 
-import haxe.at.dotpoint.core.datastructure.entity.IComponent;
+import haxe.at.dotpoint.datastructure.entity.IComponent;
 import haxe.at.dotpoint.math.vector.IMatrix44;
 import haxe.at.dotpoint.spatial.ISpatialEntity;
 

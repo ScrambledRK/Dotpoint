@@ -1,13 +1,13 @@
-package haxe.at.dotpoint.core.dispatcher.solo;
+package haxe.at.dotpoint.dispatcher.solo;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 
 /**
  * ...
  * @author RK
  */
-class SoloEventDispatcher extends SoloDispatcher<Event> implements IEventDispatcher
+class SoloEventDispatcher extends SoloDispatcher<Event,String> implements IEventDispatcher
 {
 
 	// ************************************************************************ //

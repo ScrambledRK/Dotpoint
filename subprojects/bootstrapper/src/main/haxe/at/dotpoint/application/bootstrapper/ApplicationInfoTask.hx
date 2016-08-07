@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.core.application.bootstrapper;
+package haxe.at.dotpoint.application.bootstrapper;
 
 import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.core.application.ApplicationInfo;
-import haxe.at.dotpoint.core.application.MainMacro;
+import haxe.at.dotpoint.application.ApplicationInfo;
+import haxe.at.dotpoint.application.MainMacro;
 
 /**
  * tries to gather data about the application itself, like its name, version, etc.
@@ -16,7 +16,7 @@ class ApplicationInfoTask extends BootstrapperTask<Dynamic>
 	/**
 	 *
 	 */
-	public static var ID:String = "applicationInfo";
+	@:isVar public static var ID(default,never):String = "applicationInfo";
 
 	// ************************************************************************ //
 	// Constructor

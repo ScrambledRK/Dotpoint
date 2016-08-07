@@ -8,7 +8,7 @@ import flash.events.ProgressEvent;
 import flash.events.SecurityErrorEvent;
 import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
 import haxe.at.dotpoint.loader.URLRequest;
 

@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.renderable.mesh.data;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.ARenderableData;
 import haxe.at.dotpoint.display.renderable.mesh.data.IMeshData;
 import haxe.at.dotpoint.display.renderable.mesh.data.MeshIndices.MeshIndexRegister;

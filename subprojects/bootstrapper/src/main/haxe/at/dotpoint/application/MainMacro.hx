@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core.application;
+package haxe.at.dotpoint.application;
 
 import haxe.macro.Context;
 import haxe.macro.Expr;

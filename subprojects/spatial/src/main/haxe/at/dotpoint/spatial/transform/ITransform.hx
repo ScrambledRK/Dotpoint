@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.spatial.transform;
 
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.math.geom.Space;
 import haxe.at.dotpoint.math.vector.IMatrix44;
 import haxe.at.dotpoint.math.vector.IQuaternion;

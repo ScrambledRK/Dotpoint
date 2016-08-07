@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.display.renderable.texture.data;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.ARenderableData;
 import haxe.at.dotpoint.logger.Log;
 import haxe.at.dotpoint.math.geom.Rectangle;

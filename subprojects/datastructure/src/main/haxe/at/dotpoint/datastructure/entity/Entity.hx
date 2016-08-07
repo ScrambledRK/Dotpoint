@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.core.datastructure.entity;
+package haxe.at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.core.datastructure.collection.VectorSet;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.core.datastructure.entity.event.EntityEvent;
+import haxe.at.dotpoint.datastructure.collection.VectorSet;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
 
 /**
  * Basic Object in control of components which augment the functionallity of this entity.

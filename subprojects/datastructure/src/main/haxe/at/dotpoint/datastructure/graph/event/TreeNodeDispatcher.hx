@@ -1,16 +1,16 @@
-package haxe.at.dotpoint.core.datastructure.graph.event;
+package haxe.at.dotpoint.datastructure.graph.event;
 
-import haxe.at.dotpoint.core.datastructure.graph.event.TreeNodeEvent.EventBubblePhase;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.core.datastructure.entity.IEntity;
+import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent.EventBubblePhase;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.datastructure.entity.IEntity;
 
 /**
  * 12.02.15
  * @author RK
  */
-@:access( haxe.at.dotpoint.core.datastructure.graph.event.TreeNodeEvent )
+@:access( haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent )
 //
 class TreeNodeDispatcher extends EventDispatcher
 {

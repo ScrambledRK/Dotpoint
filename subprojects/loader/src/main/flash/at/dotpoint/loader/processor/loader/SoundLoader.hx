@@ -7,7 +7,7 @@ import flash.events.ProgressEvent;
 import flash.events.SecurityErrorEvent;
 import flash.media.Sound;
 import flash.media.SoundLoaderContext;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.loader.event.HTTPStatusEvent;
 import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
 import haxe.at.dotpoint.loader.URLRequest;

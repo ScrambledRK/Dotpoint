@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core.dispatcher.lazy;
+package haxe.at.dotpoint.dispatcher.lazy;
 
 enum LazyStatus
 {

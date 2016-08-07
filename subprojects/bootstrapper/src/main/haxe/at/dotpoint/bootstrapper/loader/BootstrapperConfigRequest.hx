@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.bootstrapper.loader;
 
-import haxe.at.dotpoint.core.processor.ITaskFactory;
+import haxe.at.dotpoint.processor.ITaskFactory;
 import haxe.at.dotpoint.loader.DataRequest;
 import haxe.at.dotpoint.loader.format.StringFormat;
 import haxe.at.dotpoint.loader.URLRequest;

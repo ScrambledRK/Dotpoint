@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core;
+package haxe.at.dotpoint.datastructure;
 
 /**
  * @author RK

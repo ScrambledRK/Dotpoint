@@ -1,7 +1,7 @@
 package lwjgl.at.dotpoint.dot3d;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.display.ADisplayEngine;
 import haxe.at.dotpoint.display.IDisplayEngine;
 import haxe.at.dotpoint.display.renderable.RenderableFactory;

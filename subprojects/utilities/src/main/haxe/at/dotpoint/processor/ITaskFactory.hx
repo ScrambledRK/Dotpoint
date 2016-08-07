@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.core.processor ;
+package haxe.at.dotpoint.processor ;
 
-import haxe.at.dotpoint.core.processor.ITask;
+import haxe.at.dotpoint.processor.ITask;
 
 /**
  * ...

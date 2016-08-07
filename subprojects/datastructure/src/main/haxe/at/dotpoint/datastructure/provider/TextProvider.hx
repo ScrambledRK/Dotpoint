@@ -1,7 +1,6 @@
-package haxe.at.dotpoint.core.datastructure.provider;
+package haxe.at.dotpoint.datastructure.provider;
 
-import haxe.at.dotpoint.core.datastructure.provider.ITextProvider;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.datastructure.provider.ITextProvider;
 
 class TextProvider extends DataProvider<String> implements ITextProvider
 {

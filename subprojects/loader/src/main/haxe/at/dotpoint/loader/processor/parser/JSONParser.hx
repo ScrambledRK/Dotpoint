@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.loader.processor.parser;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.loader.processor.ADataProcessor;
 import haxe.at.dotpoint.loader.processor.IDataProcessor;
 import haxe.at.dotpoint.logger.Log;

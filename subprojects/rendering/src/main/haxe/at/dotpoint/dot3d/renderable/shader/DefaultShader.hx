@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.dot3d.renderable.shader;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.register.RegisterHelper;
 import haxe.at.dotpoint.display.renderable.shader.AShader;
 import haxe.at.dotpoint.display.renderable.shader.buffer.IShaderBuffer;
@@ -15,7 +15,7 @@ import haxe.at.dotpoint.display.renderable.shader.data.ShaderSignature;
 class DefaultShader extends AShader
 {
 	//
-	public static var NAME(default, null):String = "default";
+	@:isVar public static var NAME(default, never):String = "default";
 
 	//
 	public function new()

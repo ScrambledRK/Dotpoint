@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.display.rendering.context;
 
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.core.dispatcher.lazy.event.LazyEvent;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.lazy.event.LazyEvent;
 import haxe.at.dotpoint.math.vector.Vector3;
 
 /**

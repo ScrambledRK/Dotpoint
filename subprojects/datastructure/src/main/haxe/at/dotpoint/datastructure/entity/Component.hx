@@ -1,15 +1,15 @@
-package haxe.at.dotpoint.core.datastructure.entity;
+package haxe.at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.logger.Log;
 
 /**
  * Component augmenting an Entity with functionallity and/or data in order to allow
  * flexible assembling of multi functional objects. display system uses it heavily.
  */
-class Component<TEntity:IEntity> implements IComponent<TEntity>
+class Component<TEntity:(IEntity,Dynamic)> implements IComponent<TEntity>
 {
 
 	/**

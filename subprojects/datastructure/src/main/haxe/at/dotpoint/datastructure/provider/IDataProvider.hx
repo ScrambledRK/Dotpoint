@@ -1,9 +1,10 @@
-package haxe.at.dotpoint.core.datastructure.provider;
+package haxe.at.dotpoint.datastructure.provider;
+
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 
 /**
  * @author RK
  */
-
 interface IDataProvider<T>
 {
 	/**

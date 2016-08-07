@@ -1,10 +1,10 @@
 package haxe.at.dotpoint.spatial.transform;
 
-import haxe.at.dotpoint.core.datastructure.graph.event.TreeNodeEvent;
-import haxe.at.dotpoint.core.datastructure.graph.TreeNode;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.datastructure.entity.Component;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
+import haxe.at.dotpoint.datastructure.graph.TreeNode;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.datastructure.entity.Component;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.math.geom.Space;
 import haxe.at.dotpoint.math.lazy.LazyQuaternion;
 import haxe.at.dotpoint.math.lazy.LazyVector3;

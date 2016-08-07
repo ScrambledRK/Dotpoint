@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.display.bootstrapper;
 
 import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.display.IDisplayEngine;
 
 /**
@@ -14,7 +14,7 @@ class DisplayEngineTask extends BootstrapperTask<Dynamic>
 	/**
 	 *
 	 */
-	public static var ID:String = "displayEngine";
+	@:isVar public static var ID(default,never):String = "displayEngine";
 
 	/**
 	 *

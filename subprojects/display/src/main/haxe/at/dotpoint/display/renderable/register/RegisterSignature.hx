@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.renderable.register;
 
-import haxe.at.dotpoint.core.datastructure.VectorUtil;
+import haxe.at.dotpoint.datastructure.VectorUtil;
 import haxe.at.dotpoint.display.renderable.register.type.RegisterType;
 import haxe.at.dotpoint.math.Limit;
 import haxe.ds.Vector;

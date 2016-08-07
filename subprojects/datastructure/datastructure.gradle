@@ -1,0 +1,20 @@
+model
+{
+	components
+	{
+	
+		library(LibraryComponentSpec)
+		{
+			platform "java","javascript"
+			
+			sources
+			{		
+				main(CrossSourceSet)
+				{
+					source.srcDir 'src/main'		
+					platform "haxe"					
+				}								
+			}					
+		}
+	}	
+}

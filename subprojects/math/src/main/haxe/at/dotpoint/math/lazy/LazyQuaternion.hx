@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.math.lazy;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 import haxe.at.dotpoint.math.vector.IQuaternion;
 import haxe.at.dotpoint.math.vector.Quaternion;
 

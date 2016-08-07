@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core.datastructure ;
+package haxe.at.dotpoint.datastructure ;
 
 /**
  * ...

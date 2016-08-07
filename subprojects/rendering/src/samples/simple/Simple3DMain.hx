@@ -2,7 +2,7 @@ package;
 
 import haxe.at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
 import haxe.at.dotpoint.controls.InputControlSystem;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.display.IDisplayEngine;
 import haxe.at.dotpoint.display.renderable.IDisplayObject;
 import haxe.at.dotpoint.display.renderable.IRenderable;

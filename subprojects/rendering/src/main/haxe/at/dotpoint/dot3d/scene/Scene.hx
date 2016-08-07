@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.dot3d.scene;
 
-import haxe.at.dotpoint.core.datastructure.graph.TreeNode;
+import haxe.at.dotpoint.datastructure.graph.TreeNode;
 import haxe.at.dotpoint.display.renderable.IDisplayObject;
 import haxe.at.dotpoint.display.renderable.register.RegisterHelper;
 import haxe.at.dotpoint.display.renderable.register.type.RegisterType;

@@ -1,7 +1,7 @@
 package flash.at.dotpoint.loader.processor.parser;
 
 import flash.utils.ByteArray;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.display.renderable.texture.data.TextureData;
 import haxe.at.dotpoint.loader.processor.ADataProcessor;
 import haxe.at.dotpoint.loader.processor.IDataProcessor;

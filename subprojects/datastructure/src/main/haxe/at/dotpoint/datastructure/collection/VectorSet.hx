@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.core.datastructure.collection ;
+package haxe.at.dotpoint.datastructure.collection ;
 
-import haxe.at.dotpoint.core.datastructure.collection.ICollection;
+import haxe.at.dotpoint.datastructure.collection.ICollection;
 import haxe.ds.Vector;
 
 #if openfl
@@ -251,7 +251,7 @@ class VectorSet<T:Dynamic> implements ICollection<T>
 /**
  *
  */
-@:access(haxe.at.dotpoint.core.datastructure.collection.VectorSet)
+@:access(haxe.at.dotpoint.datastructure.collection.VectorSet)
 //
 class VectorSetIterator<T:Dynamic>
 {

@@ -1,12 +1,12 @@
-package haxe.at.dotpoint.core.dispatcher.event.generic;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+package haxe.at.dotpoint.dispatcher.event.generic;
+import haxe.at.dotpoint.dispatcher.event.Event;
 
 class StatusEvent extends Event
 {
 
-	public static var STARTED:String 	= "StatusEvent.STARTED";
-	public static var STOPPED:String 	= "StatusEvent.STOPPED";
-	public static var COMPLETE:String 	= "StatusEvent.COMPLETE";
+	@:isVar public static var STARTED(default,never):String 	= "StatusEvent.STARTED";
+    @:isVar public static var STOPPED(default,never):String 	= "StatusEvent.STOPPED";
+    @:isVar public static var COMPLETE(default,never):String 	= "StatusEvent.COMPLETE";
 
 	// ************************************************************************ //
 	// Constructor

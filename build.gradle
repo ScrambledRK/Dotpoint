@@ -16,7 +16,7 @@ buildscript
 
 allprojects
 {
-	//apply plugin: 'haxe';
+	apply plugin: 'haxe';
 	
 	//
 	group = "at.dotpoint";

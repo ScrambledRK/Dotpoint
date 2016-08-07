@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.camera;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.math.vector.IMatrix44;
 import haxe.at.dotpoint.math.vector.Matrix44;
 

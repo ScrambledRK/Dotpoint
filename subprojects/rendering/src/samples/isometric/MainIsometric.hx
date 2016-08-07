@@ -1,7 +1,7 @@
 package;
 
 import haxe.at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.dot3d.primitives.Plane;
 import haxe.at.dotpoint.dot3d.Stage3DEngine;
 import haxe.at.dotpoint.loader.DataRequest;

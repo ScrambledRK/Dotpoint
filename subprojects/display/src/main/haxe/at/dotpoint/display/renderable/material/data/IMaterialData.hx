@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.renderable.material.data;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 import haxe.at.dotpoint.display.renderable.IRenderable.IRenderableData;
 import haxe.at.dotpoint.display.renderable.register.type.RegisterType;
 

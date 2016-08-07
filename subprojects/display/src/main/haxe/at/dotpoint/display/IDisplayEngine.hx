@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.display;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.display.renderable.IDisplayObject;
 import haxe.at.dotpoint.display.rendering.context.IRenderContext;
 import haxe.at.dotpoint.display.rendering.IRenderer;

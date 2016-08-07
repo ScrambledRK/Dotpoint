@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.display.renderable;
 
-import haxe.at.dotpoint.core.datastructure.entity.IComponent;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.datastructure.entity.IComponent;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.IDisplayEngine;
 import haxe.at.dotpoint.display.renderable.input.IRenderInput;
 import haxe.at.dotpoint.display.renderable.material.IMaterial;

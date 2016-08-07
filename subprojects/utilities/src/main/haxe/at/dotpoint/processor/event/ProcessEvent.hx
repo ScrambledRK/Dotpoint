@@ -1,7 +1,7 @@
-package haxe.at.dotpoint.core.processor.event;
+package haxe.at.dotpoint.processor.event;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.processor.ITask;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.processor.ITask;
 
 /**
  * ...
@@ -10,11 +10,11 @@ import haxe.at.dotpoint.core.processor.ITask;
 class ProcessEvent extends Event	// TODO: extend from StatusEvent
 {
 
-	public static var PROCESS_STARTED:String 	= "ActionEvent.PROCESS_STARTED";
-	public static var PROCESS_COMPLETE:String 	= "ActionEvent.PROCESS_COMPLETE";
+	@:isVar public static var PROCESS_STARTED(default,never):String 	= "ActionEvent.PROCESS_STARTED";
+	@:isVar public static var PROCESS_COMPLETE(default,never):String 	= "ActionEvent.PROCESS_COMPLETE";
 
-	public static var TASK_STARTED:String 	= "ActionEvent.TASK_STARTED";
-	public static var TASK_COMPLETE:String 	= "ActionEvent.TASK_COMPLETE";
+	@:isVar public static var TASK_STARTED(default,never):String 	    = "ActionEvent.TASK_STARTED";
+	@:isVar public static var TASK_COMPLETE(default,never):String 	    = "ActionEvent.TASK_COMPLETE";
 
 	public var task:ITask;
 

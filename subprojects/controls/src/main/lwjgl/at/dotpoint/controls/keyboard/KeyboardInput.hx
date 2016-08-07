@@ -47,17 +47,14 @@ class KeyboardInput extends AKeyboardInput
 	 */
 	private function invoke( key:Int, scancode:Int, action:Int, mods:Int ):Void
 	{
-		switch( action )
-		{
-			case GLFW.GLFW_PRESS:
-				this.keyStatusMap.set( key, KeyStatus.DOWN );
+        if( action == GLFW.GLFW_PRESS )
+            this.keyStatusMap.set( key, KeyStatus.DOWN );
 
-			case GLFW.GLFW_RELEASE:
-				this.keyStatusMap.set( key, KeyStatus.UP );
+        if( action == GLFW.GLFW_RELEASE )
+           this.keyStatusMap.set( key, KeyStatus.UP );
 
-			case GLFW.GLFW_REPEAT:
-				this.keyStatusMap.set( key, KeyStatus.REPEAT );
-		}
+        if( action == GLFW.GLFW_REPEAT )
+           this.keyStatusMap.set( key, KeyStatus.REPEAT );
 	}
 
 	// ------------------------------------------------------------------------ //

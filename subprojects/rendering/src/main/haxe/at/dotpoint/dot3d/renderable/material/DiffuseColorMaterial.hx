@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.dot3d.renderable.material;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.material.AMaterial;
 import haxe.at.dotpoint.display.renderable.material.data.AMaterialData;
 import haxe.at.dotpoint.display.renderable.material.data.MaterialSignature;

@@ -1,6 +1,6 @@
 package lwjgl.at.dotpoint.dot3d.renderable.buffer;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.mesh.buffer.AMeshBuffer;
 import haxe.at.dotpoint.display.renderable.mesh.data.IMeshData;
 import haxe.at.dotpoint.display.renderable.mesh.data.MeshSignature;

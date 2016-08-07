@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core.dispatcher.solo ;
+package haxe.at.dotpoint.dispatcher.solo ;
 
 import haxe.at.dotpoint.logger.Log;
 
@@ -6,19 +6,19 @@ import haxe.at.dotpoint.logger.Log;
  * ...
  * @author RK
  */
-class SoloDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
+class SoloDispatcher<TData:Dynamic,TListener:Dynamic> implements IDispatcher<TData,TListener>
 {
 
 	/**
 	 *
 	 */
-	private var listener:T->Void;
+	private var listener:TData->Void;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?listener:T->Void )
+	public function new( ?listener:TData->Void )
 	{
 		this.listener = listener;
 	}
@@ -32,7 +32,7 @@ class SoloDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 *
 	 * @param	event
 	 */
-	inline public function dispatch( event:T ):Bool
+	inline public function dispatch( event:TData ):Bool
 	{
 		if( this.listener != null )
 			this.listener( event );
@@ -45,7 +45,7 @@ class SoloDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @param	call
 	 */
-	public function addListener( type:Null<Dynamic>, call:T->Void ):Void
+	public function addListener( type:TListener, call:TData->Void ):Void
 	{
 		if( this.listener != null )
 			Log.warn( "replacing listener " + type );
@@ -58,7 +58,7 @@ class SoloDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @param	call
 	 */
-	public function removeListener( type:Null<Dynamic>, call:T->Void ):Void
+	public function removeListener( type:TListener, call:TData->Void ):Void
 	{
 		this.listener = null;
 	}
@@ -68,7 +68,7 @@ class SoloDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @return
 	 */
-	public function hasListener( type:Null<Dynamic> ):Bool
+	public function hasListener( type:TListener ):Bool
 	{
 		return this.listener != null;
 	}

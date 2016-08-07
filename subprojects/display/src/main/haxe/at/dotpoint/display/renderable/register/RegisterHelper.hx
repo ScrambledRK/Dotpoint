@@ -13,7 +13,7 @@ import haxe.at.dotpoint.math.vector.Vector3;
  * @author RK
  */
 #if !macro
-@:build( haxe.at.dotpoint.display.renderable.register.macro.MacroRegisterHelper.build("res/main/register.cfg") )
+@:build( haxe.at.dotpoint.display.renderable.register.macro.MacroRegisterHelper.build() )
 #end
 //
 class RegisterHelper

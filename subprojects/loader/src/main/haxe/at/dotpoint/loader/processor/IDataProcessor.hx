@@ -1,8 +1,8 @@
 package haxe.at.dotpoint.loader.processor;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.ErrorEvent;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.loader.event.ProgressEvent;
 import haxe.at.dotpoint.loader.processor.IDataProcessor.IBasicDataProcessor;
 

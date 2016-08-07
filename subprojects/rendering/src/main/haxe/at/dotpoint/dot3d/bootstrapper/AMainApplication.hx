@@ -2,8 +2,8 @@ package haxe.at.dotpoint.dot3d.bootstrapper;
 
 import haxe.at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
 import haxe.at.dotpoint.controls.IInputControlSystem;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.processor.event.ProcessEvent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.processor.event.ProcessEvent;
 import haxe.at.dotpoint.display.IDisplayEngine;
 import haxe.at.dotpoint.loader.URLRequest;
 

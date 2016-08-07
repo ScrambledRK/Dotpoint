@@ -1,6 +1,6 @@
 package;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.display.renderable.DisplayObject;
 import haxe.at.dotpoint.display.renderable.Renderable;
 import haxe.at.dotpoint.dot3d.controls.TransformInputControl;
@@ -16,6 +16,7 @@ import haxe.at.dotpoint.math.vector.IVector3;
 import haxe.at.dotpoint.math.vector.Quaternion;
 import haxe.at.dotpoint.math.vector.Vector3;
 import haxe.at.dotpoint.spatial.transform.ITransform;
+import haxe.at.dotpoint.dot3d.renderable.material.DiffuseColorMaterial.DiffuseColorMaterialData;
 
 /**
  * ...
@@ -79,6 +80,10 @@ class TmpMain extends Simple3DMain
 
 			this.addDisplayObjectToScene( disp );
 		}
+
+        cast( mate.data, DiffuseColorMaterialData ).diffuseColor.x = 1;
+        cast( mate.data, DiffuseColorMaterialData ).diffuseColor.y = 0;
+        cast( mate.data, DiffuseColorMaterialData ).diffuseColor.z = 0;
 	}
 
 	/**

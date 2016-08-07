@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.rendering;
 
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.IDisplayObject;
 import haxe.at.dotpoint.display.renderable.IRenderable;
 import haxe.at.dotpoint.display.renderable.material.buffer.IMaterialBuffer;

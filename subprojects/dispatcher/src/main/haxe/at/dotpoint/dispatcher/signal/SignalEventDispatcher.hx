@@ -1,13 +1,13 @@
-package haxe.at.dotpoint.core.dispatcher.signal;
+package haxe.at.dotpoint.dispatcher.signal;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 
 /**
  * ...
  * @author RK
  */
-class SignalEventDispatcher extends SignalDispatcher<Event> implements IEventDispatcher
+class SignalEventDispatcher extends SignalDispatcher<Event,String> implements IEventDispatcher
 {
 
 	// ************************************************************************ //

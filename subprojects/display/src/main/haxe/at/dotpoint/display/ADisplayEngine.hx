@@ -1,10 +1,10 @@
 package haxe.at.dotpoint.display;
 
-import haxe.at.dotpoint.core.datastructure.graph.event.TreeNodeEvent;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.dispatcher.event.IEventDispatcher;
+import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.display.renderable.IDisplayObject;
 import haxe.at.dotpoint.display.renderable.material.buffer.IMaterialBuffer;
 import haxe.at.dotpoint.display.renderable.mesh.buffer.IMeshBuffer;

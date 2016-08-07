@@ -1,5 +1,5 @@
-package haxe.at.dotpoint.core.dispatcher.event.generic;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+package haxe.at.dotpoint.dispatcher.event.generic;
+import haxe.at.dotpoint.dispatcher.event.Event;
 
 class ErrorEvent extends Event
 {

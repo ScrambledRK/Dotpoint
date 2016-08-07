@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.loader.event;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.loader.DataRequest;
 
 /**

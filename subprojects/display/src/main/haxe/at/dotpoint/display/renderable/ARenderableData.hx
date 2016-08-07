@@ -1,5 +1,5 @@
 package haxe.at.dotpoint.display.renderable;
-import haxe.at.dotpoint.core.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
 import haxe.at.dotpoint.display.renderable.register.RegisterSignature;
 
 /**

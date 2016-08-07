@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.core.datastructure.entity.event;
+package haxe.at.dotpoint.datastructure.entity.event;
 
-import haxe.at.dotpoint.core.datastructure.entity.IComponent;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.datastructure.entity.IEntity;
+import haxe.at.dotpoint.datastructure.entity.IComponent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.datastructure.entity.IEntity;
 
 /**
  * Basic Event used withing the Entity/Component System. A component automatically dispatches an Event

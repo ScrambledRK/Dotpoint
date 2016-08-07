@@ -2,7 +2,7 @@ package lwjgl.at.dotpoint.dot3d.bootstrapper;
 
 import haxe.at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
 import haxe.at.dotpoint.controls.InputControlSystem;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.dot3d.bootstrapper.AMainApplication;
 import haxe.at.dotpoint.dot3d.bootstrapper.Bootstrapper;
 import haxe.at.dotpoint.dot3d.bootstrapper.IMainApplication;

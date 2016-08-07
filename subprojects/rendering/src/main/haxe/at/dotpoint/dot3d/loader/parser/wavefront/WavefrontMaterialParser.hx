@@ -1,7 +1,7 @@
 package haxe.at.dotpoint.dot3d.loader.parser.wavefront;
 
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.display.renderable.bitmap.BitmapData;
 import haxe.at.dotpoint.display.renderable.geometry.material.IMaterial;
 import haxe.at.dotpoint.dot3d.material.DiffuseTextureMaterial;

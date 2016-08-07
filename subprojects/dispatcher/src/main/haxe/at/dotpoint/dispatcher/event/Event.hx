@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.core.dispatcher.event;
+package haxe.at.dotpoint.dispatcher.event;
 
 /**
  *

@@ -1,6 +1,6 @@
 package haxe.at.dotpoint.display.renderable;
 
-import haxe.at.dotpoint.core.datastructure.entity.Component;
+import haxe.at.dotpoint.datastructure.entity.Component;
 import haxe.at.dotpoint.display.renderable.input.IRenderInput;
 import haxe.at.dotpoint.display.renderable.IRenderable.IARenderable;
 import haxe.at.dotpoint.display.renderable.material.IMaterial;

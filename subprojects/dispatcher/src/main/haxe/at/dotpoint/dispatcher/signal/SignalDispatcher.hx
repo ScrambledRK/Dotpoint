@@ -1,18 +1,24 @@
-package haxe.at.dotpoint.core.dispatcher.signal;
+package haxe.at.dotpoint.dispatcher.signal;
 
-import haxe.at.dotpoint.core.datastructure.collection.VectorSet;
+import haxe.ds.Vector;
+
+#if openfl
+	private typedef InternalList<T> = Array<T>;
+#else
+	private typedef InternalList<T> = Vector<T>;
+#end
 
 /**
  * ...
  * @author RK
  */
-class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
+class SignalDispatcher<TData:Dynamic,TListener:Dynamic> implements IDispatcher<TData,TListener>
 {
 
 	/**
 	 *
 	 */
-	private var listener:VectorSet<T->Void>;
+	private var listener:InternalList<TData->Void>;
 
 	// ************************************************************************ //
 	// Constructor
@@ -20,7 +26,11 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 
 	public function new( ?size:Int = 1 )
 	{
-		this.listener = new VectorSet<T->Void> ( size );
+        #if openfl
+            this.listener = new Array<TData->Void>();
+        #else
+            this.listener = new Vector<TData->Void>( size );
+        #end
 	}
 
 	// ************************************************************************ //
@@ -31,12 +41,13 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 *
 	 *
 	 * @param	event
+	 *
 	 */
-	public function dispatch( event:T ):Bool
+	public function dispatch( event:TData ):Bool
 	{
-		for( i in 0...this.listener.size() )
+		for( i in 0...this.listener.length )
 		{
-			this.listener.get(i)( event );
+			this.listener[i]( event );
 		}
 
 		return true;
@@ -47,9 +58,16 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @param	call
 	 */
-	public function addListener( type:Null<Dynamic>, call:T->Void ):Void
+	public function addListener( type:TListener, call:TData->Void ):Void
 	{
-		this.listener.add( call );
+        for( j in 0...this.listener.length )
+        {
+            if( this.listener[j] == null )
+            {
+                this.listener[j] = call;
+                return;
+            }
+        }
 	}
 
 	/**
@@ -57,9 +75,16 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @param	call
 	 */
-	public function removeListener( type:Null<Dynamic>, call:T->Void ):Void
+	public function removeListener( type:TListener, call:TData->Void ):Void
 	{
-		this.listener.remove( call );
+        for( j in 0...this.listener.length )
+        {
+            if( this.listener[j] == call )
+            {
+                this.listener[j] = null;
+                return;
+            }
+        }
 	}
 
 	/**
@@ -67,9 +92,15 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 * @param	type
 	 * @return
 	 */
-	public function hasListener( type:Null<Dynamic> ):Bool
+	public function hasListener( type:TListener ):Bool
 	{
-		return this.listener.size() > 0;
+        for( j in 0...this.listener.length )
+        {
+            if( this.listener[j] != null )
+                return true;
+        }
+
+        return false;
 	}
 
 	/**
@@ -79,8 +110,8 @@ class SignalDispatcher<T:Dynamic> implements IDispatcher<T,Null<Dynamic>>
 	 */
 	public function clearListeners():Void
 	{
-		for( call in this.listener )
-			this.listener.remove( call );
+        for( j in 0...this.listener.length )
+            this.listener[j] = null;
 	}
 
 	// ************************************************************************ //

@@ -1,6 +1,6 @@
 package lwjgl.at.dotpoint.dot3d.rendering;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.display.rendering.context.ARenderContext;
 import haxe.at.dotpoint.display.rendering.context.IRenderContext;
 import haxe.at.dotpoint.display.rendering.context.RenderSettings;

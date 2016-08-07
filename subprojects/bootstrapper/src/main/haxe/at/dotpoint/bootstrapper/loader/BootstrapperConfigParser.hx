@@ -1,8 +1,8 @@
 package haxe.at.dotpoint.bootstrapper.loader;
 
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.core.processor.ITask;
-import haxe.at.dotpoint.core.processor.ITaskFactory;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.processor.ITask;
+import haxe.at.dotpoint.processor.ITaskFactory;
 import haxe.at.dotpoint.loader.processor.ADataProcessor;
 import haxe.at.dotpoint.loader.processor.IDataProcessor;
 

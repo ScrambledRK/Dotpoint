@@ -1,8 +1,8 @@
 package haxe.at.dotpoint.loader.bootstrapper;
 
 import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.core.dispatcher.event.Event;
-import haxe.at.dotpoint.core.dispatcher.event.generic.StatusEvent;
+import haxe.at.dotpoint.dispatcher.event.Event;
+import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.at.dotpoint.loader.DataRequest;
 import haxe.at.dotpoint.loader.URLRequest;
 
