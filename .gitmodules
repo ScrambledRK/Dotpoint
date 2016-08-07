@@ -1,0 +1,3 @@
+[submodule "subprojects/rendering/lib/hxsl"]
+	path = subprojects/rendering/lib/hxsl
+	url = git@github.com:ScrambledRK/hxsl.git

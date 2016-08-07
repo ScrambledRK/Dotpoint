@@ -6,7 +6,7 @@ import haxe.at.dotpoint.display.renderable.texture.data.ITextureData;
 /**
  * @author RK
  */
-interface ITexture extends IRenderableComponent<ITextureData,ITextureBuffer<DisplayEngine>>
+interface ITexture extends IRenderableComponent<ITextureData,ITextureBuffer>
 {
 
 }

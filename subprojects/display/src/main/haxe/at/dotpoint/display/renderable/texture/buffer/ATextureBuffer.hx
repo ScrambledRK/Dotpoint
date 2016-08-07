@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.display.renderable.material.buffer;
+package haxe.at.dotpoint.display.renderable.texture.buffer;
 
 import haxe.at.dotpoint.display.renderable.shader.IShader;
 import haxe.at.dotpoint.display.renderable.texture.buffer.ITextureBuffer;
@@ -8,7 +8,7 @@ import haxe.at.dotpoint.display.renderable.texture.data.ITextureData;
  * ...
  * @author RK
  */
-class ATextureBuffer implements ITextureBuffer
+class ATextureBuffer //implements ITextureBuffer
 {
 
 	// ************************************************************************ //
@@ -29,7 +29,7 @@ class ATextureBuffer implements ITextureBuffer
 	 */
 	public function allocate( data:ITextureData ):Bool
 	{
-		throw "must override abstract method"
+		throw "must override abstract method";
 		return false;
 	}
 
@@ -38,7 +38,7 @@ class ATextureBuffer implements ITextureBuffer
 	 */
 	public function dispose( data:ITextureData ):Void
 	{
-		throw "must override abstract method"
+		throw "must override abstract method";
 	}
 
 	// ************************************************************************ //
@@ -50,7 +50,7 @@ class ATextureBuffer implements ITextureBuffer
 	 */
 	public function bind( data:ITextureData, shader:IShader ):Void
 	{
-		throw "must override abstract method"
+		throw "must override abstract method";
 	}
 
 	/**
@@ -58,7 +58,7 @@ class ATextureBuffer implements ITextureBuffer
 	 */
 	public function unbind( data:ITextureData, shader:IShader ):Void
 	{
-		throw "must override abstract method"
+		throw "must override abstract method";
 	}
 
 	// ************************************************************************ //

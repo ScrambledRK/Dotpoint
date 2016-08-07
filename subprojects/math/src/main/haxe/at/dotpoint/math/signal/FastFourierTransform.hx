@@ -137,15 +137,15 @@ class FastFourierTransform
 	 */
 	public function performFFT2( startIdx:Int, data:Vector<Vector<IVector2>> ):Int
 	{
-		var idx:Int;
-		var idx1:Int;
-		var bftIdx:Int;
+		var idx:Int = 0;
+		var idx1:Int = 0;
+		var bftIdx:Int = 0;
 
-		var Xb:Int;
-		var Yb:Int;
+		var Xb:Int = 0;
+		var Yb:Int = 0;
 
-		var wx:Float;
-		var wy:Float;
+		var wx:Float = 0;
+		var wy:Float = 0;
 
 		var i:Int = 0;
 		var j:Int = startIdx;
@@ -225,15 +225,15 @@ class FastFourierTransform
 	 */
 	public function performFFT4( startIdx:Int, data:Vector<Vector<IVector3>> ):Int
 	{
-		var idx:Int;
-		var idx1:Int;
-		var bftIdx:Int;
+		var idx:Int = 0;
+		var idx1:Int = 0;
+		var bftIdx:Int = 0;
 
-		var Xb:Int;
-		var Yb:Int;
+		var Xb:Int = 0;
+		var Yb:Int = 0;
 
-		var wx:Float;
-		var wy:Float;
+		var wx:Float = 0;
+		var wy:Float = 0;
 
 		var i:Int = 0;
 		var j:Int = startIdx;

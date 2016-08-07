@@ -14,18 +14,83 @@ buildscript
 // /////////////////////////////////////////////// //
 // /////////////////////////////////////////////// //
 
-allprojects
+apply plugin: 'haxe';
+
+//
+group = "at.dotpoint";
+version = "0.1-SNAPSHOT";
+
+//
+repositories 
 {
-	apply plugin: 'haxe';
+	mavenLocal()
+	mavenCentral()
+}
+
+// /////////////////////////////////////////////// //
+// /////////////////////////////////////////////// //
+
+model
+{
+	components
+	{	
+		library(LibraryComponentSpec)
+		{
+			platform "java","flash"
+			flavor "debug"
+			
+			sources
+			{		
+				main(CrossSourceSet)
+				{		
+					subprojects.each {
+						source.srcDir it.file('src/main')
+					}
+					
+					platform "haxe"					
+				}								
+			}					
+		}
+	}	
 	
-	//
-	group = "at.dotpoint";
-	version = "0.1-SNAPSHOT";
-	
-	//
-	repositories 
+	platforms
 	{
-        mavenLocal()
-		mavenCentral()
-    }
+		//
+		flash(IPlatform)
+		{
+			configuration.add( "-as3", "build/flash/debug/" + rootProject.name );	
+			configuration.add( "--macro", "include('flash.at.dotpoint')" );
+			configuration.add( "-cp", "subprojects/rendering/lib/hxsl" );
+			configuration.add( "-lib", "format" );
+			configuration.add( "-swf-version", "11" );
+		}
+	
+		//
+		java(IPlatform)
+		{
+			configuration.add( "-java", "build/java/debug/" + rootProject.name );	
+			configuration.add( "-java-lib", "subprojects/rendering/lib/lwjgl/lwjgl.jar" );
+			configuration.add( "--macro", "include('lwjgl.at.dotpoint')" );
+			configuration.add( "-D", "lwjgl" );						
+		}	
+
+		all
+		{		
+			configuration.add( "-D", "doc" );
+			configuration.add( "-D", "dotpoint" );
+			configuration.add( "--macro", "allowPackage('sys')" );			
+			configuration.add( "--macro", "include('haxe.at.dotpoint')" );
+			configuration.add( "--macro", "include('haxe.org.ds.VectorSort')" );
+			configuration.add( "-resource", "subprojects/rendering/res/main/register.cfg@register.cfg" );
+		}		
+	}
+	
+	 flavors
+	{
+		debug(ILibraryFlavor)
+		{
+			configuration.add( "-debug", "" );
+		}
+	} 
+
 }
