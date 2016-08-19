@@ -11,14 +11,9 @@ class EventDispatcher implements IEventDispatcher
 {
 
 	/**
-	 *
+	 * proxy target
 	 */
-	private var target:IEventDispatcher;
-
-	/**
-	 *
-	 */
-	@:isVar private var isEmptyDelegator(get,null):Bool;
+	@:isVar public var target(get,set):IEventDispatcher;
 
 	/**
 	 *
@@ -33,26 +28,27 @@ class EventDispatcher implements IEventDispatcher
 	 *
 	 * @param	?proxy
 	 */
-	public function new( ?proxy:IEventDispatcher, ?isEmptyDelegator:Bool = false )
+	public function new( ?proxy:IEventDispatcher )
 	{
 		this.target = proxy != null ? proxy : this;
-		this.isEmptyDelegator = isEmptyDelegator;
-
-		if( !this.isEmptyDelegator )
-			this.listeners = new StringMap<VectorSet<Event->Void>>();
+		this.listeners = new StringMap<VectorSet<Event->Void>>();
 	}
 
 	// ************************************************************************ //
-	// getter
+	// getter / setter
 	// ************************************************************************ //
 
 	/**
 	 *
-	 * @return
 	 */
-	private function get_isEmptyDelegator():Bool
+	private function get_target():IEventDispatcher { return this.target;	}
+
+	private function set_target( value:IEventDispatcher ):IEventDispatcher
 	{
-		return this.isEmptyDelegator && this.target != this;
+		if( value == null )
+			value = this;
+
+		return this.target = value;
 	}
 
 	// ************************************************************************ //
@@ -65,11 +61,6 @@ class EventDispatcher implements IEventDispatcher
 	 */
 	public function dispatch( event:Event ):Bool
 	{
-		if( this.isEmptyDelegator )
-			return this.target.dispatch( event );
-
-		// ------------ //
-
 		if( event.target == null )
 			event.target = this.target;
 
@@ -98,14 +89,6 @@ class EventDispatcher implements IEventDispatcher
 	 */
 	public function addListener( type:String, call:Event->Void ):Void
 	{
-		if( this.isEmptyDelegator )
-		{
-			this.target.addListener( type, call );
-			return;
-		}
-
-		// ------------ //
-
 		var list:VectorSet<Event->Void> = this.listeners.get( type );
 
 		if( list == null )
@@ -123,14 +106,6 @@ class EventDispatcher implements IEventDispatcher
 	 */
 	public function removeListener( type:String, call:Event->Void ):Void
 	{
-		if( this.isEmptyDelegator )
-		{
-			this.target.removeListener( type, call );
-			return;
-		}
-
-		// ------------ //
-
 		var list:VectorSet<Event->Void> = this.listeners.get( type );
 
 		if( list != null )
@@ -150,13 +125,7 @@ class EventDispatcher implements IEventDispatcher
 	 */
 	public function hasListener( type:String ):Bool
 	{
-		if( this.isEmptyDelegator )
-			return this.target.hasListener( type );
-
-		// ------------ //
-
 		var list:VectorSet<Event->Void> = this.listeners.get( type );
-
 		return list != null && list.size() > 0;
 	}
 
@@ -165,14 +134,6 @@ class EventDispatcher implements IEventDispatcher
 	 */
 	public function clearListeners():Void
 	{
-		if( this.isEmptyDelegator )
-		{
-			this.target.clearListeners();
-			return;
-		}
-
-		// ------------ //
-
 		for( type in this.listeners.keys() )
 		{
 			this.listeners.remove( type );

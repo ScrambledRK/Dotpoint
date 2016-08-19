@@ -38,7 +38,7 @@ interface ITransform extends IEventDispatcher
 	/**
 	 *
 	 */
-	public function getMatrix( ?output:IMatrix44, ?space:Space ):IMatrix44;
+	public function getMatrix( ?space:Space ):TransformationMatrix;
 
 	// ---------------------- //
 	// ---------------------- //
@@ -53,9 +53,4 @@ interface ITransform extends IEventDispatcher
 	 */
 	public function hasScaling( ?space:Space ):Bool;
 
-	// ---------------------- //
-	// ---------------------- //
-
-	private function getWorldMatrix():TransformationMatrix;
-	private function invalidateWorldMatrix():Void;
 }

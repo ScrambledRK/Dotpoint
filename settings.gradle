@@ -10,6 +10,7 @@ include "network";
 include "rendering";
 include "spatial";
 include "utilities";
+include "unit";
 
 //
 rootProject.name = 'dotpoint';

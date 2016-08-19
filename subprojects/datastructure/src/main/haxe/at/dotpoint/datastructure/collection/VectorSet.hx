@@ -47,7 +47,6 @@ class VectorSet<T:Dynamic> implements ICollection<T>
 			this.list = new Vector<T>( size );
 		#end
 
-
 		this.maxEntries = size;
 		this.numEntries = 0;
 

@@ -12,7 +12,7 @@ import haxe.at.dotpoint.math.vector.IVector3;
 import haxe.at.dotpoint.math.vector.Vector3;
 import haxe.at.dotpoint.spatial.event.SpatialEvent;
 import haxe.at.dotpoint.spatial.ISpatialEntity;
-import haxe.at.dotpoint.spatial.transform.Transform;
+import haxe.at.dotpoint.spatial.transform.LazyTransform;
 import haxe.at.dotpoint.spatial.transform.TransformationMatrix;
 
 /**
@@ -94,7 +94,7 @@ class Boundings<TEntity:IASpatialEntity<TEntity>> extends Component<TEntity> imp
 	 */
 	private override function onEntityAdded():Void
 	{
-		this.assertRequiredComponents( [TreeNode,Transform] );
+		this.assertRequiredComponents( [TreeNode,LazyTransform] );
 
 		// -------------- //
 
@@ -526,7 +526,7 @@ class Boundings<TEntity:IASpatialEntity<TEntity>> extends Component<TEntity> imp
 
 		// ------------- //
 
-		var inverse:Transform<TEntity> = new Transform<TEntity>();
+		var inverse:LazyTransform<TEntity> = new LazyTransform<TEntity>();
 			inverse.setMatrix( matrix, Space.LOCAL );
 
 		output.value.setExtensions( bounds.min, bounds.max );           // does not validate in case its invalid

@@ -22,5 +22,5 @@ interface IMatrix44 extends IMatrix33
 	/**
 	 * sets this matrix to the inverse (might not always be possible)
 	 */
-	public function inverse():Void;
+	public function inverse():IMatrix44;
 }

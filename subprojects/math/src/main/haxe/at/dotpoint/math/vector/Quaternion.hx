@@ -648,56 +648,58 @@ class Quaternion implements IQuaternion
 
 		// ----------- //
 
-		var t:Float = input.m11 + input.m22 + input.m33;	// trace
+		var x:Float = (  input.m11 + input.m22 + input.m33 + 1.0 ) / 4.0;
+		var y:Float = (  input.m11 - input.m22 - input.m33 + 1.0 ) / 4.0;
+		var z:Float = ( -input.m11 + input.m22 - input.m33 + 1.0 ) / 4.0;
+		var w:Float = ( -input.m11 - input.m22 + input.m33 + 1.0 ) / 4.0;
 
-		if( t >= 0 )
+		if( x < 0.0 ) x = 0.0;
+		if( y < 0.0 ) y = 0.0;
+		if( z < 0.0 ) z = 0.0;
+		if( w < 0.0 ) w = 0.0;
+
+		x = Math.sqrt( x );
+		y = Math.sqrt( y );
+		z = Math.sqrt( z );
+		w = Math.sqrt( w );
+
+		if( x >= y && x >= z && x >= w )
 		{
-			var s:Float = Math.sqrt( t + 1 ); // |s| >= 1
-
-			output.w = 0.5 * s; 	// |w| >= 0.5
-
-			s = 0.5 / s;
-
-			output.x = (input.m32 - input.m23) * s;
-			output.y = (input.m13 - input.m31) * s;
-			output.z = (input.m21 - input.m12) * s;
+			y *= MathUtil.getSign( input.m23 - input.m32 );
+			z *= MathUtil.getSign( input.m31 - input.m13 );
+			w *= MathUtil.getSign( input.m12 - input.m21 );
 		}
-		else if( (input.m11 > input.m22) && (input.m11 > input.m33) )
+		else if( y >= x && y >= z && y >= w )
 		{
-			var s = Math.sqrt( 1.0 + input.m11 - input.m22 - input.m33 ); // |s| >= 1
-
-			output.x = s * 0.5; 	// |x| >= 0.5
-
-			s = 0.5 / s;
-
-			output.y = (input.m21 + input.m12) * s;
-			output.z = (input.m31 + input.m13) * s;
-			output.w = (input.m32 - input.m23) * s;
+			x *= MathUtil.getSign( input.m23 - input.m32 );
+			z *= MathUtil.getSign( input.m12 + input.m21 );
+			w *= MathUtil.getSign( input.m31 + input.m13 );
 		}
-		else if( input.m22 > input.m33 )
+		else if( z >= x && z >= y && z >= w )
 		{
-			var s = Math.sqrt( 1.0 + input.m22 - input.m33 - input.m11 ); // |s| >= 1
-
-			output.y = s * 0.5; 	// |y| >= 0.5
-
-			s = 0.5 / s;
-
-			output.x = (input.m12 + input.m21) * s;
-			output.z = (input.m32 + input.m23) * s;
-			output.w = (input.m13 - input.m31) * s;
+			x *= MathUtil.getSign( input.m31 - input.m13 );
+			y *= MathUtil.getSign( input.m12 + input.m21 );
+			w *= MathUtil.getSign( input.m23 + input.m32 );
+		}
+		else if( w >= x && w >= y && z >= z )
+		{
+			x *= MathUtil.getSign( input.m12 - input.m21 );
+			y *= MathUtil.getSign( input.m13 + input.m31 );
+			z *= MathUtil.getSign( input.m23 + input.m32 );
 		}
 		else
 		{
-			var s = Math.sqrt( 1.0 + input.m33 - input.m11 - input.m22 ); // |s| >= 1
-
-			output.z = s * 0.5; 	// |z| >= 0.5
-
-			s = 0.5 / s;
-
-			output.x = (input.m13 + input.m31) * s;
-			output.y = (input.m23 + input.m32) * s;
-			output.w = (input.m21 - input.m12) * s;
+			throw "setMatrix implementation is bollocks";
 		}
+
+		// ----------- //
+
+		output.x = w;	// woops
+		output.y = y;
+		output.z = z;
+		output.w = x;
+
+		output.normalize();
 
 		// ----------- //
 

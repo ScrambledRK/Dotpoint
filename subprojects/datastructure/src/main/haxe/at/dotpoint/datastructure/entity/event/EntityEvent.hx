@@ -22,7 +22,7 @@ class EntityEvent extends Event
 	/**
 	 * component dispatching the event, might be null if it has been sent directly through the entity
 	 */
-	@:isVar public var component(get,set):IComponent<Dynamic>;
+	@:isVar public var component(get,set):IComponent;
 
 	/**
 	 * entity in control of a component that most likely sent this request, might be just the entity
@@ -46,12 +46,12 @@ class EntityEvent extends Event
 	/**
 	 * component dispatching the event
 	 */
-	private function set_component( value:IComponent<Dynamic> ):IComponent<Dynamic>
+	private function set_component( value:IComponent ):IComponent
 	{
 		return this.component = value;
 	}
 
-	private	function get_component():IComponent<Dynamic>
+	private	function get_component():IComponent
 	{
 		if( this.component != null )
 			return this.component;
@@ -78,8 +78,8 @@ class EntityEvent extends Event
 		if( Std.is( this.target, IEntity )  )
 			return cast this.target;
 
-		if( Std.is( this.target, IComponent ) )
-			return cast( this.target, IComponent<Dynamic> ).entity;
+//		if( Std.is( this.target, IComponent ) )
+//			return cast( this.target, IComponent ).entity;
 
 		return null;
 	}

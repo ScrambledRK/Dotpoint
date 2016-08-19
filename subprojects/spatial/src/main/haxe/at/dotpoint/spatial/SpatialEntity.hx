@@ -8,7 +8,7 @@ import haxe.at.dotpoint.spatial.boundings.Boundings;
 import haxe.at.dotpoint.spatial.boundings.IBoundings;
 import haxe.at.dotpoint.spatial.ISpatialEntity;
 import haxe.at.dotpoint.spatial.transform.ITransform;
-import haxe.at.dotpoint.spatial.transform.Transform;
+import haxe.at.dotpoint.spatial.transform.LazyTransform;
 
 /**
  * Entity for Spatial-Objects with Transformation Component for translation, scaling and rotation,
@@ -73,7 +73,7 @@ class ASpatialEntity<TNode:IASpatialEntity<TNode>> extends Entity implements IAS
 	{
 		super( numComponents );
 
-		var transform:Transform<TNode> = new Transform<TNode>();
+		var transform:LazyTransform<TNode> = new LazyTransform<TNode>();
 		var boundings:Boundings<TNode> = new Boundings<TNode>( pivot );
 
 		this.spatialNode = new TreeNode<TNode>();

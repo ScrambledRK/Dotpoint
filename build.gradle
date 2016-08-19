@@ -45,6 +45,12 @@ model
 				{		
 					subprojects.each {
 						source.srcDir it.file('src/main')
+						
+						if( it.file('src/sample').exists() )
+							source.srcDir it.file('src/sample')
+							
+						if( it.file('src/test').exists() )
+							source.srcDir it.file('src/test')	
 					}
 					
 					platform "haxe"					
@@ -68,18 +74,20 @@ model
 		java(IPlatform)
 		{
 			configuration.add( "-java-lib", "subprojects/rendering/lib/lwjgl/lwjgl.jar" );
-			configuration.add( "--macro", "include('lwjgl.at.dotpoint')" );
-			configuration.add( "-D", "lwjgl" );						
+		//	configuration.add( "--macro", "include('lwjgl.at.dotpoint')" );
+			configuration.add( "-D", "lwjgl" );	
+			configuration.add("-java", "@{variation.buildDir}" );
 		}	
 
 		all
 		{		
 			configuration.add( "-D", "doc" );
 			configuration.add( "-D", "dotpoint" );
-			configuration.add( "--macro", "allowPackage('sys')" );			
-			configuration.add( "--macro", "include('haxe.at.dotpoint')" );
-			configuration.add( "--macro", "include('haxe.org.ds.VectorSort')" );
+			//configuration.add( "--macro", "allowPackage('sys')" );			
+			// configuration.add( "--macro", "include('haxe.at.dotpoint')" );
+			// configuration.add( "--macro", "include('haxe.org.ds.VectorSort')" );
 			configuration.add( "-resource", "subprojects/rendering/res/main/register.cfg@register.cfg" );
+			configuration.add("-main", "SpatialTestRunner" );
 		}		
 	}
 	

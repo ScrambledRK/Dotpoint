@@ -1,22 +1,17 @@
 package haxe.at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-
 /**
  * ...
  * @author RK
  */
-interface IComponent<TEntity:IEntity> extends IEventDispatcher
+interface IComponent
 {
+	//
+	private var entity:IEntity;
 
-	/**
-	 * entity managing this component
-	 */
-	public var entity(get, set):TEntity;
+	//
+	private function onEntityAttached( newEntity:IEntity ):Bool;
 
-	/**
-	 * called upon entity.removeComponent
-	 */
-	public function destroyComponent():Void;
-
+	//
+	private function onEntityDetached( oldEntity:IEntity ):Bool;
 }

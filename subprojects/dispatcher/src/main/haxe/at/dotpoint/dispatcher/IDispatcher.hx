@@ -4,7 +4,7 @@ package haxe.at.dotpoint.dispatcher ;
  * @author RK
  */
 
-interface IDispatcher<TData:Dynamic,TListener:Dynamic> 
+interface IDispatcher<TData,TListener>
 {
 	/**
 	 * 

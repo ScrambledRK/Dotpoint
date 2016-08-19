@@ -18,18 +18,21 @@ class TreeNodeDispatcher extends EventDispatcher
 	/**
 	 *
 	 */
-	public var node:TreeNode<IEntity>;
+	public var node:TreeNode<Dynamic>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?proxy:IEventDispatcher )
+	public function new( ?node:TreeNode<Dynamic>, ?proxy:IEventDispatcher )
 	{
 		super( proxy );
 
-		if( Std.is( proxy, TreeNode ) )
-			this.node = cast proxy;
+		//
+		this.node = node;
+
+		if( this.node == null && Std.is( this, TreeNode ) )
+			this.node = cast this;
 	}
 
 	// ************************************************************************ //

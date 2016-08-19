@@ -1,10 +1,19 @@
 package haxe.at.dotpoint.datastructure.entity;
 
+import haxe.at.dotpoint.datastructure.entity.IEntity.IAEntity;
+import haxe.at.dotpoint.datastructure.entity.IComponent.IComponent;
+import haxe.at.dotpoint.datastructure.entity.composition.EntityComposition;
+import haxe.at.dotpoint.datastructure.entity.composition.EntityCompositionRequirement;
 import haxe.at.dotpoint.datastructure.collection.VectorSet;
 import haxe.at.dotpoint.dispatcher.event.Event;
 import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
 import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
+
+//
+// TODO: remove entity field for components
+// TODO: provide newEntity for onEntityDetached
+//
 
 /**
  * Basic Object in control of components which augment the functionallity of this entity.
@@ -12,61 +21,31 @@ import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
  *
  * @author RK
  */
-class Entity implements IEntity
+class Entity extends EventDispatcher implements IEntity
 {
-
-	/**
-	 * internal dispatcher, might be replaced with specific messagers allowing for bubbling or similar features
-	 */
-	@:isVar private var dispatcher(get,set):IEventDispatcher;
 
 	/**
 	 * list of components, component classes have to be unique (cant have the same component-type twice)
 	 */
-	public var componentSet:VectorSet<IComponent<Dynamic>>;
+	public var componentSet(default,null):VectorSet<IComponent>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
+	//
 	public function new( numComponents:Int = 1 )
 	{
-		this.componentSet = new VectorSet<IComponent<Dynamic>>( numComponents, true );
+		this.componentSet = new VectorSet<IComponent>( numComponents, true );
 	}
 
-	public function destoryEntity():Void
+	//
+	public function clear():Void
 	{
 		for( component in this.componentSet )
-		{
-			this.removeComponent( component, true );
-		}
+			this.removeComponent( component );
 
-		if( this.dispatcher != null )
-		{
-			this.dispatcher.clearListeners();
-			this.dispatcher = null;
-		}
-	}
-
-	// ************************************************************************ //
-	// getter / setter
-	// ************************************************************************ //
-
-	/**
-	 *
-	 * @return
-	 */
-	private function get_dispatcher():IEventDispatcher
-	{
-		if( this.dispatcher == null )
-			this.dispatcher = new EventDispatcher( this );
-
-		return this.dispatcher;
-	}
-
-	private function set_dispatcher( value:IEventDispatcher ):IEventDispatcher
-	{
-		return this.dispatcher = value;
+		this.clearListeners();
 	}
 
 	// ************************************************************************ //
@@ -74,19 +53,16 @@ class Entity implements IEntity
 	// ************************************************************************ //
 
 	/**
-	 * adds the component, but also removes a component of the same class if found
+	 * adds the component, but also removes all components of the same class if any
 	 */
-	public function setComponent( component:IComponent<Dynamic> ):Void
+	public function setComponent( component:IComponent ):Void
 	{
-		var existing:IComponent<Dynamic> = this.getComponent( Type.getClass( component ) );
+		var existing:IComponent = null;
 
-		if( existing != component )
-		{
-			if( existing != null  )
-				this.removeComponent( existing );
+		while( (existing = this.getComponent( Type.getClass( component ) ) ) != null )
+			this.removeComponent( existing );
 
-			this.addComponent( component );
-		}
+		this.addComponent( component );
 	}
 
 	/**
@@ -95,7 +71,7 @@ class Entity implements IEntity
 	 * @param	type
 	 * @return
 	 */
-	public function getComponent<T:IComponent<Dynamic>>( type:Class<T> ):Null<T>
+	public function getComponent<T:IComponent>( type:Class<T> ):Null<T>
 	{
 		for( component in this.componentSet )
 		{
@@ -112,13 +88,16 @@ class Entity implements IEntity
 	 * @param	component
 	 * @return
 	 */
-	public function addComponent( component:IComponent<Dynamic> ):Bool
+	public function addComponent( component:IComponent ):Bool
 	{
 		if( component.entity != null)
 			component.entity.removeComponent( component );
 
+		//
+		component.onEntityAttached( this );
 		component.entity = this;
 
+		//
 		var success:Bool = this.componentSet.add( component );
 
 		// -------------- //
@@ -143,17 +122,15 @@ class Entity implements IEntity
 	 * @param	component
 	 * @return
 	 */
-	public function removeComponent( component:IComponent<Dynamic>, ?destroy:Bool = true ):Bool
+	public function removeComponent( component:IComponent ):Bool
 	{
 		if( component.entity != this )
-			throw "can't remove a component not beeing added to this entity";
+			return false;
+
+		component.onEntityDetached( this );
+		component.entity = null;
 
 		var success:Bool = this.componentSet.remove( component );
-
-		if( destroy )
-			component.destroyComponent();
-
-		component.entity = null;
 
 		// -------------- //
 
@@ -171,65 +148,4 @@ class Entity implements IEntity
 		return success;
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	public function getComponentIterator():Iterator<IComponent<Dynamic>>
-	{
-		return this.componentSet.iterator();
-	}
-
-	// ************************************************************************ //
-	// IEventDispatcher
-	// ************************************************************************ //
-
-	/**
-	 *
-	 * @param	event
-	 */
-	public function dispatch( event:Event ):Bool
-	{
-		return this.dispatcher.dispatch( event );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @param	call
-	 */
-	public function addListener( type:String, call:Event->Void ):Void
-	{
-		this.dispatcher.addListener( type, call );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @param	call
-	 */
-	public function removeListener( type:String, call:Event->Void ):Void
-	{
-		this.dispatcher.removeListener( type, call );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @return
-	 */
-	public function hasListener( type:String ):Bool
-	{
-		return this.dispatcher.hasListener( type );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @return
-	 */
-	public function clearListeners():Void
-	{
-		return this.dispatcher.clearListeners();
-	}
 }

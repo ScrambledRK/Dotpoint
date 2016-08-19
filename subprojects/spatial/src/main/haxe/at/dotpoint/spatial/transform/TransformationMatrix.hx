@@ -1,5 +1,7 @@
 package haxe.at.dotpoint.spatial.transform;
 
+import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
+import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
 import haxe.at.dotpoint.math.vector.IMatrix44;
 import haxe.at.dotpoint.math.vector.IQuaternion;
 import haxe.at.dotpoint.math.vector.IVector3;
@@ -13,6 +15,12 @@ import haxe.at.dotpoint.math.vector.Vector3;
  */
 class TransformationMatrix extends Matrix44
 {
+	/**
+	 * responsible for dispatching/validating changes
+	 */
+	@:dox(show)
+	//
+	private var lazy(default,null):LazyComponent;
 
 	// ************************************************************************ //
 	// Constructor
@@ -21,6 +29,9 @@ class TransformationMatrix extends Matrix44
 	public function new( ?m:IMatrix44 )
 	{
 		super( m );
+
+		//
+		this.lazy = new LazyComponent();
 	}
 
 	// ************************************************************************ //

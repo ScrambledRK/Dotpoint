@@ -1,94 +1,29 @@
 package haxe.at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.logger.Log;
+import haxe.at.dotpoint.datastructure.entity.IEntity;
+
 
 /**
  * Component augmenting an Entity with functionallity and/or data in order to allow
  * flexible assembling of multi functional objects. display system uses it heavily.
  */
-class Component<TEntity:(IEntity,Dynamic)> implements IComponent<TEntity>
+class Component implements IComponent
 {
 
-	/**
-	 * internal dispatcher, might be replaced with specific messagers allowing for bubbling or similar features
-	 */
-	@:isVar private var dispatcher(get, set):IEventDispatcher;
-
-	/**
-	 * entity managing this component
-	 */
-	@:isVar public var entity(get,set):TEntity;
+	//
+	private var entity:IEntity;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new()
-	{
-		//
-	}
-
-	/**
-	 * last resort to remove all tangling pointers to the entity or other
-	 * objects that might prevent the garbage collector from removing this
-	 * component.
-	 */
-	public function destroyComponent():Void
-	{
-		Log.info( "Destroy Component: " + this + " " + this.entity );
-
-		this.entity = null;
-
-		if( this.dispatcher != null )
-		{
-			this.dispatcher.clearListeners();
-			this.dispatcher = null;
-		}
-	}
-
-	// ************************************************************************ //
-	// getter / setter
-	// ************************************************************************ //
-
 	/**
 	 *
-	 * @return
+	 * @param dispatcher internal dispatcher, will be EventDispatcher when given null
 	 */
-	private function get_dispatcher():IEventDispatcher
+	public function new()
 	{
-		if( this.dispatcher == null )
-			this.dispatcher = new EventDispatcher( this );
-
-		return this.dispatcher;
-	}
-
-	private function set_dispatcher( value:IEventDispatcher ):IEventDispatcher
-	{
-		return this.dispatcher = value;
-	}
-
-	/**
-	 * In case a new entity is set and a previous exists, onEntityRemoved
-	 * will be called, in case the new entity is not null onEntityAdded will be
-	 * called. Use those 2 methodes to gather time consuming data from other components
-	 * or the entity itself. you cannot access other components from the constructor
-	 */
-	private function get_entity():TEntity { return this.entity; }
-
-	private function set_entity( value:TEntity ):TEntity
-	{
-		if( this.entity != null )
-			this.onEntityRemoved();
-
-		this.entity = value;
-
-		if( this.entity != null )
-			this.onEntityAdded();
-
-		return value;
+		super();
 	}
 
 	// ************************************************************************ //
@@ -96,88 +31,19 @@ class Component<TEntity:(IEntity,Dynamic)> implements IComponent<TEntity>
 	// ************************************************************************ //
 
 	/**
-	 * when this component has been removed from an entity; the new entity
-	 * is accessable and you can use this methode to gather time consuming data
-	 * from other components or the entity itself.
+	 * called when this component has been added to to new entity.
 	 */
-	private function onEntityAdded():Void
+	private function onEntityAttached( newEntity:IEntity ):Bool
 	{
-		return;
+		return true;
 	}
 
 	/**
-	 * when this component has been removed from an entity; the old entity
-	 * is still accessable and you have to remove all pointers in this methode
-	 * that might prevent the garbage collector from removing this or other components
+	 * called when this component has been added to to new entity. in case it has been attached
 	 */
-	private function onEntityRemoved():Void
+	private function onEntityDetached( oldEntity:IEntity ):Bool
 	{
-		return;
+		return true;
 	}
 
-	/**
-	 *
-	 * @param	component
-	 */
-	private function assertRequiredComponents( components:Iterable<Class<IComponent<IEntity>>> ):Void
-	{
-		for( component in components )
-		{
-			if( this.entity.getComponent( component ) == null )
-				throw "Required Component: " + component + " is missing for " + this.entity;
-		}
-	}
-
-	// ************************************************************************ //
-	// IEventDispatcher
-	// ************************************************************************ //
-
-	/**
-	 *
-	 * @param	event
-	 */
-	public function dispatch( event:Event ):Bool
-	{
-		return this.dispatcher.dispatch( event );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @param	call
-	 */
-	public function addListener( type:String, call:Event->Void ):Void
-	{
-		this.dispatcher.addListener( type, call );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @param	call
-	 */
-	public function removeListener( type:String, call:Event->Void ):Void
-	{
-		this.dispatcher.removeListener( type, call );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @return
-	 */
-	public function hasListener( type:String ):Bool
-	{
-		return this.dispatcher.hasListener( type );
-	}
-
-	/**
-	 *
-	 * @param	type
-	 * @return
-	 */
-	public function clearListeners():Void
-	{
-		return this.dispatcher.clearListeners();
-	}
 }

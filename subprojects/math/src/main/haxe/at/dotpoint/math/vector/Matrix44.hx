@@ -188,12 +188,12 @@ class Matrix44 implements IMatrix44
 	/**
 	 * sets this matrix to the inverse using cramer formula (devide by determinant, multiply by inverse)
 	 */
-	public function inverse():Void
+	public function inverse():IMatrix44
 	{
 		var d:Float = this.determinant();
 
 		if( Math.abs(d) < MathUtil.ZERO_TOLERANCE )	// cannot invert with a null determinant
-			return;
+			return this;
 
 		d = 1 / d;
 
@@ -218,6 +218,8 @@ class Matrix44 implements IMatrix44
 		this.m42 =  d * ( m11*(m32*m43 - m42*m33) - m31*(m12*m43 - m42*m13) + m41*(m12*m33 - m32*m13) );
 		this.m43 = -d * ( m11*(m22*m43 - m42*m23) - m21*(m12*m43 - m42*m13) + m41*(m12*m23 - m22*m13) );
 		this.m44 =  d * ( m11*(m22*m33 - m32*m23) - m21*(m12*m33 - m32*m13) + m31*(m12*m23 - m22*m13) );
+
+		return this;
 	}
 
 	// ************************************************************************ //

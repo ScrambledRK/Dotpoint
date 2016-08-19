@@ -1,16 +1,20 @@
 package haxe.at.dotpoint.datastructure.graph;
 
+import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.at.dotpoint.datastructure.graph.event.TreeNodeDispatcher;
 import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
-import haxe.at.dotpoint.datastructure.entity.Component;
-import haxe.at.dotpoint.datastructure.entity.IEntity;
 
 /**
  * ...
  * @author RK
  */
-class TreeNode<T:IEntity> extends Component<T>
+class TreeNode<T> extends TreeNodeDispatcher
 {
+
+	/**
+	 *
+	 */
+	@:isVar public var element(get,set):T;
 
 	/**
 	 *
@@ -31,20 +35,28 @@ class TreeNode<T:IEntity> extends Component<T>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( isRootNode:Bool = false )
+	public function new( ?proxy:IEventDispatcher )
 	{
-		super();
+		super( proxy );
 
-		this.children   = new Array<TreeNode<T>>();
-		this.dispatcher = new TreeNodeDispatcher( this );
-
-		if( isRootNode )
-			this.root = this;
+		this.children = new Array<TreeNode<T>>();
+		this.root = this;
 	}
 
 	// ************************************************************************ //
 	// getter / setter
 	// ************************************************************************ //
+
+	/**
+	 *
+	 * @return
+	 */
+	private function get_element():T { return this.element; }
+
+	private function set_element( value:T ):Void
+	{
+		this.element = value;
+	}
 
 	/**
 	 *

@@ -8,5 +8,8 @@ import haxe.at.dotpoint.dispatcher.IDispatcher;
  */
 interface IEventDispatcher extends IDispatcher<Event,String>
 {
-	// just typed for convinience
+	/**
+	 * proxy target
+	 */
+	public var target(get,set):IEventDispatcher;
 }
