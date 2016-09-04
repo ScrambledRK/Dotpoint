@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.dispatcher.event;
+package at.dotpoint.dispatcher.event;
 
-import haxe.at.dotpoint.datastructure.collection.VectorSet;
+import at.dotpoint.datastructure.collection.VectorSet;
 import haxe.ds.StringMap;
 
 /**

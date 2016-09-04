@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
-import haxe.at.dotpoint.math.MathUtil;
+import at.dotpoint.math.MathUtil;
 
 /**
  * vector with 2 components (x,y)

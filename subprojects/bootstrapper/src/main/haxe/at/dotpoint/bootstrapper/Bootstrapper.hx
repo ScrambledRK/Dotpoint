@@ -1,11 +1,11 @@
-package haxe.at.dotpoint.bootstrapper;
+package at.dotpoint.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.processor.AsyncQueue;
-import haxe.at.dotpoint.processor.event.ProcessEvent;
-import haxe.at.dotpoint.processor.ITask;
+import at.dotpoint.bootstrapper.loader.BootstrapperConfigRequest;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.processor.AsyncQueue;
+import at.dotpoint.processor.event.ProcessEvent;
+import at.dotpoint.processor.ITask;
 
 /**
  * Main-Base Class useful as the first class instantiated in your application.

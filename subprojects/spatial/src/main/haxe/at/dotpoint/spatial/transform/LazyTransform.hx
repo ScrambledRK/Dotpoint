@@ -1,17 +1,17 @@
-package haxe.at.dotpoint.spatial.transform;
+package at.dotpoint.spatial.transform;
 
-import haxe.at.dotpoint.math.MathUtil;
+import at.dotpoint.math.MathUtil;
 import Math;
-import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
-import haxe.at.dotpoint.math.geom.Space;
-import haxe.at.dotpoint.math.lazy.LazyQuaternion;
-import haxe.at.dotpoint.math.lazy.LazyVector3;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.IQuaternion;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Matrix44;
-import haxe.at.dotpoint.spatial.event.SpatialEvent;
+import at.dotpoint.dispatcher.event.EventDispatcher;
+import at.dotpoint.dispatcher.lazy.LazyStatus;
+import at.dotpoint.math.geom.Space;
+import at.dotpoint.math.lazy.LazyQuaternion;
+import at.dotpoint.math.lazy.LazyVector3;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.IQuaternion;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.spatial.event.SpatialEvent;
 
 /**
  * Component handling the Transformation-Matrix used by Spatial-Entities and its Transformation-Hierachy.
@@ -20,9 +20,9 @@ import haxe.at.dotpoint.spatial.event.SpatialEvent;
  * as one in world space (relative to root). The 3 local transformation components (position, scale, rotation) and
  * the 2 Transformations-Matrix objects are automatically updated using lazy evaluation.
  */
-@:access(haxe.at.dotpoint.math.lazy.LazyVector3)
-@:access(haxe.at.dotpoint.math.lazy.LazyQuaternion)
-@:access(haxe.at.dotpoint.spatial.transform.TransformationMatrix)
+@:access(at.dotpoint.math.lazy.LazyVector3)
+@:access(at.dotpoint.math.lazy.LazyQuaternion)
+@:access(at.dotpoint.spatial.transform.TransformationMatrix)
 //
 class LazyTransform extends EventDispatcher implements ITransform
 {

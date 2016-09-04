@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.datastructure;
+package at.dotpoint.datastructure;
 
 import haxe.ds.Vector;
 import haxe.org.ds.VectorSort;

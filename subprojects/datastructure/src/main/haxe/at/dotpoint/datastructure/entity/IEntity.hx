@@ -1,7 +1,7 @@
-package haxe.at.dotpoint.datastructure.entity;
+package at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.datastructure.collection.VectorSet;
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
+import at.dotpoint.datastructure.collection.VectorSet;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
 
 /**
  * ...

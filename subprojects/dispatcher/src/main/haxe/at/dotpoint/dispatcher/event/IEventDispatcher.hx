@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.dispatcher.event;
+package at.dotpoint.dispatcher.event;
 
-import haxe.at.dotpoint.dispatcher.IDispatcher;
+import at.dotpoint.dispatcher.IDispatcher;
 
 /**
  * ...

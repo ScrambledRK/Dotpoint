@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.dispatcher.lazy.event;
+package at.dotpoint.dispatcher.lazy.event;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.Event;
 
 /**
  * 12.02.15

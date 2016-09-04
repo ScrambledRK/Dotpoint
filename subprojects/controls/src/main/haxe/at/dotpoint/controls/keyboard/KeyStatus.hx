@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.controls.keyboard;
+package at.dotpoint.controls.keyboard;
 
 /**
  * @author RK

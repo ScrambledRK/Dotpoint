@@ -1,7 +1,7 @@
-package php.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.loader.processor.loader.IDataLoader;
 
 /**
  * ...

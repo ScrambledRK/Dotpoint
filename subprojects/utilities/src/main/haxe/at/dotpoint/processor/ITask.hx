@@ -1,5 +1,5 @@
-package haxe.at.dotpoint.processor;
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
+package at.dotpoint.processor;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
 
 /**
  * Action (or Command) executes a single purpose and can be stopped/cleared anytime.

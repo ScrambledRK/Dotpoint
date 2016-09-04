@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
 typedef TVector2 = {
 	var x:Float;

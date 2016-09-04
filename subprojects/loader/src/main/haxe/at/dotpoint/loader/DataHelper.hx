@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.loader;
+package at.dotpoint.loader;
 
-import haxe.at.dotpoint.loader.format.BitmapFormat;
-import haxe.at.dotpoint.loader.format.IDataFormat;
-import haxe.at.dotpoint.loader.format.SoundFormat;
-import haxe.at.dotpoint.loader.format.StringFormat;
-import haxe.at.dotpoint.loader.format.SWFFormat;
+import at.dotpoint.loader.format.BitmapFormat;
+import at.dotpoint.loader.format.IDataFormat;
+import at.dotpoint.loader.format.SoundFormat;
+import at.dotpoint.loader.format.StringFormat;
+import at.dotpoint.loader.format.SWFFormat;
 
 /**
  * ...

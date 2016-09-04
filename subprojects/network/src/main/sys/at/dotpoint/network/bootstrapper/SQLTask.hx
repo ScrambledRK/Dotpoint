@@ -1,6 +1,6 @@
-package sys.at.dotpoint.network.bootstrapper;
+package at.dotpoint.network.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
+import at.dotpoint.bootstrapper.BootstrapperTask;
 import sys.db.Connection;
 import sys.db.Mysql;
 

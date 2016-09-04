@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.math.lazy;
+package at.dotpoint.math.lazy;
 
-import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.dispatcher.lazy.LazyComponent;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector3;
 
 /**
  * lazy evaluating vector3 dispatching changes through the lazy component. can be used

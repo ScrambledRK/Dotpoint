@@ -1,6 +1,6 @@
-package flash.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import flash.at.dotpoint.loader.processor.loader.AURLLoader;
+import at.dotpoint.loader.processor.loader.AURLLoader;
 import flash.net.URLLoaderDataFormat;
 
 /**

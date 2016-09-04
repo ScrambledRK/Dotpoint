@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.logger;
+package at.dotpoint.logger;
 
 /**
  * ...

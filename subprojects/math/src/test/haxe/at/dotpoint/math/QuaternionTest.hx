@@ -1,10 +1,10 @@
 package haxe.math;
 
-import haxe.at.dotpoint.math.MathUtil;
-import haxe.at.dotpoint.math.vector.Matrix44;
-import haxe.at.dotpoint.math.vector.Quaternion;
-import haxe.at.dotpoint.math.vector.Vector3;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.MathUtil;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.math.vector.Quaternion;
+import at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.vector.Vector3;
 import massive.munit.Assert;
 
 /**

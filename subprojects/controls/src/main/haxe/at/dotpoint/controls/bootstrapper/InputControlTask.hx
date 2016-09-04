@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.controls.bootstrapper;
+package at.dotpoint.controls.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.controls.IInputControlSystem;
-import haxe.at.dotpoint.controls.InputRequest;
-import haxe.at.dotpoint.controls.InputType;
-import haxe.at.dotpoint.controls.keyboard.KeyboardMap;
+import at.dotpoint.bootstrapper.BootstrapperTask;
+import at.dotpoint.controls.IInputControlSystem;
+import at.dotpoint.controls.InputRequest;
+import at.dotpoint.controls.InputType;
+import at.dotpoint.controls.keyboard.KeyboardMap;
 
 /**
 	"inputControl":

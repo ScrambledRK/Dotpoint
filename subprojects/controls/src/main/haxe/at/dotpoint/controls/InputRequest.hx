@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.controls;
+package at.dotpoint.controls;
 
-import haxe.at.dotpoint.controls.InputType;
+import at.dotpoint.controls.InputType;
 
 /**
  * ...

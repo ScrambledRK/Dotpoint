@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.datastructure.provider;
+package at.dotpoint.datastructure.provider;
 
-import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
+import at.dotpoint.dispatcher.lazy.LazyComponent;
 
 /**
  * ...

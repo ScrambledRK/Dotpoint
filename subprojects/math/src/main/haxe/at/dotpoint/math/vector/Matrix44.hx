@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
-import haxe.at.dotpoint.math.MathUtil;
+import at.dotpoint.math.MathUtil;
 
 /**
  * 4x4 column major matrix. upper 3x3 matrix is assumed to be rotation/scaling, 4rd column translation.

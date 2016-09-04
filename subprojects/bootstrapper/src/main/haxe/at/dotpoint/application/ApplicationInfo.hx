@@ -1,7 +1,7 @@
-package haxe.at.dotpoint.application;
+package at.dotpoint.application;
 
-import haxe.at.dotpoint.application.MainMacro;
-import haxe.at.dotpoint.StringTool;
+import at.dotpoint.application.MainMacro;
+import at.dotpoint.StringTool;
 
 /**
  * ...

@@ -1,6 +1,6 @@
-package flash.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import flash.at.dotpoint.loader.processor.loader.AFlashLoader;
+import at.dotpoint.loader.processor.loader.AFlashLoader;
 import flash.events.Event;
 import flash.events.HTTPStatusEvent;
 import flash.events.IOErrorEvent;
@@ -8,9 +8,9 @@ import flash.events.ProgressEvent;
 import flash.events.SecurityErrorEvent;
 import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.loader.processor.loader.IDataLoader;
+import at.dotpoint.loader.URLRequest;
 
 
 /**

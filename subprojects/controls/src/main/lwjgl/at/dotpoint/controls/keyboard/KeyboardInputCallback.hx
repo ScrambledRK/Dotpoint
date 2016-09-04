@@ -1,4 +1,4 @@
-package lwjgl.at.dotpoint.controls.keyboard;
+package at.dotpoint.controls.keyboard;
 
 import haxe.Int64;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFW;
 /**
  *
  */
-@:access(lwjgl.at.dotpoint.controls.keyboard.KeyboardInput)
+@:access(at.dotpoint.controls.keyboard.KeyboardInput)
 //
 class KeyboardInputCallback extends GLFWKeyCallback
 {

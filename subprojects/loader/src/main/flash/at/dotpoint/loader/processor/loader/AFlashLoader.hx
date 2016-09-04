@@ -1,9 +1,9 @@
-package flash.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import haxe.at.dotpoint.dispatcher.event.generic.ErrorEvent;
-import haxe.at.dotpoint.loader.event.HTTPStatusEvent;
-import haxe.at.dotpoint.loader.event.ProgressEvent;
-import haxe.at.dotpoint.loader.processor.ADataProcessor;
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import at.dotpoint.loader.event.HTTPStatusEvent;
+import at.dotpoint.loader.event.ProgressEvent;
+import at.dotpoint.loader.processor.ADataProcessor;
 
 /**
  * ...

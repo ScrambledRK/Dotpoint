@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.geom;
+package at.dotpoint.math.geom;
 
-import haxe.at.dotpoint.math.vector.IVector2;
+import at.dotpoint.math.vector.IVector2;
 
 /**
  * 15.02.15

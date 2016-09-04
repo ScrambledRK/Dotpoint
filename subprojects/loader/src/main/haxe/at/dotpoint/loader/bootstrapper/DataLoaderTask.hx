@@ -1,16 +1,16 @@
-package haxe.at.dotpoint.loader.bootstrapper;
+package at.dotpoint.loader.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.loader.DataRequest;
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.bootstrapper.BootstrapperTask;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.URLRequest;
 
 /**
  * ...
  * @author RK
  */
-@:access(haxe.at.dotpoint.bootstrapper.Bootstrapper)
+@:access(at.dotpoint.bootstrapper.Bootstrapper)
 //
 class DataLoaderTask extends BootstrapperTask<Dynamic>
 {

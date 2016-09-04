@@ -1,7 +1,7 @@
 package ;
 
-import haxe.at.dotpoint.spatial.transform.LazyTransform;
-import haxe.at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.spatial.transform.LazyTransform;
+import at.dotpoint.spatial.transform.ITransform;
 
 /**
  * 2016-08-12

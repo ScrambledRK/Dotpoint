@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.network;
+package at.dotpoint.network;
 
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.loader.URLRequest;
 import haxe.crypto.Md5;
 import haxe.Json;
 

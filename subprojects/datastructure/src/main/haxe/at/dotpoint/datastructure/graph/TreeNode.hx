@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.datastructure.graph;
+package at.dotpoint.datastructure.graph;
 
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.datastructure.graph.event.TreeNodeDispatcher;
-import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
+import at.dotpoint.datastructure.graph.event.TreeNodeDispatcher;
+import at.dotpoint.datastructure.graph.event.TreeNodeEvent;
 
 /**
  * ...

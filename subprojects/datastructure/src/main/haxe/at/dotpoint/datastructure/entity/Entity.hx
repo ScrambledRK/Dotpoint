@@ -1,14 +1,14 @@
-package haxe.at.dotpoint.datastructure.entity;
+package at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.datastructure.entity.IEntity.IAEntity;
-import haxe.at.dotpoint.datastructure.entity.IComponent.IComponent;
-import haxe.at.dotpoint.datastructure.entity.composition.EntityComposition;
-import haxe.at.dotpoint.datastructure.entity.composition.EntityCompositionRequirement;
-import haxe.at.dotpoint.datastructure.collection.VectorSet;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
+import at.dotpoint.datastructure.entity.IEntity.IAEntity;
+import at.dotpoint.datastructure.entity.IComponent.IComponent;
+import at.dotpoint.datastructure.entity.composition.EntityComposition;
+import at.dotpoint.datastructure.entity.composition.EntityCompositionRequirement;
+import at.dotpoint.datastructure.collection.VectorSet;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.EventDispatcher;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
+import at.dotpoint.datastructure.entity.event.EntityEvent;
 
 //
 // TODO: remove entity field for components

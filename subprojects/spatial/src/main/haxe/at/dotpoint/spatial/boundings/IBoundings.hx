@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.spatial.boundings;
-import haxe.at.dotpoint.math.geom.Cube;
-import haxe.at.dotpoint.math.geom.Space;
+package at.dotpoint.spatial.boundings;
+import at.dotpoint.math.geom.Cube;
+import at.dotpoint.math.geom.Space;
 
 /**
  * @author RK

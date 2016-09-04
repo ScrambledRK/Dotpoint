@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.application.bootstrapper;
+package at.dotpoint.application.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.BootstrapperTask;
-import haxe.at.dotpoint.application.ApplicationInfo;
-import haxe.at.dotpoint.application.MainMacro;
+import at.dotpoint.bootstrapper.BootstrapperTask;
+import at.dotpoint.application.ApplicationInfo;
+import at.dotpoint.application.MainMacro;
 
 /**
  * tries to gather data about the application itself, like its name, version, etc.

@@ -1,13 +1,13 @@
-package haxe.at.dotpoint.spatial.transform;
+package at.dotpoint.spatial.transform;
 
-import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
-import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.IQuaternion;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Matrix44;
-import haxe.at.dotpoint.math.vector.Quaternion;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.dispatcher.lazy.LazyStatus;
+import at.dotpoint.dispatcher.lazy.LazyComponent;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.IQuaternion;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.math.vector.Quaternion;
+import at.dotpoint.math.vector.Vector3;
 
 /**
  * 09.02.15

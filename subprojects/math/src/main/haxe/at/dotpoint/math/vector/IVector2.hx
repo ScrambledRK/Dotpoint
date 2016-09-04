@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
 /**
  * vector with 2 components (x,y)

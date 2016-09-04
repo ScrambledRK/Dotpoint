@@ -1,9 +1,9 @@
-package haxe.at.dotpoint.bootstrapper;
+package at.dotpoint.bootstrapper;
 
-import haxe.at.dotpoint.bootstrapper.Bootstrapper;
-import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.processor.event.ProcessEvent;
-import haxe.at.dotpoint.processor.ITask;
+import at.dotpoint.bootstrapper.Bootstrapper;
+import at.dotpoint.dispatcher.event.EventDispatcher;
+import at.dotpoint.processor.event.ProcessEvent;
+import at.dotpoint.processor.ITask;
 
 /**
  * ...

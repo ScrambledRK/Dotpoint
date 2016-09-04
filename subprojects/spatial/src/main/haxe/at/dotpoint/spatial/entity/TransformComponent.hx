@@ -1,24 +1,24 @@
-package haxe.at.dotpoint.spatial.entity;
+package at.dotpoint.spatial.entity;
 
-import haxe.at.dotpoint.spatial.transform.TransformationMatrix;
-import haxe.at.dotpoint.math.vector.Matrix44;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
-import haxe.at.dotpoint.math.geom.Space;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
-import haxe.at.dotpoint.datastructure.graph.TreeNode;
-import haxe.at.dotpoint.spatial.transform.LazyTransform;
-import haxe.at.dotpoint.spatial.transform.ITransform;
-import haxe.at.dotpoint.datastructure.entity.IEntity;
-import haxe.at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.spatial.transform.TransformationMatrix;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.dispatcher.lazy.LazyStatus;
+import at.dotpoint.math.geom.Space;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.datastructure.graph.event.TreeNodeEvent;
+import at.dotpoint.datastructure.graph.TreeNode;
+import at.dotpoint.spatial.transform.LazyTransform;
+import at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.datastructure.entity.IEntity;
+import at.dotpoint.datastructure.entity.Component;
 
 /**
  * 2016-08-13
  * @author RK
  */
-@:access(haxe.at.dotpoint.spatial.transform.LazyTransform)
-@:access(haxe.at.dotpoint.spatial.transform.TransformationMatrix)
+@:access(at.dotpoint.spatial.transform.LazyTransform)
+@:access(at.dotpoint.spatial.transform.TransformationMatrix)
 //
 class TransformComponent extends Component
 {

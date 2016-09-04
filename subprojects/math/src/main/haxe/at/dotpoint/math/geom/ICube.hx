@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.geom;
+package at.dotpoint.math.geom;
 
-import haxe.at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.IVector3;
 
 /**
  * min, max representation of an axis aligned cube, useful for bounding box. <br/>

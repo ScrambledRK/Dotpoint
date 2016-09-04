@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.loader;
+package at.dotpoint.loader;
 
 #if (flash10 || openfl)
 	typedef URLRequest = flash.net.URLRequest;

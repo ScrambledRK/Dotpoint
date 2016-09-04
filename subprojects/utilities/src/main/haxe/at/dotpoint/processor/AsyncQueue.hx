@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.processor;
+package at.dotpoint.processor;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.EventDispatcher;
-import haxe.at.dotpoint.processor.event.ProcessEvent;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.EventDispatcher;
+import at.dotpoint.processor.event.ProcessEvent;
 
 /**
  * ...

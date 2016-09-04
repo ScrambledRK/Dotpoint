@@ -1,9 +1,9 @@
-package haxe.at.dotpoint.loader.processor.parser;
+package at.dotpoint.loader.processor.parser;
 
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.loader.processor.ADataProcessor;
-import haxe.at.dotpoint.loader.processor.IDataProcessor;
-import haxe.at.dotpoint.logger.Log;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.loader.processor.ADataProcessor;
+import at.dotpoint.loader.processor.IDataProcessor;
+import at.dotpoint.logger.Log;
 import haxe.Json;
 
 /**

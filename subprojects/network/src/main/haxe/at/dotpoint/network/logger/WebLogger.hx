@@ -1,14 +1,14 @@
-package haxe.at.dotpoint.network.logger;
+package at.dotpoint.network.logger;
 
-import haxe.at.dotpoint.bootstrapper.Bootstrapper;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.network.RequestResult;
-import haxe.at.dotpoint.network.ServerTool;
-import haxe.at.dotpoint.loader.DataRequest;
-import haxe.at.dotpoint.loader.format.StringFormat;
-import haxe.at.dotpoint.loader.URLRequest;
-import haxe.at.dotpoint.logger.LogType;
+import at.dotpoint.bootstrapper.Bootstrapper;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.network.RequestResult;
+import at.dotpoint.network.ServerTool;
+import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.format.StringFormat;
+import at.dotpoint.loader.URLRequest;
+import at.dotpoint.logger.LogType;
 import haxe.PosInfos;
 
 /**

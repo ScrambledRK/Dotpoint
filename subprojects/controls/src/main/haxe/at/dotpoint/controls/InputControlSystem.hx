@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.controls;
+package at.dotpoint.controls;
 
-import haxe.at.dotpoint.controls.keyboard.AKeyboardInput;
-import haxe.at.dotpoint.controls.keyboard.IKeyboardInput;
-import haxe.at.dotpoint.controls.keyboard.KeyStatus;
+import at.dotpoint.controls.keyboard.AKeyboardInput;
+import at.dotpoint.controls.keyboard.IKeyboardInput;
+import at.dotpoint.controls.keyboard.KeyStatus;
 
 
 /**

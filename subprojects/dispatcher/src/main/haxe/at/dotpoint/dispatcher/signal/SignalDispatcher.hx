@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.dispatcher.signal;
+package at.dotpoint.dispatcher.signal;
 
 import haxe.ds.Vector;
 

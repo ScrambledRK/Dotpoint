@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.datastructure.entity;
+package at.dotpoint.datastructure.entity;
 
-import haxe.at.dotpoint.datastructure.entity.IEntity;
+import at.dotpoint.datastructure.entity.IEntity;
 
 
 /**

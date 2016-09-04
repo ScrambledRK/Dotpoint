@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.unit;
+package at.dotpoint.unit;
 
 import haxe.unit.TestCase;
 

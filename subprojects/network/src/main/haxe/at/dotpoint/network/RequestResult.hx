@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.network;
+package at.dotpoint.network;
 
 import haxe.Json;
 

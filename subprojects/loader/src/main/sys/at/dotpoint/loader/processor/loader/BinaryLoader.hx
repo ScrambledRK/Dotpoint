@@ -1,6 +1,6 @@
-package sys.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
+import at.dotpoint.loader.processor.loader.IDataLoader;
 import haxe.io.Bytes;
 
 /**

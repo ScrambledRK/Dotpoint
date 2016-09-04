@@ -1,25 +1,25 @@
-package haxe.at.dotpoint.spatial.boundings;
+package at.dotpoint.spatial.boundings;
 
-import haxe.at.dotpoint.datastructure.graph.event.TreeNodeEvent;
-import haxe.at.dotpoint.datastructure.graph.TreeNode;
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.datastructure.entity.Component;
-import haxe.at.dotpoint.dispatcher.lazy.LazyStatus;
-import haxe.at.dotpoint.math.geom.Cube;
-import haxe.at.dotpoint.math.geom.Space;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector3;
-import haxe.at.dotpoint.spatial.event.SpatialEvent;
-import haxe.at.dotpoint.spatial.ISpatialEntity;
-import haxe.at.dotpoint.spatial.transform.LazyTransform;
-import haxe.at.dotpoint.spatial.transform.TransformationMatrix;
+import at.dotpoint.datastructure.graph.event.TreeNodeEvent;
+import at.dotpoint.datastructure.graph.TreeNode;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.dispatcher.lazy.LazyStatus;
+import at.dotpoint.math.geom.Cube;
+import at.dotpoint.math.geom.Space;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector3;
+import at.dotpoint.spatial.event.SpatialEvent;
+import at.dotpoint.spatial.ISpatialEntity;
+import at.dotpoint.spatial.transform.LazyTransform;
+import at.dotpoint.spatial.transform.TransformationMatrix;
 
 /**
  * 15.02.15
  * @author RK
  */
-@:access(haxe.at.dotpoint.math.lazy.LazyCube)
+@:access(at.dotpoint.math.lazy.LazyCube)
 //
 class Boundings<TEntity:IASpatialEntity<TEntity>> extends Component<TEntity> implements IBoundings
 {

@@ -1,7 +1,7 @@
-package haxe.at.dotpoint.datastructure.graph.event;
+package at.dotpoint.datastructure.graph.event;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.datastructure.entity.event.EntityEvent;
 
 /**
  * 12.02.15

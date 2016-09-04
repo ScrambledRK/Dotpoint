@@ -1,9 +1,9 @@
-package flash.at.dotpoint.controls.keyboard;
+package at.dotpoint.controls.keyboard;
 
 import flash.events.KeyboardEvent;
 import flash.Lib;
-import haxe.at.dotpoint.controls.keyboard.AKeyboardInput;
-import haxe.at.dotpoint.controls.keyboard.KeyStatus;
+import at.dotpoint.controls.keyboard.AKeyboardInput;
+import at.dotpoint.controls.keyboard.KeyStatus;
 
 /**
  * ...

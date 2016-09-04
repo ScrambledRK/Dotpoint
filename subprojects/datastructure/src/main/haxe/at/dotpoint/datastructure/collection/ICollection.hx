@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.datastructure.collection;
+package at.dotpoint.datastructure.collection;
 
 /**
  * stricly speaking not just a collection as it also implements methods for random access which might be really

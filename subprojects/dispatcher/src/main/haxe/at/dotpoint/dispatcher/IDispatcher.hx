@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.dispatcher ;
+package at.dotpoint.dispatcher ;
 
 /**
  * @author RK

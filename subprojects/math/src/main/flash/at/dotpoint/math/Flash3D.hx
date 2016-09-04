@@ -1,12 +1,12 @@
-package flash.at.dotpoint.math;
+package at.dotpoint.math;
 
 import flash.geom.Matrix;
 import flash.geom.Matrix3D;
 import flash.geom.Vector3D;
 import flash.Vector;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.Matrix44;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.math.vector.Vector3;
 
 /**
  * ...

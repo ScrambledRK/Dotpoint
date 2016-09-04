@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.math;
+package at.dotpoint.math;
 
-import haxe.at.dotpoint.math.geom.Rectangle;
-import haxe.at.dotpoint.math.vector.IVector2;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector2;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.geom.Rectangle;
+import at.dotpoint.math.vector.IVector2;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector2;
+import at.dotpoint.math.vector.Vector3;
 import haxe.ds.Vector;
 
 /**

@@ -1,4 +1,4 @@
-package flash.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
 import flash.net.URLLoaderDataFormat;
 import flash.utils.ByteArray;

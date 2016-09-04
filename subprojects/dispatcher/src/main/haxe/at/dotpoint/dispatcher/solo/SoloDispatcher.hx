@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.dispatcher.solo ;
+package at.dotpoint.dispatcher.solo ;
 
-import haxe.at.dotpoint.logger.Log;
+import at.dotpoint.logger.Log;
 
 /**
  * ...

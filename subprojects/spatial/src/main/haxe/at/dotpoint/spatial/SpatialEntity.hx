@@ -1,14 +1,14 @@
-package haxe.at.dotpoint.spatial;
+package at.dotpoint.spatial;
 
-import haxe.at.dotpoint.datastructure.graph.TreeNode;
-import haxe.at.dotpoint.datastructure.entity.Entity;
-import haxe.at.dotpoint.datastructure.entity.IComponent;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.spatial.boundings.Boundings;
-import haxe.at.dotpoint.spatial.boundings.IBoundings;
-import haxe.at.dotpoint.spatial.ISpatialEntity;
-import haxe.at.dotpoint.spatial.transform.ITransform;
-import haxe.at.dotpoint.spatial.transform.LazyTransform;
+import at.dotpoint.datastructure.graph.TreeNode;
+import at.dotpoint.datastructure.entity.Entity;
+import at.dotpoint.datastructure.entity.IComponent;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.spatial.boundings.Boundings;
+import at.dotpoint.spatial.boundings.IBoundings;
+import at.dotpoint.spatial.ISpatialEntity;
+import at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.spatial.transform.LazyTransform;
 
 /**
  * Entity for Spatial-Objects with Transformation Component for translation, scaling and rotation,

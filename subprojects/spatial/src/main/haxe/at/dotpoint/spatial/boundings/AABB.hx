@@ -1,12 +1,12 @@
-package haxe.at.dotpoint.spatial.boundings;
+package at.dotpoint.spatial.boundings;
 
-import haxe.at.dotpoint.math.Axis.AxisRelative;
-import haxe.at.dotpoint.math.geom.Space;
-import haxe.at.dotpoint.math.lazy.LazyCube;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector3;
-import haxe.at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.math.Axis.AxisRelative;
+import at.dotpoint.math.geom.Space;
+import at.dotpoint.math.lazy.LazyCube;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector3;
+import at.dotpoint.spatial.transform.ITransform;
 
 /**
  * Axis-Aligned-Bounding-Box

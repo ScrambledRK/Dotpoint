@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.math.signal;
+package at.dotpoint.math.signal;
 
-import haxe.at.dotpoint.math.MathUtil;
-import haxe.at.dotpoint.math.vector.IVector2;
-import haxe.at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.MathUtil;
+import at.dotpoint.math.vector.IVector2;
+import at.dotpoint.math.vector.IVector3;
 import haxe.ds.Vector;
 
 /**

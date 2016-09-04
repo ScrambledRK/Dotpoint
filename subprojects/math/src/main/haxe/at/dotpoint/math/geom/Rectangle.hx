@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.math.geom;
+package at.dotpoint.math.geom;
 
-import haxe.at.dotpoint.math.Axis.AxisRelative;
-import haxe.at.dotpoint.math.vector.IVector2;
-import haxe.at.dotpoint.math.vector.Vector2;
+import at.dotpoint.math.Axis.AxisRelative;
+import at.dotpoint.math.vector.IVector2;
+import at.dotpoint.math.vector.Vector2;
 
 
 /**

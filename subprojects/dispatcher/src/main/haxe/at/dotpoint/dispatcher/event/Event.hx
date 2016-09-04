@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.dispatcher.event;
+package at.dotpoint.dispatcher.event;
 
 /**
  *
@@ -55,7 +55,7 @@ class Event
 	{
 		#if dotLogger
 			if( this.type != null )
-				haxe.at.dotpoint.logger.Log.warn( "Event.type already set! " + this );
+				at.dotpoint.logger.Log.warn( "Event.type already set! " + this );
 		#end
 
 		return this.type = value;
@@ -71,7 +71,7 @@ class Event
 	{
 		#if dotLogger
 			if( this.target != null )
-				haxe.at.dotpoint.logger.Log.warn( "Event.target already set! " + this );
+				at.dotpoint.logger.Log.warn( "Event.target already set! " + this );
 		#end
 
 		return this.target = value;

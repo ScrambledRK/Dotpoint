@@ -1,7 +1,7 @@
-package haxe.at.dotpoint.loader.processor.parser;
+package at.dotpoint.loader.processor.parser;
 
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.logger.Log;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.logger.Log;
 /**
  * ...
  * @author RK

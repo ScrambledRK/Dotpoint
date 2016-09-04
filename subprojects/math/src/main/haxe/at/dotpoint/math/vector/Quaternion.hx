@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
-import haxe.at.dotpoint.math.MathUtil;
+import at.dotpoint.math.MathUtil;
 
 /**
  * unit-quaternion is a Vector4 like object for interpolateable and gimbal-lock-free rotations;

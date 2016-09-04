@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.loader.format;
+package at.dotpoint.loader.format;
 
-import haxe.at.dotpoint.loader.DataRequest;
-import haxe.at.dotpoint.loader.processor.IDataProcessor;
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.processor.IDataProcessor;
+import at.dotpoint.loader.URLRequest;
 
 /**
  * ...
@@ -37,7 +37,7 @@ class SWFFormat extends ABaseDataFormat
 	public override function createLoader( request:DataRequest ):IDataProcessor<URLRequest,Dynamic>
 	{
 		#if flash
-			return new flash.at.dotpoint.loader.processor.loader.SWFLoader();
+			return new at.dotpoint.loader.processor.loader.SWFLoader();
 		#else
 			return null;
 		#end

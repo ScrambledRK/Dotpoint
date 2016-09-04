@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.loader.format;
+package at.dotpoint.loader.format;
 
-import haxe.at.dotpoint.loader.DataRequest;
-import haxe.at.dotpoint.loader.processor.IDataProcessor;
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.processor.IDataProcessor;
+import at.dotpoint.loader.URLRequest;
 
 /**
  * ...
@@ -37,11 +37,11 @@ class BitmapFormat extends ABaseDataFormat
 	public override function createLoader( request:DataRequest ):IDataProcessor<URLRequest,Dynamic>
 	{
 		#if (flash)
-			return new flash.at.dotpoint.loader.processor.loader.BitmapLoader();
+			return new at.dotpoint.loader.processor.loader.BitmapLoader();
 		#elseif js
-			return new js.at.dotpoint.loader.processor.loader.ImageLoader();
+			return new at.dotpoint.loader.processor.loader.ImageLoader();
 		#else
-			return new sys.at.dotpoint.loader.processor.loader.BitmapLoader();
+			return new at.dotpoint.loader.processor.loader.BitmapLoader();
 		#end
 
 		return null;
@@ -50,7 +50,7 @@ class BitmapFormat extends ABaseDataFormat
 	public override function createParser(request:DataRequest):IDataProcessor<Dynamic, Dynamic>
 	{
 		#if (flash)
-			return new flash.at.dotpoint.loader.processor.parser.BitmapParser();
+			return new at.dotpoint.loader.processor.parser.BitmapParser();
 		#else
 			return super.createParser( request );
 		#end

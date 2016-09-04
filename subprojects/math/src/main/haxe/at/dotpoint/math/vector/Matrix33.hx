@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
 /**
  * 3x3 column major matrix. can be used as a rotation matrix (opengl comform) 

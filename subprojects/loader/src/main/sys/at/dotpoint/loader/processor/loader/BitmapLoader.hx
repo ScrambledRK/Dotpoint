@@ -1,7 +1,7 @@
-package sys.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
-import haxe.at.dotpoint.display.renderable.texture.data.TextureData;
-import haxe.at.dotpoint.loader.processor.loader.IDataLoader;
+import at.dotpoint.display.renderable.texture.data.TextureData;
+import at.dotpoint.loader.processor.loader.IDataLoader;
 
 /**
  * ...

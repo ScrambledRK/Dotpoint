@@ -1,7 +1,7 @@
-package lwjgl.at.dotpoint.controls.keyboard;
+package at.dotpoint.controls.keyboard;
 
-import haxe.at.dotpoint.controls.keyboard.AKeyboardInput;
-import haxe.at.dotpoint.controls.keyboard.KeyStatus;
+import at.dotpoint.controls.keyboard.AKeyboardInput;
+import at.dotpoint.controls.keyboard.KeyStatus;
 import java.lang.Long;
 import org.lwjgl.glfw.GLFW;
 
@@ -9,7 +9,7 @@ import org.lwjgl.glfw.GLFW;
  * ...
  * @author RK
  */
-@:access(lwjgl.at.dotpoint.controls.keyboard.KeyboardInputCallback)
+@:access(at.dotpoint.controls.keyboard.KeyboardInputCallback)
 //
 class KeyboardInput extends AKeyboardInput
 {

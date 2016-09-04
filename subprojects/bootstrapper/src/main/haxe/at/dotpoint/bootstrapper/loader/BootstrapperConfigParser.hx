@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.bootstrapper.loader;
+package at.dotpoint.bootstrapper.loader;
 
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.processor.ITask;
-import haxe.at.dotpoint.processor.ITaskFactory;
-import haxe.at.dotpoint.loader.processor.ADataProcessor;
-import haxe.at.dotpoint.loader.processor.IDataProcessor;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.processor.ITask;
+import at.dotpoint.processor.ITaskFactory;
+import at.dotpoint.loader.processor.ADataProcessor;
+import at.dotpoint.loader.processor.IDataProcessor;
 
 /**
  * ...

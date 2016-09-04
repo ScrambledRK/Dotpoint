@@ -1,9 +1,9 @@
-package haxe.at.dotpoint.spatial;
+package at.dotpoint.spatial;
 
-import haxe.at.dotpoint.datastructure.entity.IEntity;
-import haxe.at.dotpoint.datastructure.graph.TreeNode;
-import haxe.at.dotpoint.spatial.boundings.IBoundings;
-import haxe.at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.datastructure.entity.IEntity;
+import at.dotpoint.datastructure.graph.TreeNode;
+import at.dotpoint.spatial.boundings.IBoundings;
+import at.dotpoint.spatial.transform.ITransform;
 
 /**
  * Entity for Spatial-Objects with Transformation Component for translation, scaling and rotation,

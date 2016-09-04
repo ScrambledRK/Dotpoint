@@ -1,7 +1,7 @@
 package haxe.math;
 
-import haxe.at.dotpoint.math.vector.Vector3;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.vector.Vector3;
 import massive.munit.Assert;
 
 /**

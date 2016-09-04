@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
-import haxe.at.dotpoint.math.MathUtil;
+import at.dotpoint.math.MathUtil;
 
 /**
  * vector with 3 components (x,y,z) + homogenous (w: 0 = direction; 1 = point)

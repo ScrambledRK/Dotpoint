@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.geom;
+package at.dotpoint.math.geom;
 
 /**
  * @author RK

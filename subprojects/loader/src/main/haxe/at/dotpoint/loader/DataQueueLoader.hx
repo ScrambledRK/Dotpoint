@@ -1,12 +1,12 @@
-package haxe.at.dotpoint.loader;
+package at.dotpoint.loader;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.generic.ErrorEvent;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.loader.event.DataLoaderEvent;
-import haxe.at.dotpoint.loader.processor.ADataProcessor.ABasicDataProcessor;
-import haxe.at.dotpoint.loader.processor.IDataProcessor.IBasicDataProcessor;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
+import at.dotpoint.loader.event.DataLoaderEvent;
+import at.dotpoint.loader.processor.ADataProcessor.ABasicDataProcessor;
+import at.dotpoint.loader.processor.IDataProcessor.IBasicDataProcessor;
 
 /**
  * ...

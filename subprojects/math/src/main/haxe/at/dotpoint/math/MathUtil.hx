@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math;
+package at.dotpoint.math;
 
 /**
  * ...

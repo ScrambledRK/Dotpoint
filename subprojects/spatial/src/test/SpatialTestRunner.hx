@@ -1,6 +1,6 @@
 package ;
 
-import haxe.at.dotpoint.spatial.transform.LazyTransformTest;
+import at.dotpoint.spatial.transform.LazyTransformTest;
 import haxe.unit.TestRunner;
 
 

@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.math.lazy;
+package at.dotpoint.math.lazy;
 
-import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.math.geom.Cube;
-import haxe.at.dotpoint.math.geom.ICube;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.dispatcher.lazy.LazyComponent;
+import at.dotpoint.math.geom.Cube;
+import at.dotpoint.math.geom.ICube;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector3;
 
 /**
  * lazy evaluating cube dispatching changes through the lazy component. can be used
@@ -13,7 +13,7 @@ import haxe.at.dotpoint.math.vector.Vector3;
  * responsible for dispatching updates/validation etc is hidden. use the "@:access" macro
  * to set listeners on the lazy component.
  */
-@:access(haxe.at.dotpoint.math.geom.Cube)
+@:access(at.dotpoint.math.geom.Cube)
 //
 class LazyCube implements ICube
 {

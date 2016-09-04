@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.spatial.entity;
+package at.dotpoint.spatial.entity;
 
-import haxe.at.dotpoint.spatial.transform.ITransform;
-import haxe.at.dotpoint.datastructure.entity.Component;
-import haxe.at.dotpoint.datastructure.graph.TreeNode;
+import at.dotpoint.spatial.transform.ITransform;
+import at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.datastructure.graph.TreeNode;
 
 /**
  * 2016-08-12

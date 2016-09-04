@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.spatial.boundings;
+package at.dotpoint.spatial.boundings;
 
 /**
  * 17.02.15

@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.math.lazy;
+package at.dotpoint.math.lazy;
 
-import haxe.at.dotpoint.dispatcher.lazy.LazyComponent;
-import haxe.at.dotpoint.math.vector.IQuaternion;
-import haxe.at.dotpoint.math.vector.Quaternion;
+import at.dotpoint.dispatcher.lazy.LazyComponent;
+import at.dotpoint.math.vector.IQuaternion;
+import at.dotpoint.math.vector.Quaternion;
 
 /**
  * lazy evaluating quaternion dispatching changes through the lazy component. can be used

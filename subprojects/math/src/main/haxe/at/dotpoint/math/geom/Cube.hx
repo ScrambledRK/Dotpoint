@@ -1,9 +1,9 @@
-package haxe.at.dotpoint.math.geom;
+package at.dotpoint.math.geom;
 
-import haxe.at.dotpoint.math.Axis.AxisRelative;
-import haxe.at.dotpoint.math.geom.ICube;
-import haxe.at.dotpoint.math.vector.IVector3;
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.Axis.AxisRelative;
+import at.dotpoint.math.geom.ICube;
+import at.dotpoint.math.vector.IVector3;
+import at.dotpoint.math.vector.Vector3;
 
 
 /**

@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.color.transform;
+package at.dotpoint.math.color.transform;
 
 /**
  * flash default ist ARGB

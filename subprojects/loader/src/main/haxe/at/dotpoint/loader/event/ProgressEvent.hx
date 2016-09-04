@@ -1,5 +1,5 @@
-package haxe.at.dotpoint.loader.event ;
-import haxe.at.dotpoint.dispatcher.event.Event;
+package at.dotpoint.loader.event ;
+import at.dotpoint.dispatcher.event.Event;
 
 class ProgressEvent extends Event
 {

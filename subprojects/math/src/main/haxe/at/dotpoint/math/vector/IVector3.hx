@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.math.vector;
+package at.dotpoint.math.vector;
 
 /**
  * vector with 3 components (x,y,z) + homogenous (w: 0 = direction; 1 = point)

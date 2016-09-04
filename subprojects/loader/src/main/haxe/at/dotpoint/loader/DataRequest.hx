@@ -1,13 +1,13 @@
-package haxe.at.dotpoint.loader;
+package at.dotpoint.loader;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.dispatcher.event.generic.ErrorEvent;
-import haxe.at.dotpoint.dispatcher.event.generic.StatusEvent;
-import haxe.at.dotpoint.loader.event.ProgressEvent;
-import haxe.at.dotpoint.loader.format.IDataFormat;
-import haxe.at.dotpoint.loader.processor.ADataProcessor;
-import haxe.at.dotpoint.loader.processor.IDataProcessor;
-import haxe.at.dotpoint.loader.processor.IDataRequest;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
+import at.dotpoint.loader.event.ProgressEvent;
+import at.dotpoint.loader.format.IDataFormat;
+import at.dotpoint.loader.processor.ADataProcessor;
+import at.dotpoint.loader.processor.IDataProcessor;
+import at.dotpoint.loader.processor.IDataRequest;
 
 /**
  * ...

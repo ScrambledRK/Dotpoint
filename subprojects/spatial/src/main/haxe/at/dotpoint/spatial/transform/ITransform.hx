@@ -1,10 +1,10 @@
-package haxe.at.dotpoint.spatial.transform;
+package at.dotpoint.spatial.transform;
 
-import haxe.at.dotpoint.dispatcher.event.IEventDispatcher;
-import haxe.at.dotpoint.math.geom.Space;
-import haxe.at.dotpoint.math.vector.IMatrix44;
-import haxe.at.dotpoint.math.vector.IQuaternion;
-import haxe.at.dotpoint.math.vector.IVector3;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
+import at.dotpoint.math.geom.Space;
+import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.IQuaternion;
+import at.dotpoint.math.vector.IVector3;
 
 /**
  * @author RK

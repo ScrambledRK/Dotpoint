@@ -1,6 +1,6 @@
-package haxe.at.dotpoint.math.color;
+package at.dotpoint.math.color;
 
-import haxe.at.dotpoint.math.vector.Vector3;
+import at.dotpoint.math.vector.Vector3;
 
 /**
  * ...

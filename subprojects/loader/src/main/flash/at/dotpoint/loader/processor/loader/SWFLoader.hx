@@ -1,4 +1,4 @@
-package flash.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
 import flash.display.Loader;
 import flash.events.Event;

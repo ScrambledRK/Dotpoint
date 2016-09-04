@@ -1,4 +1,4 @@
-package js.at.dotpoint.loader.processor.loader;
+package at.dotpoint.loader.processor.loader;
 
 
 /**

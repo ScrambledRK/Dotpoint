@@ -1,4 +1,4 @@
-package haxe.at.dotpoint.controls;
+package at.dotpoint.controls;
 
 /**
  * @author RK

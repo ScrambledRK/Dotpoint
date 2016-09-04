@@ -1,9 +1,9 @@
-package haxe.at.dotpoint.bootstrapper.loader;
+package at.dotpoint.bootstrapper.loader;
 
-import haxe.at.dotpoint.processor.ITaskFactory;
-import haxe.at.dotpoint.loader.DataRequest;
-import haxe.at.dotpoint.loader.format.StringFormat;
-import haxe.at.dotpoint.loader.URLRequest;
+import at.dotpoint.processor.ITaskFactory;
+import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.format.StringFormat;
+import at.dotpoint.loader.URLRequest;
 
 /**
  * ...

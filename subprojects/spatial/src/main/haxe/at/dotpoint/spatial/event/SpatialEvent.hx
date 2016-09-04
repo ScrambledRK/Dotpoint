@@ -1,8 +1,8 @@
-package haxe.at.dotpoint.spatial.event;
+package at.dotpoint.spatial.event;
 
-import haxe.at.dotpoint.dispatcher.event.Event;
-import haxe.at.dotpoint.datastructure.entity.event.EntityEvent;
-import haxe.at.dotpoint.math.geom.Space;
+import at.dotpoint.dispatcher.event.Event;
+import at.dotpoint.datastructure.entity.event.EntityEvent;
+import at.dotpoint.math.geom.Space;
 
 /**
  * 17.02.15
