@@ -1,0 +1,31 @@
+model
+{
+	components
+	{	
+		main(IApplicationComponent)
+		{
+			platform "java"			
+			buildType "release"
+			
+			options.add("hxml",'--macro include ("at.dotpoint")');
+			options.add("hxml",'--macro exclude ("haxe")');
+			options.add("hxml",'-dce no');
+			
+			sources
+			{		
+				compile(ISourceSet)
+				{		
+					dependencies
+					{
+						module( "org.haxe", "std-java", "3.3.0-SNAPSHOT" );
+					}
+				
+					source.srcDir file('src/main/haxe')
+					source.include '**/*.hx'
+					
+					platform "haxe"					
+				}	
+			}				
+		}
+	}	
+}

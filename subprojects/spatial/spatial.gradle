@@ -1,0 +1,58 @@
+model
+{
+	components
+	{	
+		main(IApplicationComponent)
+		{
+			platform "java"//,"flash"			
+			buildType "debug", "release"
+			//flavor "library"
+			
+			configuration.add( "hxml", "-D doc" );
+			configuration.add( "hxml", "-D dotpoint" );
+			
+			sources
+			{		
+				compile(ISourceSet)
+				{		
+					// dependencies
+					// {
+						// library(":math","main");
+						// library(":datastructure","main");
+					// }
+				
+					source.srcDir file('src/main')
+					source.include 'haxe/**/*.hx'
+					
+					platform "haxe"					
+				}	
+
+				test(ISourceSet)
+				{						
+					source.srcDir file('src/test')				
+					platform "haxe"					
+				}
+			}		
+
+			binaries
+			{
+				all 
+				{
+					if( it.targetPlatform.name == "java" )
+					{
+						it.sources
+						{
+							compile(ISourceSet)
+							{	
+								source.srcDir file('src/main')
+								source.include 'lwjgl/**/*.hx'
+								
+								platform "haxe"
+							}
+						}						
+					}
+				}
+			}
+		}
+	}	
+}

@@ -1,0 +1,23 @@
+model
+{
+	components
+	{	
+		main(IApplicationComponent)
+		{
+			platform "java"//,"flash"			
+			buildType "debug", "release"
+			//flavor "library"
+			
+			sources
+			{		
+				main(ISourceSet)
+				{		
+					source.srcDir file('src/main')					
+					source.srcDir file('src/test')					
+					
+					platform "haxe"					
+				}								
+			}					
+		}
+	}	
+}

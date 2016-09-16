@@ -1,16 +1,16 @@
-include "bootstrapper";
-include "controls";
-include "datastructure";
-include "dispatcher";
-include "display";
-include "loader";
-include "logger";
-include "math";
-include "network";
-include "rendering";
-include "spatial";
-include "utilities";
-include "unit";
+include ":bootstrapper";
+include ":controls";
+include ":datastructure";
+include ":dispatcher";
+include ":display";
+include ":loader";
+include ":logger";
+include ":math";
+include ":network";
+include ":rendering";
+include ":spatial";
+include ":utilities";
+include ":unit";
 
 //
 rootProject.name = 'dotpoint';

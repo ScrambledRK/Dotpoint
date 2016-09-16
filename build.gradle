@@ -14,23 +14,78 @@ buildscript
 // /////////////////////////////////////////////// //
 // /////////////////////////////////////////////// //
 
-apply plugin: 'haxe';
-
-//
-group = "at.dotpoint";
-version = "0.1-SNAPSHOT";
-
-//
-repositories 
+allprojects
 {
-	mavenLocal()
-	mavenCentral()
+	apply plugin: 'haxe';
+
+	//
+	group = "at.dotpoint";
+	version = "0.1-SNAPSHOT";
+
+	//
+	repositories 
+	{
+		mavenLocal()
+		mavenCentral()
+	}
+	
+/* 	model
+	{
+		buildTypes
+		{
+			debug(IBuildType)
+			{
+				configuration.add( "debug", "true" );
+			}
+			
+			release(IBuildType)
+			{
+				configuration.add( "debug", "false" );
+			}
+		} 		
+	} */
 }
 
 // /////////////////////////////////////////////// //
 // /////////////////////////////////////////////// //
 
-model
+/* allprojects
+{
+	configurations.create("default");
+
+	configurations
+	{	
+		compile 
+		{		
+			description = 'compile classpath'
+			transitive = true
+		}
+		
+		test
+		{
+			extendsFrom compile
+			
+			description = 'test classpath'
+			transitive = true
+		}
+	}	
+
+	// model {
+		
+		// sources
+		// {
+			// all
+			// {
+				// println it.source.getSrcDirs();
+			// }
+		// }
+	// } 
+} */
+
+// /////////////////////////////////////////////// //
+// /////////////////////////////////////////////// //
+
+/* model
 {
 	components
 	{	
@@ -43,6 +98,11 @@ model
 			{		
 				main(CrossSourceSet)
 				{		
+					dependencies
+					{
+						project(":math");
+					}
+				
 					subprojects.each {
 						source.srcDir it.file('src/main')
 						
@@ -100,3 +160,6 @@ model
 	} 
 
 }
+ */
+// /////////////////////////////////////////////// //
+// /////////////////////////////////////////////// //
