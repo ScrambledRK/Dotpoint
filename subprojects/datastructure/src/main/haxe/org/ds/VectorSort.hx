@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package haxe.org.ds;
+package org.ds;
 
 import haxe.ds.Vector;
 

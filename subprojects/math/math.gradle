@@ -4,20 +4,51 @@ model
 	{	
 		main(IApplicationComponent)
 		{
-			platform "java"//,"flash"			
-			buildType "debug", "release"
-			//flavor "library"
+			platform "java"			
+			buildType "release"
+			
+			options.add("macro",'include("at.dotpoint")');
+			options.add("hxml",'-dce no');
 			
 			sources
 			{		
-				main(ISourceSet)
+				compile(ISourceSet)
 				{		
-					source.srcDir file('src/main')					
-					source.srcDir file('src/test')					
+					dependencies
+					{
+						library( ":datastructure", "main" );
+					}
+		
+					source.srcDir file('src/main/haxe')
+					source.include '**/*.hx'
 					
 					platform "haxe"					
-				}								
-			}					
+				}	
+			}	
+
+			tests
+			{
+				unit(ITestComponent)
+				{
+					main = "at.dotpoint.math.MathTestRunner";
+				
+					sources
+					{	
+						test(ISourceSet)
+						{		
+							dependencies
+							{
+								library( ":unit", "main" );
+							}
+						
+							source.srcDir file('src/test/haxe')
+							source.include '**/*.hx'
+							
+							platform "haxe"					
+						}
+					}						
+				}
+			}			
 		}
 	}	
 }

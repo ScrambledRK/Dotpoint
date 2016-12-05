@@ -1,7 +1,7 @@
 package at.dotpoint.datastructure;
 
 import haxe.ds.Vector;
-import haxe.org.ds.VectorSort;
+import org.ds.VectorSort;
 
 /**
  * ...

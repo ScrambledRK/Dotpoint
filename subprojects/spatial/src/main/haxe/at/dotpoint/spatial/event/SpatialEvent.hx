@@ -1,7 +1,7 @@
 package at.dotpoint.spatial.event;
 
 import at.dotpoint.dispatcher.event.Event;
-import at.dotpoint.datastructure.entity.event.EntityEvent;
+import at.dotpoint.entity.event.EntityEvent;
 import at.dotpoint.math.geom.Space;
 
 /**

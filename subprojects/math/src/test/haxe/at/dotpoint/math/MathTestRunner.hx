@@ -1,14 +1,13 @@
-package ;
+package at.dotpoint.math;
 
-import at.dotpoint.spatial.transform.LazyTransformTest;
+import at.dotpoint.math.vector.QuaternionTest;
 import haxe.unit.TestRunner;
 
-
 /**
- * 2016-08-12
+ * 2016-12-04
  * @author RK
  */
-class SpatialTestRunner extends TestRunner
+class MathTestRunner extends TestRunner
 {
 
     // ************************************************************************ //
@@ -18,7 +17,7 @@ class SpatialTestRunner extends TestRunner
     //
     static public function main()
     {
-        new SpatialTestRunner();
+        new MathTestRunner();
     }
 
     //
@@ -26,7 +25,7 @@ class SpatialTestRunner extends TestRunner
     {
 		super();
 
-		this.add( new LazyTransformTest() );
+		this.add( new QuaternionTest() );
 		this.run();
     }
 

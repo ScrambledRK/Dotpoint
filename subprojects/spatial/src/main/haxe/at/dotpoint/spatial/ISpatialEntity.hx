@@ -1,6 +1,6 @@
 package at.dotpoint.spatial;
 
-import at.dotpoint.datastructure.entity.IEntity;
+import at.dotpoint.entity.IEntity;
 import at.dotpoint.datastructure.graph.TreeNode;
 import at.dotpoint.spatial.boundings.IBoundings;
 import at.dotpoint.spatial.transform.ITransform;

@@ -1,12 +1,11 @@
 package at.dotpoint.spatial.transform;
 
-import at.dotpoint.math.vector.Matrix44;
-import at.dotpoint.math.vector.Quaternion;
 import at.dotpoint.math.MathUtil;
-import at.dotpoint.math.vector.Vector3;
-import at.dotpoint.math.vector.Matrix44;
 import at.dotpoint.math.geom.Space;
 import at.dotpoint.math.vector.IMatrix44;
+import at.dotpoint.math.vector.Matrix44;
+import at.dotpoint.math.vector.Quaternion;
+import at.dotpoint.math.vector.Vector3;
 
 using at.dotpoint.unit.TestCaseHelper;
 
@@ -14,7 +13,7 @@ using at.dotpoint.unit.TestCaseHelper;
  * 2016-08-12
  * @author RK
  */
-class ITransformTest extends haxe.unit.TestCase
+class ATransformTest extends haxe.unit.TestCase
 {
 
 	//

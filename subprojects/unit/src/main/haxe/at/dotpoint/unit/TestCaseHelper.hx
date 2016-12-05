@@ -1,6 +1,7 @@
 package at.dotpoint.unit;
 
 import haxe.unit.TestCase;
+import haxe.PosInfos;
 
 /**
  * 2016-08-15

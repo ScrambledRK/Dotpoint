@@ -1,8 +1,8 @@
 package at.dotpoint.spatial;
 
 import at.dotpoint.datastructure.graph.TreeNode;
-import at.dotpoint.datastructure.entity.Entity;
-import at.dotpoint.datastructure.entity.IComponent;
+import at.dotpoint.entity.Entity;
+import at.dotpoint.entity.IComponent;
 import at.dotpoint.math.vector.IVector3;
 import at.dotpoint.spatial.boundings.Boundings;
 import at.dotpoint.spatial.boundings.IBoundings;

@@ -1,7 +1,6 @@
 include ":bootstrapper";
 include ":controls";
 include ":datastructure";
-include ":dispatcher";
 include ":display";
 include ":loader";
 include ":logger";

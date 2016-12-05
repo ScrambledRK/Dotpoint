@@ -4,20 +4,22 @@ model
 	{	
 		main(IApplicationComponent)
 		{
-			platform "java"//,"flash"			
-			buildType "debug", "release"
-			//flavor "library"
+			platform "java"			
+			buildType "release"
+			
+			options.add("macro",'include("at.dotpoint")');
+			options.add("hxml",'-dce no');
 			
 			sources
 			{		
-				main(ISourceSet)
-				{
-					source.srcDir file('src/main')					
-					//source.srcDir file('src/test')					
+				compile(ISourceSet)
+				{						
+					source.srcDir file('src/main/haxe')
+					source.include '**/*.hx'
 					
 					platform "haxe"					
-				}								
-			}					
+				}	
+			}		
 		}
 	}	
 }

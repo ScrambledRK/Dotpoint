@@ -3,7 +3,7 @@ package at.dotpoint.spatial.boundings;
 import at.dotpoint.datastructure.graph.event.TreeNodeEvent;
 import at.dotpoint.datastructure.graph.TreeNode;
 import at.dotpoint.dispatcher.event.Event;
-import at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.entity.Component;
 import at.dotpoint.dispatcher.lazy.LazyStatus;
 import at.dotpoint.math.geom.Cube;
 import at.dotpoint.math.geom.Space;

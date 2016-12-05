@@ -648,44 +648,44 @@ class Quaternion implements IQuaternion
 
 		// ----------- //
 
-		var x:Float = (  input.m11 + input.m22 + input.m33 + 1.0 ) / 4.0;
-		var y:Float = (  input.m11 - input.m22 - input.m33 + 1.0 ) / 4.0;
-		var z:Float = ( -input.m11 + input.m22 - input.m33 + 1.0 ) / 4.0;
-		var w:Float = ( -input.m11 - input.m22 + input.m33 + 1.0 ) / 4.0;
+		var w:Float = (  input.m11 + input.m22 + input.m33 + 1.0 ) / 4.0;
+		var x:Float = (  input.m11 - input.m22 - input.m33 + 1.0 ) / 4.0;
+		var y:Float = ( -input.m11 + input.m22 - input.m33 + 1.0 ) / 4.0;
+		var z:Float = ( -input.m11 - input.m22 + input.m33 + 1.0 ) / 4.0;
 
+		if( w < 0.0 ) w = 0.0;
 		if( x < 0.0 ) x = 0.0;
 		if( y < 0.0 ) y = 0.0;
 		if( z < 0.0 ) z = 0.0;
-		if( w < 0.0 ) w = 0.0;
 
+		w = Math.sqrt( w );
 		x = Math.sqrt( x );
 		y = Math.sqrt( y );
 		z = Math.sqrt( z );
-		w = Math.sqrt( w );
 
-		if( x >= y && x >= z && x >= w )
-		{
-			y *= MathUtil.getSign( input.m23 - input.m32 );
-			z *= MathUtil.getSign( input.m31 - input.m13 );
-			w *= MathUtil.getSign( input.m12 - input.m21 );
-		}
-		else if( y >= x && y >= z && y >= w )
+		if( w >= x && w >= y && w >= z )
 		{
 			x *= MathUtil.getSign( input.m23 - input.m32 );
-			z *= MathUtil.getSign( input.m12 + input.m21 );
-			w *= MathUtil.getSign( input.m31 + input.m13 );
+			y *= MathUtil.getSign( input.m31 - input.m13 );
+			z *= MathUtil.getSign( input.m12 - input.m21 );
 		}
-		else if( z >= x && z >= y && z >= w )
+		else if( x >= w && x >= y && x >= z )
 		{
-			x *= MathUtil.getSign( input.m31 - input.m13 );
+			w *= MathUtil.getSign( input.m23 - input.m32 );
 			y *= MathUtil.getSign( input.m12 + input.m21 );
-			w *= MathUtil.getSign( input.m23 + input.m32 );
+			z *= MathUtil.getSign( input.m31 + input.m13 );
 		}
-		else if( w >= x && w >= y && z >= z )
+		else if( y >= w && y >= x && y >= z )
 		{
-			x *= MathUtil.getSign( input.m12 - input.m21 );
-			y *= MathUtil.getSign( input.m13 + input.m31 );
+			w *= MathUtil.getSign( input.m31 - input.m13 );
+			x *= MathUtil.getSign( input.m12 + input.m21 );
 			z *= MathUtil.getSign( input.m23 + input.m32 );
+		}
+		else if( z >= w && z >= x && z >= y )
+		{
+			w *= MathUtil.getSign( input.m12 - input.m21 );
+			x *= MathUtil.getSign( input.m13 + input.m31 );
+			y *= MathUtil.getSign( input.m23 + input.m32 );
 		}
 		else
 		{
@@ -694,10 +694,10 @@ class Quaternion implements IQuaternion
 
 		// ----------- //
 
-		output.x = w;	// woops
+		output.x = x;
 		output.y = y;
 		output.z = z;
-		output.w = x;
+		output.w = w;
 
 		output.normalize();
 
@@ -828,7 +828,7 @@ class Quaternion implements IQuaternion
 	 *
 	 * @param	a		quaternion to use the values from
 	 * @param	b		quaternion to use the values from
-	 * @return			true if both matrix objects are the same
+	 * @return			true if both quaternion objects are the same
 	 */
 	public static function isEqual( a:IQuaternion, b:IQuaternion ):Bool
 	{

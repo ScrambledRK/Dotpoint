@@ -1,7 +1,7 @@
 package at.dotpoint.spatial.entity;
 
 import at.dotpoint.spatial.transform.ITransform;
-import at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.entity.Component;
 import at.dotpoint.datastructure.graph.TreeNode;
 
 /**

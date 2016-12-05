@@ -4,7 +4,7 @@ package at.dotpoint.spatial.transform;
  * 2016-08-12
  * @author RK
  */
-class LazyTransformTest extends ITransformTest
+class LazyTransformTest extends ATransformTest
 {
 
 	// ************************************************************************ //

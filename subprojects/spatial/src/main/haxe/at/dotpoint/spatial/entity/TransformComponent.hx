@@ -10,8 +10,8 @@ import at.dotpoint.datastructure.graph.event.TreeNodeEvent;
 import at.dotpoint.datastructure.graph.TreeNode;
 import at.dotpoint.spatial.transform.LazyTransform;
 import at.dotpoint.spatial.transform.ITransform;
-import at.dotpoint.datastructure.entity.IEntity;
-import at.dotpoint.datastructure.entity.Component;
+import at.dotpoint.entity.IEntity;
+import at.dotpoint.entity.Component;
 
 /**
  * 2016-08-13
