@@ -1,6 +1,8 @@
 package at.dotpoint.math;
 
-import at.dotpoint.math.vector.QuaternionTest;
+
+import at.dotpoint.math.vector.Vector2Test;
+import at.dotpoint.math.vector.Vector3Test;
 import haxe.unit.TestRunner;
 
 /**
@@ -25,7 +27,8 @@ class MathTestRunner extends TestRunner
     {
 		super();
 
-		this.add( new QuaternionTest() );
+		this.add( new Vector2Test() );
+		this.add( new Vector3Test() );
 		this.run();
     }
 

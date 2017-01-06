@@ -1,21 +1,22 @@
-package at.dotpoint.math.vector;
+package at.dotpoint.math.quaternion;
 
 /**
- * vector with 3 components (x,y,z) + homogenous (w: 0 = direction; 1 = point)
+ * unit-quaternion is a Vector4 like object for interpolateable and gimbal-lock-free rotations;
+ * note - this class does not guarantee to be a unit quaternion but some methodes may rely on it.
  */
-class Vector3 implements IVector3
+class Quaternion implements IQuaternion
 {
 
-	/** x component, usually x-axis in euler coordinate system */
+	/** imaginary x component */
 	@:isVar public var x(get, set):Float;
 
-	/** y component, usually y-axis in euler coordinate system */
+	/** imaginary y component */
 	@:isVar public var y(get, set):Float;
 
-	/** z component, usually z-axis in euler coordinate system */
+	/** imaginary z component */
 	@:isVar public var z(get, set):Float;
 
-	/** homogenous w component, useful for projection calculations. 0 = direction, 1 = point */
+	/** real x component */
 	@:isVar public var w(get, set):Float;
 
 	// ************************************************************************ //
@@ -23,13 +24,13 @@ class Vector3 implements IVector3
 	// ************************************************************************ //
 
 	/**
-	 * creates a new vector instance with the provided optional arguments.
-	 * by default: 0,0,0,1 (point in space, not direction)
+	 * creates a new Quaternion instance with the provided optional arguments.
+	 * by default: 0,0,0,1
 	 *
-	 * @param	x	x component, usually x-axis in euler coordinate system
-	 * @param	y	y component, usually y-axis in euler coordinate system
-	 * @param	z	z component, usually z-axis in euler coordinate system
-	 * @param	w	homogenous w component. 0 = direction, 1 = point
+	 * @param	x	imaginary x component
+	 * @param	y	imaginary y component
+	 * @param	z	imaginary z component
+	 * @param	w	real w component
 	 */
 	public function new( x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 1 )
 	{
@@ -85,7 +86,7 @@ class Vector3 implements IVector3
 
 	// ************************************************************************ //
 	// etc
-	// ************************************************************************ //
+	// ************************************************************************ //	
 
 	/**
 	 * prints each component seperated by ","
@@ -93,6 +94,7 @@ class Vector3 implements IVector3
 	 */
 	public function toString():String
 	{
-		return "[Vector3;" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + "]";
+		return "[Quaternion;" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + "]";
 	}
+
 }

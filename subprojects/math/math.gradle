@@ -13,12 +13,7 @@ model
 			sources
 			{		
 				compile(ISourceSet)
-				{		
-					dependencies
-					{
-						library( ":datastructure", "main" );
-					}
-		
+				{				
 					source.srcDir file('src/main/haxe')
 					source.include '**/*.hx'
 					

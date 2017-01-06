@@ -1,14 +1,4 @@
-include ":bootstrapper";
-include ":controls";
-include ":datastructure";
-include ":display";
-include ":loader";
-include ":logger";
 include ":math";
-include ":network";
-include ":rendering";
-include ":spatial";
-include ":utilities";
 include ":unit";
 
 //
