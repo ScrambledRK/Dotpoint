@@ -1,3 +1,4 @@
+include ":spatial";
 include ":math";
 include ":unit";
 
