@@ -2,7 +2,7 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="CustomBuild" />
+    <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\" />
     <movie fps="0" />
@@ -21,6 +21,7 @@
     <class path="subprojects\unit\src\main\haxe" />
     <class path="subprojects\spatial\src\main\haxe" />
     <class path="subprojects\spatial\src\test\haxe" />
+    <class path="project\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -29,7 +30,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="Main" />
     <option enabledebug="False" />
-    <option additional="" />
+    <option additional="-dce no&#xA;--macro &quot;include('at.dotpoint')&quot;" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -44,7 +45,7 @@
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>$(ProjectDir)\gradlew.bat build</preBuildCommand>
+  <preBuildCommand />
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

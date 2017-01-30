@@ -1,8 +1,8 @@
 package at.dotpoint.spatial.geometry.primitive;
 
 import at.dotpoint.math.axis.AxisEuler;
-import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;
+import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.primitive.cube.Cube;
 import at.dotpoint.spatial.geometry.primitive.cube.ICube;
 
@@ -30,72 +30,14 @@ class MathCube
 		if( output == null )
 			output = new Cube();
 
-		output.min.x = from.min.x;
-		output.min.y = from.min.y;
-		output.min.z = from.min.z;
-		output.max.x = from.max.x;
-		output.max.y = from.max.y;
-		output.max.z = from.max.z;
+		output.center.x = from.center.x;
+		output.center.y = from.center.y;
+		output.center.z = from.center.z;
+		output.extent.x = from.extent.x;
+		output.extent.y = from.extent.y;
+		output.extent.z = from.extent.z;
 
 		return output;
-	}
-	
-	/**
-	 * sets the `min`/`max` to zero. note that a cube with a volume of 0 is still considered a valid cube.
-	 * use `setEmpty()` to create a truly empty cube. empty cubes opposed to non-empty cubes accept any
-	 * initial extent/dimension.
-	 * 
-	 * @param 	a target cube
-	 * @return given cube 'a' for chaining
-	 */
-	public static function setZero( a:ICube ):ICube
-	{
-		a.min.x = 0;
-		a.min.y = 0;
-		a.min.z = 0;
-		a.max.x = 0;
-		a.max.y = 0;
-		a.max.z = 0;
-		
-		return a;
-	}
-	
-	/**
-	 * sets the `min` to (1,1,1) and `max` to (-1,-1,-1), indicating an empty (invalid) cube.
-	 * an empty cube accepts any initial extent value, for example when creating a cube using `insertVector3()`.
-	 * 
-	 * @param 	a target cube
-	 * @return given cube 'a' for chaining
-	 */
-	 public static function setEmpty( a:ICube ):ICube
-	{
-		a.min.x =  1;
-		a.min.y =  1;
-		a.min.z =  1;
-		a.max.x = -1;
-		a.max.y = -1;
-		a.max.z = -1;
-		
-		return a;
-	}
-
-	/**
-	 * checks if `width`, `height` or `length` are negative. negative values are only possible when constructed
-	 * or `setEmpty()` has been called. an empty cube accepts any initial extent value <br/>
-	 *
-	 * this check is useful in combination with `insertVector3()` or `insertCube()` to
-	 * generate boundings based on a point cloud, or other bounding-cubes.
-	 *
-	 * @param 	a target cube
-	 * @return true if empty-cube, false if not
-	 */
-	public static function isEmpty( a:ICube ):Bool
-	{
-		var x:Bool = MathCube.getSpan( a, AxisEuler.X ) < 0;
-		var y:Bool = MathCube.getSpan( a, AxisEuler.Y ) < 0;
-		var z:Bool = MathCube.getSpan( a, AxisEuler.Z ) < 0;
-		
-		return x || y || z;
 	}
 	
 	// ************************************************************************ //
@@ -107,13 +49,13 @@ class MathCube
 	 * @param 	axis X for width, Y for height, Z for length
 	 * @return 	span between min.x/y/z and max.x/y/z; never negative unless unset (empty cube)
 	 */
-	public static function getSpan( a:ICube, axis:AxisEuler ):Float
+	inline public static function getSpan( a:ICube, axis:AxisEuler ):Float
 	{
 		switch( axis )
 		{
-			case AxisEuler.X: return a.max.x - a.min.x;
-			case AxisEuler.Y: return a.max.y - a.min.y;
-			case AxisEuler.Z: return a.max.z - a.min.z;
+			case AxisEuler.X: return a.extent.x + a.extent.x;
+			case AxisEuler.Y: return a.extent.y + a.extent.y;
+			case AxisEuler.Z: return a.extent.z + a.extent.z;
 		}
 	}	
 	
@@ -126,43 +68,168 @@ class MathCube
 	 * @param	pivot used as a center to change the dimension from, default is center
 	 * @return	new width
 	 */
-	public static function setSpan( a:ICube, axis:AxisEuler, value:Float, ?pivot:IVector3 ):Float
+	inline public static function setSpan( a:ICube, axis:AxisEuler, value:Float, ?pivot:IVector3 ):Float
 	{
 		if( value < 0 )
 			throw "dimension must be positive but " + value + " given";
 
 		if( pivot == null )
-			pivot = new Vector3( 0.5, 0.5, 0.5 );
-			
-		if( MathCube.isEmpty( a ) )
-			MathCube.setZero( a );
-
-		//
-		var center:IVector3 = MathCube.getPoint( a, pivot );
-
-		switch( axis )
 		{
-			case AxisEuler.X:
+			switch( axis )
 			{
-				a.min.x = center.x - value * pivot.x;
-				a.max.x = center.x + value * (1 - pivot.x);
+				case AxisEuler.X: a.extent.x = value * 0.5;
+				case AxisEuler.Y: a.extent.y = value * 0.5;
+				case AxisEuler.Z: a.extent.z = value * 0.5;
 			}
-			
-			case AxisEuler.Y:
+		}
+		else
+		{
+			var center:IVector3 = MathCube.getPoint( a, pivot );
+	
+			switch( axis )
 			{
-				a.min.y = center.y - value * pivot.y;
-				a.max.y = center.y + value * (1 - pivot.y);
-			}
-			
-			case AxisEuler.Z:
-			{
-				a.min.z = center.z - value * pivot.z;
-				a.max.z = center.z + value * (1 - pivot.z);
+				case AxisEuler.X:
+				{
+					MathCube.setMin( a, axis, center.x - value * pivot.x );
+					MathCube.setMax( a, axis, center.x + value * (1 - pivot.x) );
+				}
+				
+				case AxisEuler.Y:
+				{
+					MathCube.setMin( a, axis, center.y - value * pivot.y );
+					MathCube.setMax( a, axis, center.y + value * (1 - pivot.y) );
+				}
+				
+				case AxisEuler.Z:
+				{
+					MathCube.setMin( a, axis, center.z - value * pivot.z );
+					MathCube.setMax( a, axis, center.z + value * (1 - pivot.z) );
+				}
 			}
 		}		
 
 		return value;
 	}
+	
+	// ------------------------------------ //
+	// ------------------------------------ //
+	
+	/**
+	 * sets the min.x/y/z (TOP_LEFT_FRONT corner of the cube)
+	 * 
+	 * @param 	a target cube
+	 * @param 	axis X for width, Y for height, Z for length
+	 * @param 	value new min in euler coordinate system 
+	 * @return 	given cube 'a' for chaining
+	 */
+	inline public static function setMin( a:ICube, axis:AxisEuler, value:Float ):ICube
+	{		
+		switch( axis )
+		{
+			case AxisEuler.X:
+			{
+				var dx:Float = (a.center.x - a.extent.x - value) * 0.5;
+				
+				a.center.x -= dx;		
+				a.extent.x += dx;
+			}
+			
+			case AxisEuler.Y:
+			{
+				var dy:Float = (a.center.y - a.extent.y - value) * 0.5;
+				
+				a.center.y -= dy;		
+				a.extent.y += dy;
+			}
+			
+			case AxisEuler.Z:
+			{
+				var dz:Float = (a.center.z - a.extent.z - value) * 0.5;
+				
+				a.center.z -= dz;		
+				a.extent.z += dz;
+			}
+		}	
+		
+		return a;
+	}
+	
+	/**
+	 * gets the min.x/y/z (TOP_LEFT_FRONT corner of the cube)
+	 * 
+	 * @param 	a target cube
+	 * @param 	axis X for width, Y for height, Z for length
+	 * @return 	min.x/y/z
+	 */
+	inline public static function getMin( a:ICube, axis:AxisEuler ):Float
+	{ 
+		switch( axis )
+		{
+			case AxisEuler.X: return a.center.x - a.extent.x;
+			case AxisEuler.Y: return a.center.y - a.extent.y;
+			case AxisEuler.Z: return a.center.z - a.extent.z;
+		}
+	}
+
+	/**
+	 * sets the max.x/y/z (BOTTOM_RIGHT_BACK corner of the cube)
+	 * 
+	 * @param 	a target cube
+	 * @param 	axis X for width, Y for height, Z for length
+	 * @param 	value new max in euler coordinate system 
+	 * @return 	given cube 'a' for chaining
+	 */
+	inline public static function setMax( a:ICube, axis:AxisEuler, value:Float ):ICube
+	{		
+		switch( axis )
+		{
+			case AxisEuler.X:
+			{
+				var dx:Float = (a.center.x + a.extent.x - value) * 0.5;
+				
+				a.center.x -= dx;		
+				a.extent.x += dx;
+			}
+			
+			case AxisEuler.Y:
+			{
+				var dy:Float = (a.center.y + a.extent.y - value) * 0.5;
+				
+				a.center.y -= dy;		
+				a.extent.y += dy;
+			}
+			
+			case AxisEuler.Z:
+			{
+				var dz:Float = (a.center.z + a.extent.z - value) * 0.5;
+				
+				a.center.z -= dz;		
+				a.extent.z += dz;
+			}
+		}	
+		
+		return a;
+	}
+	
+	/**
+	 * gets the max.x/y/z (BOTTOM_RIGHT_BACK corner of the cube)
+	 * 
+	 * @param 	a target cube
+	 * @param 	axis X for width, Y for height, Z for length
+	 * @return 	max.x/y/z
+	 */
+	inline public static function getMax( a:ICube, axis:AxisEuler ):Float
+	{ 
+		switch( axis )
+		{
+			case AxisEuler.X: return a.center.x + a.extent.x;
+			case AxisEuler.Y: return a.center.y + a.extent.y;
+			case AxisEuler.Z: return a.center.z + a.extent.z;
+		}
+	}
+	
+	// ------------------------------------ //
+	// ------------------------------------ //
 	
 	/**
 	 * calculates a point in euler space using the current boundings (`min`/`max` extents) and the given
@@ -176,17 +243,14 @@ class MathCube
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	 public static function getPoint( a:ICube, point:IVector3, ?output:IVector3 ):IVector3
+	inline public static function getPoint( a:ICube, point:IVector3, ?output:IVector3 ):IVector3
 	{
-		if( MathCube.isEmpty( a ) )
-			throw "cannot calculate relative coordinates of an empty cube";
-		
 		if( output == null )
 			output = new Vector3();
 
-		output.x = a.min.x + MathCube.getSpan( a, AxisEuler.X ) * point.x;
-		output.y = a.min.y + MathCube.getSpan( a, AxisEuler.Y ) * point.y;
-		output.z = a.min.z + MathCube.getSpan( a, AxisEuler.Z ) * point.z;
+		output.x = MathCube.getMin( a, AxisEuler.X ) + MathCube.getSpan( a, AxisEuler.X ) * point.x;
+		output.y = MathCube.getMin( a, AxisEuler.Y ) + MathCube.getSpan( a, AxisEuler.Y ) * point.y;
+		output.z = MathCube.getMin( a, AxisEuler.Z ) + MathCube.getSpan( a, AxisEuler.Z ) * point.z;
 
 		return output;
 	}
@@ -206,10 +270,7 @@ class MathCube
 	 * @return given cube 'a' for chaining
 	 */
 	public static function setDimensions( a:ICube, w:Float, h:Float, l:Float, ?pivot:IVector3 ):ICube
-	{
-		if( pivot == null )
-			pivot = new Vector3( 0.5, 0.5, 0.5 );		// optimization attempt; this method could be more efficient in general
-		
+	{	
 		MathCube.setSpan( a, AxisEuler.X, w, pivot );
 		MathCube.setSpan( a, AxisEuler.Y, h, pivot );
 		MathCube.setSpan( a, AxisEuler.Z, l, pivot );
@@ -218,20 +279,24 @@ class MathCube
 	}
 
 	/**
-	 * sets `min` and `max` extents at once. (x,y,z values are copied)
+	 * sets `min` and `max` extrema at once. (x,y,z values are copied)
 	 *
 	 * @param 	a target cube
-	 * @param	min		min extent (must be smaller than max)
-	 * @param	max		max extent (must be bigger than min)
+	 * @param	min	extrema (must be smaller than max)
+	 * @param	max	extrema (must be bigger than min)
 	 * @return given cube 'a' for chaining
 	 */
-	public static function setExtensions( a:ICube, min:IVector3, max:IVector3 ):ICube
+	public static function setExtrema( a:ICube, min:IVector3, max:IVector3 ):ICube
 	{
 		if ( min.x > max.x || min.y > max.y || min.z > max.z )
 			throw "dimensions must be positive but max extend " + max + " is smaller than min " + min;
 
-		MathVector3.clone( min, a.min );
-		MathVector3.clone( max, a.max );
+		MathCube.setMin( a, AxisEuler.X, min.x );
+		MathCube.setMin( a, AxisEuler.Y, min.y );
+		MathCube.setMin( a, AxisEuler.Z, min.z );
+		MathCube.setMax( a, AxisEuler.X, max.x );
+		MathCube.setMax( a, AxisEuler.Y, max.y );
+		MathCube.setMax( a, AxisEuler.Z, max.z );
 		
 		return a;
 	}
@@ -241,83 +306,73 @@ class MathCube
 	// ************************************************************************ //
 	
 	/**
-	 * tests if the given `other` bound is within the boundings of `cube`. a cube is considered to be
-	 * within the bounds if `other.min >(=) cube.min` and `other.max <(=) cube.max`. the `equal` parameter
-	 * specifies whether or not `other` is allowed to have the same extents as `cube` <br/>
+	 * tests if the given `operator` bound is within the boundings of `source`. a cube is considered to be
+	 * within the bounds if `operator.min >(=) source.min` and `operator.max <(=) source.max`. the `equal` parameter
+	 * specifies whether or not `operator` is allowed to have the same extrema as `source` <br/>
 	 *
-	 * if either `cube` or `other` are empty, the method returns false.
-	 *
-	 * @param	a	cube to perform the check on
-	 * @param	b	cube to perform the check with
+	 * @param	source	cube to perform the check on
+	 * @param	operator	cube to perform the check with
 	 * @param	equal	true touching bounds is considered still inside
-	 * @return	true `other` is within `cube`
+	 * @return	true `operator` is within `cube`
 	 */
 	public static function isCubeInside( source:ICube, operator:ICube, ?equal:Bool = false ):Bool
 	{
-		if( MathCube.isEmpty( source ) || MathCube.isEmpty( operator ) )
-			return false;
-
-		var min:Bool = MathCube.isVector3Inside( source, operator.min, equal );	
-		var max:Bool = MathCube.isVector3Inside( source, operator.max, equal );	
+		var min:Bool = MathCube.isPointInside( source, operator.getMin(), equal );	
+		var max:Bool = MathCube.isPointInside( source, operator.getMax(), equal );	
 			
 		return min && max;
 	}
 
 	/**
-	 * tests if the given `point` vector is within the boundings of `cube`. a point is considered to be
+	 * tests if the given `point` vector is within the boundings of `source`. a point is considered to be
 	 * within the bounds if `point >(=) cube.min` and `point <(=) cube.max`. the `equal` parameter
 	 * specifies whether or not `point` is allowed to have the same value as the extends of `cube` <br/>
 	 *
-	 * if `cube` is empty, the method returns false.
-	 *
-	 * @param	cube	cube to perform the check on
-	 * @param	point	point in euler space to perform the check with
+	 * @param	source	cube to perform the check on
+	 * @param	operator	point in euler space to perform the check with
 	 * @param	equal	true touching bounds is considered still inside
 	 * @return	true `point` is within `cube`
 	 */
-	public static function isVector3Inside( source:ICube, operator:IVector3, ?equal:Bool = false ):Bool
+	public static function isPointInside( source:ICube, operator:IVector3, ?equal:Bool = false ):Bool
 	{
-		if( MathCube.isEmpty( source ) )
-			return false;
-
 		if( equal )
 		{
-			if( operator.x <= source.min.x )
+			if( operator.x <= MathCube.getMin( source, AxisEuler.X ) )
 				return false;
 
-			if( operator.y <= source.min.y )
+			if( operator.y <= MathCube.getMin( source, AxisEuler.Y ) )
 				return false;
 
-			if( operator.z <= source.min.z )
+			if( operator.z <= MathCube.getMin( source, AxisEuler.Z ) )
 				return false;
 
-			if( operator.x >= source.max.x )
+			if( operator.x >= MathCube.getMax( source, AxisEuler.X ) )
 				return false;
 
-			if( operator.y >= source.max.y )
+			if( operator.y >= MathCube.getMax( source, AxisEuler.Y ) )
 				return false;
 
-			if( operator.z >= source.max.z )
+			if( operator.z >= MathCube.getMax( source, AxisEuler.Z ) )
 				return false;
 		}
 		else
 		{
-			if( operator.x < source.min.x )
+			if( operator.x < MathCube.getMin( source, AxisEuler.X ) )
 				return false;
 
-			if( operator.y < source.min.y )
+			if( operator.y < MathCube.getMin( source, AxisEuler.Y ) )
 				return false;
 
-			if( operator.z < source.min.z )
+			if( operator.z < MathCube.getMin( source, AxisEuler.Z ) )
 				return false;
 
-			if( operator.x > source.max.x )
+			if( operator.x > MathCube.getMax( source, AxisEuler.X ) )
 				return false;
 
-			if( operator.y > source.max.y )
+			if( operator.y > MathCube.getMax( source, AxisEuler.Y ) )
 				return false;
 
-			if( operator.z > source.max.z )
+			if( operator.z > MathCube.getMax( source, AxisEuler.Z ) )
 				return false;
 		}
 
@@ -328,69 +383,43 @@ class MathCube
 	// ----------------------------------------------------------------------- //
 
 	/**
-	 * inserts the given `other` into the given `cube`, extending its boundings/extents in
-	 * case the `other` `min`/`max` is smaller/bigger than the one cube ones. <br/>
+	 * inserts the given `operator` into the given `source`, extending its boundings/extents in
+	 * case the `operator` `min`/`max` is smaller/bigger than the one cube ones. <br/>
 	 *
-	 * note that a cube of zero volume is still considered valid and inserting one might not
-	 * change it. (since for example: `other.min.x > cube.min.x`) use `cube.setEmpty()` first
-	 * to always insert `other`.<br/>
-	 *
-	 * if the given `other` cube is empty, the method throws error
-	 *
-	 * @param	a	cube to perform the insertion on
-	 * @param	b	cube that should be inserted
+	 * @param	source	cube to perform the insertion on
+	 * @param	operator	cube that should be inserted
 	 */
-	public static function insertCube( source:ICube, operator:ICube ):ICube
+	public static function insertCube( source:ICube, operator:ICube ):Void
 	{
-		if( MathCube.isEmpty( operator ) )
-			throws "cannot insert empty cube into other cube";
-
-		MathCube.insertVector3( source, operator.min );
-		MathCube.insertVector3( source, operator.max );
+		MathCube.insertPoint( source, operator.getMin() );
+		MathCube.insertPoint( source, operator.getMax() );
 	}
 
 	/**
-	 * inserts the given `point` into the given `cube`, extending its boundings/extents in
+	 * inserts the given `point` into the given `source`, extending its boundings/extents in
 	 * case the `point` is smaller/bigger than the one cube min`/`max` extents. <br/>
-	 *
-	 * note that a cube of zero volume is still considered valid and inserting a point might not
-	 * change it. (since for example: `point.x > cube.min.x`) use `cube.setEmpty()` first
-	 * to always insert the point.<br/>
 	 *
 	 * @param	cube	cube to perform the insertion on
 	 * @param	point	point that should be inserted
 	 */
-	public static function insertVector3( source:ICube, operator:IVector3 ):Void
+	public static function insertPoint( source:ICube, operator:IVector3 ):Void
 	{
-		if( MathCube.isEmpty( source ) )
-		{
-			source.min.x = operator.x;
-			source.min.y = operator.y;
-			source.min.z = operator.z;
+		if( operator.x < MathCube.getMin( source, AxisEuler.X ) )
+			MathCube.setMin( source, AxisEuler.X, operator.x );
 
-			source.max.x = operator.x;
-			source.max.y = operator.y;
-			source.max.z = operator.z;
-		}
-		else
-		{
-			if( operator.x < source.min.x )
-				source.min.x = operator.x;
+		if( operator.y < MathCube.getMin( source, AxisEuler.Y ) )
+			MathCube.setMin( source, AxisEuler.X, operator.y );
+			
+		if( operator.z < MathCube.getMin( source, AxisEuler.Z ) )
+			MathCube.setMin( source, AxisEuler.Z, operator.z );
 
-			if( operator.y < source.min.y )
-				source.min.y = operator.y;
+		if( operator.x > MathCube.getMax( source, AxisEuler.X ) )
+			MathCube.setMax( source, AxisEuler.X, operator.x );
 
-			if( operator.z < source.min.z )
-				source.min.z = operator.z;
+		if( operator.y > MathCube.getMax( source, AxisEuler.Y ) )
+			MathCube.setMax( source, AxisEuler.X, operator.y );
 
-			if( operator.x > source.max.x )
-				source.max.x = operator.x;
-
-			if( operator.y > source.max.y )
-				source.max.y = operator.y;
-
-			if( operator.z > source.max.z )
-				source.max.z = operator.z;
-		}
+		if( operator.z > MathCube.getMax( source, AxisEuler.Z ) )
+			MathCube.setMax( source, AxisEuler.Z, operator.z );	
 	}	
 }

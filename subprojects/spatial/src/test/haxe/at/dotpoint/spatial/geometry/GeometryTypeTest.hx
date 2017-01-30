@@ -16,7 +16,7 @@ class GeometryTypeTest extends haxe.unit.TestCase
 	private function testPrimitiveSphere():Void
 	{
 		var type:GeometryType = GeometryType.PRIMITIVE( PrimitiveType.SPHERE );
-		
+	
 		assertTrue( type != null );
 		assertEquals( PrimitiveType.SPHERE, type.getParameters()[0] );
 	}
