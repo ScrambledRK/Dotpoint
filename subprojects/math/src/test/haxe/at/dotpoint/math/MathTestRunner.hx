@@ -1,6 +1,9 @@
 package at.dotpoint.math;
 
 
+import at.dotpoint.math.tensor.MathMatrix33Test;
+import at.dotpoint.math.tensor.MathMatrix44Test;
+import at.dotpoint.math.tensor.MathQuaternionTest;
 import at.dotpoint.math.tensor.matrix.Matrix33Test;
 import at.dotpoint.math.tensor.matrix.Matrix44Test;
 import at.dotpoint.math.tensor.quaternion.QuaternionTest;
@@ -35,6 +38,9 @@ class MathTestRunner extends TestRunner
 		this.add( new Matrix33Test() );
 		this.add( new Matrix44Test() );
 		this.add( new QuaternionTest() );
+		this.add( new MathMatrix33Test() );
+		this.add( new MathMatrix44Test() );
+		this.add( new MathQuaternionTest() );
 		this.run();
     }
 

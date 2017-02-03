@@ -8,4 +8,7 @@ interface IMatrix33
 	public var m11:Float; public var m12:Float; public var m13:Float;
 	public var m21:Float; public var m22:Float; public var m23:Float;
 	public var m31:Float; public var m32:Float; public var m33:Float;	
+	
+	public function get( columnIndex:Int, rowIndex:Int ):Float;
+	public function set( columnIndex:Int, rowIndex:Int, value:Float ):Void;
 }

@@ -1,26 +1,63 @@
 package at.dotpoint.math.tensor.matrix;
-import at.dotpoint.math.tensor.matrix.AMatrix44Test;
-import at.dotpoint.math.tensor.matrix.Matrix44;
+
+import haxe.unit.TestCase;
 
 /**
- * 2016-12-05
+ * ...
  * @author RK
  */
-class Matrix44Test extends AMatrix44Test<Matrix44>
+class Matrix44Test extends TestCase 
 {
 
-	public function new( )
+	public function new() 
 	{
-		super();
+		super();		
 	}
-
+	
 	// ************************************************************************ //
-	// Methods
+	// Tests
 	// ************************************************************************ //
 
-	override private function createMatrix():Matrix44
-	{
-		return new Matrix44();
+	/**
+	 *
+	 */
+	private function testEmptyConstruction():Void
+	{	
+		var subject:Matrix44 = new Matrix44();
+		
+		assertTrue( subject.m11 == 1 );
+		assertTrue( subject.m12 == 0 );
+		assertTrue( subject.m13 == 0 );
+		assertTrue( subject.m14 == 0 );
+		assertTrue( subject.m21 == 0 );
+		assertTrue( subject.m22 == 1 );
+		assertTrue( subject.m23 == 0 );
+		assertTrue( subject.m24 == 0 );
+		assertTrue( subject.m31 == 0 );
+		assertTrue( subject.m32 == 0 );
+		assertTrue( subject.m33 == 1 );
+		assertTrue( subject.m34 == 0 );
+		assertTrue( subject.m41 == 0 );
+		assertTrue( subject.m42 == 0 );
+		assertTrue( subject.m43 == 0 );
+		assertTrue( subject.m44 == 1 );
 	}
-
+	
+	/**
+	 *
+	 */
+	private function testSetGet():Void
+	{	
+		for( c in 0...3 )
+		{
+			for( r in 0...3 )
+			{
+				var subject:Matrix44 = new Matrix44();	
+					subject.set( c, r, -2 );
+				
+				assertTrue( subject.get( c, r ) == -2 );
+			}
+		}		
+	}	
+	
 }
