@@ -82,6 +82,36 @@ class Vector3 implements IVector3
 	{
 		return this.w = value;
 	}
+	
+	//
+	inline public function getByIndex( index:Int ):Float
+	{
+		switch( index )
+		{
+			case 0: return this.x;
+			case 1: return this.y;
+			case 2: return this.z;
+			case 3: return this.w;
+			
+			default: 
+				throw "invalid index: " + index + "(0-3 allowed)";
+		}
+	}
+	
+	//
+	inline public function setByIndex( index:Int, value:Float ):Void
+	{
+		switch( index )
+		{
+			case 0: this.x = value;
+			case 1: this.y = value;
+			case 2: this.z = value;
+			case 3: this.w = value;
+			
+			default: 
+				throw "invalid index: " + index + "(0-3 allowed)";
+		}
+	}
 
 	// ************************************************************************ //
 	// etc

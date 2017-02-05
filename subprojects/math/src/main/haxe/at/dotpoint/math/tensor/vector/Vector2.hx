@@ -52,6 +52,32 @@ class Vector2 implements IVector2
 	{
 		return this.y = value;
 	}
+	
+	//
+	inline public function getByIndex( index:Int ):Float
+	{
+		switch( index )
+		{
+			case 0: return this.x;
+			case 1: return this.y;
+			
+			default: 
+				throw "invalid index: " + index + "(0-1 allowed)";
+		}
+	}
+	
+	//
+	inline public function setByIndex( index:Int, value:Float ):Void
+	{
+		switch( index )
+		{
+			case 0: this.x = value;
+			case 1: this.y = value;
+			
+			default: 
+				throw "invalid index: " + index + "(0-1 allowed)";
+		}
+	}
 
 	// ************************************************************************ //
 	// etc

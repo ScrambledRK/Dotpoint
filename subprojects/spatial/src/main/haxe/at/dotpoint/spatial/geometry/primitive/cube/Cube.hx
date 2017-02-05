@@ -1,10 +1,9 @@
 package at.dotpoint.spatial.geometry.primitive.cube;
 
 import at.dotpoint.math.axis.AxisEuler;
-import at.dotpoint.math.tensor.MathVector3;
-import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.GeometryType;
 import at.dotpoint.math.tensor.vector.IVector3;
+import at.dotpoint.math.tensor.vector.Vector3;
+import at.dotpoint.spatial.geometry.primitive.MathCube;
 
 /**
  * center, (half)extent representation of an axis aligned cube. useful for bounding box. <br/>
@@ -13,7 +12,7 @@ class Cube implements ICube
 {
 
 	/**
-	 * center point in euler coordinate system. 
+	 * center point in euler coordinate system.
 	 */
 	@:isVar public var center(get, null):IVector3;
 
@@ -40,12 +39,11 @@ class Cube implements ICube
 	// ************************************************************************ //
 
 	//
-	inline private function get_center():IVector3{ return this.center; }
-	
+	inline private function get_center():IVector3 { return this.center; }
+
 	//
-	inline private function get_extent():IVector3{ return this.extent; }
-	
-	
+	inline private function get_extent():IVector3 { return this.extent; }
+
 	/**
 	 * @param value new min in euler coordinate system (TOP_LEFT_FRONT corner of the cube)
 	 * @return this cube for chaining
@@ -55,23 +53,23 @@ class Cube implements ICube
 		MathCube.setMin( this, AxisEuler.X, value.x );
 		MathCube.setMin( this, AxisEuler.Y, value.y );
 		MathCube.setMin( this, AxisEuler.Z, value.z );
-		
+
 		return this;
 	}
-	
+
 	/**
 	 * @param	output optional vector the result will be stored into or new instance if none provided
 	 * @return	provided `output` vector or a new one with the computational result
 	 */
-	inline public function getMin( ?output:IVector3 ):IVector3 
-	{ 
+	inline public function getMin( ?output:IVector3 ):IVector3
+	{
 		if( output == null )
 			output = new Vector3();
-			
+
 		output.x = this.center.x - this.extent.x;
 		output.y = this.center.y - this.extent.y;
 		output.z = this.center.z - this.extent.z;
-		
+
 		return output;
 	}
 
@@ -79,28 +77,28 @@ class Cube implements ICube
 	 * @param	output optional vector the result will be stored into or new instance if none provided
 	 * @return	provided `output` vector or a new one with the computational result
 	 */
-	inline public function getMax( ?output:IVector3 ):IVector3 
-	{ 
+	inline public function getMax( ?output:IVector3 ):IVector3
+	{
 		if( output == null )
 			output = new Vector3();
-			
+
 		output.x = this.center.x + this.extent.x;
 		output.y = this.center.y + this.extent.y;
 		output.z = this.center.z + this.extent.z;
-		
-		return output;	
+
+		return output;
 	}
-	
+
 	/**
 	 * @param value new min in euler coordinate system (TOP_LEFT_FRONT corner of the cube)
 	 * @return this cube for chaining
 	 */
 	inline public function setMax( value:IVector3 ):ICube
 	{
-		MathCube.setMax( this, AxisEuler.X, value.x );
-		MathCube.setMax( this, AxisEuler.Y, value.y );
-		MathCube.setMax( this, AxisEuler.Z, value.z );
-		
+		MathCube.setMin( this, AxisEuler.X, value.x );
+		MathCube.setMin( this, AxisEuler.Y, value.y );
+		MathCube.setMin( this, AxisEuler.Z, value.z );
+
 		return this;
 	}
 

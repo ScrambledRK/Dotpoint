@@ -1,14 +1,13 @@
-package at.dotpoint.spatial;
+package at.dotpoint.datastructure;
 
-import at.dotpoint.spatial.geometry.primitive.cube.CubeTest;
-import at.dotpoint.spatial.transformation.TransformationTest;
+import at.dotpoint.datastructure.pooling.ObjectPoolRegisterTest;
 import haxe.unit.TestRunner;
 
 /**
  * ...
  * @author RK
  */
-class SpatialTestRunner extends TestRunner
+class DatastructureTestRunner extends TestRunner
 {
 
 	// ************************************************************************ //
@@ -18,7 +17,7 @@ class SpatialTestRunner extends TestRunner
 	//
 	static public function main()
 	{
-		new SpatialTestRunner();
+		new DatastructureTestRunner();
 	}
 
 	//
@@ -26,8 +25,7 @@ class SpatialTestRunner extends TestRunner
 	{
 		super();
 
-		this.add( new CubeTest() );
-		this.add( new TransformationTest() );
+		this.add( new ObjectPoolRegisterTest() );
 		this.run();
 	}
 

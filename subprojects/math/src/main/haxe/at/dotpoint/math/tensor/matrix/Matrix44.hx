@@ -116,6 +116,7 @@ class Matrix44 implements IMatrix44
 					case 0: this.m11 = value;
 					case 1: this.m12 = value;
 					case 2: this.m13 = value;
+					case 3: this.m14 = value;
 					
 					default: 
 						throw "invalid row index: " + rowIndex + "(0-3 allowed)";
@@ -129,6 +130,7 @@ class Matrix44 implements IMatrix44
 					case 0: this.m21 = value;
 					case 1: this.m22 = value;
 					case 2: this.m23 = value;
+					case 3: this.m24 = value;
 					
 					default: 
 						throw "invalid row index: " + rowIndex + "(0-3 allowed)";
@@ -142,6 +144,21 @@ class Matrix44 implements IMatrix44
 					case 0: this.m31 = value;
 					case 1: this.m32 = value;
 					case 2: this.m33 = value;
+					case 3: this.m34 = value;
+					
+					default: 
+						throw "invalid row index: " + rowIndex + "(0-3 allowed)";
+				}
+			}
+			
+			case 3:
+			{
+				switch( rowIndex )
+				{
+					case 0: this.m41 = value;
+					case 1: this.m42 = value;
+					case 2: this.m43 = value;
+					case 3: this.m44 = value;
 					
 					default: 
 						throw "invalid row index: " + rowIndex + "(0-3 allowed)";
@@ -150,6 +167,19 @@ class Matrix44 implements IMatrix44
 			
 			default: throw "invalid column index: " + columnIndex + "(0-3 allowed)";
 		}
+	}
+	
+	//
+	inline public function getByIndex( index:Int ):Float
+	{
+		//trace( index, Std.int( index / 4 ), index % 4 );
+		return this.get( Std.int( index / 4 ), index % 4 );
+	}
+	
+	//
+	inline public function setByIndex( index:Int, value:Float ):Void
+	{
+		this.set( Std.int( index / 4 ), index % 4, value );
 	}
 	
 	// ************************************************************************ //

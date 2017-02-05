@@ -132,6 +132,18 @@ class Matrix33 implements IMatrix33
 		}
 	}
 	
+	//
+	inline public function getByIndex( index:Int ):Float
+	{
+		return this.get( Std.int( index / 3 ), index % 3 );
+	}
+	
+	//
+	inline public function setByIndex( index:Int, value:Float ):Void
+	{
+		this.set( Std.int( index / 3 ), index % 3, value );
+	}
+	
 	// ************************************************************************ //
 	// etc
 	// ************************************************************************ //
