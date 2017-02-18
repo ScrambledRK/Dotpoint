@@ -1,5 +1,6 @@
 package at.dotpoint.datastructure.bytes;
 
+import haxe.ds.Vector;
 import haxe.io.Bytes;
 
 /**
@@ -54,5 +55,27 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 		//
 		for( i in 0...format.numValues )		
 			output.setByIndex( i, data.getDouble( start + i * format.sizeValue ) );	
+	}
+	
+	//
+	public function writeInteger( index:Int, type:TType, value:Vector<Int>, offset:Int = 0 ):Void
+	{
+		var format:ByteFormat = this.signature.getFormat( type );
+		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		
+		//
+		for( i in 0...format.numValues )		
+			this.data.setInt32( start + i * format.sizeValue, value[ offset + i ] );	
+	}
+	
+	//
+	public function readInteger( index:Int, type:TType, output:Vector<Int>, offset:Int = 0 ):Void
+	{
+		var format:ByteFormat = this.signature.getFormat( type );
+		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		
+		//
+		for( i in 0...format.numValues )		
+			output[ offset + i ] = data.getInt32( start + i * format.sizeValue );	
 	}
 }

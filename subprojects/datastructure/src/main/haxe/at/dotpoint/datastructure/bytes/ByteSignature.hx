@@ -15,11 +15,15 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 {
 	
 	//
-	public var type(default,null):ByteLayoutType;
+	public var layout(default,null):ByteLayoutType;
 	
 	//
 	public var formats(default, null):Vector<ByteFormat>;
 	public var entries(default, null):Vector<Int>;	
+	public var types(default, null):Vector<T>;
+	
+	//
+	public var size(default, null):Int;
 
 	// ************************************************************************ //
 	// Constructor
@@ -29,16 +33,18 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	 * 
 	 * @param	size of the generic type param enum (length all enum values)
 	 */
-	public function new( size:Int, ?type:ByteLayoutType ) 
+	public function new( size:Int, ?layout:ByteLayoutType ) 
 	{
-		if( type == null )
-			type = ByteLayoutType.INTERLEAVED;
+		if( layout == null )
+			layout = ByteLayoutType.INTERLEAVED;
 		
-		this.type = type;
+		this.layout = layout;
+		this.size = size;
 		
 		//
 		this.formats = new Vector<ByteFormat>( size );
 		this.entries = new Vector<Int>( size );
+		this.types = new Vector<T>( size );
 		
 		for( j in 0...size )
 			this.formats[j] = new ByteFormat( null, 0 );
@@ -61,13 +67,20 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 		var index:Int = type.getIndex();
 		
 		this.formats[ index ] = format;
-		this.entries[ index ] = this.type == ByteLayoutType.INTERLEAVED ? 1 : numEntries;	
+		this.entries[ index ] = this.layout == ByteLayoutType.INTERLEAVED ? 1 : numEntries;	
+		this.types[ index ] = type;
 	}
 	
 	//
 	public function getFormat( type:T ):ByteFormat
 	{
 		return this.formats[ type.getIndex() ];
+	}
+	
+
+	public function numEntries( type:T ):Int
+	{
+		return this.entries[ type.getIndex() ];
 	}
 	
 	// ------------------------------------------------------------------------ //
@@ -88,7 +101,7 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	//
 	public function getStepSizeEntry( type:T ):Int
 	{
-		switch( this.type )
+		switch( this.layout )
 		{
 			//
 			case ByteLayoutType.INTERLEAVED:
@@ -118,7 +131,7 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 			total += this.formats[j].sizeTotal * this.entries[j];			// might ommit with zero entries
 
 		//
-		switch( this.type )
+		switch( this.layout )
 		{
 			case ByteLayoutType.INTERLEAVED:	return total * numEntries;				
 			case ByteLayoutType.BLOCKED:		return total;			
