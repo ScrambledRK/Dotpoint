@@ -13,10 +13,10 @@ class ByteFormat
 	public var type(default, null):ByteType;
 	
 	/** length number of entries (e.g. for 3 floats: 3) */
-	public var numEntries(default, null):Int;	
+	public var numValues(default, null):Int;	
 	
 	/** automatically calculated according to the ByteType, in numbers of bit */
-	public var sizeEntry(default, null):Int;
+	public var sizeValue(default, null):Int;
 	
 	/** total number of bits the format takes up */
 	public var sizeTotal(get, null):Int;
@@ -32,8 +32,8 @@ class ByteFormat
 	public function new( type:ByteType, length:Int )
 	{
 		this.type = type;
-		this.numEntries = length;
-		this.sizeEntry = this.getSize();
+		this.numValues = length;
+		this.sizeValue = type != null ? this.getSize() : 0;
 	}	
 	
 	// ************************************************************************ //
@@ -53,6 +53,6 @@ class ByteFormat
 	//
 	inline private function get_sizeTotal():Int
 	{
-		return this.numEntries * this.sizeEntry;
+		return this.numValues * this.sizeValue;
 	}
 }

@@ -26,7 +26,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	 */
 	public function new( signature:TSignature, numEntries:Int ) 
 	{
-		this.data = Bytes.alloc( signature.getSizeTotal() * numEntries );
+		this.data = Bytes.alloc( signature.getSizeTotal( numEntries ) );
 		this.signature = signature;
 	}
 	
@@ -38,19 +38,21 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public function writeTensor( index:Int, type:TType, value:ITensor ):Void
 	{		
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getSizeTotal() + this.signature.getStride( type );
-			
-		for( i in 0...format.numEntries )		
-			this.data.setDouble( start + i * format.sizeEntry, value.getByIndex( i ) );	
+		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		
+		//
+		for( i in 0...format.numValues )		
+			this.data.setDouble( start + i * format.sizeValue, value.getByIndex( i ) );	
 	}
 	
 	//
 	public function readTensor( index:Int, type:TType, output:ITensor ):Void
 	{
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getSizeTotal() + this.signature.getStride( type );
-			
-		for( i in 0...format.numEntries )		
-			output.setByIndex( i, data.getDouble( start + i * format.sizeEntry ) );	
+		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		
+		//
+		for( i in 0...format.numValues )		
+			output.setByIndex( i, data.getDouble( start + i * format.sizeValue ) );	
 	}
 }

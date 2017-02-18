@@ -2,6 +2,7 @@ package at.dotpoint.spatial.transformation.graph;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteRepository;
+import at.dotpoint.datastructure.bytes.ByteSignature;
 import at.dotpoint.datastructure.bytes.ByteType;
 import at.dotpoint.datastructure.bytes.IByteSignature;
 import at.dotpoint.datastructure.graph.IGraphRepository;
@@ -146,19 +147,19 @@ class TransformationSignature implements IByteSignature<DataType>
 	// ************************************************************************ //	
 	
 	//
-	inline public function getFormat( type:DataType ):ByteFormat 
+	public function getFormat( type:DataType ):ByteFormat
 	{
-		switch ( type )
+		switch( type )
 		{
-			case DataType.TRANSLATION:	return this.translation;	// already instances, for proper inlining
-			case DataType.ROTATION:		return this.rotation;		// doesn't work with constructor inlining
-			case DataType.SCALE:		return this.scale;
-			case DataType.MATRIX:		return this.matrix;
+			case DataType.TRANSLATION: 	return this.translation;
+			case DataType.ROTATION: 	return this.rotation;
+			case DataType.SCALE: 		return this.scale;
+			case DataType.MATRIX: 		return this.matrix;
 		}
 	}
 	
 	//
-	inline public function getStride( type:DataType ):Int 
+	public function getStepSizeType( type:DataType ):Int 
 	{
 		switch( type )
 		{
@@ -170,9 +171,15 @@ class TransformationSignature implements IByteSignature<DataType>
 	}
 	
 	//
-	inline public function getSizeTotal():Int 
+	public function getStepSizeEntry( type:DataType ):Int 
 	{
 		return (4 + 3 + 16) * 8;
+	}
+	
+	//
+	public function getSizeTotal( numEntries:Int ):Int
+	{
+		return (4 + 3 + 16) * 8 * numEntries;
 	}
 	
 }
