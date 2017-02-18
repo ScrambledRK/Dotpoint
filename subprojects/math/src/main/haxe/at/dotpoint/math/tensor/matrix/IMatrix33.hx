@@ -1,5 +1,5 @@
 package at.dotpoint.math.tensor.matrix;
-import at.dotpoint.math.tensor.ITensor;
+import at.dotpoint.datastructure.ITensor;
 
 /**
  * 3x3 column major matrix. can be used as a rotation matrix

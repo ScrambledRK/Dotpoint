@@ -1,5 +1,5 @@
 package at.dotpoint.math.tensor.quaternion;
-import at.dotpoint.math.tensor.ITensor;
+import at.dotpoint.datastructure.ITensor;
 
 /**
  * unit-quaternion is a Vector4 like object for interpolateable and gimbal-lock-free rotations;

@@ -7,5 +7,5 @@ import haxe.io.Bytes;
  */
 interface IGraphRepository<TRepository:EnumValue>
 {
-	public function getByteFormat( type:TRepository ):ByteFormat;
+	//public function getByteFormat( type:TRepository ):ByteFormat;
 }

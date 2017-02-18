@@ -1,31 +1,31 @@
-package at.dotpoint.spatial.transformation;
-
-import at.dotpoint.datastructure.graph.IGraphRepository;
+package at.dotpoint.spatial;
 import at.dotpoint.math.tensor.matrix.IMatrix44;
 import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
+import at.dotpoint.spatial.transformation.ITransformation;
 
 /**
  * ...
  * @author RK
  */
-class Node implements ITransformation
+class SpatialEntity implements ITransformation
 {
 
-	private var key:Int;
-	private var repository:Repository;
+	//
+	private var ID:Int;
+	
+	//
+	private var scene:SpatialScene;	
 	
 	// ************************************************************************ //
 	// Constructor
-	// ************************************************************************ //
+	// ************************************************************************ //	
 	
-	//
-	public function new( key:Int, repository:Repository ) 
+	public function new() 
 	{
-		this.key = key;
-		this.repository = repository;
+		
 	}
-
+	
 	// ************************************************************************ //
 	// ITransformation
 	// ************************************************************************ //
@@ -36,7 +36,7 @@ class Node implements ITransformation
 	 */
 	inline public function getTranslation( ?output:IVector3 ):IVector3
 	{
-		return this.repository.getTranslation( this.key, output );
+		return this.scene.getTranslation( this.ID, output );
 	}
 	
 	/**
@@ -45,7 +45,7 @@ class Node implements ITransformation
 	 */
 	inline public function getRotation( ?output:IQuaternion ):IQuaternion
 	{
-		return this.repository.getRotation( this.key, output );
+		return this.scene.getRotation( this.ID, output );
 	}
 	
 	/**
@@ -54,7 +54,7 @@ class Node implements ITransformation
 	 */
 	inline public function getScaling( ?output:IVector3 ):IVector3
 	{
-		return this.repository.getScaling( this.key, output );
+		return this.scene.getScaling( this.ID, output );
 	}
 	
 	/**
@@ -63,7 +63,7 @@ class Node implements ITransformation
 	 */
 	inline public function getMatrix( ?output:IMatrix44 ):IMatrix44
 	{
-		return this.repository.getMatrix( this.key, output );
+		return this.scene.getMatrix( this.ID, output );
 	}
 	
 	// -------------- //
@@ -74,7 +74,7 @@ class Node implements ITransformation
 	 */
 	inline public function setTranslation( value:IVector3 ):ITransformation
 	{
-		this.repository.setTranslation( this.key, value );
+		this.scene.setTranslation( this.ID, value );
 		return this;
 	}
 	
@@ -84,7 +84,7 @@ class Node implements ITransformation
 	 */
 	inline public function setRotation( value:IQuaternion ):ITransformation
 	{
-		this.repository.setRotation( this.key, value );
+		this.scene.setRotation( this.ID, value );
 		return this;
 	}
 	
@@ -94,7 +94,7 @@ class Node implements ITransformation
 	 */
 	inline public function setScaling( value:IVector3 ):ITransformation
 	{
-		this.repository.setScaling( this.key, value );
+		this.scene.setScaling( this.ID, value );
 		return this;
 	}
 	
@@ -104,7 +104,7 @@ class Node implements ITransformation
 	 */
 	inline public function setMatrix( value:IMatrix44 ):ITransformation
 	{
-		this.repository.setMatrix( this.key, value );
+		this.scene.setMatrix( this.ID, value );
 		return this;
 	}
 	
@@ -116,7 +116,7 @@ class Node implements ITransformation
 	 */
 	inline public function hasRotation():Bool
 	{
-		return true; // this.repository.hasRotation( this.key );
+		return this.scene.hasRotation( this.ID );
 	}
 
 	/**
@@ -124,7 +124,6 @@ class Node implements ITransformation
 	 */
 	inline public function hasScaling():Bool
 	{
-		return true; // this.repository.hasRotation( this.key );
-	}
-	
+		return this.scene.hasScaling( this.ID );
+	}	
 }

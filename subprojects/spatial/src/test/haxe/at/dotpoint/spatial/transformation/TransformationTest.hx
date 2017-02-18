@@ -10,8 +10,11 @@ import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
+import at.dotpoint.spatial.transformation.graph.DataType;
+import at.dotpoint.spatial.transformation.graph.TransformationData;
 import haxe.io.Bytes;
 import haxe.unit.TestCase;
+using at.dotpoint.unit.TestCaseHelper;
 
 /**
  * ...
@@ -23,8 +26,7 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetTranslation():Void
 	{
-		var repository:Repository = new Repository( 1 );
-		var transform:ITransformation = new Node( 0, repository );
+		var repository:TransformationData = new TransformationData( 1 );
 		
 		// ------------- //
 		
@@ -34,11 +36,11 @@ class TransformationTest extends TestCase
 			input.z = Math.random();
 		
 		var expected:IVector3 = MathVector3.clone( input );
+		var result:IVector3 = new Vector3();
 		
 		//
-		transform.setTranslation( input );
-		
-		var result:IVector3 = transform.getTranslation();
+		repository.setValues( 0, DataType.TRANSLATION, input );
+		repository.getValues( 0, DataType.TRANSLATION, result );
 		
 		// ------------- //
 		
@@ -48,18 +50,22 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetRotation():Void
 	{
-		var repository:Repository = new Repository( 1 );
-		var transform:ITransformation = new Node( 0, repository );
+		var repository:TransformationData = new TransformationData( 1 );
 		
 		// ------------- //
 		
-		var input:IQuaternion = new Quaternion( 1, 2, 3, 4 );
+		var input:IQuaternion = new Quaternion();
+			input.x = Math.random();
+			input.y = Math.random();
+			input.z = Math.random();
+			input.w = Math.random();
+		
 		var expected:IQuaternion = MathQuaternion.clone( input );
+		var result:Quaternion = new Quaternion();
 		
 		//
-		transform.setRotation( input );
-		
-		var result:IQuaternion = transform.getRotation();
+		repository.setValues( 0, DataType.ROTATION, input );
+		repository.getValues( 0, DataType.ROTATION, result );
 		
 		// ------------- //
 		
@@ -69,18 +75,21 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetScale():Void
 	{
-		var repository:Repository = new Repository( 1 );
-		var transform:ITransformation = new Node( 0, repository );
+		var repository:TransformationData = new TransformationData( 1 );
 		
 		// ------------- //
 		
-		var input:IVector3 = new Vector3( 1, 2, 3, 4 );
+		var input:IVector3 = new Vector3();
+			input.x = Math.random();
+			input.y = Math.random();
+			input.z = Math.random();
+		
 		var expected:IVector3 = MathVector3.clone( input );
+		var result:IVector3 = new Vector3();
 		
 		//
-		transform.setScaling( input );
-		
-		var result:IVector3 = transform.getScaling();
+		repository.setValues( 0, DataType.SCALE, input );		
+		repository.getValues( 0, DataType.SCALE, result );
 		
 		// ------------- //
 		
@@ -90,30 +99,26 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetMatrix():Void
 	{
-		var repository:Repository = new Repository( 1 );
-		var transform:ITransformation = new Node( 0, repository );
+		var repository:TransformationData = new TransformationData( 1 );
 		
 		// ------------- //
 		
 		var input:IMatrix44 = new Matrix44();
 			
 		for( i in 0...16 )
-			input.setByIndex( i, i );
+			input.setByIndex( i, Math.random() );
 			
-		//input.m11 = Math.random();
-		//input.m22 = Math.random();
-		//input.m33 = Math.random();
 		
 		var expected:IMatrix44 = MathMatrix44.clone( input );
+		var result:IMatrix44 = new Matrix44();
 		
 		//
-		transform.setMatrix( input );
-		
-		var result:IMatrix44 = transform.getMatrix();
+		repository.setValues( 0, DataType.MATRIX, input );
+		repository.getValues( 0, DataType.MATRIX, result );
 		
 		// ------------- //
 		
 		assertTrue( MathMatrix44.isEqual( result, expected ) );
-	}
-	
+	}	
+
 }

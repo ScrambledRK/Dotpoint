@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.transformation;
+package at.dotpoint.spatial.transformation.graph;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 
 /**
