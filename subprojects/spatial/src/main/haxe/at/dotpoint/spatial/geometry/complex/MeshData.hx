@@ -97,13 +97,30 @@ class VertexTableSignature extends ByteSignature<VertexType>
 	//
 	public function new( signature:MeshSignature )
 	{
-		super( signature.size, this.getLayoutType( signature ) );
+		var layout:ByteLayoutType = this.getLayoutType( signature );
 		
 		//
-		var format:ByteFormat = new ByteFormat( ByteType.INT, 1 );
+		super( signature.size, layout );
 		
-		for( j in 0...signature.size )
-			this.setFormat( VertexType.createByIndex(j), format, 0 );	// in case of interleave, set to 1 by itself!
+		//
+		switch( layout )
+		{
+			case ByteLayoutType.INTERLEAVED:
+			{
+				var format:ByteFormat = new ByteFormat( ByteType.INT, 1 );
+		
+				for( j in 0...signature.size )
+					this.setFormat( VertexType.createByIndex(j), format, 1 );	
+			}
+			
+			case ByteLayoutType.BLOCKED:
+			{
+				var format:ByteFormat = new ByteFormat( ByteType.INT, 0 );
+		
+				for( j in 0...signature.size )
+					this.setFormat( VertexType.createByIndex(j), format, 0 );	
+			}
+		}		
 	}
 	
 	//
@@ -204,7 +221,7 @@ class MeshDataRepository extends ByteRepository<VertexType,MeshSignature>
 	//
 	public function new( signature:MeshSignature ) 
 	{
-		super( signature, 1 );
+		super( signature, signature.numVertices );
 	}
 	
 }

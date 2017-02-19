@@ -1,5 +1,6 @@
 package at.dotpoint.spatial;
 
+import at.dotpoint.spatial.geometry.complex.MeshDataTest;
 import at.dotpoint.spatial.geometry.primitive.cube.CubeTest;
 import at.dotpoint.spatial.transformation.TransformationTest;
 import haxe.unit.TestRunner;
@@ -28,6 +29,7 @@ class SpatialTestRunner extends TestRunner
 
 		this.add( new CubeTest() );
 		this.add( new TransformationTest() );
+		this.add( new MeshDataTest() );
 		this.run();
 	}
 

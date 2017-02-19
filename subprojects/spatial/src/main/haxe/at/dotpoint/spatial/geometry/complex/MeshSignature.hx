@@ -13,9 +13,12 @@ class MeshSignature extends ByteSignature<VertexType>
 	public var numTriangles(default,null):Int;
 	
 	//
-	public function new( numVertices:Int, numTriangles:Int ) 
+	public function new( numVertices:Int, numTriangles:Int, ?layout:ByteLayoutType ) 
 	{
-		super( VertexType.createAll().length, ByteLayoutType.BLOCKED );	
+		if( layout == null )
+			layout = ByteLayoutType.BLOCKED;
+		
+		super( VertexType.createAll().length, layout );	
 		
 		this.numVertices  = numVertices;
 	    this.numTriangles = numTriangles;
