@@ -33,7 +33,7 @@ class ByteFormat
 	{
 		this.type = type;
 		this.numValues = length;
-		this.sizeValue = type != null ? this.getSize() : 0;
+		this.sizeValue = type != null ? ByteFormat.getSize( type ) : 0;
 	}	
 	
 	// ************************************************************************ //
@@ -41,9 +41,9 @@ class ByteFormat
 	// ************************************************************************ //	
 	
 	//
-	inline private function getSize():Int
+	public static function getSize( type:ByteType ):Int
 	{
-		switch( this.type )
+		switch( type )
 		{
 			case ByteType.INT:		return 4;
 			case ByteType.FLOAT:	return 8;
