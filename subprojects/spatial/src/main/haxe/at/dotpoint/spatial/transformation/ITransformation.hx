@@ -3,6 +3,8 @@ import at.dotpoint.math.tensor.matrix.IMatrix44;
 import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 
+// TODO: do it like Vertex, leave out Matrix
+
 /**
  * @author RK
  */

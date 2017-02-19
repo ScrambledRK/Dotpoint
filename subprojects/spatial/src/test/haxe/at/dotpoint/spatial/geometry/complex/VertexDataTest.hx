@@ -12,18 +12,18 @@ import haxe.unit.TestCase;
  * ...
  * @author RK
  */
-class MeshDataTest extends TestCase 
+class VertexDataTest extends TestCase 
 {
 
 	//
-	private function createMeshData( layout:ByteLayoutType ):MeshData
+	private function createMeshData( layout:ByteLayoutType ):VertexData
 	{
 		var signature:MeshSignature = new MeshSignature( 3, 0, layout );
 			signature.setFormat( VertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
 			signature.setFormat( VertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
 			signature.setFormat( VertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
 		
-		return new MeshData( signature );
+		return new VertexData( signature );
 	}
 	
 	// ------------------------------------------------------------------------ //
@@ -32,7 +32,7 @@ class MeshDataTest extends TestCase
 	//
 	public function testSetGetVertexDataBlocked():Void
 	{
-		var instance:MeshData = this.createMeshData( ByteLayoutType.BLOCKED );
+		var instance:VertexData = this.createMeshData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -45,8 +45,8 @@ class MeshDataTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		instance.setVertexData( 2, VertexType.NORMAL, input );		
-		instance.getVertexData( 2, VertexType.NORMAL, result );
+		instance.setData( 2, VertexType.NORMAL, input );		
+		instance.getData( 2, VertexType.NORMAL, result );
 		
 		// ------------------- //
 		
@@ -56,7 +56,7 @@ class MeshDataTest extends TestCase
 	//
 	public function testSetGetVertexDataInterleaved():Void
 	{
-		var instance:MeshData = this.createMeshData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexData = this.createMeshData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		
@@ -69,8 +69,8 @@ class MeshDataTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		instance.setVertexData( 2, VertexType.NORMAL, input );		
-		instance.getVertexData( 2, VertexType.NORMAL, result );
+		instance.setData( 2, VertexType.NORMAL, input );		
+		instance.getData( 2, VertexType.NORMAL, result );
 		
 		// ------------------- //
 		
@@ -80,7 +80,7 @@ class MeshDataTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexBlocked():Void
 	{
-		var instance:MeshData = this.createMeshData( ByteLayoutType.BLOCKED );
+		var instance:VertexData = this.createMeshData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -88,8 +88,8 @@ class MeshDataTest extends TestCase
 		var expected:Int = input;
 		
 		//
-		instance.setVertexDataIndex( 2, VertexType.NORMAL, input );		
-		var result:Int = instance.getVertexDataIndex( 2, VertexType.NORMAL );
+		instance.setIndex( 2, VertexType.NORMAL, input );		
+		var result:Int = instance.getIndex( 2, VertexType.NORMAL );
 		
 		// ------------------- //
 		
@@ -99,7 +99,7 @@ class MeshDataTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexInterleaved():Void
 	{
-		var instance:MeshData = this.createMeshData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexData = this.createMeshData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		
@@ -107,8 +107,8 @@ class MeshDataTest extends TestCase
 		var expected:Int = 2;	// interleaved duplicates vertex data - therefor each vertex index equals data index
 		
 		//
-		instance.setVertexDataIndex( 2, VertexType.NORMAL, input );		
-		var result:Int = instance.getVertexDataIndex( 2, VertexType.NORMAL );
+		instance.setIndex( 2, VertexType.NORMAL, input );		
+		var result:Int = instance.getIndex( 2, VertexType.NORMAL );
 		
 		// ------------------- //
 		

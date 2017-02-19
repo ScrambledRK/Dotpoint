@@ -133,12 +133,6 @@ class TransformationData implements IGraphRepository<DataType>
  */
 class TransformationSignature implements IByteSignature<DataType> 
 {
-
-	private var translation:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );	
-	private var rotation:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 4 );		
-	private var scale:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 3 );		
-	private var matrix:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 16 );	
-
 	//
 	public function new(){}
 	
@@ -147,15 +141,9 @@ class TransformationSignature implements IByteSignature<DataType>
 	// ************************************************************************ //	
 	
 	//
-	public function getFormat( type:DataType ):ByteFormat
+	inline public function getFormat( type:DataType ):ByteFormat
 	{
-		switch( type )
-		{
-			case DataType.TRANSLATION: 	return this.translation;
-			case DataType.ROTATION: 	return this.rotation;
-			case DataType.SCALE: 		return this.scale;
-			case DataType.MATRIX: 		return this.matrix;
-		}
+		return DataTypeHelper.getByteFormat( type );
 	}
 	
 	//
@@ -182,6 +170,11 @@ class TransformationSignature implements IByteSignature<DataType>
 		return (4 + 3 + 16) * 8 * numEntries;
 	}
 	
+	//
+	public function getEntryIndex( index:Int, type:DataType ):Int
+	{
+		return index * this.getStepSizeEntry( type ) + this.getStepSizeType( type );
+	}
 }
 
 /**

@@ -4,7 +4,7 @@ import haxe.ds.Vector;
 /**
  * @author RK
  */
-interface IByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> 
+interface IByteRepository<TType:Dynamic,TSignature:IByteSignature<TType>> 
 {
 	/** where and how the data is stored */
 	public var signature(default, null):TSignature;

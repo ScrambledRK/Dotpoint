@@ -100,7 +100,7 @@ class ByteSignatureTest extends TestCase
 		assertEquals( expected, result );
 	}
 	
-		//
+	//
 	public function testGetStepSizeTypeBlocked():Void
 	{
 		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );

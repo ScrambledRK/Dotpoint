@@ -7,7 +7,7 @@ import haxe.ds.Vector;
  * such as the stride where the data can be found in the context of the data structure it is stored in 
  * (e.g. there are several float values before this entry so there is an offset of x * float size bits)
  * 
- * 
+ * use this in conjunction with a byte repository for maximum thrills n giggls.
  * 
  * @author RK
  */
@@ -30,8 +30,15 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	// ************************************************************************ //	
 	
 	/**
+	 * INTERLEAVED layout has all different types/byteformats sequentially next to
+	 * each other. each entry has all types together as if it were a single object.
 	 * 
-	 * @param	size of the generic type param enum (length all enum values)
+	 * BLOCKED layout has all different types/byteformats split apart. each type
+	 * has values stored for all entries as if each type is stored in a seperate
+	 * array containing the values for all entries sequentially.
+	 * 
+	 * @param	size must be size of constructable enum values, not smaller!
+	 * @param	layout BLOCKED or INTERLEAVED
 	 */
 	public function new( size:Int, ?layout:ByteLayoutType ) 
 	{
@@ -54,10 +61,16 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	// Methods
 	// ************************************************************************ //	
 	
-	//
-	// entries irrelevant for interleaved, yet must not be 0. 0 entries means the
-	// given enum type is not used and must be ignored for the step size calculations
-	//
+	/**
+	 * sets a byteformat and associates it with the given type. in case of a BLOCKED 
+	 * bytelayout the number of entries is relevant and required to be set. entries irrelevant 
+	 * for interleaved, yet must not be 0. 0 entries means the given enum type is not used and 
+	 * must be ignored for the step size calculations.
+	 * 
+	 * @param	type	identifier to associate with the given byteformat
+	 * @param	format	byte storage information for a "value-unit"
+	 * @param	numEntries number of entries for given type (only relevant for BLOCKED layout)
+	 */
 	public function setFormat( type:T, format:ByteFormat, ?numEntries:Int ):Void
 	{
 		if (numEntries == null || numEntries < 0 )
@@ -86,7 +99,13 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 	
-	//
+	/**
+	 * step size required to get to / iterate over the requested type data within a byte repo
+	 * see getEntryIndex for more information.
+	 * 
+	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
+	 * @return	number of bytes required to stride over to obtain the requested type data
+	 */
 	public function getStepSizeType( type:T ):Int
 	{
 		var total:Int = 0;
@@ -98,7 +117,13 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 		return total;
 	}
 	
-	//
+	/**
+	 * step size required to get to / iterate over the requested type data within a byte repo
+	 * see getEntryIndex for more information.
+	 * 
+	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
+	 * @return	number of bytes required to stride over to obtain the requested type data
+	 */
 	public function getStepSizeEntry( type:T ):Int
 	{
 		switch( this.layout )
@@ -122,7 +147,17 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 		}	
 	}
 	
-	//
+	/**
+	 * calculates the total number of bytes required to store the signature in respect
+	 * to the given number of entries. 
+	 * 
+	 * only the INTERLEAVED bytelayout respects the given number of entries. BLOCKED
+	 * requires the number of entries to be set for each byte format / type and uses
+	 * this data only. (see setFormat)
+	 * 
+	 * @param	numEntries number of data entries one wants to store
+	 * @return  size in bytes required to store all entries
+	 */
 	public function getSizeTotal( numEntries:Int ):Int
 	{
 		var total:Int = 0;
@@ -136,5 +171,18 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 			case ByteLayoutType.INTERLEAVED:	return total * numEntries;				
 			case ByteLayoutType.BLOCKED:		return total;			
 		}
+	}
+	
+	/**
+	 * calculates the byte position of the given entry index and requested "value-unit" type.
+	 * this calculation depends a lot on the internal byte layout and byte formats set.
+	 * 
+	 * @param	index entry index requested (not type of "value-unit" (byte format))
+	 * @param	type byte format / value-unit requested. e.g. POSITION
+	 * @return	byte position the requested entry + type must be located
+	 */
+	public function getEntryIndex( index:Int, type:T ):Int
+	{
+		return index * this.getStepSizeEntry( type ) + this.getStepSizeType( type );
 	}
 }

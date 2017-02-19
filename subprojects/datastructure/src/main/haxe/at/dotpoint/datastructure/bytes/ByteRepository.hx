@@ -39,7 +39,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public function writeTensor( index:Int, type:TType, value:ITensor ):Void
 	{		
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		var start:Int = this.signature.getEntryIndex( index, type );
 		
 		//
 		for( i in 0...format.numValues )		
@@ -50,7 +50,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public function readTensor( index:Int, type:TType, output:ITensor ):Void
 	{
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		var start:Int = this.signature.getEntryIndex( index, type );
 		
 		//
 		for( i in 0...format.numValues )		
@@ -61,7 +61,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public function writeInteger( index:Int, type:TType, value:Vector<Int>, offset:Int = 0 ):Void
 	{
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		var start:Int = this.signature.getEntryIndex( index, type );
 		
 		//
 		for( i in 0...format.numValues )		
@@ -72,7 +72,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public function readInteger( index:Int, type:TType, output:Vector<Int>, offset:Int = 0 ):Void
 	{
 		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = index * this.signature.getStepSizeEntry( type ) + this.signature.getStepSizeType( type );
+		var start:Int = this.signature.getEntryIndex( index, type );
 		
 		//
 		for( i in 0...format.numValues )		
