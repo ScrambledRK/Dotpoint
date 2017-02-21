@@ -1,5 +1,6 @@
 package at.dotpoint.datastructure.bytes;
 
+import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
 /**
@@ -12,7 +13,7 @@ class ByteSignatureTest extends TestCase
 	//
 	private function createSignature( layout:ByteLayoutType ):ByteSignature<TestEnum>
 	{
-		var instance:ByteSignature<TestEnum> = new ByteSignature( 3, layout );
+		var instance:ByteSignature<TestEnum> = new ByteSignature( new Vector<TestEnum>(3), layout );
 			instance.setFormat( TestEnum.B, new ByteFormat( ByteType.INT, 3 ), 2 );
 			instance.setFormat( TestEnum.C, new ByteFormat( ByteType.INT, 2 ), 1 );
 		
@@ -25,7 +26,7 @@ class ByteSignatureTest extends TestCase
 	//
 	public function testGetSetFormat():Void
 	{
-		var instance:ByteSignature<TestEnum> = new ByteSignature( 3 );
+		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );
 			
 		// ------------------- //
 		

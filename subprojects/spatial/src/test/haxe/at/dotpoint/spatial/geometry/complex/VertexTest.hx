@@ -3,6 +3,7 @@ package at.dotpoint.spatial.geometry.complex;
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
+import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
 /**
@@ -11,7 +12,7 @@ import haxe.unit.TestCase;
  */
 class VertexTest extends TestCase 
 {
-
+	
 	//
 	public function testGetSetData():Void
 	{
@@ -26,8 +27,8 @@ class VertexTest extends TestCase
 			
 		var expected:IVector3 = MathVector3.clone( input );
 		
-		vertex.setData( VertexType.NORMAL, input );
-		var result:IVector3 = vertex.getData( VertexType.NORMAL );
+		vertex.setTensor( VertexType.NORMAL, input );
+		var result:IVector3 = vertex.getTensor( VertexType.NORMAL );
 		
 		// ------------------- //
 		
@@ -47,7 +48,7 @@ class VertexTest extends TestCase
 			input.z = Math.random();		
 			
 		var expected:IVector3 = MathVector3.clone( input );
-		var result:IVector3 = vertex.getData( VertexType.POSITION );
+		var result:IVector3 = vertex.getTensor( VertexType.POSITION );
 		
 		// ------------------- //
 		
@@ -67,7 +68,7 @@ class VertexTest extends TestCase
 			input.z = Math.random();		
 			
 		var expected:IVector3 = MathVector3.clone( input );
-		var result:IVector3 = vertex.getData( VertexType.NORMAL );
+		var result:IVector3 = vertex.getTensor( VertexType.NORMAL );
 		
 		// ------------------- //
 		

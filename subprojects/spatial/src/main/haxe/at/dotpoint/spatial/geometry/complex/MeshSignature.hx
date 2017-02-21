@@ -2,6 +2,7 @@ package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
 import at.dotpoint.datastructure.bytes.ByteSignature;
+import haxe.ds.Vector;
 
 /**
  * ...
@@ -18,7 +19,7 @@ class MeshSignature extends ByteSignature<VertexType>
 		if( layout == null )
 			layout = ByteLayoutType.BLOCKED;
 		
-		super( VertexType.createAll().length, layout );	
+		super( new Vector<VertexType>( VertexType.createAll().length ), layout );	
 		
 		this.numVertices  = numVertices;
 	    this.numTriangles = numTriangles;

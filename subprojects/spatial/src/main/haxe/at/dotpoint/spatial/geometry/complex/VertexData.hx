@@ -39,6 +39,89 @@ class VertexData
 	// ************************************************************************ //	
 	
 	//
+	public function setVertex( vertex:IVertex ):Void
+	{
+		this.checkVertex( vertex );
+
+		//
+		var signature:MeshSignature = this.getSignature();		
+		
+		for( j in 0...signature.size )
+		{
+			if( signature.entries[j] > 0 )
+			{
+				var type:VertexType = signature.types[j];
+				
+				this.indices.setIndex( vertex.index, type, vertex.getDataIndex( type ) );
+				vertex.writeBytes( this.repository.data, signature, type );
+			}
+		}
+	}
+	
+	//
+	public function getVertex( index:Int, ?output:IVertex ):IVertex
+	{
+		if( output == null )
+			output = new Vertex();
+
+		//
+		output.clear();	
+		output.index = index;	
+		
+		//
+		var signature:MeshSignature = this.getSignature();		
+		
+		for( j in 0...signature.size )
+		{
+			if( signature.entries[j] > 0 )
+			{
+				var type:VertexType = signature.types[j];
+				
+				output.setDataIndex( type, this.indices.getIndex( index, type ) );
+				output.readBytes( this.repository.data, signature, type );
+			}
+		}		
+		
+		return output;
+	}
+	
+	//
+	private function checkVertex( vertex:IVertex ):Void
+	{
+		var signature:MeshSignature = this.getSignature();
+		
+		//
+		if( vertex.index < 0 || vertex.index > signature.numVertices )
+			throw "given vertex index out of bounds: " + vertex.index + " of " + signature.numVertices;
+		
+		//
+		for( j in 0...signature.size )
+		{
+			var numEntries:Int = signature.entries[j];
+			var maxEntries:Int = signature.layout == ByteLayoutType.BLOCKED ? numEntries : signature.numVertices;
+			
+			if( numEntries > 0 )
+			{
+				var type:VertexType = signature.types[j];
+				
+				//
+				if( !vertex.hasData( type ) )
+					throw "vertex data missing for " + type;
+					
+				//	
+				var index:Int = vertex.getDataIndex( type );
+					
+				if( index < 0 || index > maxEntries )	
+					throw "vertex data index out of bounds: " + index + " of " + maxEntries;
+			}
+		}	
+	}
+	
+	// ************************************************************************ //
+	// get/set Data/Index
+	// ************************************************************************ //	
+	
+	//
 	public function getSignature():MeshSignature
 	{
 		return this.repository.signature;
@@ -48,13 +131,13 @@ class VertexData
 	// ------------------------------------------------------------------------ //
 	
 	//
-	public function setData( index:MeshIndexData, type:VertexType, value:ITensor ):Void
+	public function setDataTensor( index:MeshIndexData, type:VertexType, value:ITensor ):Void
 	{
 		this.repository.writeTensor( index, type, value );
 	}
 	
 	//
-	public function getData( index:MeshIndexData, type:VertexType, output:ITensor ):Void
+	public function getDataTensor( index:MeshIndexData, type:VertexType, output:ITensor ):Void
 	{
 		this.repository.readTensor( index, type, output );
 	}
@@ -100,7 +183,7 @@ class VertexTableSignature extends ByteSignature<VertexType>
 		var layout:ByteLayoutType = this.getLayoutType( signature );
 		
 		//
-		super( signature.size, layout );
+		super( new Vector<VertexType>( signature.size ), layout );
 		
 		//
 		switch( layout )

@@ -37,23 +37,23 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	 * has values stored for all entries as if each type is stored in a seperate
 	 * array containing the values for all entries sequentially.
 	 * 
-	 * @param	size must be size of constructable enum values, not smaller!
+	 * @param	empty list for enum types; size must be size of constructable enum values, not smaller!
 	 * @param	layout BLOCKED or INTERLEAVED
 	 */
-	public function new( size:Int, ?layout:ByteLayoutType ) 
+	public function new( types:Vector<T>, ?layout:ByteLayoutType ) 
 	{
 		if( layout == null )
 			layout = ByteLayoutType.INTERLEAVED;
 		
 		this.layout = layout;
-		this.size = size;
+		this.size = types.length;
 		
 		//
-		this.formats = new Vector<ByteFormat>( size );
-		this.entries = new Vector<Int>( size );
-		this.types = new Vector<T>( size );
+		this.formats = new Vector<ByteFormat>( this.size );
+		this.entries = new Vector<Int>( this.size );
+		this.types = types;
 		
-		for( j in 0...size )
+		for( j in 0...this.size )
 			this.formats[j] = new ByteFormat( null, 0 );
 	}
 	

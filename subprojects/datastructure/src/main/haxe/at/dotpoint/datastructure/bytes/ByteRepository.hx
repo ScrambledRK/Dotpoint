@@ -14,7 +14,7 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	public var signature(default, null):TSignature;
 	
 	/** actual data storage */
-	private var data:Bytes;
+	public var data(default, null):Bytes;
 	
 	// ************************************************************************ //
 	// Constructor
@@ -38,44 +38,24 @@ class ByteRepository<TType:EnumValue,TSignature:IByteSignature<TType>> implement
 	//
 	public function writeTensor( index:Int, type:TType, value:ITensor ):Void
 	{		
-		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = this.signature.getEntryIndex( index, type );
-		
-		//
-		for( i in 0...format.numValues )		
-			this.data.setDouble( start + i * format.sizeValue, value.getByIndex( i ) );	
+		ByteOperations.writeTensor( this.data, this.signature, index, type, value );
 	}
 	
 	//
 	public function readTensor( index:Int, type:TType, output:ITensor ):Void
 	{
-		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = this.signature.getEntryIndex( index, type );
-		
-		//
-		for( i in 0...format.numValues )		
-			output.setByIndex( i, data.getDouble( start + i * format.sizeValue ) );	
+		ByteOperations.readTensor( this.data, this.signature, index, type, output );
 	}
 	
 	//
 	public function writeInteger( index:Int, type:TType, value:Vector<Int>, offset:Int = 0 ):Void
 	{
-		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = this.signature.getEntryIndex( index, type );
-		
-		//
-		for( i in 0...format.numValues )		
-			this.data.setInt32( start + i * format.sizeValue, value[ offset + i ] );	
+		ByteOperations.writeInteger( this.data, this.signature, index, type, value, offset );
 	}
 	
 	//
 	public function readInteger( index:Int, type:TType, output:Vector<Int>, offset:Int = 0 ):Void
 	{
-		var format:ByteFormat = this.signature.getFormat( type );
-		var start:Int = this.signature.getEntryIndex( index, type );
-		
-		//
-		for( i in 0...format.numValues )		
-			output[ offset + i ] = data.getInt32( start + i * format.sizeValue );	
+		ByteOperations.readInteger( this.data, this.signature, index, type, output, offset );
 	}
 }

@@ -13,6 +13,11 @@ package at.dotpoint.datastructure.bytes;
 interface IByteSignature<T:Dynamic>
 {
 	/**
+	 * number of different byte formats possible (not necessarily used)
+	 */
+	public var size(default, null):Int;
+	
+	/**
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return	byte storage information for a "value-unit"
 	 */

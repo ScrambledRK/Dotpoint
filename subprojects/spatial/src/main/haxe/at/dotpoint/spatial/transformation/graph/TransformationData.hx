@@ -134,7 +134,13 @@ class TransformationData implements IGraphRepository<DataType>
 class TransformationSignature implements IByteSignature<DataType> 
 {
 	//
-	public function new(){}
+	public var size(default, null):Int;
+	
+	//
+	public function new()
+	{
+		this.size = 4;
+	}
 	
 	// ************************************************************************ //
 	// Methods

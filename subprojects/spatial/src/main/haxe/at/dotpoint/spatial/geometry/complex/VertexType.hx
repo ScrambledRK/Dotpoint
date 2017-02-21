@@ -1,4 +1,5 @@
 package at.dotpoint.spatial.geometry.complex;
+
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
