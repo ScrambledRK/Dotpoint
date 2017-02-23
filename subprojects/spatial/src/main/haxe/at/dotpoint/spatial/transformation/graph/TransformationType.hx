@@ -11,7 +11,7 @@ import at.dotpoint.math.tensor.vector.Vector3;
 /**
  * @author RK
  */
-enum DataType 
+enum TransformationType 
 {
 	TRANSLATION; 
 	ROTATION; 
@@ -19,7 +19,7 @@ enum DataType
 	MATRIX;
 }
 
-class DataTypeHelper
+class TransformationTypeHelper
 {
 	private static var translation:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );	
 	private static var rotation:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 4 );		
@@ -27,21 +27,21 @@ class DataTypeHelper
 	private static var matrix:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 16 );	
 	
 	//
-	public static function getByteFormat( type:DataType ):ByteFormat
+	public static function getByteFormat( type:TransformationType ):ByteFormat
 	{
 		switch( type )
 		{
-			case DataType.TRANSLATION: 	return translation;
-			case DataType.ROTATION: 	return rotation;
-			case DataType.SCALE: 		return scale;
-			case DataType.MATRIX: 		return matrix;
+			case TransformationType.TRANSLATION: 	return translation;
+			case TransformationType.ROTATION: 	return rotation;
+			case TransformationType.SCALE: 		return scale;
+			case TransformationType.MATRIX: 		return matrix;
 		}
 	}
 	
 	//
-	public static function createTensor( type:DataType ):ITensor
+	public static function createTensor( type:TransformationType ):ITensor
 	{
-		var format:ByteFormat = DataTypeHelper.getByteFormat( type );
+		var format:ByteFormat = TransformationTypeHelper.getByteFormat( type );
 		
 		//
 		switch( format.numValues )

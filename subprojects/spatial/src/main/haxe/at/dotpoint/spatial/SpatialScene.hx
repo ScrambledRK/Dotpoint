@@ -5,7 +5,7 @@ import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.transformation.graph.DataType;
+import at.dotpoint.spatial.transformation.graph.TransformationType;
 import at.dotpoint.spatial.transformation.graph.TransformationGraph;
 
 /**
@@ -43,7 +43,7 @@ class SpatialScene
 	 */
 	public function setTranslation( index:Int, value:IVector3 ):Void
 	{
-		this.transformation.setValues( index, DataType.TRANSLATION, value );
+		this.transformation.setValues( index, TransformationType.TRANSLATION, value );
 	}
 
 	//
@@ -53,7 +53,7 @@ class SpatialScene
 			output = new Vector3();
 
 		//
-		this.transformation.getValues( index, DataType.TRANSLATION, output );
+		this.transformation.getValues( index, TransformationType.TRANSLATION, output );
 
 		//
 		return output;
@@ -67,7 +67,7 @@ class SpatialScene
 	 */
 	public function setRotation( index:Int, value:IQuaternion ):Void
 	{
-		this.transformation.setValues( index, DataType.ROTATION, value );
+		this.transformation.setValues( index, TransformationType.ROTATION, value );
 	}
 
 	//
@@ -77,7 +77,7 @@ class SpatialScene
 			output = new Quaternion();
 
 		//
-		this.transformation.getValues( index, DataType.ROTATION, output );
+		this.transformation.getValues( index, TransformationType.ROTATION, output );
 
 		//
 		return output;
@@ -91,7 +91,7 @@ class SpatialScene
 	 */
 	public function setScaling( index:Int, value:IVector3 ):Void
 	{
-		this.transformation.setValues( index, DataType.SCALE, value );
+		this.transformation.setValues( index, TransformationType.SCALE, value );
 	}
 
 	//
@@ -101,7 +101,7 @@ class SpatialScene
 			output = new Vector3();
 
 		//
-		this.transformation.getValues( index, DataType.SCALE, output );
+		this.transformation.getValues( index, TransformationType.SCALE, output );
 
 		//
 		return output;
@@ -115,7 +115,7 @@ class SpatialScene
 	 */
 	public function setMatrix( index:Int, value:IMatrix44 ):Void
 	{
-		this.transformation.setValues( index, DataType.MATRIX, value );
+		this.transformation.setValues( index, TransformationType.MATRIX, value );
 	}
 
 	//
@@ -125,7 +125,7 @@ class SpatialScene
 			output = new Matrix44();
 
 		//
-		this.transformation.getValues( index, DataType.MATRIX, output );
+		this.transformation.getValues( index, TransformationType.MATRIX, output );
 
 		//
 		return output;

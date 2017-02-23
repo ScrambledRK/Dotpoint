@@ -19,7 +19,7 @@ import at.dotpoint.math.tensor.vector.Vector3;
  * 
  * @author RK
  */
-class TransformationGraph implements IGraphContainer<RelationType,DataType> 
+class TransformationGraph implements IGraphContainer<RelationType,TransformationType> 
 {
 	//
 	private var register:IObjectPoolRegister;
@@ -45,14 +45,14 @@ class TransformationGraph implements IGraphContainer<RelationType,DataType>
 	// ************************************************************************ //	
 
 	//
-	public function setValues( index:Int, type:DataType, value:ITensor ):Void
+	public function setValues( index:Int, type:TransformationType, value:ITensor ):Void
 	{		
 		this.repository.setValues( index, type, value );
 		
 	}
 	
 	//
-	public function getValues( index:Int, type:DataType, output:ITensor ):Void
+	public function getValues( index:Int, type:TransformationType, output:ITensor ):Void
 	{
 		this.repository.getValues( index, type, output );	
 	}

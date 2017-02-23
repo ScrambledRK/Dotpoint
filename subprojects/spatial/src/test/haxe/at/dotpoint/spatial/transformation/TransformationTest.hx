@@ -10,7 +10,7 @@ import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.transformation.graph.DataType;
+import at.dotpoint.spatial.transformation.graph.TransformationType;
 import at.dotpoint.spatial.transformation.graph.TransformationData;
 import haxe.io.Bytes;
 import haxe.unit.TestCase;
@@ -39,8 +39,8 @@ class TransformationTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		repository.setValues( 0, DataType.TRANSLATION, input );
-		repository.getValues( 0, DataType.TRANSLATION, result );
+		repository.setValues( 0, TransformationType.TRANSLATION, input );
+		repository.getValues( 0, TransformationType.TRANSLATION, result );
 		
 		// ------------- //
 		
@@ -64,8 +64,8 @@ class TransformationTest extends TestCase
 		var result:Quaternion = new Quaternion();
 		
 		//
-		repository.setValues( 0, DataType.ROTATION, input );
-		repository.getValues( 0, DataType.ROTATION, result );
+		repository.setValues( 0, TransformationType.ROTATION, input );
+		repository.getValues( 0, TransformationType.ROTATION, result );
 		
 		// ------------- //
 		
@@ -88,8 +88,8 @@ class TransformationTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		repository.setValues( 0, DataType.SCALE, input );		
-		repository.getValues( 0, DataType.SCALE, result );
+		repository.setValues( 0, TransformationType.SCALE, input );		
+		repository.getValues( 0, TransformationType.SCALE, result );
 		
 		// ------------- //
 		
@@ -113,8 +113,8 @@ class TransformationTest extends TestCase
 		var result:IMatrix44 = new Matrix44();
 		
 		//
-		repository.setValues( 0, DataType.MATRIX, input );
-		repository.getValues( 0, DataType.MATRIX, result );
+		repository.setValues( 0, TransformationType.MATRIX, input );
+		repository.getValues( 0, TransformationType.MATRIX, result );
 		
 		// ------------- //
 		
