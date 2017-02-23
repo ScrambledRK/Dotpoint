@@ -53,7 +53,7 @@ class VertexData
 				var type:VertexType = signature.types[j];
 				
 				this.indices.setIndex( vertex.index, type, vertex.getDataIndex( type ) );
-				vertex.writeBytes( this.repository.data, signature, type );
+				vertex.writeBytes( this.repository, type );
 			}
 		}
 	}
@@ -75,10 +75,8 @@ class VertexData
 		{
 			if( signature.entries[j] > 0 )
 			{
-				var type:VertexType = signature.types[j];
-				
-				output.setDataIndex( type, this.indices.getIndex( index, type ) );
-				output.readBytes( this.repository.data, signature, type );
+				var type:VertexType = signature.types[j];				
+				output.readBytes( this.repository, type, this.indices.getIndex( index, type ) );
 			}
 		}		
 		

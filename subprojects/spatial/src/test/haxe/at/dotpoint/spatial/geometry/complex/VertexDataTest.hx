@@ -77,7 +77,8 @@ class VertexDataTest extends TestCase
 		
 		instance.setVertex( vertex );
 		
-		var result:IVertex = instance.getVertex( 1 );
+		var result:Vertex = new Vertex();
+		instance.getVertex( 1, result );
 		
 		assertEquals( 1, result.index );
 		assertEquals( 0, result.getDataIndex( VertexType.NORMAL) );
@@ -88,13 +89,6 @@ class VertexDataTest extends TestCase
 		
 		var t_norm:IVector3 = new Vector3();
 		instance.getDataTensor( 0, VertexType.NORMAL, t_norm );
-		
-		trace("what?");
-		trace( ex_normal );
-		trace( ou_normal );
-		trace( t_norm );
-		trace( ex_uv );
-		trace( ou_uv );
 		
 		assertTrue( MathVector3.isEqual( ex_normal, ou_normal ) );
 		assertTrue( MathVector2.isEqual( ex_uv, ou_uv ) );

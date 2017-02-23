@@ -1,14 +1,12 @@
 package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.ITensor;
-import at.dotpoint.datastructure.bytes.ByteOperations;
-import at.dotpoint.datastructure.bytes.IByteSignature;
 import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
+import at.dotpoint.spatial.geometry.complex.VertexData.VertexRepository;
 import at.dotpoint.spatial.geometry.complex.VertexType.VertexTypeHelper;
 import haxe.ds.Vector;
-import haxe.io.Bytes;
 
 /**
  * ...
@@ -19,33 +17,33 @@ class Vertex implements IVertex
 
 	//
 	public var index:MeshIndexVertex;
-	
+
 	//
 	private var data:Vector<ITensor>;
 	private var indices:Vector<MeshIndexVertex>;
-	
+
 	// ************************************************************************ //
 	// Constructor
-	// ************************************************************************ //	
-	
+	// ************************************************************************ //
+
 	//
-	public function new() 
+	public function new()
 	{
 		var size:Int = VertexType.createAll().length;
-		
+
 		this.data = new Vector<ITensor>( size );
 		this.indices = new Vector<MeshIndexVertex>( size );
-		
+
 		this.clear();
-	}	
-	
+	}
+
 	//
 	public function clear():Void
 	{
 		this.index = -1;
-		
-		for( j in 0...this.indices.length )
-		{			
+
+		for ( j in 0...this.indices.length )
+		{
 			this.indices[j] = -1;
 			this.data[j] = null;
 		}
@@ -53,105 +51,101 @@ class Vertex implements IVertex
 
 	// ************************************************************************ //
 	// IByteCollection
-	// ************************************************************************ //	
-	
+	// ************************************************************************ //
+
 	/**
-	 * store this byte collection with its internal data representation into the given byte buffer 
-	 * using the given signature and type in order to figure out how to save it. use the static
-	 * ByteOperations methods to help you out.
-	 * 
-	 * @param	data target to store the internal data of the given type into
-	 * @param	signature layout information how to store the data
+	 * store this byte collection with its internal data representation into the given byte repository
+	 *
+	 * @param	repository target to store the internal data of the given type into
 	 * @param	type kind of data to store
+	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( data:Bytes, signature:IByteSignature<VertexType>, type:VertexType ):Void
+	public function writeBytes( repository:VertexRepository, type:VertexType, index:Int = -1 ):Void
 	{
-		var index:Int = this.getDataIndex( type );
+		var index:Int = index < 0 ? this.getDataIndex( type ) : index;
 		var input:ITensor = this.getTensor( type );
-		
-		if( input == null || index < 0 )
+
+		if ( input == null || index < 0 )
 			return;
-		
+
 		//
-		ByteOperations.writeTensor( data, signature, index, type, input );
+		repository.writeTensor( index, type, input );
 	}
-	
+
 	/**
-	 * use the given bytes data to store its values into this byte collection internal data representation 
-	 * using the given signature and type in order to figure out how to save it. use the static
-	 * ByteOperations methods to help you out.
-	 * 
-	 * @param	data source to read the internal data of the given type from
-	 * @param	signature layout information how to store the data
+	 * use the given bytes repository data to store its values into this byte collection internal data representation
+	 *
+	 * @param	repository source to read the internal data of the given type from
 	 * @param	type kind of data to store
+	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( data:Bytes, signature:IByteSignature<VertexType>, type:VertexType ):Void
-	{		
-		var index:Int = this.getDataIndex( type );
-		
-		if( index < 0 )
+	public function readBytes( repository:VertexRepository, type:VertexType, index:Int = -1 ):Void
+	{
+		var index:Int = this.setDataIndex( type, index < 0 ? this.getDataIndex( type ) : index );
+
+		if ( index < 0 )
 			return;
-		
+
 		//
 		var output:ITensor = this.getTensor( type );
-		
-		if( output == null )
+
+		if ( output == null )
 		{
 			output = VertexTypeHelper.createTensor( type );
 			this.setTensor( type, output );
 		}
-			
+
 		//
-		ByteOperations.readTensor( data, signature, index, type, output );
+		repository.readTensor( index, type, output );
 	}
-	
+
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
-	
+
 	//
 	public function getDataIndex( type:VertexType ):Int
 	{
 		return this.indices[ type.getIndex() ];
 	}
-	
+
 	//
 	public function setDataIndex( type:VertexType, value:Int ):Int
 	{
 		return this.indices[ type.getIndex() ] = value;
 	}
-	
+
 	//
 	public function hasData( type:VertexType ):Bool
 	{
 		return this.getTensor( type ) != null;
 	}
-	
+
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
-	
+
 	//
 	public function getTensor<T:ITensor>( type:VertexType ):Null<T>
 	{
 		return cast this.data[ type.getIndex() ];
 	}
-	
+
 	//
 	public function setTensor<T:ITensor>( type:VertexType, value:T ):Null<T>
 	{
 		return cast this.data[ type.getIndex() ] = value;
 	}
-	
+
 	// ************************************************************************ //
 	// Helper
-	// ************************************************************************ //	
-	
-	// TODO: generate typed accessors via macro	
-	
+	// ************************************************************************ //
+
+	// TODO: generate typed accessors via macro
+
 	public var position(get,set):Null<IVector3>;
 	public var normal(get,set):Null<IVector3>;
 	public var color(get,set):Null<IVector3>;
 	public var uv(get, set):Null<IVector2>;
-	
+
 	/**
 	 * VERTEX_POSITION
 	 */
