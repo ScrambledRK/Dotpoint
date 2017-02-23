@@ -1,4 +1,6 @@
 package at.dotpoint.spatial.geometry.complex;
+import at.dotpoint.spatial.geometry.complex.index.IndexData;
+import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
 
 /**
  * ...

@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.vertex;
 
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.datastructure.bytes.ByteFormat;

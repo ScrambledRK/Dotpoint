@@ -9,6 +9,9 @@ import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
+import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
+import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
 import haxe.unit.TestCase;
 
 /**
