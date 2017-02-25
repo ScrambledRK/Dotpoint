@@ -12,7 +12,7 @@ class FaceRepository extends ByteRepository<FaceType,FaceSignature>
 
 	public function new( signature:MeshSignature ) 
 	{
-		super( new FaceSignature( signature ), signature.numTriangles );
+		super( new FaceSignature( signature, signature.faceLayout ), signature.numTriangles );
 	}
 	
 }

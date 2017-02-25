@@ -1,7 +1,7 @@
 package at.dotpoint.spatial.geometry.complex;
-import at.dotpoint.datastructure.bytes.ByteLayoutType;
+
 import at.dotpoint.spatial.geometry.complex.face.FaceData;
-import at.dotpoint.spatial.geometry.complex.MeshIndexLookup;
+import at.dotpoint.spatial.geometry.complex.face.IFace;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
 
@@ -9,50 +9,53 @@ import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
  * ...
  * @author RK
  */
-class MeshData 
+class MeshData
 {
 
 	//
 	public var signature(default,null):MeshSignature;
-	
+
 	private var vertex:VertexData;
-	private var index:FaceData;
+	private var face:FaceData;
 
 	// ************************************************************************ //
 	// Constructor
-	// ************************************************************************ //	
-	
+	// ************************************************************************ //
+
 	//
-	public function new( signature:MeshSignature ) 
+	public function new( signature:MeshSignature )
 	{
 		this.signature = signature;
-		
+
 		this.vertex = new VertexData( signature );
-		this.index = new FaceData( signature );
+		this.face = new FaceData( signature );
 	}
-	
+
 	// ************************************************************************ //
 	// Methods
-	// ************************************************************************ //	
-	
+	// ************************************************************************ //
+
 	//
-	public function addVertex( vertex:IVertex, ?lookup:MeshIndexLookup ):Void
+	public function setFace( face:IFace ):Void
 	{
-		if( this.signature.layout == ByteLayoutType.BLOCKED && lookup == null )
-			throw "must provide index lookup instance for BLOCKED mesh data";
-		
-		if( lookup != null )
-			lookup.setVertex( vertex );
-			
-		return this.setVertex( vertex );
+		return this.face.setFace( face );
 	}
-	
+
+	//
+	public function getFace( index:Int, ?output:IFace ):IFace
+	{
+		return this.face.getFace( index, output );
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
 	//
 	public function setVertex( vertex:IVertex ):Void
 	{
 		return this.vertex.setVertex( vertex );
 	}
-	
+
 	//
 	public function getVertex( index:Int, ?output:IVertex ):IVertex
 	{

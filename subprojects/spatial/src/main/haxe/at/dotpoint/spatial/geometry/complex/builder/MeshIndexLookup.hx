@@ -1,4 +1,5 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.builder;
+
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType;

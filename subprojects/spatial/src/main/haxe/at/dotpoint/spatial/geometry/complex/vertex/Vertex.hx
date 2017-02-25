@@ -3,6 +3,7 @@ package at.dotpoint.spatial.geometry.complex.vertex;
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
+import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
 import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexRepository;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType.VertexTypeHelper;
@@ -20,7 +21,7 @@ class Vertex implements IVertex
 
 	//
 	private var data:Vector<ITensor>;
-	private var indices:Vector<MeshIndexVertex>;
+	private var indices:Vector<MeshIndexData>;
 
 	// ************************************************************************ //
 	// Constructor
@@ -32,8 +33,9 @@ class Vertex implements IVertex
 		var size:Int = VertexType.createAll().length;
 
 		this.data = new Vector<ITensor>( size );
-		this.indices = new Vector<MeshIndexVertex>( size );
+		this.indices = new Vector<MeshIndexData>( size );
 
+		//
 		this.clear();
 	}
 
@@ -103,13 +105,13 @@ class Vertex implements IVertex
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getDataIndex( type:VertexType ):Int
+	public function getDataIndex( type:VertexType ):MeshIndexData
 	{
 		return this.indices[ type.getIndex() ];
 	}
 
 	//
-	public function setDataIndex( type:VertexType, value:Int ):Int
+	public function setDataIndex( type:VertexType, value:MeshIndexData ):MeshIndexData
 	{
 		return this.indices[ type.getIndex() ] = value;
 	}
@@ -119,7 +121,7 @@ class Vertex implements IVertex
 	{
 		return this.getTensor( type ) != null;
 	}
-	
+
 	//
 	public function getData( type:VertexType ):Dynamic
 	{

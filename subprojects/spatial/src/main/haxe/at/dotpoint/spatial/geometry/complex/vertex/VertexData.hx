@@ -57,7 +57,7 @@ class VertexData
 	//
 	public function getVertex( index:Int, ?output:IVertex ):IVertex
 	{
-		if( output == null )
+		if ( output == null )
 			output = new Vertex();
 
 		//
@@ -82,6 +82,9 @@ class VertexData
 	//
 	private function checkVertex( vertex:IVertex ):Void
 	{
+		if ( vertex == null )
+			throw "given vertex is null";
+
 		var signature:MeshSignature = this.getSignature();
 
 		//
@@ -116,7 +119,7 @@ class VertexData
 	// ************************************************************************ //
 
 	//
-	public function getSignature():MeshSignature
+	private function getSignature():MeshSignature
 	{
 		return this.repository.signature;
 	}

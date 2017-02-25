@@ -10,8 +10,14 @@ import at.dotpoint.datastructure.bytes.IByteSignature;
  */
 class FaceSignature implements IByteSignature<FaceType> 
 {
-	//
+	/**
+	 * number of different byte formats possible (not necessarily used)
+	 */
 	public var size(default, null):Int;
+	
+	//
+	public var numVertices(default,null):Int;
+	public var numTriangles(default,null):Int;
 	
 	//
 	private var format:ByteFormat;								// only triangles allowed
@@ -30,9 +36,13 @@ class FaceSignature implements IByteSignature<FaceType>
 		if( layout == null )
 			layout = FaceLayoutType.TRIANGLE;
 			
+		this.size = FaceType.createAll().length;
+		
 		this.layout = layout;
 		this.overhead = 0;
-		this.size = 1;
+		
+		this.numVertices = signature.numVertices;
+		this.numTriangles = signature.numTriangles + this.overhead;
 		
 		if( layout != FaceLayoutType.TRIANGLE )
 			throw "layouts other than triangle not supported";
