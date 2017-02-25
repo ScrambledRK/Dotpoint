@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.index;
+package at.dotpoint.spatial.geometry.complex;
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
@@ -9,7 +9,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class IndexLookup 
+class MeshIndexLookup 
 {
 	private static var TRIANGLE(default,never):Int = 0;
 	private static var VERTEX(default,never):Int = 1;
@@ -123,7 +123,7 @@ class IndexLookup
 		if( this.table.get( index ) == null )
 			this.table.set( index, new StringMap<Int>() );
 
-		return this.indexLookup.get( index );
+		return this.table.get( index );
 	}
 
 	/**

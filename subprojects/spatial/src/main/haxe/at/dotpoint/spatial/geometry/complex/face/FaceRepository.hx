@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.index;
+package at.dotpoint.spatial.geometry.complex.face;
 
 import at.dotpoint.datastructure.bytes.ByteRepository;
 import at.dotpoint.spatial.geometry.complex.MeshSignature;
@@ -7,12 +7,12 @@ import at.dotpoint.spatial.geometry.complex.MeshSignature;
  * ...
  * @author RK
  */
-class IndexRepository extends ByteRepository<IndexType,IndexSignature>
+class FaceRepository extends ByteRepository<FaceType,FaceSignature>
 {
 
 	public function new( signature:MeshSignature ) 
 	{
-		super( new IndexSignature( signature ), signature.numTriangles );
+		super( new FaceSignature( signature ), signature.numTriangles );
 	}
 	
 }

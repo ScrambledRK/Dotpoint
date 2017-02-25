@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.index;
+package at.dotpoint.spatial.geometry.complex.face;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
@@ -8,7 +8,7 @@ import at.dotpoint.datastructure.bytes.IByteSignature;
  * ...
  * @author RK
  */
-class IndexSignature implements IByteSignature<IndexType> 
+class FaceSignature implements IByteSignature<FaceType> 
 {
 	//
 	public var size(default, null):Int;
@@ -18,23 +18,23 @@ class IndexSignature implements IByteSignature<IndexType>
 	private var overhead:Int;									// strip may need additional degenerated tris
 	
 	//
-	public var layout(default, null):IndexLayoutType;
+	public var layout(default, null):FaceLayoutType;
 	
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //	
 	
 	//
-	public function new( signature:MeshSignature, ?layout:IndexLayoutType )
+	public function new( signature:MeshSignature, ?layout:FaceLayoutType )
 	{
 		if( layout == null )
-			layout = IndexLayoutType.TRIANGLE;
+			layout = FaceLayoutType.TRIANGLE;
 			
 		this.layout = layout;
 		this.overhead = 0;
 		this.size = 1;
 		
-		if( layout != IndexLayoutType.TRIANGLE )
+		if( layout != FaceLayoutType.TRIANGLE )
 			throw "layouts other than triangle not supported";
 			
 		this.format = new ByteFormat( ByteType.INT, 3 );		// could be smaller than int
@@ -45,7 +45,7 @@ class IndexSignature implements IByteSignature<IndexType>
 	// ************************************************************************ //	
 	
 	//
-	public function getFormat( type:IndexType ):ByteFormat
+	public function getFormat( type:FaceType ):ByteFormat
 	{
 		return this.format;
 	}
@@ -57,7 +57,7 @@ class IndexSignature implements IByteSignature<IndexType>
 	}
 	
 	//
-	public function getEntryIndex( index:Int, type:IndexType ):Int
+	public function getEntryIndex( index:Int, type:FaceType ):Int
 	{
 		return index * this.format.sizeTotal;
 	}
