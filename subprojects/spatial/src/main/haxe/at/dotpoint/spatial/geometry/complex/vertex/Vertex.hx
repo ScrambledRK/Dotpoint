@@ -119,6 +119,12 @@ class Vertex implements IVertex
 	{
 		return this.getTensor( type ) != null;
 	}
+	
+	//
+	public function getData( type:VertexType ):Dynamic
+	{
+		return this.getTensor( type );
+	}
 
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //

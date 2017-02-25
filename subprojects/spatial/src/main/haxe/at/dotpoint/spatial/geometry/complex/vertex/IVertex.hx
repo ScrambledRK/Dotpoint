@@ -16,7 +16,8 @@ interface IVertex extends IByteCollection<VertexType,VertexRepository>
 
 	//
 	public function clear():Void;
-
+	public function getData( type:VertexType ):Dynamic;
+	
 	//
 	public function getDataIndex( type:VertexType ):Int;
 	public function setDataIndex( type:VertexType, value:Int ):Int;

@@ -84,6 +84,15 @@ class Quaternion implements IQuaternion
 		return this.w = value;
 	}
 	
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	
+	//
+	inline public function getNumComponents():Int
+	{
+		return 4;
+	}
+	
 	//
 	inline public function getByIndex( index:Int ):Float
 	{

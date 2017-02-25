@@ -83,6 +83,15 @@ class Vector3 implements IVector3
 		return this.w = value;
 	}
 	
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	
+	//
+	inline public function getNumComponents():Int
+	{
+		return 4;
+	}
+	
 	//
 	inline public function getByIndex( index:Int ):Float
 	{

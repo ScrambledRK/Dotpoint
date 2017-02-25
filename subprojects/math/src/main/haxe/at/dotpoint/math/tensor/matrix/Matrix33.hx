@@ -27,7 +27,13 @@ class Matrix33 implements IMatrix33
 	// ************************************************************************ //
 	// get/set
 	// ************************************************************************ //
-
+	
+	//
+	inline public function getNumComponents():Int
+	{
+		return 9;
+	}
+	
 	/**
 	 * @param	columnIndex 0-2; 0 = m1x, 1 = m2x, ...
 	 * @param	rowIndex 0-2; 0 = mx1, 1 = mx2, ...

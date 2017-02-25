@@ -57,7 +57,7 @@ class VertexData
 	//
 	public function getVertex( index:Int, ?output:IVertex ):IVertex
 	{
-		if ( output == null )
+		if( output == null )
 			output = new Vertex();
 
 		//

@@ -53,6 +53,15 @@ class Vector2 implements IVector2
 		return this.y = value;
 	}
 	
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	
+	//
+	inline public function getNumComponents():Int
+	{
+		return 2;
+	}
+	
 	//
 	inline public function getByIndex( index:Int ):Float
 	{
