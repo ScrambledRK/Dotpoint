@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.mesh.vertex;
+package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.datastructure.bytes.ByteFormat;
@@ -12,7 +12,7 @@ import at.dotpoint.math.tensor.vector.Vector3;
 /**
  * @author RK
  */
-enum VertexType 
+enum DefaultVertexType 
 {
 	POSITION;
 	NORMAL;
@@ -28,19 +28,19 @@ class VertexTypeHelper
 	private static var color:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );
 	
 	//
-	public static function getByteFormat( type:VertexType ):ByteFormat
+	public static function getByteFormat( type:DefaultVertexType ):ByteFormat
 	{
 		switch( type )
 		{
-			case VertexType.POSITION:	return position;
-			case VertexType.NORMAL:		return normal;
-			case VertexType.UV:			return uv;
-			case VertexType.COLOR:		return color;
+			case DefaultVertexType.POSITION:	return position;
+			case DefaultVertexType.NORMAL:		return normal;
+			case DefaultVertexType.UV:			return uv;
+			case DefaultVertexType.COLOR:		return color;
 		}
 	}
 	
 	//
-	public static function createTensor( type:VertexType ):ITensor
+	public static function createTensor( type:DefaultVertexType ):ITensor
 	{
 		var format:ByteFormat = VertexTypeHelper.getByteFormat( type );
 		

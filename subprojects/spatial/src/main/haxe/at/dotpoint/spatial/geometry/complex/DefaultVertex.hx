@@ -1,19 +1,21 @@
-package at.dotpoint.spatial.geometry.complex.mesh.vertex;
+package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexType.VertexTypeHelper;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexRepository;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType.VertexTypeHelper;
 import haxe.ds.Vector;
 
 /**
  * ...
  * @author RK
  */
-class Vertex implements IVertex<VertexType>
+class DefaultVertex implements IVertex<DefaultVertexType>
 {
 
 	//
@@ -30,7 +32,7 @@ class Vertex implements IVertex<VertexType>
 	//
 	public function new()
 	{
-		var size:Int = VertexType.createAll().length;
+		var size:Int = DefaultVertexType.createAll().length;
 
 		this.data = new Vector<ITensor>( size );
 		this.indices = new Vector<MeshIndexData>( size );
@@ -62,7 +64,7 @@ class Vertex implements IVertex<VertexType>
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( repository:VertexRepository<VertexType>, type:VertexType, index:Int = -1 ):Void
+	public function writeBytes( repository:VertexRepository<DefaultVertexType>, type:DefaultVertexType, index:Int = -1 ):Void
 	{
 		var index:Int = index < 0 ? this.getDataIndex( type ) : index;
 		var input:ITensor = this.getTensor( type );
@@ -81,7 +83,7 @@ class Vertex implements IVertex<VertexType>
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( repository:VertexRepository<VertexType>, type:VertexType, index:Int = -1 ):Void
+	public function readBytes( repository:VertexRepository<DefaultVertexType>, type:DefaultVertexType, index:Int = -1 ):Void
 	{
 		var index:Int = this.setDataIndex( type, index < 0 ? this.getDataIndex( type ) : index );
 
@@ -105,31 +107,31 @@ class Vertex implements IVertex<VertexType>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getDataIndex( type:VertexType ):MeshIndexData
+	public function getDataIndex( type:DefaultVertexType ):MeshIndexData
 	{
 		return this.indices[ type.getIndex() ];
 	}
 
 	//
-	public function setDataIndex( type:VertexType, value:MeshIndexData ):MeshIndexData
+	public function setDataIndex( type:DefaultVertexType, value:MeshIndexData ):MeshIndexData
 	{
 		return this.indices[ type.getIndex() ] = value;
 	}
 
 	//
-	public function hasData( type:VertexType ):Bool
+	public function hasData( type:DefaultVertexType ):Bool
 	{
 		return this.getTensor( type ) != null;
 	}
 
 	//
-	public function getData( type:VertexType ):Dynamic
+	public function getData( type:DefaultVertexType ):Dynamic
 	{
 		return this.getTensor( type );
 	}
 	
 	//
-	public function setData( type:VertexType, data:Dynamic ):Void
+	public function setData( type:DefaultVertexType, data:Dynamic ):Void
 	{
 		this.setTensor( type, cast( data, ITensor ) );
 	}
@@ -138,13 +140,13 @@ class Vertex implements IVertex<VertexType>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getTensor<T:ITensor>( type:VertexType ):Null<T>
+	public function getTensor<T:ITensor>( type:DefaultVertexType ):Null<T>
 	{
 		return cast this.data[ type.getIndex() ];
 	}
 
 	//
-	public function setTensor<T:ITensor>( type:VertexType, value:T ):Null<T>
+	public function setTensor<T:ITensor>( type:DefaultVertexType, value:T ):Null<T>
 	{
 		return cast this.data[ type.getIndex() ] = value;
 	}
@@ -163,12 +165,12 @@ class Vertex implements IVertex<VertexType>
 	 */
 	private function get_position():Null<IVector3>
 	{
-		return this.getTensor( VertexType.POSITION );
+		return this.getTensor( DefaultVertexType.POSITION );
 	}
 
 	private function set_position( value:Null<IVector3> ):Null<IVector3>
 	{
-		return this.setTensor( VertexType.POSITION, value );
+		return this.setTensor( DefaultVertexType.POSITION, value );
 	}
 
 	/**
@@ -176,12 +178,12 @@ class Vertex implements IVertex<VertexType>
 	 */
 	private function get_normal():Null<IVector3>
 	{
-		return this.getTensor( VertexType.NORMAL );
+		return this.getTensor( DefaultVertexType.NORMAL );
 	}
 
 	private function set_normal( value:Null<IVector3> ):Null<IVector3>
 	{
-		return this.setTensor( VertexType.NORMAL, value );
+		return this.setTensor( DefaultVertexType.NORMAL, value );
 	}
 
 	/**
@@ -189,12 +191,12 @@ class Vertex implements IVertex<VertexType>
 	 */
 	private function get_color():Null<IVector3>
 	{
-		return this.getTensor( VertexType.COLOR );
+		return this.getTensor( DefaultVertexType.COLOR );
 	}
 
 	private function set_color( value:Null<IVector3> ):Null<IVector3>
 	{
-		return this.setTensor( VertexType.COLOR, value );
+		return this.setTensor( DefaultVertexType.COLOR, value );
 	}
 
 	/**
@@ -202,11 +204,11 @@ class Vertex implements IVertex<VertexType>
 	 */
 	private function get_uv():Null<IVector2>
 	{
-		return this.getTensor( VertexType.UV );
+		return this.getTensor( DefaultVertexType.UV );
 	}
 
 	private function set_uv( value:Null<IVector2> ):Null<IVector2>
 	{
-		return this.setTensor( VertexType.UV, value );
+		return this.setTensor( DefaultVertexType.UV, value );
 	}
 }

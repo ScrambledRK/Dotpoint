@@ -3,7 +3,6 @@ package at.dotpoint.spatial.geometry.complex.mesh.face;
 import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexTriangle;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
-import at.dotpoint.spatial.geometry.complex.mesh.face.FaceType.FaceTypeHelper;
 import haxe.ds.Vector;
 
 /**

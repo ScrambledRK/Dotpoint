@@ -3,8 +3,8 @@ package at.dotpoint.spatial.geometry.complex.vertex;
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.DefaultVertex;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
 import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
@@ -18,7 +18,7 @@ class VertexTest extends TestCase
 	//
 	public function testGetSetData():Void
 	{
-		var vertex:Vertex = new Vertex();
+		var vertex:DefaultVertex = new DefaultVertex();
 		
 		// ------------------- //
 		
@@ -29,8 +29,8 @@ class VertexTest extends TestCase
 			
 		var expected:IVector3 = MathVector3.clone( input );
 		
-		vertex.setTensor( VertexType.NORMAL, input );
-		var result:IVector3 = vertex.getTensor( VertexType.NORMAL );
+		vertex.setTensor( DefaultVertexType.NORMAL, input );
+		var result:IVector3 = vertex.getTensor( DefaultVertexType.NORMAL );
 		
 		// ------------------- //
 		
@@ -40,7 +40,7 @@ class VertexTest extends TestCase
 	//
 	public function testGetSetPosition():Void
 	{
-		var vertex:Vertex = new Vertex();
+		var vertex:DefaultVertex = new DefaultVertex();
 		
 		// ------------------- //
 		
@@ -50,7 +50,7 @@ class VertexTest extends TestCase
 			input.z = Math.random();		
 			
 		var expected:IVector3 = MathVector3.clone( input );
-		var result:IVector3 = vertex.getTensor( VertexType.POSITION );
+		var result:IVector3 = vertex.getTensor( DefaultVertexType.POSITION );
 		
 		// ------------------- //
 		
@@ -60,7 +60,7 @@ class VertexTest extends TestCase
 	//
 	public function testGetSetNormal():Void
 	{
-		var vertex:Vertex = new Vertex();
+		var vertex:DefaultVertex = new DefaultVertex();
 		
 		// ------------------- //
 		
@@ -70,7 +70,7 @@ class VertexTest extends TestCase
 			input.z = Math.random();		
 			
 		var expected:IVector3 = MathVector3.clone( input );
-		var result:IVector3 = vertex.getTensor( VertexType.NORMAL );
+		var result:IVector3 = vertex.getTensor( DefaultVertexType.NORMAL );
 		
 		// ------------------- //
 		

@@ -9,8 +9,8 @@ import at.dotpoint.spatial.geometry.complex.DefaultMeshFactory;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshData;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.DefaultVertex;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
 import haxe.unit.TestCase;
 
 using at.dotpoint.unit.TestCaseHelper;
@@ -34,9 +34,9 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):Vertex
+	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):DefaultVertex
 	{
-		var vertex:Vertex = new Vertex();
+		var vertex:DefaultVertex = new DefaultVertex();
 			vertex.position = p[pi];
 			vertex.uv = u[ui];
 			vertex.normal = n[ni];
@@ -45,13 +45,13 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function createMeshBuilder():MeshBuilder<VertexType>
+	private function createMeshBuilder():MeshBuilder<DefaultVertexType>
 	{
-		return new MeshBuilder<VertexType>( new DefaultMeshFactory() );
+		return new MeshBuilder<DefaultVertexType>( new DefaultMeshFactory() );
 	}
 	
 	//
-	private function createCube():MeshBuilder<VertexType>
+	private function createCube():MeshBuilder<DefaultVertexType>
 	{
 		var w:Float = Math.random() * 2;
 		var h:Float = Math.random() * 2;
@@ -98,7 +98,7 @@ class MeshBuilderTest extends TestCase
 		// ------------------ //
 		// ------------------ //
 		
-		var builder:MeshBuilder<VertexType> = this.createMeshBuilder();
+		var builder:MeshBuilder<DefaultVertexType> = this.createMeshBuilder();
 		
 		builder.addVertices( [ v( p, u, n, 0,0,0 ), v( p, u, n, 1,1,0 ), v( p, u, n, 2,2,0 ) ] );
 		builder.addVertices( [ v( p, u, n, 2,2,0 ), v( p, u, n, 3,3,0 ), v( p, u, n, 0,0,0 ) ] );
@@ -127,41 +127,41 @@ class MeshBuilderTest extends TestCase
 	//
 	public function testCubeBlocked()
 	{
-		var builder:MeshBuilder<VertexType> = this.createCube();
+		var builder:MeshBuilder<DefaultVertexType> = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData<VertexType> = builder.buildMesh( ByteLayoutType.BLOCKED );
-		var signature:MeshSignature<VertexType> = mesh.signature;
+		var mesh:MeshData<DefaultVertexType> = builder.buildMesh( ByteLayoutType.BLOCKED );
+		var signature:MeshSignature<DefaultVertexType> = mesh.signature;
 		
 		// ------------------- //
 		
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 8, signature.entries[ VertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 4, signature.entries[ VertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 6, signature.entries[ VertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 8, signature.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
+		aEquals( 4, signature.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
+		aEquals( 6, signature.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
 	}
 	
 	//
 	public function testCubeInterleaved()
 	{
-		var builder:MeshBuilder<VertexType> = this.createCube();
+		var builder:MeshBuilder<DefaultVertexType> = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData<VertexType> = builder.buildMesh( ByteLayoutType.INTERLEAVED );
-		var signature:MeshSignature<VertexType> = mesh.signature;
+		var mesh:MeshData<DefaultVertexType> = builder.buildMesh( ByteLayoutType.INTERLEAVED );
+		var signature:MeshSignature<DefaultVertexType> = mesh.signature;
 		
 		// ------------------- //
 		
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 1, signature.entries[ VertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 1, signature.entries[ VertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 1, signature.entries[ VertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 1, signature.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
+		aEquals( 1, signature.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
+		aEquals( 1, signature.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
 	}
 	
 }

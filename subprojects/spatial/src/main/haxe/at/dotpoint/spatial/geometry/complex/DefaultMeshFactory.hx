@@ -1,17 +1,17 @@
 package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
+import at.dotpoint.spatial.geometry.complex.DefaultVertex;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexData;
+import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
 import at.dotpoint.spatial.geometry.complex.builder.IMeshFactory;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexData;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 
 /**
  * ...
  * @author RK
  */
-class DefaultMeshFactory implements IMeshFactory<VertexType>
+class DefaultMeshFactory implements IMeshFactory<DefaultVertexType>
 {
 
 	//
@@ -25,9 +25,9 @@ class DefaultMeshFactory implements IMeshFactory<VertexType>
 	// ************************************************************************ //	
 	
 	//
-	public function getTypes():Vector<VertexType> 
+	public function getTypes():Vector<DefaultVertexType> 
 	{
-		return Vector.fromArrayCopy( VertexType.createAll() );
+		return Vector.fromArrayCopy( DefaultVertexType.createAll() );
 	}
 	
 	//
@@ -37,18 +37,18 @@ class DefaultMeshFactory implements IMeshFactory<VertexType>
 	}
 	
 	//
-	public function createVertexData():VertexData
+	public function createVertexData():DefaultVertexData
 	{
-		return new VertexData();
+		return new DefaultVertexData();
 	}
 	
 	//
-	public function createVertex():Vertex
+	public function createVertex():DefaultVertex
 	{
-		return new Vertex();
+		return new DefaultVertex();
 	}
 	
-	public function getByteFormat( type:VertexType ):ByteFormat
+	public function getByteFormat( type:DefaultVertexType ):ByteFormat
 	{
 		return VertexTypeHelper.getByteFormat( type );
 	}
