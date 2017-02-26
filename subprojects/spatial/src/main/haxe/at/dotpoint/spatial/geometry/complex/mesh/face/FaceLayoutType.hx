@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.face;
+package at.dotpoint.spatial.geometry.complex.mesh.face;
 
 /**
  * @author RK

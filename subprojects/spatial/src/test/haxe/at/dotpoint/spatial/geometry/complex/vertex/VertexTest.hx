@@ -3,8 +3,8 @@ package at.dotpoint.spatial.geometry.complex.vertex;
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 import haxe.unit.TestCase;
 

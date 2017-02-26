@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.mesh;
 
 /**
  * 

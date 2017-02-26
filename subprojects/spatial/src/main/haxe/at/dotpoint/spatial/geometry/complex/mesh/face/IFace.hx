@@ -1,7 +1,8 @@
-package at.dotpoint.spatial.geometry.complex.face;
+package at.dotpoint.spatial.geometry.complex.mesh.face;
+
 import at.dotpoint.datastructure.bytes.IByteCollection;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexTriangle;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexTriangle;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
 
 /**
  * @author RK

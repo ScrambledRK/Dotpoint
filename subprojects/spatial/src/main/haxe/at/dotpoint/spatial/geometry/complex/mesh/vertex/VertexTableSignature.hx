@@ -1,10 +1,10 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
 import at.dotpoint.datastructure.bytes.ByteSignature;
 import at.dotpoint.datastructure.bytes.ByteType;
-import at.dotpoint.spatial.geometry.complex.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 import haxe.ds.Vector;
 
 /**

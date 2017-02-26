@@ -1,9 +1,9 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.mesh;
 
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
 import at.dotpoint.datastructure.bytes.ByteSignature;
-import at.dotpoint.spatial.geometry.complex.face.FaceLayoutType;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.face.FaceLayoutType;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 
 /**

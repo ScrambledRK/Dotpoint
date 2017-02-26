@@ -1,12 +1,12 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
 
 import at.dotpoint.datastructure.ITensor;
 import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexRepository;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType.VertexTypeHelper;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexRepository;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType.VertexTypeHelper;
 import haxe.ds.Vector;
 
 /**

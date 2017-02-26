@@ -2,9 +2,9 @@ package at.dotpoint.spatial.geometry.complex;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.spatial.geometry.complex.builder.IMeshFactory;
-import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexData;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 
 /**

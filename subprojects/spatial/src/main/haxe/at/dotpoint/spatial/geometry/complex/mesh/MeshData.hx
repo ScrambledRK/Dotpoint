@@ -1,9 +1,9 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.mesh;
 
-import at.dotpoint.spatial.geometry.complex.face.FaceCollection;
-import at.dotpoint.spatial.geometry.complex.face.IFace;
-import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
+import at.dotpoint.spatial.geometry.complex.mesh.face.FaceCollection;
+import at.dotpoint.spatial.geometry.complex.mesh.face.IFace;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
 
 /**
  * ...

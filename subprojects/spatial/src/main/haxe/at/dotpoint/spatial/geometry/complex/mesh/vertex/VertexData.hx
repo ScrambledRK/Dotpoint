@@ -1,6 +1,7 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
+
 import at.dotpoint.datastructure.ITensor;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 
 /**
  * ...

@@ -1,8 +1,8 @@
-package at.dotpoint.spatial.geometry.complex.face;
+package at.dotpoint.spatial.geometry.complex.mesh.face;
 
 import at.dotpoint.datastructure.bytes.ByteRepository;
-import at.dotpoint.spatial.geometry.complex.IMeshStatistic;
-import at.dotpoint.spatial.geometry.complex.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 
 /**
  * ...

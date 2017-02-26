@@ -1,5 +1,6 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
+
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 
 /**
  * @author RK

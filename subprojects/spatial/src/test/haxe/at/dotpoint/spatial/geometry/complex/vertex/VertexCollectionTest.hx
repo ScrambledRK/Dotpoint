@@ -9,9 +9,10 @@ import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 import haxe.unit.TestCase;
 

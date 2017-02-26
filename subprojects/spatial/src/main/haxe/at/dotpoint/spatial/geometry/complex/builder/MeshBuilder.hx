@@ -1,16 +1,16 @@
 package at.dotpoint.spatial.geometry.complex.builder;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
-import at.dotpoint.spatial.geometry.complex.MeshData;
-import at.dotpoint.spatial.geometry.complex.MeshSignature;
-import at.dotpoint.spatial.geometry.complex.face.Face;
-import at.dotpoint.spatial.geometry.complex.face.FaceType;
-import at.dotpoint.spatial.geometry.complex.face.IFace;
-import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.vertex.IVertexData;
-import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshData;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.face.Face;
+import at.dotpoint.spatial.geometry.complex.mesh.face.FaceType;
+import at.dotpoint.spatial.geometry.complex.mesh.face.IFace;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertexData;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexData;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.ds.Vector;
 
 // TODO: vertex data will be set multiple times in case it is not unique (vertices and faces not, but vertex data)

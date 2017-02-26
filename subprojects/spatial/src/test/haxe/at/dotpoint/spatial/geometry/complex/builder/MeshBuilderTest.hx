@@ -6,11 +6,11 @@ import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.complex.DefaultMeshFactory;
-import at.dotpoint.spatial.geometry.complex.MeshData;
-import at.dotpoint.spatial.geometry.complex.MeshSignature;
-import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshData;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.Vertex;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexType;
 import haxe.unit.TestCase;
 
 using at.dotpoint.unit.TestCaseHelper;

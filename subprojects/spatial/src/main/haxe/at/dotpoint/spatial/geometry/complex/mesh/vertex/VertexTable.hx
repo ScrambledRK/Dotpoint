@@ -1,9 +1,9 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
 
 import at.dotpoint.datastructure.bytes.ByteRepository;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
-import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
-import at.dotpoint.spatial.geometry.complex.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 import haxe.ds.Vector;
 
 /**
