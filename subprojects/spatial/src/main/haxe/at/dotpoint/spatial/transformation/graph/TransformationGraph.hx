@@ -26,7 +26,7 @@ class TransformationGraph implements IGraphContainer<RelationType,Transformation
 	
 	//
 	private var structure:TransformationRelation;
-	private var repository:TransformationData;
+	private var repository:TransformationCollection;
 	
 	// ************************************************************************ //
 	// Constructor
@@ -37,7 +37,7 @@ class TransformationGraph implements IGraphContainer<RelationType,Transformation
 		this.register = new ObjectPoolRegister( size );
 		
 		this.structure = new TransformationRelation( size );
-		this.repository = new TransformationData( size );
+		this.repository = new TransformationCollection( size );
 	}
 	
 	// ************************************************************************ //

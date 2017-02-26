@@ -11,7 +11,7 @@ import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.transformation.graph.TransformationType;
-import at.dotpoint.spatial.transformation.graph.TransformationData;
+import at.dotpoint.spatial.transformation.graph.TransformationCollection;
 import haxe.io.Bytes;
 import haxe.unit.TestCase;
 using at.dotpoint.unit.TestCaseHelper;
@@ -26,7 +26,7 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetTranslation():Void
 	{
-		var repository:TransformationData = new TransformationData( 1 );
+		var repository:TransformationCollection = new TransformationCollection( 1 );
 		
 		// ------------- //
 		
@@ -50,7 +50,7 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetRotation():Void
 	{
-		var repository:TransformationData = new TransformationData( 1 );
+		var repository:TransformationCollection = new TransformationCollection( 1 );
 		
 		// ------------- //
 		
@@ -75,7 +75,7 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetScale():Void
 	{
-		var repository:TransformationData = new TransformationData( 1 );
+		var repository:TransformationCollection = new TransformationCollection( 1 );
 		
 		// ------------- //
 		
@@ -99,7 +99,7 @@ class TransformationTest extends TestCase
 	//
 	public function testSetGetMatrix():Void
 	{
-		var repository:TransformationData = new TransformationData( 1 );
+		var repository:TransformationCollection = new TransformationCollection( 1 );
 		
 		// ------------- //
 		

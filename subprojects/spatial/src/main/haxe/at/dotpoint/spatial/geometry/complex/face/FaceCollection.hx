@@ -9,7 +9,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class FaceData
+class FaceCollection
 {
 	//
 	private var indices:FaceRepository;
@@ -27,7 +27,7 @@ class FaceData
 	//
 	public function setFace( face:IFace ):Void
 	{
-		this.checkFace( vertex );
+		this.checkFace( face );
 
 		//
 		face.writeBytes( this.indices, face.type, -1 );
@@ -63,12 +63,10 @@ class FaceData
 			throw "given face index out of bounds: " + face.index + " of " + signature.numTriangles;
 
 		//
-		var size:Int = FaceTypeHelper.getNumVertices( face.type );
-
-		for ( j in 0...size )
+		for ( j in 0...face.size )
 		{
 			//
-			var index:Int = face.geVertexIndex( j );
+			var index:Int = face.getVertexIndex( j );
 
 			if ( index < 0 || index > signature.numVertices )
 				throw "vertex index out of bounds: " + index + " of " + signature.numVertices;

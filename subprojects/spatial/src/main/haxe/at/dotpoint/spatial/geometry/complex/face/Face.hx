@@ -11,9 +11,13 @@ import haxe.ds.Vector;
 class Face implements IFace
 {
 	//
+	public var size(get, null):Int;
+	
+	//
 	public var index:MeshIndexTriangle;
 	public var type:FaceType;
 	
+	//
 	private var data:Vector<MeshIndexVertex>;
 	
 	// ************************************************************************ //
@@ -72,7 +76,7 @@ class Face implements IFace
 	 */
 	public function readBytes( repository:FaceRepository, type:FaceType, index:Int = -1 ):Void
 	{
-		var index:Int = this.setVertexIndex( index < 0 ? this.index : index );
+		var index:Int = index < 0 ? this.index : index;
 
 		if( index < 0 || this.type != type )
 			return;
@@ -84,8 +88,13 @@ class Face implements IFace
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 
+	private function get_size():Int
+	{
+		return FaceTypeHelper.getNumVertices( this.type );
+	}
+	
 	//
-	public function geVertexIndex( index:Int ):MeshIndexVertex
+	public function getVertexIndex( index:Int ):MeshIndexVertex
 	{
 		return this.data[ index ];
 	}

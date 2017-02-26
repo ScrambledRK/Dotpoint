@@ -1,6 +1,7 @@
 package at.dotpoint.spatial.geometry.complex.builder;
 
 import at.dotpoint.datastructure.ITensor;
+import at.dotpoint.spatial.geometry.complex.face.IFace;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
 import haxe.ds.StringMap;
@@ -44,7 +45,28 @@ class MeshIndexLookup
 	// Methods
 	// ************************************************************************ //
 	
-	//
+	/**
+	 * sets indices for all vertices and the face itself.
+	 * does detect but not care if the face as such already exists.
+	 */
+	public function setFace( face:IFace ):Void
+	{
+		var signature:String = "";
+		
+		//
+		for( j in 0...face.size )		
+			signature += Std.string( face.getVertexIndex( j ) );
+		
+		face.index = this.calculateIndex( TRIANGLE, signature );
+	}
+	
+	// --------------------------------- //
+	// --------------------------------- //
+	
+	/**
+	 * sets indices for all its data and the vertex itself.
+	 * does detect but not care if the vertex as such already exists.
+	 */
 	public function setVertex( vertex:IVertex ):Void
 	{
 		for( j in 0...this.types.length )
@@ -61,7 +83,6 @@ class MeshIndexLookup
 	//
 	private function getVertexIndex( vertex:IVertex ):Int
 	{
-		var table:StringMap<Int> = this.table[ VERTEX ];
 		var signature:String = "";
 		
 		//		
@@ -74,53 +95,45 @@ class MeshIndexLookup
 		}
 		
 		//
-		var index:Int = -1;
-		
-		if( !table.exists( signature ) )
-		{
-			index = this.indices[ VERTEX ]++;					
-			table.set( signature, index );
-		}
-		else
-		{
-			index = table.get( signature ); 
-		}
-		
-		return index;
+		return this.calculateIndex( VERTEX, signature );
 	}
 	
 	//
 	private function getDataIndex( vertex:IVertex, type:VertexType ):Int
-	{
-		var table:StringMap<Int> = this.getLookupTable( type );
+	{		
 		var signature:String = this.getLookupSignature( vertex.getData( type ) );
+		var lookupIndex:Int = OFFSET + type.getIndex();
 		
-		//
-		var index:Int = -1;
-		
-		if( !table.exists( signature ) )
-		{
-			index = this.indices[ type.getIndex() ]++;					
-			table.set( signature, index );
-		}
-		else
-		{
-			index = table.get( signature ); 
-		}
-		
-		return index;
+		return this.calculateIndex( lookupIndex, signature );
 	}
 	
 	// --------------------------------- //
 	// --------------------------------- //
 
+	//
+	private function calculateIndex( lookupIndex:Int, signature:String ):Int
+	{
+		var table:StringMap<Int> = this.getLookupTable( lookupIndex );
+		var index:Int = -1;
+		
+		if( !table.exists( signature ) )
+		{
+			index = this.indices[ lookupIndex ]++;					
+			table.set( signature, index );
+		}
+		else
+		{
+			index = table.get( signature ); 
+		}
+		
+		return index;
+	}
+	
 	/**
 	 * returns the indexLookup-table from the given ID or creates on if necessary
 	 */
-	private function getLookupTable( type:VertexType ):StringMap<Int>
-	{
-		var index:Int = OFFSET + type.getIndex();
-		
+	private function getLookupTable( index:Int ):StringMap<Int>
+	{		
 		if( this.table.get( index ) == null )
 			this.table.set( index, new StringMap<Int>() );
 

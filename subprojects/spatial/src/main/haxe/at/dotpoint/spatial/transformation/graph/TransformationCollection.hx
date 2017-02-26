@@ -17,7 +17,7 @@ import at.dotpoint.spatial.transformation.graph.TransformationType;
  *
  * @author RK
  */
-class TransformationData implements IGraphRepository<TransformationType>
+class TransformationCollection implements IGraphRepository<TransformationType>
 {
 
 	private var repository:TransformationRepository;

@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.vertex;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
@@ -10,7 +10,7 @@ import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
+import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
 import haxe.unit.TestCase;
 
@@ -18,7 +18,7 @@ import haxe.unit.TestCase;
  * ...
  * @author RK
  */
-class VertexDataTest extends TestCase 
+class VertexCollectionTest extends TestCase 
 {
 
 	private function getRandomVector2():IVector2
@@ -41,14 +41,14 @@ class VertexDataTest extends TestCase
 	}
 	
 	//
-	private function createVertexData( layout:ByteLayoutType ):VertexData
+	private function createVertexData( layout:ByteLayoutType ):VertexCollection
 	{
 		var signature:MeshSignature = new MeshSignature( 3, 0, layout );
 			signature.setFormat( VertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
 			signature.setFormat( VertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
 			signature.setFormat( VertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
 		
-		return new VertexData( signature );
+		return new VertexCollection( signature );
 	}
 	
 	// ------------------------------------------------------------------------ //
@@ -56,7 +56,7 @@ class VertexDataTest extends TestCase
 	
 	public function testSetGetVertexBlocked()
 	{
-		var instance:VertexData = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -103,7 +103,7 @@ class VertexDataTest extends TestCase
 	//
 	public function testSetGetVertexDataBlocked():Void
 	{
-		var instance:VertexData = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -127,7 +127,7 @@ class VertexDataTest extends TestCase
 	//
 	public function testSetGetVertexDataInterleaved():Void
 	{
-		var instance:VertexData = this.createVertexData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexCollection = this.createVertexData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		
@@ -151,7 +151,7 @@ class VertexDataTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexBlocked():Void
 	{
-		var instance:VertexData = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -170,7 +170,7 @@ class VertexDataTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexInterleaved():Void
 	{
-		var instance:VertexData = this.createVertexData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexCollection = this.createVertexData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		

@@ -127,6 +127,12 @@ class Vertex implements IVertex
 	{
 		return this.getTensor( type );
 	}
+	
+	//
+	public function setData( type:VertexType, data:Dynamic ):Void
+	{
+		this.setTensor( type, cast( data, ITensor ) );
+	}
 
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
@@ -146,8 +152,6 @@ class Vertex implements IVertex
 	// ************************************************************************ //
 	// Helper
 	// ************************************************************************ //
-
-	// TODO: generate typed accessors via macro
 
 	public var position(get,set):Null<IVector3>;
 	public var normal(get,set):Null<IVector3>;

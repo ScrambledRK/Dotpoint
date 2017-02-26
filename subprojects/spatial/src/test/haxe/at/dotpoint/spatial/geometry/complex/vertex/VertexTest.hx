@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.vertex;
 
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;

@@ -1,9 +1,9 @@
 package at.dotpoint.spatial.geometry.complex;
 
-import at.dotpoint.spatial.geometry.complex.face.FaceData;
+import at.dotpoint.spatial.geometry.complex.face.FaceCollection;
 import at.dotpoint.spatial.geometry.complex.face.IFace;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexData;
+import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
 
 /**
  * ...
@@ -15,8 +15,8 @@ class MeshData
 	//
 	public var signature(default,null):MeshSignature;
 
-	private var vertex:VertexData;
-	private var face:FaceData;
+	private var vertex:VertexCollection;
+	private var face:FaceCollection;
 
 	// ************************************************************************ //
 	// Constructor
@@ -27,8 +27,8 @@ class MeshData
 	{
 		this.signature = signature;
 
-		this.vertex = new VertexData( signature );
-		this.face = new FaceData( signature );
+		this.vertex = new VertexCollection( signature );
+		this.face = new FaceCollection( signature );
 	}
 
 	// ************************************************************************ //
