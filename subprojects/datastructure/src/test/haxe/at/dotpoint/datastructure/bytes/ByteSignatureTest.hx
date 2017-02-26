@@ -71,65 +71,7 @@ class ByteSignatureTest extends TestCase
 		assertEquals( expected, result );
 	}
 	
-	//
-	public function testGetStepSizeEntryBlocked():Void
-	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );
-			
-		// ------------------- //
-		
-		var expected:Int = 2 * ByteFormat.getSize( ByteType.INT );	// already clusterd in a block, so only within a block
-		var result:Int = instance.getStepSizeEntry( TestEnum.C );
-		
-		// ------------------- //
-		
-		assertEquals( expected, result );
-	}
 	
-	//
-	public function testGetStepSizeEntryInterleaved():Void
-	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.INTERLEAVED );
-			
-		// ------------------- //
-		
-		var expected:Int = 5 * ByteFormat.getSize( ByteType.INT );	// jump over entry block (size of all types)
-		var result:Int = instance.getStepSizeEntry( TestEnum.C );
-		
-		// ------------------- //
-		
-		assertEquals( expected, result );
-	}
-	
-	//
-	public function testGetStepSizeTypeBlocked():Void
-	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );
-			
-		// ------------------- //
-		
-		var expected:Int = 3 * 2 * ByteFormat.getSize( ByteType.INT );	// jump over all previous blocked type entries
-		var result:Int = instance.getStepSizeType( TestEnum.C );
-		
-		// ------------------- //
-		
-		assertEquals( expected, result );
-	}
-	
-	//
-	public function testGetStepSizeTypeInterleaved():Void
-	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.INTERLEAVED );
-			
-		// ------------------- //
-		
-		var expected:Int = 3 * ByteFormat.getSize( ByteType.INT );	// jump within an entry block to the specific type
-		var result:Int = instance.getStepSizeType( TestEnum.C );
-		
-		// ------------------- //
-		
-		assertEquals( expected, result );
-	}
 	
 }
 

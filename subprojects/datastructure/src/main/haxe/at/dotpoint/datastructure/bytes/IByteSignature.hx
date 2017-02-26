@@ -12,16 +12,18 @@ package at.dotpoint.datastructure.bytes;
  */
 interface IByteSignature<T:Dynamic>
 {
-	/**
-	 * number of different byte formats possible (not necessarily used)
-	 */
-	public var size(default, null):Int;
 	
 	/**
 	 * @param	type identifier associated with the requested ByteFormat
-	 * @return	byte storage information for a "value-unit"
+	 * @return 	number of components the byte format consists of
 	 */
-	public function getFormat( type:T ):ByteFormat;
+	public function getNumValues( type:T ):Int;
+	
+	/**
+	 * @param	type identifier associated with the requested ByteFormat
+	 * @return	size in bytes of a single component of the byte format
+	 */	
+	public function getSizeValue( type:T ):Int;
 	
 	/**
 	 * calculates the total number of bytes required to store the signature in respect

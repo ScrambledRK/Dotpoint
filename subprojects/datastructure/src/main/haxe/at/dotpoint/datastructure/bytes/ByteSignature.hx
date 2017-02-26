@@ -98,53 +98,23 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
-	
+
 	/**
-	 * step size required to get to / iterate over the requested type data within a byte repo
-	 * see getEntryIndex for more information.
-	 * 
-	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
-	 * @return	number of bytes required to stride over to obtain the requested type data
+	 * @param	type identifier associated with the requested ByteFormat
+	 * @return 	number of components the byte format consists of
 	 */
-	public function getStepSizeType( type:T ):Int
+	public function getNumValues( type:T ):Int
 	{
-		var total:Int = 0;
-		
-		for( j in 0...type.getIndex() )
-			total += this.formats[j].sizeTotal * this.entries[j];			// interleaved might ommit with zero entries
-		
-		//
-		return total;
+		return this.getFormat( type ).numValues;
 	}
 	
 	/**
-	 * step size required to get to / iterate over the requested type data within a byte repo
-	 * see getEntryIndex for more information.
-	 * 
-	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
-	 * @return	number of bytes required to stride over to obtain the requested type data
-	 */
-	public function getStepSizeEntry( type:T ):Int
+	 * @param	type identifier associated with the requested ByteFormat
+	 * @return	size in bytes of a single component of the byte format
+	 */	
+	public function getSizeValue( type:T ):Int
 	{
-		switch( this.layout )
-		{
-			//
-			case ByteLayoutType.INTERLEAVED:
-			{
-				var total:Int = 0;
-				
-				for( j in 0...this.formats.length )
-					total += this.formats[j].sizeTotal * this.entries[j];	// might ommit with zero entries
-					
-				return total;	
-			}
-			
-			//
-			case ByteLayoutType.BLOCKED:
-			{
-				return this.formats[type.getIndex()].sizeTotal;				// step size within a block
-			}
-		}	
+		return this.getFormat( type ).sizeValue;
 	}
 	
 	/**
@@ -184,5 +154,56 @@ class ByteSignature<T:EnumValue> implements IByteSignature<T>
 	public function getEntryIndex( index:Int, type:T ):Int
 	{
 		return index * this.getStepSizeEntry( type ) + this.getStepSizeType( type );
+	}
+	
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	
+	/**
+	 * step size required to get to / iterate over the requested type data within a byte repo
+	 * see getEntryIndex for more information.
+	 * 
+	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
+	 * @return	number of bytes required to stride over to obtain the requested type data
+	 */
+	private function getStepSizeType( type:T ):Int
+	{
+		var total:Int = 0;
+		
+		for( j in 0...type.getIndex() )
+			total += this.formats[j].sizeTotal * this.entries[j];			// interleaved might ommit with zero entries
+		
+		//
+		return total;
+	}
+	
+	/**
+	 * step size required to get to / iterate over the requested type data within a byte repo
+	 * see getEntryIndex for more information.
+	 * 
+	 * @param	type identifier associated with a requested ByteFormat ("value-unit")
+	 * @return	number of bytes required to stride over to obtain the requested type data
+	 */
+	private function getStepSizeEntry( type:T ):Int
+	{
+		switch( this.layout )
+		{
+			//
+			case ByteLayoutType.INTERLEAVED:
+			{
+				var total:Int = 0;
+				
+				for( j in 0...this.formats.length )
+					total += this.formats[j].sizeTotal * this.entries[j];	// might ommit with zero entries
+					
+				return total;	
+			}
+			
+			//
+			case ByteLayoutType.BLOCKED:
+			{
+				return this.formats[type.getIndex()].sizeTotal;				// step size within a block
+			}
+		}	
 	}
 }
