@@ -6,7 +6,7 @@ import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexData;
  * ...
  * @author RK
  */
-class VertexData implements IVertexData
+class VertexData implements IVertexData<VertexType>
 {
 	//
 	public var index:MeshIndexData;

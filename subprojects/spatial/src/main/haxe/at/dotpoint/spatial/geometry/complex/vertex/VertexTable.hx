@@ -10,13 +10,13 @@ import haxe.ds.Vector;
  * TODO: optimize read/write performance
  * @author RK
  */
-class VertexTable extends ByteRepository<VertexType,VertexTableSignature>
+class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableSignature<TVertex>>
 {
 	
 	//
-	public function new( signature:MeshSignature )
+	public function new( signature:MeshSignature<TVertex> )
 	{
-		super( new VertexTableSignature( signature ), signature.numVertices );
+		super( new VertexTableSignature<TVertex>( signature ), signature.numVertices );
 	}
 	
 	// ************************************************************************ //
@@ -24,7 +24,7 @@ class VertexTable extends ByteRepository<VertexType,VertexTableSignature>
 	// ************************************************************************ //	
 	
 	//
-	public function setIndex( index:MeshIndexVertex, type:VertexType, value:MeshIndexData ):Void
+	public function setIndex( index:MeshIndexVertex, type:TVertex, value:MeshIndexData ):Void
 	{
 		var container:Vector<MeshIndexData> = this.getIndexContainer( index );
 			container[ type.getIndex() ] = value;
@@ -33,7 +33,7 @@ class VertexTable extends ByteRepository<VertexType,VertexTableSignature>
 	}
 	
 	//
-	public function getIndex( index:MeshIndexVertex, type:VertexType ):MeshIndexData
+	public function getIndex( index:MeshIndexVertex, type:TVertex ):MeshIndexData
 	{
 		var container:Vector<MeshIndexData> = this.getIndexContainer( index );			
 		this.readInteger( index, type, container, type.getIndex() );

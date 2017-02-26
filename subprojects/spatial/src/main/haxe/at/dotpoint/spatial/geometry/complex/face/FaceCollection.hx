@@ -1,5 +1,6 @@
 package at.dotpoint.spatial.geometry.complex.face;
 
+import at.dotpoint.spatial.geometry.complex.IMeshStatistic;
 import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexTriangle;
 import at.dotpoint.spatial.geometry.complex.MeshIndices.MeshIndexVertex;
 import at.dotpoint.spatial.geometry.complex.face.FaceType.FaceTypeHelper;
@@ -15,9 +16,9 @@ class FaceCollection
 	private var indices:FaceRepository;
 
 	//
-	public function new( signature:MeshSignature )
+	public function new( statistics:IMeshStatistic, ?layout:FaceLayoutType )
 	{
-		this.indices = new FaceRepository( signature );
+		this.indices = new FaceRepository( statistics, layout );
 	}
 
 	// ************************************************************************ //

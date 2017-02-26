@@ -9,13 +9,13 @@ import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
  * ...
  * @author RK
  */
-class MeshData
+class MeshData<TVertex:EnumValue>
 {
 
 	//
-	public var signature(default,null):MeshSignature;
+	public var signature(default,null):MeshSignature<TVertex>;
 
-	private var vertex:VertexCollection;
+	private var vertex:VertexCollection<TVertex>;
 	private var face:FaceCollection;
 
 	// ************************************************************************ //
@@ -23,11 +23,11 @@ class MeshData
 	// ************************************************************************ //
 
 	//
-	public function new( signature:MeshSignature )
+	public function new( signature:MeshSignature<TVertex> )
 	{
 		this.signature = signature;
 
-		this.vertex = new VertexCollection( signature );
+		this.vertex = new VertexCollection<TVertex>( signature );
 		this.face = new FaceCollection( signature );
 	}
 
@@ -51,14 +51,14 @@ class MeshData
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function setVertex( vertex:IVertex ):Void
+	public function setVertex( vertex:IVertex<TVertex> ):Void
 	{
 		return this.vertex.setVertex( vertex );
 	}
 
 	//
-	public function getVertex( index:Int, ?output:IVertex ):IVertex
+	public function getVertex( index:Int, output:IVertex<TVertex> ):Void
 	{
-		return this.vertex.getVertex( index, output );
+		this.vertex.getVertex( index, output );
 	}
 }

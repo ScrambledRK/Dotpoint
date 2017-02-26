@@ -5,6 +5,7 @@ import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
+import at.dotpoint.spatial.geometry.complex.DefaultMeshFactory;
 import at.dotpoint.spatial.geometry.complex.MeshData;
 import at.dotpoint.spatial.geometry.complex.MeshSignature;
 import at.dotpoint.spatial.geometry.complex.vertex.IVertex;
@@ -33,7 +34,7 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):IVertex
+	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):Vertex
 	{
 		var vertex:Vertex = new Vertex();
 			vertex.position = p[pi];
@@ -44,7 +45,13 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function createCube():MeshBuilder
+	private function createMeshBuilder():MeshBuilder<VertexType>
+	{
+		return new MeshBuilder<VertexType>( new DefaultMeshFactory() );
+	}
+	
+	//
+	private function createCube():MeshBuilder<VertexType>
 	{
 		var w:Float = Math.random() * 2;
 		var h:Float = Math.random() * 2;
@@ -91,7 +98,7 @@ class MeshBuilderTest extends TestCase
 		// ------------------ //
 		// ------------------ //
 		
-		var builder:MeshBuilder = new MeshBuilder();
+		var builder:MeshBuilder<VertexType> = this.createMeshBuilder();
 		
 		builder.addVertices( [ v( p, u, n, 0,0,0 ), v( p, u, n, 1,1,0 ), v( p, u, n, 2,2,0 ) ] );
 		builder.addVertices( [ v( p, u, n, 2,2,0 ), v( p, u, n, 3,3,0 ), v( p, u, n, 0,0,0 ) ] );
@@ -120,12 +127,12 @@ class MeshBuilderTest extends TestCase
 	//
 	public function testCubeBlocked()
 	{
-		var builder:MeshBuilder = this.createCube();
+		var builder:MeshBuilder<VertexType> = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData = builder.buildMesh( ByteLayoutType.BLOCKED );
-		var signature:MeshSignature = mesh.signature;
+		var mesh:MeshData<VertexType> = builder.buildMesh( ByteLayoutType.BLOCKED );
+		var signature:MeshSignature<VertexType> = mesh.signature;
 		
 		// ------------------- //
 		
@@ -140,12 +147,12 @@ class MeshBuilderTest extends TestCase
 	//
 	public function testCubeInterleaved()
 	{
-		var builder:MeshBuilder = this.createCube();
+		var builder:MeshBuilder<VertexType> = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData = builder.buildMesh( ByteLayoutType.INTERLEAVED );
-		var signature:MeshSignature = mesh.signature;
+		var mesh:MeshData<VertexType> = builder.buildMesh( ByteLayoutType.INTERLEAVED );
+		var signature:MeshSignature<VertexType> = mesh.signature;
 		
 		// ------------------- //
 		

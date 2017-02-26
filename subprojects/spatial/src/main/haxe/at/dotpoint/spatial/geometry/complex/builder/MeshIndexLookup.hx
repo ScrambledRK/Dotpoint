@@ -11,14 +11,15 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class MeshIndexLookup 
+class MeshIndexLookup<TVertex:EnumValue> 
 {
+	//
 	private static var TRIANGLE(default,never):Int = 0;
 	private static var VERTEX(default,never):Int = 1;
 	private static var OFFSET(default, never):Int = 2;
 	
 	//
-	private var types:Vector<VertexType>;
+	private var types:Vector<TVertex>;
 	
 	//
 	private var table:Vector<StringMap<Int>>;	
@@ -29,9 +30,9 @@ class MeshIndexLookup
 	// ************************************************************************ //
 	
 	//
-	public function new() 
+	public function new( types:Vector<TVertex> ) 
 	{
-		this.types = Vector.fromArrayCopy( VertexType.createAll() );
+		this.types = types;
 		
 		this.table = new Vector<StringMap<Int>>( this.types.length + OFFSET );
 		this.indices = new Vector<Int>( this.types.length + OFFSET );
@@ -67,11 +68,11 @@ class MeshIndexLookup
 	 * sets indices for all its data and the vertex itself.
 	 * does detect but not care if the vertex as such already exists.
 	 */
-	public function setVertex( vertex:IVertex ):Void
+	public function setVertex( vertex:IVertex<TVertex> ):Void
 	{
 		for( j in 0...this.types.length )
 		{
-			var type:VertexType = this.types[j];
+			var type:TVertex = this.types[j];
 			
 			if( vertex.hasData( type ) )
 				vertex.setDataIndex( type, this.getDataIndex( vertex, type ) );			
@@ -81,14 +82,14 @@ class MeshIndexLookup
 	}
 	
 	//
-	private function getVertexIndex( vertex:IVertex ):Int
+	private function getVertexIndex( vertex:IVertex<TVertex> ):Int
 	{
 		var signature:String = "";
 		
 		//		
 		for( j in 0...this.types.length )
 		{
-			var type:VertexType = this.types[j];
+			var type:TVertex = this.types[j];
 			
 			if( vertex.hasData( type ) )
 				signature += Std.string( vertex.getDataIndex( type ) );		
@@ -99,7 +100,7 @@ class MeshIndexLookup
 	}
 	
 	//
-	private function getDataIndex( vertex:IVertex, type:VertexType ):Int
+	private function getDataIndex( vertex:IVertex<TVertex>, type:TVertex ):Int
 	{		
 		var signature:String = this.getLookupSignature( vertex.getData( type ) );
 		var lookupIndex:Int = OFFSET + type.getIndex();

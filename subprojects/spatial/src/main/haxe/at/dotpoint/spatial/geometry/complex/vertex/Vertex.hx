@@ -13,7 +13,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class Vertex implements IVertex
+class Vertex implements IVertex<VertexType>
 {
 
 	//
@@ -62,7 +62,7 @@ class Vertex implements IVertex
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( repository:VertexRepository, type:VertexType, index:Int = -1 ):Void
+	public function writeBytes( repository:VertexRepository<VertexType>, type:VertexType, index:Int = -1 ):Void
 	{
 		var index:Int = index < 0 ? this.getDataIndex( type ) : index;
 		var input:ITensor = this.getTensor( type );
@@ -81,7 +81,7 @@ class Vertex implements IVertex
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( repository:VertexRepository, type:VertexType, index:Int = -1 ):Void
+	public function readBytes( repository:VertexRepository<VertexType>, type:VertexType, index:Int = -1 ):Void
 	{
 		var index:Int = this.setDataIndex( type, index < 0 ? this.getDataIndex( type ) : index );
 

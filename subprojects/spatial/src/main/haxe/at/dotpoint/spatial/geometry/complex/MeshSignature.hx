@@ -10,7 +10,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class MeshSignature extends ByteSignature<VertexType>
+class MeshSignature<TVertex:EnumValue> extends ByteSignature<TVertex> implements IMeshStatistic
 {	
 	public var faceLayout(default, null):FaceLayoutType;
 	
@@ -18,12 +18,12 @@ class MeshSignature extends ByteSignature<VertexType>
 	public var numTriangles(default,null):Int;
 	
 	//
-	public function new( numVertices:Int, numTriangles:Int, ?layout:ByteLayoutType, ?faceLayout:FaceLayoutType ) 
+	public function new( types:Vector<TVertex>, numVertices:Int, numTriangles:Int, ?layout:ByteLayoutType, ?faceLayout:FaceLayoutType ) 
 	{
 		if( layout == null )
 			layout = ByteLayoutType.BLOCKED;
 		
-		super( new Vector<VertexType>( VertexType.createAll().length ), layout );	
+		super( types, layout );	
 		
 		//
 		this.numVertices  = numVertices;
@@ -35,5 +35,4 @@ class MeshSignature extends ByteSignature<VertexType>
 			
 		this.faceLayout = faceLayout;
 	}
-	
 }

@@ -11,39 +11,42 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class VertexTableSignature extends ByteSignature<VertexType>
+class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
 {	
 	//
-	public function new( signature:MeshSignature )
+	public function new( signature:MeshSignature<TVertex> )
 	{
-		var layout:ByteLayoutType = this.getLayoutType( signature );
+		super( signature.types.copy(), this.getLayoutType( signature ) );
 		
 		//
-		super( new Vector<VertexType>( signature.size ), layout );
-		
-		//
-		switch( layout )
+		switch( this.layout )
 		{
 			case ByteLayoutType.INTERLEAVED:
 			{
 				var format:ByteFormat = new ByteFormat( ByteType.INT, 1 );
 		
 				for( j in 0...signature.size )
-					this.setFormat( VertexType.createByIndex(j), format, 1 );	
+				{
+					if( signature.types[j] != null )
+						this.setFormat( signature.types[j], format, 1 );	
+				}					
 			}
 			
 			case ByteLayoutType.BLOCKED:
 			{
 				var format:ByteFormat = new ByteFormat( ByteType.INT, 0 );
 		
-				for( j in 0...signature.size )
-					this.setFormat( VertexType.createByIndex(j), format, 0 );	
+				for( j in 0...signature.size )					
+				{
+					if( signature.types[j] != null )
+						this.setFormat( signature.types[j], format, 0 );
+				}
 			}
 		}		
 	}
 	
 	//
-	inline private function getLayoutType( signature:MeshSignature ):ByteLayoutType
+	inline private function getLayoutType( signature:MeshSignature<TVertex> ):ByteLayoutType
 	{
 		var layout:ByteLayoutType = ByteLayoutType.BLOCKED;
 		

@@ -9,7 +9,7 @@ import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection.VertexReposi
 /**
  * @author RK
  */
-interface IVertex extends IByteCollection<VertexType,VertexRepository>
+interface IVertex<TVertex:EnumValue> extends IByteCollection<TVertex,VertexRepository<TVertex>>
 {
 	//
 	public var index:MeshIndexVertex;
@@ -18,11 +18,11 @@ interface IVertex extends IByteCollection<VertexType,VertexRepository>
 	public function clear():Void;
 	
 	//
-	public function getData( type:VertexType ):Dynamic;
-	public function setData( type:VertexType, data:Dynamic ):Void;
+	public function getData( type:TVertex ):Dynamic;
+	public function setData( type:TVertex, data:Dynamic ):Void;
 	
 	//
-	public function getDataIndex( type:VertexType ):Int;
-	public function setDataIndex( type:VertexType, value:Int ):Int;
+	public function getDataIndex( type:TVertex ):Int;
+	public function setDataIndex( type:TVertex, value:Int ):Int;
 	
 }

@@ -12,19 +12,19 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class VertexCollection
+class VertexCollection<TVertex:EnumValue>
 {
 
 	//
-	private var repository:VertexRepository;
-	private var indices:VertexTable;
+	private var repository:VertexRepository<TVertex>;
+	private var indices:VertexTable<TVertex>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
 	//
-	public function new( signature:MeshSignature )
+	public function new( signature:MeshSignature<TVertex> )
 	{
 		this.repository = new VertexRepository( signature );
 		this.indices = new VertexTable( signature );
@@ -35,18 +35,18 @@ class VertexCollection
 	// ************************************************************************ //
 
 	//
-	public function setVertex( vertex:IVertex ):Void
+	public function setVertex( vertex:IVertex<TVertex> ):Void
 	{
 		this.checkVertex( vertex );
 
 		//
-		var signature:MeshSignature = this.getSignature();
+		var signature:MeshSignature<TVertex> = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
 			if ( signature.entries[j] > 0 )
 			{
-				var type:VertexType = signature.types[j];
+				var type:TVertex = signature.types[j];
 
 				this.indices.setIndex( vertex.index, type, vertex.getDataIndex( type ) );
 				vertex.writeBytes( this.repository, type );
@@ -55,37 +55,33 @@ class VertexCollection
 	}
 
 	//
-	public function getVertex( index:Int, ?output:IVertex ):IVertex
+	public function getVertex( index:Int, output:IVertex<TVertex> ):Void
 	{
-		if ( output == null )
-			output = new Vertex();
-
-		//
 		output.clear();
 		output.index = index;
 
 		//
-		var signature:MeshSignature = this.getSignature();
+		var signature:MeshSignature<TVertex> = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
 			if ( signature.entries[j] > 0 )
 			{
-				var type:VertexType = signature.types[j];
-				output.readBytes( this.repository, type, this.indices.getIndex( index, type ) );
+				var type:TVertex = signature.types[j];
+				var vindex:Int = this.indices.getIndex( index, type );
+				
+				output.readBytes( this.repository, type, vindex );
 			}
 		}
-
-		return output;
 	}
 
 	//
-	private function checkVertex( vertex:IVertex ):Void
+	private function checkVertex( vertex:IVertex<TVertex> ):Void
 	{
 		if ( vertex == null )
 			throw "given vertex is null";
 
-		var signature:MeshSignature = this.getSignature();
+		var signature:MeshSignature<TVertex> = this.getSignature();
 
 		//
 		if ( vertex.index < 0 || vertex.index > signature.numVertices )
@@ -99,7 +95,7 @@ class VertexCollection
 
 			if ( numEntries > 0 )
 			{
-				var type:VertexType = signature.types[j];
+				var type:TVertex = signature.types[j];
 
 				//
 				if ( !vertex.hasData( type ) )
@@ -119,7 +115,7 @@ class VertexCollection
 	// ************************************************************************ //
 
 	//
-	private function getSignature():MeshSignature
+	private function getSignature():MeshSignature<TVertex>
 	{
 		return this.repository.signature;
 	}
@@ -128,17 +124,20 @@ class VertexCollection
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function setDataTensor( index:MeshIndexData, type:VertexType, value:ITensor ):Void
+	public function setDataTensor( index:MeshIndexData, type:TVertex, value:ITensor ):Void
 	{
 		this.repository.writeTensor( index, type, value );
 	}
 
 	//
-	public function getDataTensor( index:MeshIndexData, type:VertexType, output:ITensor ):Void
+	public function getDataTensor( index:MeshIndexData, type:TVertex, output:ITensor ):Void
 	{
 		this.repository.readTensor( index, type, output );
 	}
 
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	
 	//
 	public function setIndices( index:MeshIndexVertex, value:Vector<MeshIndexData> ):Void
 	{
@@ -149,19 +148,16 @@ class VertexCollection
 	public function getIndices( index:MeshIndexVertex, output:Vector<MeshIndexData> ):Void
 	{
 		this.indices.getIndices( index, output );
-	}
-
-	// ------------------------------------------------------------------------ //
-	// ------------------------------------------------------------------------ //
+	}	
 
 	//
-	public function setIndex( index:MeshIndexVertex, type:VertexType, value:MeshIndexData ):Void
+	public function setIndex( index:MeshIndexVertex, type:TVertex, value:MeshIndexData ):Void
 	{
 		this.indices.setIndex( index, type, value );
 	}
 
 	//
-	public function getIndex( index:MeshIndexVertex, type:VertexType ):MeshIndexData
+	public function getIndex( index:MeshIndexVertex, type:TVertex ):MeshIndexData
 	{
 		return this.indices.getIndex( index, type );
 	}

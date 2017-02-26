@@ -12,6 +12,7 @@ import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.complex.vertex.Vertex;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexCollection;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexType;
+import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
 /**
@@ -41,14 +42,16 @@ class VertexCollectionTest extends TestCase
 	}
 	
 	//
-	private function createVertexData( layout:ByteLayoutType ):VertexCollection
+	private function createVertexData( layout:ByteLayoutType ):VertexCollection<VertexType>
 	{
-		var signature:MeshSignature = new MeshSignature( 3, 0, layout );
+		var types:Vector<VertexType> = Vector.fromArrayCopy( VertexType.createAll() );
+		
+		var signature:MeshSignature<VertexType> = new MeshSignature<VertexType>( types, 3, 0, layout );
 			signature.setFormat( VertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
 			signature.setFormat( VertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
 			signature.setFormat( VertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
 		
-		return new VertexCollection( signature );
+		return new VertexCollection<VertexType>( signature );
 	}
 	
 	// ------------------------------------------------------------------------ //
@@ -56,7 +59,7 @@ class VertexCollectionTest extends TestCase
 	
 	public function testSetGetVertexBlocked()
 	{
-		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection<VertexType> = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -103,7 +106,7 @@ class VertexCollectionTest extends TestCase
 	//
 	public function testSetGetVertexDataBlocked():Void
 	{
-		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection<VertexType> = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -127,7 +130,7 @@ class VertexCollectionTest extends TestCase
 	//
 	public function testSetGetVertexDataInterleaved():Void
 	{
-		var instance:VertexCollection = this.createVertexData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexCollection<VertexType> = this.createVertexData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		
@@ -151,7 +154,7 @@ class VertexCollectionTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexBlocked():Void
 	{
-		var instance:VertexCollection = this.createVertexData( ByteLayoutType.BLOCKED );
+		var instance:VertexCollection<VertexType> = this.createVertexData( ByteLayoutType.BLOCKED );
 		
 		// ------------------- //
 		
@@ -170,7 +173,7 @@ class VertexCollectionTest extends TestCase
 	//
 	public function testSetGetVertexDataIndexInterleaved():Void
 	{
-		var instance:VertexCollection = this.createVertexData( ByteLayoutType.INTERLEAVED );
+		var instance:VertexCollection<VertexType> = this.createVertexData( ByteLayoutType.INTERLEAVED );
 		
 		// ------------------- //
 		

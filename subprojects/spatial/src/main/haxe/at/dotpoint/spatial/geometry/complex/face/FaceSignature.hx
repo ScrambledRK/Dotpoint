@@ -3,12 +3,13 @@ package at.dotpoint.spatial.geometry.complex.face;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
 import at.dotpoint.datastructure.bytes.IByteSignature;
+import at.dotpoint.spatial.geometry.complex.IMeshStatistic;
 
 /**
  * ...
  * @author RK
  */
-class FaceSignature implements IByteSignature<FaceType> 
+class FaceSignature implements IByteSignature<FaceType>
 {
 	//
 	public var numVertices(default,null):Int;
@@ -26,7 +27,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	// ************************************************************************ //	
 	
 	//
-	public function new( signature:MeshSignature, ?layout:FaceLayoutType )
+	public function new( statistic:IMeshStatistic, ?layout:FaceLayoutType )
 	{
 		if( layout == null )
 			layout = FaceLayoutType.TRIANGLE;
@@ -38,8 +39,8 @@ class FaceSignature implements IByteSignature<FaceType>
 		this.layout = layout;
 		this.overhead = 0;
 		
-		this.numVertices = signature.numVertices;
-		this.numTriangles = signature.numTriangles + this.overhead;
+		this.numVertices = statistic.numVertices;
+		this.numTriangles = statistic.numTriangles + this.overhead;
 		
 		this.format = new ByteFormat( ByteType.INT, 3 );		// could be smaller than int
 	}
