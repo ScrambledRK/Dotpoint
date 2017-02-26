@@ -50,8 +50,12 @@ class MeshBuilder
 		this.face = new Array<IFace>();
 		
 		this.entriesData = new Vector<Int>( VertexType.createAll().length );
-		this.entriesVertex = 0;
-		this.entriesFace = 0;
+		
+		for( j in 0...this.entriesData.length )
+			this.entriesData[j] = -1;
+		
+		this.entriesVertex = -1;
+		this.entriesFace = -1;
 	}
 
 	// ************************************************************************ //
@@ -85,13 +89,16 @@ class MeshBuilder
 		if( layout == null )
 			layout = ByteLayoutType.BLOCKED;
 		
+		var numVertices:Int = this.entriesVertex + 1;	
+		var numFaces:Int = this.entriesFace + 1;	
+			
 		//
-		var signature:MeshSignature = new MeshSignature( this.entriesVertex, this.entriesFace, layout );
+		var signature:MeshSignature = new MeshSignature( numVertices, numFaces, layout );
 		
 		//
 		for( j in 0...this.entriesData.length )
 		{
-			var numEntries:Int = this.entriesData[j];
+			var numEntries:Int = this.entriesData[j] + 1;
 			
 			if( numEntries > 0 )
 			{
@@ -201,7 +208,9 @@ class MeshBuilder
 		if( this.vertex[ vertex.index ] == null )
 		{
 			this.vertex[ vertex.index ] = vertex;
-			this.entriesVertex++;
+			
+			if( vertex.index > this.entriesVertex )
+				this.entriesVertex = vertex.index;
 			
 			return true;
 		}
@@ -281,7 +290,9 @@ class MeshBuilder
 		if( this.face[ face.index ] == null )
 		{
 			this.face[ face.index ] = face;
-			this.entriesFace++;
+			
+			if( face.index > this.entriesFace )
+				this.entriesFace = face.index;
 			
 			return true;
 		}		

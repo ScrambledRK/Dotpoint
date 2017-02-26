@@ -1,5 +1,6 @@
 package at.dotpoint.spatial;
 
+import at.dotpoint.spatial.geometry.complex.builder.MeshBuilderTest;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexCollectionTest;
 import at.dotpoint.spatial.geometry.complex.vertex.VertexTest;
 import at.dotpoint.spatial.geometry.primitive.cube.CubeTest;
@@ -32,6 +33,7 @@ class SpatialTestRunner extends TestRunner
 		this.add( new TransformationTest() );
 		this.add( new VertexCollectionTest() );
 		this.add( new VertexTest() );
+		this.add( new MeshBuilderTest() );
 		this.run();
 	}
 
