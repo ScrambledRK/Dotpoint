@@ -10,9 +10,9 @@ import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
 class FaceRepository extends ByteRepository<FaceType,FaceSignature>
 {
 
-	public function new( statistic:IMeshStatistic, ?layout:FaceLayoutType ) 
+	public function new( signature:FaceSignature ) 
 	{
-		super( new FaceSignature( statistic, layout ), statistic.numTriangles );
+		super( signature, signature.numTriangles );
 	}
 	
 }

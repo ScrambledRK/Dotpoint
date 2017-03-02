@@ -14,7 +14,7 @@ class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableS
 {
 	
 	//
-	public function new( signature:MeshSignature<TVertex> )
+	public function new( signature:VertexSignature<TVertex> )
 	{
 		super( new VertexTableSignature<TVertex>( signature ), signature.numVertices );
 	}

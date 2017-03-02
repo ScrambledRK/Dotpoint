@@ -101,9 +101,9 @@ class MeshBuilder<TVertex:EnumValue>
 		for( j in 0...types.length )
 			types[j] = null;
 		
+		//	
 		var signature:MeshSignature<TVertex> = new MeshSignature<TVertex>( types, numVertices, numFaces, layout );
 		
-		//
 		for( j in 0...this.entriesData.length )
 		{
 			var numEntries:Int = this.entriesData[j] + 1;
@@ -113,7 +113,7 @@ class MeshBuilder<TVertex:EnumValue>
 				var type:TVertex = this.types[j];
 				var format:ByteFormat = this.factory.getByteFormat( type );
 				
-				signature.setFormat( type, format, numEntries );
+				signature.vertex.setFormat( type, format, numEntries );
 			}				
 		}
 		

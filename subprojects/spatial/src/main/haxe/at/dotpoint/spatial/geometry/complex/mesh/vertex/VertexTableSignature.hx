@@ -13,7 +13,7 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
 {	
 	//
-	public function new( signature:MeshSignature<TVertex> )
+	public function new( signature:VertexSignature<TVertex> )
 	{
 		super( signature.types.copy(), this.getLayoutType( signature ) );
 		
@@ -45,7 +45,7 @@ class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
 	}
 	
 	//
-	inline private function getLayoutType( signature:MeshSignature<TVertex> ):ByteLayoutType
+	inline private function getLayoutType( signature:VertexSignature<TVertex> ):ByteLayoutType
 	{
 		var layout:ByteLayoutType = ByteLayoutType.BLOCKED;
 		

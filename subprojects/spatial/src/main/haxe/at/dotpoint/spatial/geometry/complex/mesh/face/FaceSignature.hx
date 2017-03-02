@@ -17,7 +17,6 @@ class FaceSignature implements IByteSignature<FaceType>
 	
 	//
 	private var format:ByteFormat;								// only triangles allowed
-	private var overhead:Int;									// strip may need additional degenerated tris
 	
 	//
 	public var layout(default, null):FaceLayoutType;
@@ -27,7 +26,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	// ************************************************************************ //	
 	
 	//
-	public function new( statistic:IMeshStatistic, ?layout:FaceLayoutType )
+	public function new( numVertices:Int, numTriangles:Int, ?layout:FaceLayoutType )
 	{
 		if( layout == null )
 			layout = FaceLayoutType.TRIANGLE;
@@ -37,10 +36,9 @@ class FaceSignature implements IByteSignature<FaceType>
 		
 		//
 		this.layout = layout;
-		this.overhead = 0;
 		
-		this.numVertices = statistic.numVertices;
-		this.numTriangles = statistic.numTriangles + this.overhead;
+		this.numVertices = numVertices;
+		this.numTriangles = numTriangles;
 		
 		this.format = new ByteFormat( ByteType.INT, 3 );		// could be smaller than int
 	}
@@ -78,7 +76,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	 */
 	public function getSizeTotal( numEntries:Int ):Int
 	{
-		return this.overhead + this.format.sizeTotal * numEntries;
+		return this.format.sizeTotal * numEntries;
 	}
 	
 	/**

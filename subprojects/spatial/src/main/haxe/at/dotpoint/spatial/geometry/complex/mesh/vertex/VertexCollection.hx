@@ -24,7 +24,7 @@ class VertexCollection<TVertex:EnumValue>
 	// ************************************************************************ //
 
 	//
-	public function new( signature:MeshSignature<TVertex> )
+	public function new( signature:VertexSignature<TVertex> )
 	{
 		this.repository = new VertexRepository( signature );
 		this.indices = new VertexTable( signature );
@@ -40,7 +40,7 @@ class VertexCollection<TVertex:EnumValue>
 		this.checkVertex( vertex );
 
 		//
-		var signature:MeshSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature<TVertex> = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
@@ -61,7 +61,7 @@ class VertexCollection<TVertex:EnumValue>
 		output.index = index;
 
 		//
-		var signature:MeshSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature<TVertex> = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
@@ -81,7 +81,7 @@ class VertexCollection<TVertex:EnumValue>
 		if ( vertex == null )
 			throw "given vertex is null";
 
-		var signature:MeshSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature<TVertex> = this.getSignature();
 
 		//
 		if ( vertex.index < 0 || vertex.index > signature.numVertices )
@@ -115,7 +115,7 @@ class VertexCollection<TVertex:EnumValue>
 	// ************************************************************************ //
 
 	//
-	private function getSignature():MeshSignature<TVertex>
+	private function getSignature():VertexSignature<TVertex>
 	{
 		return this.repository.signature;
 	}

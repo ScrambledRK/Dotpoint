@@ -5,6 +5,6 @@ package at.dotpoint.spatial.geometry.complex.mesh;
  */
 interface IMeshStatistic 
 {
-	public var numVertices(default,null):Int;
-	public var numTriangles(default,null):Int;
+	public var numVertices(get,null):Int;
+	public var numTriangles(get,null):Int;
 }

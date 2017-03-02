@@ -27,8 +27,8 @@ class MeshData<TVertex:EnumValue>
 	{
 		this.signature = signature;
 
-		this.vertex = new VertexCollection<TVertex>( signature );
-		this.face = new FaceCollection( signature );
+		this.vertex = new VertexCollection<TVertex>( signature.vertex );
+		this.face = new FaceCollection( signature.face );
 	}
 
 	// ************************************************************************ //

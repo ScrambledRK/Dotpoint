@@ -15,9 +15,9 @@ class FaceCollection
 	private var indices:FaceRepository;
 
 	//
-	public function new( statistics:IMeshStatistic, ?layout:FaceLayoutType )
+	public function new( signature:FaceSignature )
 	{
-		this.indices = new FaceRepository( statistics, layout );
+		this.indices = new FaceRepository( signature );
 	}
 
 	// ************************************************************************ //

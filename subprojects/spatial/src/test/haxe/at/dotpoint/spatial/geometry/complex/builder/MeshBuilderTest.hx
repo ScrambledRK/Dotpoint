@@ -139,9 +139,9 @@ class MeshBuilderTest extends TestCase
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 8, signature.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 4, signature.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 6, signature.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 8, signature.vertex.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
+		aEquals( 4, signature.vertex.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
+		aEquals( 6, signature.vertex.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
 	}
 	
 	//
@@ -159,9 +159,9 @@ class MeshBuilderTest extends TestCase
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 1, signature.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 1, signature.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 1, signature.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
 	}
 	
 }

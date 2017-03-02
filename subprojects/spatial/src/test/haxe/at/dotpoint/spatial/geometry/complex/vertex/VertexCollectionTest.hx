@@ -48,11 +48,11 @@ class VertexCollectionTest extends TestCase
 		var types:Vector<DefaultVertexType> = Vector.fromArrayCopy( DefaultVertexType.createAll() );
 		
 		var signature:MeshSignature<DefaultVertexType> = new MeshSignature<DefaultVertexType>( types, 3, 0, layout );
-			signature.setFormat( DefaultVertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
-			signature.setFormat( DefaultVertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
-			signature.setFormat( DefaultVertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
+			signature.vertex.setFormat( DefaultVertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
+			signature.vertex.setFormat( DefaultVertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
+			signature.vertex.setFormat( DefaultVertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
 		
-		return new VertexCollection<DefaultVertexType>( signature );
+		return new VertexCollection<DefaultVertexType>( signature.vertex );
 	}
 	
 	// ------------------------------------------------------------------------ //
