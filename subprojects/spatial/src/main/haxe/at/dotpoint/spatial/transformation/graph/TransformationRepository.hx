@@ -5,7 +5,7 @@ import at.dotpoint.datastructure.bytes.ByteRepository;
  * ...
  * @author RK
  */
-class TransformationRepository extends ByteRepository<TransformationType,TransformationSignature>
+class TransformationRepository extends ByteRepository<TransformationSignature>
 {
 
 	//

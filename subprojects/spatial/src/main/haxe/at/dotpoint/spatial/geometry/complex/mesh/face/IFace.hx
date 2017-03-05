@@ -7,11 +7,11 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
 /**
  * @author RK
  */
-interface IFace extends IByteCollection<FaceType,FaceRepository>
+interface IFace extends IByteCollection<FaceRepository>
 {
 	//
 	public var index:MeshIndexTriangle;
-	public var type:FaceType;
+	public var type:Int;
 	
 	//
 	public var size(get, null):Int;

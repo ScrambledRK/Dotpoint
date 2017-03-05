@@ -45,13 +45,13 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function createMeshBuilder():MeshBuilder<DefaultVertexType>
+	private function createMeshBuilder():MeshBuilder
 	{
-		return new MeshBuilder<DefaultVertexType>( new DefaultMeshFactory() );
+		return new MeshBuilder( new DefaultMeshFactory() );
 	}
 	
 	//
-	private function createCube():MeshBuilder<DefaultVertexType>
+	private function createCube():MeshBuilder
 	{
 		var w:Float = Math.random() * 2;
 		var h:Float = Math.random() * 2;
@@ -98,7 +98,7 @@ class MeshBuilderTest extends TestCase
 		// ------------------ //
 		// ------------------ //
 		
-		var builder:MeshBuilder<DefaultVertexType> = this.createMeshBuilder();
+		var builder:MeshBuilder = this.createMeshBuilder();
 		
 		builder.addVertices( [ v( p, u, n, 0,0,0 ), v( p, u, n, 1,1,0 ), v( p, u, n, 2,2,0 ) ] );
 		builder.addVertices( [ v( p, u, n, 2,2,0 ), v( p, u, n, 3,3,0 ), v( p, u, n, 0,0,0 ) ] );
@@ -127,41 +127,41 @@ class MeshBuilderTest extends TestCase
 	//
 	public function testCubeBlocked()
 	{
-		var builder:MeshBuilder<DefaultVertexType> = this.createCube();
+		var builder:MeshBuilder = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData<DefaultVertexType> = builder.buildMesh( ByteLayoutType.BLOCKED );
-		var signature:MeshSignature<DefaultVertexType> = mesh.signature;
+		var mesh:MeshData = builder.buildMesh( ByteLayoutType.BLOCKED );
+		var signature:MeshSignature = mesh.signature;
 		
 		// ------------------- //
 		
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 8, signature.vertex.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 4, signature.vertex.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 6, signature.vertex.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 8, signature.vertex.entries[ DefaultVertexType.POSITION ], "num positions" );
+		aEquals( 4, signature.vertex.entries[ DefaultVertexType.UV ], 		 "num uvs" );
+		aEquals( 6, signature.vertex.entries[ DefaultVertexType.NORMAL ], 	 "num normals" );
 	}
 	
 	//
 	public function testCubeInterleaved()
 	{
-		var builder:MeshBuilder<DefaultVertexType> = this.createCube();
+		var builder:MeshBuilder = this.createCube();
 		
 		// ------------------- //
 		
-		var mesh:MeshData<DefaultVertexType> = builder.buildMesh( ByteLayoutType.INTERLEAVED );
-		var signature:MeshSignature<DefaultVertexType> = mesh.signature;
+		var mesh:MeshData = builder.buildMesh( ByteLayoutType.INTERLEAVED );
+		var signature:MeshSignature = mesh.signature;
 		
 		// ------------------- //
 		
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.POSITION.getIndex() ], "num positions" );
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.UV.getIndex() ], 		 "num uvs" );
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.NORMAL.getIndex() ], 	 "num normals" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.POSITION ], "num positions" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.UV ], 		 "num uvs" );
+		aEquals( 1, signature.vertex.entries[ DefaultVertexType.NORMAL ], 	 "num normals" );
 	}
 	
 }

@@ -9,11 +9,11 @@ import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertexData;
  * ...
  * @author RK
  */
-class DefaultVertexData implements IVertexData<DefaultVertexType>
+class DefaultVertexData implements IVertexData
 {
 	//
 	public var index:MeshIndexData;
-	public var type:DefaultVertexType;
+	public var type:Int;
 	
 	private var data:ITensor;
 

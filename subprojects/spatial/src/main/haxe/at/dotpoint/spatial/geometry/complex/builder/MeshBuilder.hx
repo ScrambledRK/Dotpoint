@@ -17,16 +17,15 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class MeshBuilder<TVertex:EnumValue> 
+class MeshBuilder
 {
 
 	//
-	private var lookup:MeshIndexLookup<TVertex>;
-	private var factory:IMeshFactory<TVertex>;
-	private var types:Vector<TVertex>;
+	private var lookup:MeshIndexLookup;
+	private var factory:IMeshFactory;
 	
 	//
-	private var vertex:Array<IVertex<TVertex>>;
+	private var vertex:Array<IVertex>;
 	private var face:Array<IFace>;
 	
 	//
@@ -35,20 +34,19 @@ class MeshBuilder<TVertex:EnumValue>
 	private var entriesFace:Int;
 	
 	//
-	private var queueV:Array<IVertex<TVertex>>;	
-	private var queueD:Array<IVertexData<TVertex>>;	
+	private var queueV:Array<IVertex>;	
+	private var queueD:Array<IVertexData>;	
 	
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 	
-	public function new( factory:IMeshFactory<TVertex> ) 
+	public function new( factory:IMeshFactory ) 
 	{
-		this.types = factory.getTypes();
-		this.lookup = new MeshIndexLookup<TVertex>( this.types );
+		this.lookup = new MeshIndexLookup( factory.getTypesSize() );
 		this.factory = factory;
 		
-		this.vertex = new Array<IVertex<TVertex>>();
+		this.vertex = new Array<IVertex>();
 		this.face = new Array<IFace>();
 		
 		this.entriesData = new Vector<Int>( factory.getTypesSize() );
@@ -65,10 +63,10 @@ class MeshBuilder<TVertex:EnumValue>
 	// ************************************************************************ //	
 	
 	//
-	public function buildMesh( ?layout:ByteLayoutType ):MeshData<TVertex>
+	public function buildMesh( ?layout:ByteLayoutType ):MeshData
 	{
-		var signature:MeshSignature<TVertex> = this.createSignature( layout );
-		var mesh:MeshData<TVertex> = new MeshData<TVertex>( signature );
+		var signature:MeshSignature = this.createSignature( layout );
+		var mesh:MeshData = new MeshData( signature );
 		
 		for( v in 0...this.vertex.length )
 		{
@@ -86,7 +84,7 @@ class MeshBuilder<TVertex:EnumValue>
 	}
 	
 	//
-	private function createSignature( ?layout:ByteLayoutType ):MeshSignature<TVertex>
+	private function createSignature( ?layout:ByteLayoutType ):MeshSignature
 	{
 		if( layout == null )
 			layout = ByteLayoutType.BLOCKED;
@@ -95,14 +93,8 @@ class MeshBuilder<TVertex:EnumValue>
 		var numVertices:Int = this.entriesVertex + 1;	
 		var numFaces:Int = this.entriesFace + 1;	
 		
-		//
-		var types:Vector<TVertex> = this.factory.getTypes();
-		
-		for( j in 0...types.length )
-			types[j] = null;
-		
 		//	
-		var signature:MeshSignature<TVertex> = new MeshSignature<TVertex>( types, numVertices, numFaces, layout );
+		var signature:MeshSignature = new MeshSignature( this.factory.getTypesSize(), numVertices, numFaces, layout );
 		
 		for( j in 0...this.entriesData.length )
 		{
@@ -110,10 +102,8 @@ class MeshBuilder<TVertex:EnumValue>
 			
 			if( numEntries > 0 )
 			{
-				var type:TVertex = this.types[j];
-				var format:ByteFormat = this.factory.getByteFormat( type );
-				
-				signature.vertex.setFormat( type, format, numEntries );
+				var format:ByteFormat = this.factory.getByteFormat( j );				
+				signature.vertex.setFormat( j, format, numEntries );
 			}				
 		}
 		
@@ -128,7 +118,7 @@ class MeshBuilder<TVertex:EnumValue>
 	 * stores the given data for a single vertex so you can later build a vertex with it.
 	 * @param	vertex
 	 */
-	public function queueVerticesData( data:Iterable<IVertexData<TVertex>> ):Void
+	public function queueVerticesData( data:Iterable<IVertexData> ):Void
 	{
 		for( v in data )
 			this.queueVertexData( v.type, v.getData() );
@@ -138,12 +128,12 @@ class MeshBuilder<TVertex:EnumValue>
 	 * stores the given data for a single vertex so you can later build a vertex with it.
 	 * @param	vertex
 	 */
-	public function queueVertexData( type:TVertex, data:Dynamic ):Void
+	public function queueVertexData( type:Int, data:Dynamic ):Void
 	{
 		if( this.queueD == null )
-			this.queueD = new Array<IVertexData<TVertex>>();
+			this.queueD = new Array<IVertexData>();
 		
-		var vdata:IVertexData<TVertex> = this.factory.createVertexData();
+		var vdata:IVertexData = this.factory.createVertexData();
 			vdata.setData( data );
 			vdata.type = type;
 			
@@ -160,7 +150,7 @@ class MeshBuilder<TVertex:EnumValue>
 			throw "cannot build a vertex without any queued data";
 			
 		//	
-		var vertex:IVertex<TVertex> = this.factory.createVertex();			
+		var vertex:IVertex = this.factory.createVertex();			
 		
 		for( v in this.queueD )		
 			vertex.setData( v.type, v.getData() );
@@ -180,7 +170,7 @@ class MeshBuilder<TVertex:EnumValue>
 	 * @param	vertices
 	 * @return true - face was unique, false already existing face
 	 */
-	public function addVertices( vertices:Iterable<IVertex<TVertex>> ):Bool
+	public function addVertices( vertices:Iterable<IVertex> ):Bool
 	{
 		for( v in vertices )
 			this.queueVertex( v );
@@ -194,18 +184,16 @@ class MeshBuilder<TVertex:EnumValue>
 	 * @param	vertex
 	 * @return true - vertex was unique, false already existing vertex
 	 */
-	public function addVertex( vertex:IVertex<TVertex> ):Bool
+	public function addVertex( vertex:IVertex ):Bool
 	{
 		this.lookup.setVertex( vertex );				
 		
 		//
 		for( j in 0...this.entriesData.length )
 		{
-			var type:TVertex = this.types[j];
-			
-			if( vertex.hasData( type ) )
+			if( vertex.hasData( j ) )
 			{
-				var index:Int = vertex.getDataIndex( type );
+				var index:Int = vertex.getDataIndex( j );
 				
 				if( index > this.entriesData[j] )
 					this.entriesData[j] = index;
@@ -234,7 +222,7 @@ class MeshBuilder<TVertex:EnumValue>
 	 * stores given vertices so you can later build a face with it.	 * 
 	 * @param	vertex
 	 */
-	public function queueVertices( vertices:Iterable<IVertex<TVertex>> ):Void
+	public function queueVertices( vertices:Iterable<IVertex> ):Void
 	{
 		for( v in vertices )
 			this.queueVertex( v );
@@ -244,10 +232,10 @@ class MeshBuilder<TVertex:EnumValue>
 	 * stores a given vertex so you can later build a face with it.	 * 
 	 * @param	vertex
 	 */
-	public function queueVertex( vertex:IVertex<TVertex> ):Void
+	public function queueVertex( vertex:IVertex ):Void
 	{
 		if( this.queueV == null )
-			this.queueV = new Array<IVertex<TVertex>>();
+			this.queueV = new Array<IVertex>();
 		
 		this.queueV.push( vertex );
 	}
@@ -265,9 +253,9 @@ class MeshBuilder<TVertex:EnumValue>
 			this.addVertex( this.queueV[j] );
 		
 		//
-		var type:FaceType = FaceTypeHelper.getType( this.queueV.length );
+		var type:Int = FaceTypeHelper.getType( this.queueV.length );
 		
-		if( type == null )
+		if( type == -1 )
 			throw "cannot add " + this.queueV.length + " vertices as no valid face type is available";
 			
 		//	

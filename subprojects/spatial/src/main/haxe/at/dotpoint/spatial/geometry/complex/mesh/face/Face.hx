@@ -16,7 +16,7 @@ class Face implements IFace
 	
 	//
 	public var index:MeshIndexTriangle;
-	public var type:FaceType;
+	public var type:Int;
 	
 	//
 	private var data:Vector<MeshIndexVertex>;
@@ -26,12 +26,13 @@ class Face implements IFace
 	// ************************************************************************ //
 
 	//
-	public function new( ?type:FaceType )
+	public function new( ?type:Int )
 	{
 		if( type == null )
 			type = FaceType.TRIANGLE;
 
 		this.data = new Vector<MeshIndexVertex>( FaceTypeHelper.getNumVertices( type ) );	
+		this.type = type;
 		
 		//
 		this.clear();
@@ -57,7 +58,7 @@ class Face implements IFace
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( repository:FaceRepository, type:FaceType, index:Int = -1 ):Void
+	public function writeBytes( repository:FaceRepository, type:Int, index:Int = -1 ):Void
 	{
 		var index:Int = index < 0 ? this.index: index;
 
@@ -75,7 +76,7 @@ class Face implements IFace
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( repository:FaceRepository, type:FaceType, index:Int = -1 ):Void
+	public function readBytes( repository:FaceRepository, type:Int, index:Int = -1 ):Void
 	{
 		var index:Int = index < 0 ? this.index : index;
 
@@ -89,6 +90,7 @@ class Face implements IFace
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 
+	//
 	private function get_size():Int
 	{
 		return FaceTypeHelper.getNumVertices( this.type );
@@ -107,7 +109,7 @@ class Face implements IFace
 	}
 
 	//
-	public function hasData( type:FaceType ):Bool
+	public function hasData( type:Int ):Bool
 	{
 		if( type == this.type )
 		{

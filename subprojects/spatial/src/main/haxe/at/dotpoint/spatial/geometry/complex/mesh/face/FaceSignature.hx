@@ -9,17 +9,17 @@ import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
  * ...
  * @author RK
  */
-class FaceSignature implements IByteSignature<FaceType>
+class FaceSignature implements IByteSignature
 {
 	//
 	public var numVertices(default,null):Int;
-	public var numTriangles(default,null):Int;
-	
-	//
-	private var format:ByteFormat;								// only triangles allowed
+	public var numTriangles(default,null):Int;	
 	
 	//
 	public var layout(default, null):FaceLayoutType;
+	
+	//
+	private var format:ByteFormat;								
 	
 	// ************************************************************************ //
 	// Constructor
@@ -51,7 +51,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return 	number of components the byte format consists of
 	 */
-	public function getNumValues( type:FaceType ):Int
+	public function getNumValues( type:Int ):Int
 	{
 		return this.format.numValues;
 	}
@@ -60,7 +60,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return	size in bytes of a single component of the byte format
 	 */	
-	public function getSizeValue( type:FaceType ):Int
+	public function getSizeValue( type:Int ):Int
 	{
 		return this.format.sizeValue;
 	}
@@ -87,7 +87,7 @@ class FaceSignature implements IByteSignature<FaceType>
 	 * @param	type byte format / value-unit requested. e.g. POSITION
 	 * @return	byte position the requested entry + type must be located
 	 */
-	public function getEntryIndex( index:Int, type:FaceType ):Int
+	public function getEntryIndex( index:Int, type:Int ):Int
 	{
 		return index * this.format.sizeTotal;
 	}

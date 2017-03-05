@@ -10,7 +10,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class MeshIndexLookup<TVertex:EnumValue> 
+class MeshIndexLookup
 {
 	//
 	private static var TRIANGLE(default,never):Int = 0;
@@ -18,9 +18,8 @@ class MeshIndexLookup<TVertex:EnumValue>
 	private static var OFFSET(default, never):Int = 2;
 	
 	//
-	private var types:Vector<TVertex>;
+	private var types:Int;
 	
-	//
 	private var table:Vector<StringMap<Int>>;	
 	private var indices:Vector<Int>;
 	
@@ -29,12 +28,12 @@ class MeshIndexLookup<TVertex:EnumValue>
 	// ************************************************************************ //
 	
 	//
-	public function new( types:Vector<TVertex> ) 
+	public function new( types:Int ) 
 	{
 		this.types = types;
 		
-		this.table = new Vector<StringMap<Int>>( this.types.length + OFFSET );
-		this.indices = new Vector<Int>( this.types.length + OFFSET );
+		this.table = new Vector<StringMap<Int>>( types + OFFSET );
+		this.indices = new Vector<Int>( types + OFFSET );
 		
 		//
 		this.table[ TRIANGLE ] = new StringMap<Int>();
@@ -67,31 +66,27 @@ class MeshIndexLookup<TVertex:EnumValue>
 	 * sets indices for all its data and the vertex itself.
 	 * does detect but not care if the vertex as such already exists.
 	 */
-	public function setVertex( vertex:IVertex<TVertex> ):Void
+	public function setVertex( vertex:IVertex ):Void
 	{
-		for( j in 0...this.types.length )
+		for( j in 0...this.types )
 		{
-			var type:TVertex = this.types[j];
-			
-			if( vertex.hasData( type ) )
-				vertex.setDataIndex( type, this.getDataIndex( vertex, type ) );			
+			if( vertex.hasData( j ) )
+				vertex.setDataIndex( j, this.getDataIndex( vertex, j ) );			
 		}
 		
 		vertex.index = this.getVertexIndex( vertex );
 	}
 	
 	//
-	private function getVertexIndex( vertex:IVertex<TVertex> ):Int
+	private function getVertexIndex( vertex:IVertex ):Int
 	{
 		var signature:String = "";
 		
 		//		
-		for( j in 0...this.types.length )
+		for( j in 0...this.types )
 		{
-			var type:TVertex = this.types[j];
-			
-			if( vertex.hasData( type ) )
-				signature += Std.string( vertex.getDataIndex( type ) );		
+			if( vertex.hasData( j ) )
+				signature += Std.string( vertex.getDataIndex( j ) );		
 		}
 		
 		//
@@ -99,10 +94,10 @@ class MeshIndexLookup<TVertex:EnumValue>
 	}
 	
 	//
-	private function getDataIndex( vertex:IVertex<TVertex>, type:TVertex ):Int
+	private function getDataIndex( vertex:IVertex, type:Int ):Int
 	{		
 		var signature:String = this.getLookupSignature( vertex.getData( type ) );
-		var lookupIndex:Int = OFFSET + type.getIndex();
+		var lookupIndex:Int = OFFSET + type;
 		
 		return this.calculateIndex( lookupIndex, signature );
 	}

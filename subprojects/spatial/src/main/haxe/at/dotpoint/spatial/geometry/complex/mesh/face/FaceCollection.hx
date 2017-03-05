@@ -87,13 +87,13 @@ class FaceCollection
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function setIndices( index:MeshIndexTriangle, type:FaceType, value:Vector<MeshIndexVertex> ):Void
+	public function setIndices( index:MeshIndexTriangle, type:Int, value:Vector<MeshIndexVertex> ):Void
 	{
 		this.indices.writeInteger( index, type, value );
 	}
 
 	//
-	public function getIndices( index:MeshIndexVertex, type:FaceType, output:Vector<MeshIndexVertex> ):Void
+	public function getIndices( index:MeshIndexVertex, type:Int, output:Vector<MeshIndexVertex> ):Void
 	{
 		this.indices.readInteger( index, type, output );
 	}

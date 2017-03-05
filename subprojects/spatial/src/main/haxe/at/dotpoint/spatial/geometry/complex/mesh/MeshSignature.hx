@@ -11,10 +11,10 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class MeshSignature<TVertex:EnumValue> implements IMeshStatistic
+class MeshSignature implements IMeshStatistic
 {	
 	//
-	public var vertex(default,null):VertexSignature<TVertex>;
+	public var vertex(default,null):VertexSignature;
 	public var face(default,null):FaceSignature;
 	
 	//
@@ -26,14 +26,14 @@ class MeshSignature<TVertex:EnumValue> implements IMeshStatistic
 	// ************************************************************************ //
 	
 	//
-	public function new( types:Vector<TVertex>, numVertices:Int, numTriangles:Int, ?vertexLayout:ByteLayoutType, ?faceLayout:FaceLayoutType ) 
+	public function new( numTypes:Int, numVertices:Int, numTriangles:Int, ?vertexLayout:ByteLayoutType, ?faceLayout:FaceLayoutType ) 
 	{
 		//
 		this.numVertices  = numVertices;
 	    this.numTriangles = numTriangles;
 		
 		//
-		this.vertex = new VertexSignature<TVertex>( types, numVertices, vertexLayout );
+		this.vertex = new VertexSignature( numTypes, numVertices, vertexLayout );
 		this.face = new FaceSignature( numVertices, numTriangles, faceLayout );
 	}
 	

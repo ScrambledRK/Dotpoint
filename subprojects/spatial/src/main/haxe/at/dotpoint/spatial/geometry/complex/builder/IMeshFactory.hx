@@ -8,13 +8,12 @@ import haxe.ds.Vector;
 /**
  * @author RK
  */
-interface IMeshFactory<TVertex:EnumValue> 
+interface IMeshFactory 
 {
-	public function getTypes():Vector<TVertex>;
 	public function getTypesSize():Int;
 	
-	public function createVertexData():IVertexData<TVertex>;
-	public function createVertex():IVertex<TVertex>;
+	public function createVertexData():IVertexData;
+	public function createVertex():IVertex;
 	
-	public function getByteFormat( type:TVertex ):ByteFormat;
+	public function getByteFormat( type:Int ):ByteFormat;
 }

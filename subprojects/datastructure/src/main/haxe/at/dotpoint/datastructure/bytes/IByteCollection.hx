@@ -5,10 +5,10 @@ import haxe.io.Bytes;
  * ...
  * @author RK
  */
-interface IByteCollection<TType:EnumValue,TRepository:IByteRepository<TType,Dynamic>> 
+interface IByteCollection<TRepository:IByteRepository<Dynamic>> 
 {
 	//
-	public function hasData( type:TType ):Bool;
+	public function hasData( type:Int ):Bool;
 	
 	/**
 	 * store this byte collection with its internal data representation into the given byte repository 
@@ -17,7 +17,7 @@ interface IByteCollection<TType:EnumValue,TRepository:IByteRepository<TType,Dyna
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( repository:TRepository, type:TType, index:Int = -1 ):Void;
+	public function writeBytes( repository:TRepository, type:Int, index:Int = -1 ):Void;
 	
 	/**
 	 * use the given bytes repository data to store its values into this byte collection internal data representation  
@@ -26,5 +26,5 @@ interface IByteCollection<TType:EnumValue,TRepository:IByteRepository<TType,Dyna
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( repository:TRepository, type:TType, index:Int = -1 ):Void;
+	public function readBytes( repository:TRepository, type:Int, index:Int = -1 ):Void;
 }

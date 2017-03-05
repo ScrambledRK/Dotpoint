@@ -5,10 +5,10 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 /**
  * @author RK
  */
-interface IVertexData<TVertex:EnumValue>
+interface IVertexData
 {
 	public var index:MeshIndexData;
-	public var type:TVertex;
+	public var type:Int;
 	
 	public function getData():Dynamic;
 	public function setData( value:Dynamic ):Void;

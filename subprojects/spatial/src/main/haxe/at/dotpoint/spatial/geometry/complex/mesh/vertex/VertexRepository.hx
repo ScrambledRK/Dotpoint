@@ -7,11 +7,11 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
  * ...
  * @author RK
  */
-class VertexRepository<TVertex:EnumValue> extends ByteRepository<TVertex,VertexSignature<TVertex>>
+class VertexRepository extends ByteRepository<VertexSignature>
 {
 
 	//
-	public function new( signature:VertexSignature<TVertex> ) 
+	public function new( signature:VertexSignature ) 
 	{
 		super( signature, signature.numVertices );
 	}

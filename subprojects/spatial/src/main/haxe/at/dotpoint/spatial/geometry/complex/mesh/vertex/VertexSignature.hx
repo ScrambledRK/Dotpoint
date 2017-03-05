@@ -8,16 +8,16 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class VertexSignature<TVertex:EnumValue> extends ByteSignature<TVertex> 
+class VertexSignature extends ByteSignature
 {
 	
 	//
 	public var numVertices(default,null):Int;
 	
 	//
-	public function new( types:Vector<TVertex>, numVertices:Int, ?layout:ByteLayoutType ) 
+	public function new( numTypes:Int, numVertices:Int, ?layout:ByteLayoutType ) 
 	{
-		super( types, layout );	
+		super( numTypes, layout );	
 		this.numVertices = numVertices;
 	}
 	

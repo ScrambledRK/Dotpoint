@@ -12,12 +12,12 @@ import at.dotpoint.math.tensor.vector.Vector3;
 /**
  * @author RK
  */
-enum DefaultVertexType 
+class DefaultVertexType 
 {
-	POSITION;
-	NORMAL;
-	UV;
-	COLOR;
+	public static var POSITION(default,never) = 0;
+	public static var NORMAL(default,never) = 1;
+	public static var UV(default,never) = 2;
+	public static var COLOR(default,never) = 3;
 }
 
 class VertexTypeHelper
@@ -28,7 +28,7 @@ class VertexTypeHelper
 	private static var color:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );
 	
 	//
-	public static function getByteFormat( type:DefaultVertexType ):ByteFormat
+	public static function getByteFormat( type:Int ):ByteFormat
 	{
 		switch( type )
 		{
@@ -37,10 +37,12 @@ class VertexTypeHelper
 			case DefaultVertexType.UV:			return uv;
 			case DefaultVertexType.COLOR:		return color;
 		}
+		
+		return null;
 	}
 	
 	//
-	public static function createTensor( type:DefaultVertexType ):ITensor
+	public static function createTensor( type:Int ):ITensor
 	{
 		var format:ByteFormat = VertexTypeHelper.getByteFormat( type );
 		

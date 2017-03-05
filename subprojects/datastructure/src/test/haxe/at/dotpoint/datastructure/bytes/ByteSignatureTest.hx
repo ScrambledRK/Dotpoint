@@ -11,9 +11,9 @@ class ByteSignatureTest extends TestCase
 {
 
 	//
-	private function createSignature( layout:ByteLayoutType ):ByteSignature<TestEnum>
+	private function createSignature( layout:ByteLayoutType ):ByteSignature
 	{
-		var instance:ByteSignature<TestEnum> = new ByteSignature( new Vector<TestEnum>(3), layout );
+		var instance:ByteSignature = new ByteSignature( 3, layout );
 			instance.setFormat( TestEnum.B, new ByteFormat( ByteType.INT, 3 ), 2 );
 			instance.setFormat( TestEnum.C, new ByteFormat( ByteType.INT, 2 ), 1 );
 		
@@ -26,7 +26,7 @@ class ByteSignatureTest extends TestCase
 	//
 	public function testGetSetFormat():Void
 	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );
+		var instance:ByteSignature = this.createSignature( ByteLayoutType.BLOCKED );
 			
 		// ------------------- //
 		
@@ -44,7 +44,7 @@ class ByteSignatureTest extends TestCase
 	//
 	public function testGetSizeTotalBlocked():Void
 	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.BLOCKED );
+		var instance:ByteSignature = this.createSignature( ByteLayoutType.BLOCKED );
 			
 		// ------------------- //
 		
@@ -59,7 +59,7 @@ class ByteSignatureTest extends TestCase
 	//
 	public function testGetSizeTotalInterleaved():Void
 	{
-		var instance:ByteSignature<TestEnum> = this.createSignature( ByteLayoutType.INTERLEAVED );
+		var instance:ByteSignature = this.createSignature( ByteLayoutType.INTERLEAVED );
 			
 		// ------------------- //
 		
@@ -75,9 +75,9 @@ class ByteSignatureTest extends TestCase
 	
 }
 
-enum TestEnum
+class TestEnum
 {
-	A;
-	B;
-	C;
+	public static var A:Int = 0;
+	public static var B:Int = 1;
+	public static var C:Int = 2;
 }

@@ -10,13 +10,13 @@ import haxe.ds.Vector;
  * TODO: optimize read/write performance
  * @author RK
  */
-class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableSignature<TVertex>>
+class VertexTable extends ByteRepository<VertexTableSignature>
 {
 	
 	//
-	public function new( signature:VertexSignature<TVertex> )
+	public function new( signature:VertexSignature )
 	{
-		super( new VertexTableSignature<TVertex>( signature ), signature.numVertices );
+		super( new VertexTableSignature( signature ), signature.numVertices );
 	}
 	
 	// ************************************************************************ //
@@ -24,21 +24,21 @@ class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableS
 	// ************************************************************************ //	
 	
 	//
-	public function setIndex( index:MeshIndexVertex, type:TVertex, value:MeshIndexData ):Void
+	public function setIndex( index:MeshIndexVertex, type:Int, value:MeshIndexData ):Void
 	{
 		var container:Vector<MeshIndexData> = this.getIndexContainer( index );
-			container[ type.getIndex() ] = value;
+			container[ type ] = value;
 			
-		this.writeInteger( index, type, container, type.getIndex() );
+		this.writeInteger( index, type, container, type );
 	}
 	
 	//
-	public function getIndex( index:MeshIndexVertex, type:TVertex ):MeshIndexData
+	public function getIndex( index:MeshIndexVertex, type:Int ):MeshIndexData
 	{
 		var container:Vector<MeshIndexData> = this.getIndexContainer( index );			
-		this.readInteger( index, type, container, type.getIndex() );
+		this.readInteger( index, type, container, type );
 		
-		return container[ type.getIndex() ];
+		return container[ type ];
 	}
 	
 	//
@@ -47,7 +47,7 @@ class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableS
 		for( j in 0...this.signature.size )
 		{
 			if( this.signature.entries[j] > 0 )
-				this.writeInteger( index, this.signature.types[j], values, j  );
+				this.writeInteger( index, j, values, j  );
 		}
 		
 		return values;
@@ -61,7 +61,7 @@ class VertexTable<TVertex:EnumValue> extends ByteRepository<TVertex,VertexTableS
 		for( j in 0...this.signature.size )
 		{
 			if( this.signature.entries[j] > 0 )
-				this.readInteger( index, this.signature.types[j], container, j  );
+				this.readInteger( index, j, container, j  );
 		}
 		
 		return container;

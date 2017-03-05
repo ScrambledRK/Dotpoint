@@ -10,12 +10,12 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
  * ...
  * @author RK
  */
-class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
+class VertexTableSignature extends ByteSignature
 {	
 	//
-	public function new( signature:VertexSignature<TVertex> )
+	public function new( signature:VertexSignature )
 	{
-		super( signature.types.copy(), this.getLayoutType( signature ) );
+		super( signature.size, this.getLayoutType( signature ) );
 		
 		//
 		switch( this.layout )
@@ -26,8 +26,8 @@ class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
 		
 				for( j in 0...signature.size )
 				{
-					if( signature.types[j] != null )
-						this.setFormat( signature.types[j], format, 1 );	
+					if( signature.entries[j] > 0 )
+						this.setFormat( j, format, 1 );	
 				}					
 			}
 			
@@ -37,15 +37,15 @@ class VertexTableSignature<TVertex:EnumValue> extends ByteSignature<TVertex>
 		
 				for( j in 0...signature.size )					
 				{
-					if( signature.types[j] != null )
-						this.setFormat( signature.types[j], format, 0 );
+					if( signature.entries[j] > 0 )
+						this.setFormat( j, format, 0 );
 				}
 			}
 		}		
 	}
 	
 	//
-	inline private function getLayoutType( signature:VertexSignature<TVertex> ):ByteLayoutType
+	inline private function getLayoutType( signature:VertexSignature ):ByteLayoutType
 	{
 		var layout:ByteLayoutType = ByteLayoutType.BLOCKED;
 		

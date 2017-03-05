@@ -8,7 +8,7 @@ import at.dotpoint.spatial.transformation.graph.TransformationType.Transformatio
  * ...
  * @author RK
  */
-class TransformationSignature implements IByteSignature<TransformationType> 
+class TransformationSignature implements IByteSignature 
 {
 	
 	//
@@ -25,7 +25,7 @@ class TransformationSignature implements IByteSignature<TransformationType>
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return 	number of components the byte format consists of
 	 */
-	public function getNumValues( type:TransformationType ):Int
+	public function getNumValues( type:Int ):Int
 	{
 		return TransformationTypeHelper.getByteFormat( type ).numValues;
 	}
@@ -34,7 +34,7 @@ class TransformationSignature implements IByteSignature<TransformationType>
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return	size in bytes of a single component of the byte format
 	 */	
-	public function getSizeValue( type:TransformationType ):Int
+	public function getSizeValue( type:Int ):Int
 	{
 		return TransformationTypeHelper.getByteFormat( type ).sizeValue;
 	}	
@@ -61,7 +61,7 @@ class TransformationSignature implements IByteSignature<TransformationType>
 	 * @param	type byte format / value-unit requested. e.g. POSITION
 	 * @return	byte position the requested entry + type must be located
 	 */
-	public function getEntryIndex( index:Int, type:TransformationType ):Int
+	public function getEntryIndex( index:Int, type:Int ):Int
 	{
 		return index * this.getStepSizeEntry( type ) + this.getStepSizeType( type );
 	}
@@ -70,7 +70,7 @@ class TransformationSignature implements IByteSignature<TransformationType>
 	// ------------------------------------------------------------------------ //
 	
 	//
-	private function getStepSizeType( type:TransformationType ):Int 
+	private function getStepSizeType( type:Int ):Int 
 	{
 		switch( type )
 		{
@@ -79,10 +79,12 @@ class TransformationSignature implements IByteSignature<TransformationType>
 			case TransformationType.SCALE: 			return 4 * 8;
 			case TransformationType.MATRIX: 		return 7 * 8;
 		}
+		
+		return -1;
 	}
 	
 	//
-	private function getStepSizeEntry( type:TransformationType ):Int 
+	private function getStepSizeEntry( type:Int ):Int 
 	{
 		return (4 + 3 + 16) * 8;
 	}

@@ -10,20 +10,20 @@ package at.dotpoint.datastructure.bytes;
  * 
  * @author RK
  */
-interface IByteSignature<T:Dynamic>
+interface IByteSignature
 {
 	
 	/**
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return 	number of components the byte format consists of
 	 */
-	public function getNumValues( type:T ):Int;
+	public function getNumValues( type:Int ):Int;
 	
 	/**
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return	size in bytes of a single component of the byte format
 	 */	
-	public function getSizeValue( type:T ):Int;
+	public function getSizeValue( type:Int ):Int;
 	
 	/**
 	 * calculates the total number of bytes required to store the signature in respect
@@ -44,5 +44,5 @@ interface IByteSignature<T:Dynamic>
 	 * @param	type byte format / value-unit requested. e.g. POSITION
 	 * @return	byte position the requested entry + type must be located
 	 */
-	public function getEntryIndex( index:Int, type:T ):Int;
+	public function getEntryIndex( index:Int, type:Int ):Int;
 }

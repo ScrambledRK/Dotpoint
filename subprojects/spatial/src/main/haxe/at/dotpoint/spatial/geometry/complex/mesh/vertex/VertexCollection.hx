@@ -12,19 +12,19 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class VertexCollection<TVertex:EnumValue>
+class VertexCollection
 {
 
 	//
-	private var repository:VertexRepository<TVertex>;
-	private var indices:VertexTable<TVertex>;
+	private var repository:VertexRepository;
+	private var indices:VertexTable;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
 	//
-	public function new( signature:VertexSignature<TVertex> )
+	public function new( signature:VertexSignature )
 	{
 		this.repository = new VertexRepository( signature );
 		this.indices = new VertexTable( signature );
@@ -35,53 +35,49 @@ class VertexCollection<TVertex:EnumValue>
 	// ************************************************************************ //
 
 	//
-	public function setVertex( vertex:IVertex<TVertex> ):Void
+	public function setVertex( vertex:IVertex ):Void
 	{
 		this.checkVertex( vertex );
 
 		//
-		var signature:VertexSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
 			if ( signature.entries[j] > 0 )
 			{
-				var type:TVertex = signature.types[j];
-
-				this.indices.setIndex( vertex.index, type, vertex.getDataIndex( type ) );
-				vertex.writeBytes( this.repository, type );
+				this.indices.setIndex( vertex.index, j, vertex.getDataIndex( j ) );
+				vertex.writeBytes( this.repository, j );
 			}
 		}
 	}
 
 	//
-	public function getVertex( index:Int, output:IVertex<TVertex> ):Void
+	public function getVertex( index:Int, output:IVertex ):Void
 	{
 		output.clear();
 		output.index = index;
 
 		//
-		var signature:VertexSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature = this.getSignature();
 
 		for ( j in 0...signature.size )
 		{
 			if ( signature.entries[j] > 0 )
 			{
-				var type:TVertex = signature.types[j];
-				var vindex:Int = this.indices.getIndex( index, type );
-				
-				output.readBytes( this.repository, type, vindex );
+				var vindex:Int = this.indices.getIndex( index, j );				
+				output.readBytes( this.repository, j, vindex );
 			}
 		}
 	}
 
 	//
-	private function checkVertex( vertex:IVertex<TVertex> ):Void
+	private function checkVertex( vertex:IVertex ):Void
 	{
 		if ( vertex == null )
 			throw "given vertex is null";
 
-		var signature:VertexSignature<TVertex> = this.getSignature();
+		var signature:VertexSignature = this.getSignature();
 
 		//
 		if ( vertex.index < 0 || vertex.index > signature.numVertices )
@@ -95,14 +91,12 @@ class VertexCollection<TVertex:EnumValue>
 
 			if ( numEntries > 0 )
 			{
-				var type:TVertex = signature.types[j];
+				//
+				if ( !vertex.hasData( j ) )
+					throw "vertex data missing for " + j;
 
 				//
-				if ( !vertex.hasData( type ) )
-					throw "vertex data missing for " + type;
-
-				//
-				var index:Int = vertex.getDataIndex( type );
+				var index:Int = vertex.getDataIndex( j );
 
 				if ( index < 0 || index > maxEntries )
 					throw "vertex data index out of bounds: " + index + " of " + maxEntries;
@@ -115,7 +109,7 @@ class VertexCollection<TVertex:EnumValue>
 	// ************************************************************************ //
 
 	//
-	private function getSignature():VertexSignature<TVertex>
+	private function getSignature():VertexSignature
 	{
 		return this.repository.signature;
 	}
@@ -124,13 +118,13 @@ class VertexCollection<TVertex:EnumValue>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function setDataTensor( index:MeshIndexData, type:TVertex, value:ITensor ):Void
+	public function setDataTensor( index:MeshIndexData, type:Int, value:ITensor ):Void
 	{
 		this.repository.writeTensor( index, type, value );
 	}
 
 	//
-	public function getDataTensor( index:MeshIndexData, type:TVertex, output:ITensor ):Void
+	public function getDataTensor( index:MeshIndexData, type:Int, output:ITensor ):Void
 	{
 		this.repository.readTensor( index, type, output );
 	}
@@ -151,13 +145,13 @@ class VertexCollection<TVertex:EnumValue>
 	}	
 
 	//
-	public function setIndex( index:MeshIndexVertex, type:TVertex, value:MeshIndexData ):Void
+	public function setIndex( index:MeshIndexVertex, type:Int, value:MeshIndexData ):Void
 	{
 		this.indices.setIndex( index, type, value );
 	}
 
 	//
-	public function getIndex( index:MeshIndexVertex, type:TVertex ):MeshIndexData
+	public function getIndex( index:MeshIndexVertex, type:Int ):MeshIndexData
 	{
 		return this.indices.getIndex( index, type );
 	}

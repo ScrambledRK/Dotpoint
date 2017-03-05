@@ -15,7 +15,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class DefaultVertex implements IVertex<DefaultVertexType>
+class DefaultVertex implements IVertex
 {
 
 	//
@@ -32,7 +32,7 @@ class DefaultVertex implements IVertex<DefaultVertexType>
 	//
 	public function new()
 	{
-		var size:Int = DefaultVertexType.createAll().length;
+		var size:Int = 4;
 
 		this.data = new Vector<ITensor>( size );
 		this.indices = new Vector<MeshIndexData>( size );
@@ -64,7 +64,7 @@ class DefaultVertex implements IVertex<DefaultVertexType>
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function writeBytes( repository:VertexRepository<DefaultVertexType>, type:DefaultVertexType, index:Int = -1 ):Void
+	public function writeBytes( repository:VertexRepository, type:Int, index:Int = -1 ):Void
 	{
 		var index:Int = index < 0 ? this.getDataIndex( type ) : index;
 		var input:ITensor = this.getTensor( type );
@@ -83,7 +83,7 @@ class DefaultVertex implements IVertex<DefaultVertexType>
 	 * @param	type kind of data to store
 	 * @param 	index position to write the data to, may need to use internal information and not provided one
 	 */
-	public function readBytes( repository:VertexRepository<DefaultVertexType>, type:DefaultVertexType, index:Int = -1 ):Void
+	public function readBytes( repository:VertexRepository, type:Int, index:Int = -1 ):Void
 	{
 		var index:Int = this.setDataIndex( type, index < 0 ? this.getDataIndex( type ) : index );
 
@@ -107,31 +107,31 @@ class DefaultVertex implements IVertex<DefaultVertexType>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getDataIndex( type:DefaultVertexType ):MeshIndexData
+	public function getDataIndex( type:Int ):MeshIndexData
 	{
-		return this.indices[ type.getIndex() ];
+		return this.indices[ type ];
 	}
 
 	//
-	public function setDataIndex( type:DefaultVertexType, value:MeshIndexData ):MeshIndexData
+	public function setDataIndex( type:Int, value:MeshIndexData ):MeshIndexData
 	{
-		return this.indices[ type.getIndex() ] = value;
+		return this.indices[ type ] = value;
 	}
 
 	//
-	public function hasData( type:DefaultVertexType ):Bool
+	public function hasData( type:Int ):Bool
 	{
 		return this.getTensor( type ) != null;
 	}
 
 	//
-	public function getData( type:DefaultVertexType ):Dynamic
+	public function getData( type:Int ):Dynamic
 	{
 		return this.getTensor( type );
 	}
 	
 	//
-	public function setData( type:DefaultVertexType, data:Dynamic ):Void
+	public function setData( type:Int, data:Dynamic ):Void
 	{
 		this.setTensor( type, cast( data, ITensor ) );
 	}
@@ -140,15 +140,15 @@ class DefaultVertex implements IVertex<DefaultVertexType>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getTensor<T:ITensor>( type:DefaultVertexType ):Null<T>
+	public function getTensor<T:ITensor>( type:Int ):Null<T>
 	{
-		return cast this.data[ type.getIndex() ];
+		return cast this.data[ type ];
 	}
 
 	//
-	public function setTensor<T:ITensor>( type:DefaultVertexType, value:T ):Null<T>
+	public function setTensor<T:ITensor>( type:Int, value:T ):Null<T>
 	{
-		return cast this.data[ type.getIndex() ] = value;
+		return cast this.data[ type ] = value;
 	}
 
 	// ************************************************************************ //

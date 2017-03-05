@@ -11,7 +11,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class DefaultMeshFactory implements IMeshFactory<DefaultVertexType>
+class DefaultMeshFactory implements IMeshFactory
 {
 
 	//
@@ -25,15 +25,9 @@ class DefaultMeshFactory implements IMeshFactory<DefaultVertexType>
 	// ************************************************************************ //	
 	
 	//
-	public function getTypes():Vector<DefaultVertexType> 
-	{
-		return Vector.fromArrayCopy( DefaultVertexType.createAll() );
-	}
-	
-	//
 	public function getTypesSize():Int 
 	{
-		return this.getTypes().length;
+		return 4;
 	}
 	
 	//
@@ -48,7 +42,7 @@ class DefaultMeshFactory implements IMeshFactory<DefaultVertexType>
 		return new DefaultVertex();
 	}
 	
-	public function getByteFormat( type:DefaultVertexType ):ByteFormat
+	public function getByteFormat( type:Int ):ByteFormat
 	{
 		return VertexTypeHelper.getByteFormat( type );
 	}

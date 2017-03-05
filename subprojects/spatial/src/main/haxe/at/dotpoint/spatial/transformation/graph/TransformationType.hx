@@ -11,12 +11,12 @@ import at.dotpoint.math.tensor.vector.Vector3;
 /**
  * @author RK
  */
-enum TransformationType 
+class TransformationType 
 {
-	TRANSLATION; 
-	ROTATION; 
-	SCALE; 
-	MATRIX;
+	public static var TRANSLATION(default,never) = 0; 
+	public static var ROTATION(default,never) = 1; 
+	public static var SCALE(default,never) = 2; 
+	public static var MATRIX(default,never) = 3;
 }
 
 class TransformationTypeHelper
@@ -27,7 +27,7 @@ class TransformationTypeHelper
 	private static var matrix:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 16 );	
 	
 	//
-	public static function getByteFormat( type:TransformationType ):ByteFormat
+	public static function getByteFormat( type:Int ):ByteFormat
 	{
 		switch( type )
 		{
@@ -36,10 +36,12 @@ class TransformationTypeHelper
 			case TransformationType.SCALE: 		return scale;
 			case TransformationType.MATRIX: 		return matrix;
 		}
+		
+		return null;
 	}
 	
 	//
-	public static function createTensor( type:TransformationType ):ITensor
+	public static function createTensor( type:Int ):ITensor
 	{
 		var format:ByteFormat = TransformationTypeHelper.getByteFormat( type );
 		

@@ -5,7 +5,7 @@ import haxe.ds.Vector;
  * ...
  * @author RK
  */
-class ValidationTable<T:EnumValue> implements IValidationTable<T>
+class ValidationTable implements IValidationTable
 {
 
 	//
@@ -32,31 +32,31 @@ class ValidationTable<T:EnumValue> implements IValidationTable<T>
 	// ************************************************************************ //
 		
 	//
-	inline private function getIndex( index:Int, type:T ):Int
+	inline private function getIndex( index:Int, type:Int ):Int
 	{
-		return index * this.numTypes + type.getIndex();
+		return index * this.numTypes + type;
 	}
 	
 	//
-	inline public function isInvalid( index:Int, type:T ):Bool	
+	inline public function isInvalid( index:Int, type:Int ):Bool	
 	{
 		return this.status[ this.getIndex( index, type ) ];		
 	}
 	
 	//
-	inline public function isValid( index, type:T ):Bool
+	inline public function isValid( index, type:Int ):Bool
 	{
 		return !this.isInvalid( index, type );
 	}
 	
 	//
-	inline public function invalidate( index:Int, type:T ):Void
+	inline public function invalidate( index:Int, type:Int ):Void
 	{
 		this.status[ this.getIndex( index, type ) ] = true;		
 	}	
 	
 	//
-	inline public function validate( index:Int, type:T ):Void
+	inline public function validate( index:Int, type:Int ):Void
 	{
 		this.status[ this.getIndex( index, type ) ] = false;
 	}

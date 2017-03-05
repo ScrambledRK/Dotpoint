@@ -17,7 +17,7 @@ import at.dotpoint.spatial.transformation.graph.TransformationType;
  *
  * @author RK
  */
-class TransformationCollection implements IGraphRepository<TransformationType>
+class TransformationCollection
 {
 
 	private var repository:TransformationRepository;
@@ -44,7 +44,7 @@ class TransformationCollection implements IGraphRepository<TransformationType>
 	 * @param	value
 	 * @return
 	 */
-	public function setValues( index:Int, type:TransformationType, value:ITensor ):ITensor
+	public function setValues( index:Int, type:Int, value:ITensor ):ITensor
 	{
 		this.invalidate( index, type );
 		this.repository.writeTensor( index, type, value );
@@ -59,7 +59,7 @@ class TransformationCollection implements IGraphRepository<TransformationType>
 	 * @param	output
 	 * @return
 	 */
-	public function getValues( index:Int, type:TransformationType, output:ITensor ):ITensor
+	public function getValues( index:Int, type:Int, output:ITensor ):ITensor
 	{
 		this.validate( index, type, output );
 		this.repository.readTensor( index, type, output );
@@ -71,14 +71,14 @@ class TransformationCollection implements IGraphRepository<TransformationType>
 	// ------------------------------------------------------------------------ //
 
 	//
-	private function invalidate( index:Int, type:TransformationType )
+	private function invalidate( index:Int, type:Int )
 	{
 		if ( type != TransformationType.TRANSLATION )
 			this.validation.invalidate( index, type != TransformationType.MATRIX ? TransformationType.MATRIX : TransformationType.TRANSLATION );
 	}
 
 	//
-	private function validate( index:Int, type:TransformationType, output:ITensor )
+	private function validate( index:Int, type:Int, output:ITensor )
 	{
 		if ( this.validation.isInvalid( index, type ) )
 		{

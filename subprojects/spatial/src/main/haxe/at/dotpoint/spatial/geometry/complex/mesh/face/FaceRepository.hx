@@ -7,7 +7,7 @@ import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
  * ...
  * @author RK
  */
-class FaceRepository extends ByteRepository<FaceType,FaceSignature>
+class FaceRepository extends ByteRepository<FaceSignature>
 {
 
 	public function new( signature:FaceSignature ) 
