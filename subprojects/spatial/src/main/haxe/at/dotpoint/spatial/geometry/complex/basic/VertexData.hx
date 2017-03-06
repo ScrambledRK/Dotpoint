@@ -1,7 +1,7 @@
-package at.dotpoint.spatial.geometry.complex;
+package at.dotpoint.spatial.geometry.complex.basic;
 
 import at.dotpoint.datastructure.ITensor;
-import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
+import at.dotpoint.spatial.geometry.complex.basic.VertexType;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertexData;
 
@@ -9,7 +9,7 @@ import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertexData;
  * ...
  * @author RK
  */
-class DefaultVertexData implements IVertexData
+class VertexData implements IVertexData
 {
 	//
 	public var index:MeshIndexData;

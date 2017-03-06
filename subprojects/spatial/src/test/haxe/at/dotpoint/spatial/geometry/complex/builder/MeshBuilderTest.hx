@@ -5,12 +5,12 @@ import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.complex.DefaultMeshFactory;
+import at.dotpoint.spatial.geometry.complex.basic.MeshFactory;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshData;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
-import at.dotpoint.spatial.geometry.complex.DefaultVertex;
-import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
+import at.dotpoint.spatial.geometry.complex.basic.Vertex;
+import at.dotpoint.spatial.geometry.complex.basic.VertexType;
 import haxe.unit.TestCase;
 
 using at.dotpoint.unit.TestCaseHelper;
@@ -34,9 +34,9 @@ class MeshBuilderTest extends TestCase
 	}
 	
 	//
-	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):DefaultVertex
+	private function v( p:Array<IVector3>, u:Array<IVector2>, n:Array<IVector3>, pi:Int, ui:Int, ni:Int ):Vertex
 	{
-		var vertex:DefaultVertex = new DefaultVertex();
+		var vertex:Vertex = new Vertex();
 			vertex.position = p[pi];
 			vertex.uv = u[ui];
 			vertex.normal = n[ni];
@@ -47,7 +47,7 @@ class MeshBuilderTest extends TestCase
 	//
 	private function createMeshBuilder():MeshBuilder
 	{
-		return new MeshBuilder( new DefaultMeshFactory() );
+		return new MeshBuilder( new MeshFactory() );
 	}
 	
 	//
@@ -139,9 +139,9 @@ class MeshBuilderTest extends TestCase
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 8, signature.vertex.entries[ DefaultVertexType.POSITION ], "num positions" );
-		aEquals( 4, signature.vertex.entries[ DefaultVertexType.UV ], 		 "num uvs" );
-		aEquals( 6, signature.vertex.entries[ DefaultVertexType.NORMAL ], 	 "num normals" );
+		aEquals( 8, signature.vertex.entries[ VertexType.POSITION ], "num positions" );
+		aEquals( 4, signature.vertex.entries[ VertexType.UV ], 		 "num uvs" );
+		aEquals( 6, signature.vertex.entries[ VertexType.NORMAL ], 	 "num normals" );
 	}
 	
 	//
@@ -159,9 +159,9 @@ class MeshBuilderTest extends TestCase
 		aEquals( 24, signature.numVertices, "num vertices" );
 		aEquals( 12, signature.numTriangles, "num triangles" );
 		
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.POSITION ], "num positions" );
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.UV ], 		 "num uvs" );
-		aEquals( 1, signature.vertex.entries[ DefaultVertexType.NORMAL ], 	 "num normals" );
+		aEquals( 1, signature.vertex.entries[ VertexType.POSITION ], "num positions" );
+		aEquals( 1, signature.vertex.entries[ VertexType.UV ], 		 "num uvs" );
+		aEquals( 1, signature.vertex.entries[ VertexType.NORMAL ], 	 "num normals" );
 	}
 	
 }

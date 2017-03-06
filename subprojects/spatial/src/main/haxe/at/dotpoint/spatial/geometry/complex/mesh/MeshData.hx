@@ -38,13 +38,14 @@ class MeshData
 	//
 	public function setFace( face:IFace ):Void
 	{
-		return this.face.setFace( face );
+		face.writeBytes( this.face );
 	}
 
 	//
-	public function getFace( index:Int, ?output:IFace ):IFace
+	public function getFace( index:Int, output:IFace ):Void
 	{
-		return this.face.getFace( index, output );
+		output.index = index;
+		output.readBytes( this.face );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -53,12 +54,13 @@ class MeshData
 	//
 	public function setVertex( vertex:IVertex ):Void
 	{
-		return this.vertex.setVertex( vertex );
+		vertex.writeBytes( this.vertex );
 	}
 
 	//
 	public function getVertex( index:Int, output:IVertex ):Void
 	{
-		this.vertex.getVertex( index, output );
+		output.index = index;
+		output.readBytes( this.vertex );
 	}
 }

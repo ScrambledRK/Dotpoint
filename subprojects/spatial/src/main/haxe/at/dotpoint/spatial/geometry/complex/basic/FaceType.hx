@@ -1,15 +1,12 @@
-package at.dotpoint.spatial.geometry.complex.mesh.face;
+package at.dotpoint.spatial.geometry.complex.basic;
 
 /**
  * @author RK
  */
 class FaceType 
 {
-	public static var TRIANGLE(default,never) = 0;
-}
-
-class FaceTypeHelper
-{
+	public static var TRIANGLE(default, never) = 0;
+	
 	//
 	public static function getNumVertices( type:Int ):Int
 	{

@@ -1,13 +1,13 @@
 package at.dotpoint.spatial.geometry.complex.mesh.face;
 
-import at.dotpoint.datastructure.bytes.IByteCollection;
+import at.dotpoint.datastructure.bytes.IByteRepresentation;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexTriangle;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
 
 /**
  * @author RK
  */
-interface IFace extends IByteCollection<FaceRepository>
+interface IFace extends IByteRepresentation<FaceCollection>
 {
 	//
 	public var index:MeshIndexTriangle;
@@ -15,9 +15,6 @@ interface IFace extends IByteCollection<FaceRepository>
 	
 	//
 	public var size(get, null):Int;
-	
-	//
-	public function clear():Void;
 	
 	//
 	public function getVertexIndex( index:Int ):MeshIndexVertex;

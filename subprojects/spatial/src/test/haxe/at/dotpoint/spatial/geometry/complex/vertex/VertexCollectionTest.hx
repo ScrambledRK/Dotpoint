@@ -10,9 +10,9 @@ import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
-import at.dotpoint.spatial.geometry.complex.DefaultVertex;
+import at.dotpoint.spatial.geometry.complex.basic.Vertex;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
-import at.dotpoint.spatial.geometry.complex.DefaultVertexType;
+import at.dotpoint.spatial.geometry.complex.basic.VertexType;
 import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
@@ -46,9 +46,9 @@ class VertexCollectionTest extends TestCase
 	private function createVertexData( layout:ByteLayoutType ):VertexCollection
 	{
 		var signature:MeshSignature = new MeshSignature( 4, 3, 0, layout );
-			signature.vertex.setFormat( DefaultVertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
-			signature.vertex.setFormat( DefaultVertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
-			signature.vertex.setFormat( DefaultVertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
+			signature.vertex.setFormat( VertexType.POSITION, new ByteFormat( ByteType.FLOAT, 3 ), 0 );
+			signature.vertex.setFormat( VertexType.NORMAL, new ByteFormat( ByteType.FLOAT, 3 ), 1 );
+			signature.vertex.setFormat( VertexType.UV, new ByteFormat( ByteType.FLOAT, 2 ), 3 );
 		
 		return new VertexCollection( signature.vertex );
 	}
@@ -69,31 +69,28 @@ class VertexCollectionTest extends TestCase
 		var ex_uv:IVector2 = MathVector2.clone( in_uv );
 
 		//
-		var vertex:DefaultVertex = new DefaultVertex();
+		var vertex:Vertex = new Vertex();
 			vertex.index = 1;
 			
-		vertex.setTensor( DefaultVertexType.NORMAL, in_normal );	
-		vertex.setTensor( DefaultVertexType.UV, in_uv );	
+		vertex.setTensor( VertexType.NORMAL, in_normal );	
+		vertex.setTensor( VertexType.UV, in_uv );	
 		
-		vertex.setDataIndex( DefaultVertexType.NORMAL, 0 );
-		vertex.setDataIndex( DefaultVertexType.UV, 2 );
+		vertex.setDataIndex( VertexType.NORMAL, 0 );
+		vertex.setDataIndex( VertexType.UV, 2 );
 		
 		// ------------------- //
 		
-		instance.setVertex( vertex );
+		vertex.writeBytes( instance );
 		
-		var result:DefaultVertex = new DefaultVertex();
-		instance.getVertex( 1, result );
+		var result:Vertex = new Vertex( 1 );
+			result.readBytes( instance );
 		
 		assertEquals( 1, result.index );
-		assertEquals( 0, result.getDataIndex( DefaultVertexType.NORMAL) );
-		assertEquals( 2, result.getDataIndex( DefaultVertexType.UV) );
+		assertEquals( 0, result.getDataIndex( VertexType.NORMAL) );
+		assertEquals( 2, result.getDataIndex( VertexType.UV) );
 		
-		var ou_normal:IVector3 = result.getTensor( DefaultVertexType.NORMAL );
-		var ou_uv:IVector2 = result.getTensor( DefaultVertexType.UV );
-		
-		var t_norm:IVector3 = new Vector3();
-		instance.getDataTensor( 0, DefaultVertexType.NORMAL, t_norm );
+		var ou_normal:IVector3 = result.getTensor( VertexType.NORMAL );
+		var ou_uv:IVector2 = result.getTensor( VertexType.UV );
 		
 		assertTrue( MathVector3.isEqual( ex_normal, ou_normal ) );
 		assertTrue( MathVector2.isEqual( ex_uv, ou_uv ) );
@@ -118,8 +115,8 @@ class VertexCollectionTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		instance.setDataTensor( 2, DefaultVertexType.NORMAL, input );		
-		instance.getDataTensor( 2, DefaultVertexType.NORMAL, result );
+		instance.setDataTensor( 2, VertexType.NORMAL, input );		
+		instance.getDataTensor( 2, VertexType.NORMAL, result );
 		
 		// ------------------- //
 		
@@ -142,8 +139,8 @@ class VertexCollectionTest extends TestCase
 		var result:IVector3 = new Vector3();
 		
 		//
-		instance.setDataTensor( 2, DefaultVertexType.NORMAL, input );		
-		instance.getDataTensor( 2, DefaultVertexType.NORMAL, result );
+		instance.setDataTensor( 2, VertexType.NORMAL, input );		
+		instance.getDataTensor( 2, VertexType.NORMAL, result );
 		
 		// ------------------- //
 		
@@ -161,8 +158,8 @@ class VertexCollectionTest extends TestCase
 		var expected:Int = input;
 		
 		//
-		instance.setIndex( 2, DefaultVertexType.NORMAL, input );		
-		var result:Int = instance.getIndex( 2, DefaultVertexType.NORMAL );
+		instance.setIndex( 2, VertexType.NORMAL, input );		
+		var result:Int = instance.getIndex( 2, VertexType.NORMAL );
 		
 		// ------------------- //
 		
@@ -180,8 +177,8 @@ class VertexCollectionTest extends TestCase
 		var expected:Int = 2;	// interleaved duplicates vertex data - therefor each vertex index equals data index
 		
 		//
-		instance.setIndex( 2, DefaultVertexType.NORMAL, input );		
-		var result:Int = instance.getIndex( 2, DefaultVertexType.NORMAL );
+		instance.setIndex( 2, VertexType.NORMAL, input );		
+		var result:Int = instance.getIndex( 2, VertexType.NORMAL );
 		
 		// ------------------- //
 		

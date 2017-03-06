@@ -16,34 +16,34 @@ class MeshIndexLookup
 	private static var TRIANGLE(default,never):Int = 0;
 	private static var VERTEX(default,never):Int = 1;
 	private static var OFFSET(default, never):Int = 2;
-	
+
 	//
 	private var types:Int;
-	
-	private var table:Vector<StringMap<Int>>;	
+
+	private var table:Vector<StringMap<Int>>;
 	private var indices:Vector<Int>;
-	
+
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
-	
+
 	//
-	public function new( types:Int ) 
+	public function new( types:Int )
 	{
 		this.types = types;
-		
+
 		this.table = new Vector<StringMap<Int>>( types + OFFSET );
 		this.indices = new Vector<Int>( types + OFFSET );
-		
+
 		//
 		this.table[ TRIANGLE ] = new StringMap<Int>();
 		this.table[ VERTEX ] = new StringMap<Int>();
 	}
-	
+
 	// ************************************************************************ //
 	// Methods
 	// ************************************************************************ //
-	
+
 	/**
 	 * sets indices for all vertices and the face itself.
 	 * does detect but not care if the face as such already exists.
@@ -51,57 +51,57 @@ class MeshIndexLookup
 	public function setFace( face:IFace ):Void
 	{
 		var signature:String = "";
-		
+
 		//
-		for( j in 0...face.size )		
+		for ( j in 0...face.size )
 			signature += Std.string( face.getVertexIndex( j ) );
-		
+
 		face.index = this.calculateIndex( TRIANGLE, signature );
 	}
-	
+
 	// --------------------------------- //
 	// --------------------------------- //
-	
+
 	/**
 	 * sets indices for all its data and the vertex itself.
 	 * does detect but not care if the vertex as such already exists.
 	 */
 	public function setVertex( vertex:IVertex ):Void
 	{
-		for( j in 0...this.types )
+		for ( j in 0...this.types )
 		{
-			if( vertex.hasData( j ) )
-				vertex.setDataIndex( j, this.getDataIndex( vertex, j ) );			
+			if ( vertex.getData( j ) != null )
+				vertex.setDataIndex( j, this.getDataIndex( vertex, j ) );
 		}
-		
+
 		vertex.index = this.getVertexIndex( vertex );
 	}
-	
+
 	//
 	private function getVertexIndex( vertex:IVertex ):Int
 	{
 		var signature:String = "";
-		
-		//		
-		for( j in 0...this.types )
+
+		//
+		for ( j in 0...this.types )
 		{
-			if( vertex.hasData( j ) )
-				signature += Std.string( vertex.getDataIndex( j ) );		
+			if ( vertex.getData( j ) != null )
+				signature += Std.string( vertex.getDataIndex( j ) );
 		}
-		
+
 		//
 		return this.calculateIndex( VERTEX, signature );
 	}
-	
+
 	//
 	private function getDataIndex( vertex:IVertex, type:Int ):Int
-	{		
+	{
 		var signature:String = this.getLookupSignature( vertex.getData( type ) );
 		var lookupIndex:Int = OFFSET + type;
-		
+
 		return this.calculateIndex( lookupIndex, signature );
 	}
-	
+
 	// --------------------------------- //
 	// --------------------------------- //
 
@@ -110,26 +110,26 @@ class MeshIndexLookup
 	{
 		var table:StringMap<Int> = this.getLookupTable( lookupIndex );
 		var index:Int = -1;
-		
-		if( !table.exists( signature ) )
+
+		if ( !table.exists( signature ) )
 		{
-			index = this.indices[ lookupIndex ]++;					
+			index = this.indices[ lookupIndex ]++;
 			table.set( signature, index );
 		}
 		else
 		{
-			index = table.get( signature ); 
+			index = table.get( signature );
 		}
-		
+
 		return index;
 	}
-	
+
 	/**
 	 * returns the indexLookup-table from the given ID or creates on if necessary
 	 */
 	private function getLookupTable( index:Int ):StringMap<Int>
-	{		
-		if( this.table.get( index ) == null )
+	{
+		if ( this.table.get( index ) == null )
 			this.table.set( index, new StringMap<Int>() );
 
 		return this.table.get( index );
@@ -140,17 +140,17 @@ class MeshIndexLookup
 	 */
 	private function getLookupSignature( data:Dynamic ):String
 	{
-		if( Std.is( data, ITensor ) )
+		if ( Std.is( data, ITensor ) )
 		{
 			var tensor:ITensor = cast data;
 			var signature:String = "";
-			
-			for( j in 0...tensor.getNumComponents() )
+
+			for ( j in 0...tensor.getNumComponents() )
 				signature += Std.string( tensor.getByIndex( j ) );
-				
+
 			return signature;
 		}
-		
+
 		return Std.string( data );
 	}
 }
