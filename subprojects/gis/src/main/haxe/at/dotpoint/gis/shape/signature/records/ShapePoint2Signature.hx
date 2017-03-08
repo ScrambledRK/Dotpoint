@@ -1,4 +1,4 @@
-package at.dotpoint.gis.shape.records;
+package at.dotpoint.gis.shape.signature.records;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
@@ -8,7 +8,7 @@ import at.dotpoint.datastructure.bytes.IByteSignature;
  * ...
  * @author RK
  */
-class ShapePoint3Signature extends AShapeRecordSignature
+class ShapePoint2Signature extends AShapeRecordSignature
 {
 
 	public function new() 
@@ -16,7 +16,7 @@ class ShapePoint3Signature extends AShapeRecordSignature
 		super( 1 );
 		
 		//
-		this.format[0] = new ByteFormat( ByteType.FLOAT, 3, false );
+		this.format[0] = new ByteFormat( ByteType.FLOAT, 2, false );
 	}	
 	
 }

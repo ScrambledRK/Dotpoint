@@ -1,4 +1,4 @@
-package at.dotpoint.gis.shape.records;
+package at.dotpoint.gis.shape.signature.records;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
 
@@ -6,7 +6,7 @@ import at.dotpoint.datastructure.bytes.ByteType;
  * ...
  * @author RK
  */
-class ShapeMultiPatch extends AShapeRecordSignature
+class ShapeMultiPatchSignature extends AShapeRecordSignature
 {
 
 	public function new() 

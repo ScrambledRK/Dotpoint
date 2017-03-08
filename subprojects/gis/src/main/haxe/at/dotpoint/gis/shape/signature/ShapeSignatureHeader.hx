@@ -1,4 +1,4 @@
-package at.dotpoint.gis.shape;
+package at.dotpoint.gis.shape.signature;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteHeader;

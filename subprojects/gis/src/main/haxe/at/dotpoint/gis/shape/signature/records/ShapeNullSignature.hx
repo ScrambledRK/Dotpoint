@@ -1,4 +1,4 @@
-package at.dotpoint.gis.shape.records;
+package at.dotpoint.gis.shape.signature.records;
 
 import at.dotpoint.datastructure.bytes.IByteSignature;
 

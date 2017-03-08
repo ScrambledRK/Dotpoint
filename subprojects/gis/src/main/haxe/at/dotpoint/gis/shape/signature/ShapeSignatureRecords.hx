@@ -1,7 +1,8 @@
-package at.dotpoint.gis.shape;
+package at.dotpoint.gis.shape.signature;
 
 import at.dotpoint.datastructure.bytes.IByteSignature;
-import at.dotpoint.gis.shape.records.AShapeRecordSignature;
+import at.dotpoint.gis.shape.signature.ShapeSignatureHeader;
+import at.dotpoint.gis.shape.signature.records.AShapeRecordSignature;
 import haxe.ds.Vector;
 
 /**
@@ -14,6 +15,10 @@ class ShapeSignatureRecords implements IByteSignature
 	//
 	public var header(default, null):ShapeSignatureHeader;
 	public var records(default, null):Array<AShapeRecordSignature>;
+
+	// ************************************************************************ //
+	// Constructor
+	// ************************************************************************ //
 	
 	//
 	public function new( ?header:ShapeSignatureHeader ) 
