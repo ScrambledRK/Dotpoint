@@ -66,9 +66,9 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 		this.setup( input );
 		
 		//
-		var position:Int = signature.header.getSizeTotal( 1 );
+		var position:Int = this.signatureIndex.header.getSizeTotal( 1 );
 		
-		while( position < data.length )
+		while( position < this.bytesRecord.length )
 			position = this.parse( position );
 		
 		//
@@ -83,13 +83,16 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 	private function setup( input:Bytes ):Void
 	{
 		this.bytesRecord = new BytesInput( input );
-		this.bytesIndex = new BytesBuffer();
+		this.bytesIndex = new BytesBuffer();		
 		
 		//
 		var header:ShapeSignatureHeader = new ShapeSignatureHeader();
 		
 		this.signatureRecord = new ShapeSignatureRecords( header );
 		this.signatureIndex = new ShapeSignatureIndex( header, true );
+		
+		//
+		this.bytesIndex.addBytes( input, 0, this.signatureIndex.header.getSizeTotal( 1 ) );
 	}
 	
 	//
@@ -178,7 +181,7 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 		this.signatureRecord.records.push( signature );	
 			
 		//
-		return index;
+		return position;
 	}
 	
 	//

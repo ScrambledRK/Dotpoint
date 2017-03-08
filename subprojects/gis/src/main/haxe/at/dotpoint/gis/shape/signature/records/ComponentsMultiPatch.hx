@@ -12,8 +12,8 @@ class ComponentsMultiPatch
 	public static var PARTS(default, never):Int 		= 3;	
 	public static var PART_TYPES(default, never):Int 	= 4;	
 	public static var POINTS(default, never):Int 		= 5;
-	public static var Z_RANGE(default, never):Int 		= 6;
-	public static var Z_ARRAY(default, never):Int 		= 7;
-	public static var M_RANGE(default, never):Int 		= 8;
-	public static var M_ARRAY(default, never):Int 		= 9;	
+	public static var M_RANGE(default, never):Int 		= 6;
+	public static var M_ARRAY(default, never):Int 		= 7;
+	public static var Z_RANGE(default, never):Int 		= 8;
+	public static var Z_ARRAY(default, never):Int 		= 9;	
 }

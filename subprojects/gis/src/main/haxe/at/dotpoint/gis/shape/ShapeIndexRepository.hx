@@ -2,6 +2,7 @@ package at.dotpoint.gis.shape;
 
 import at.dotpoint.datastructure.bytes.IByteRepository;
 import at.dotpoint.gis.shape.signature.ShapeSignatureIndex;
+import at.dotpoint.gis.shape.signature.ShapeTypesIndex;
 import haxe.io.BytesInput;
 
 /**
@@ -25,4 +26,16 @@ class ShapeIndexRepository implements IByteRepository<ShapeSignatureIndex>
 		this.signature = signature;
 	}
 
+	// ************************************************************************ //
+	// IByteRepository
+	// ************************************************************************ //		
+	
+	//
+	public function getPosition( record:Int ):Int
+	{
+		this.data.position = this.signature.getEntryIndex( record, ShapeTypesIndex.RECORD );
+		this.data.bigEndian = this.signature.record.isBigEndian;
+		
+		return this.data.readInt32();
+	}
 }

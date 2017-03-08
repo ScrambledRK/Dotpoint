@@ -28,10 +28,10 @@ class Cube implements ICube
 	/**
 	 * creates a new empty cube (center and extent 0)
 	 */
-	public function new()
+	public function new( ?center:IVector3, ?extent:IVector3 )
 	{
-		this.center = new Vector3();
-		this.extent = new Vector3();
+		this.center = center != null ? center : new Vector3();
+		this.extent = extent != null ? extent : new Vector3();
 	}
 
 	// ************************************************************************ //

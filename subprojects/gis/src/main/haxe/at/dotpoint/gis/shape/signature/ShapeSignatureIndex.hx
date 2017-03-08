@@ -13,7 +13,7 @@ class ShapeSignatureIndex implements IByteSignature
 {
 
 	//
-	private var header:ShapeSignatureHeader;
+	public var header(default,null):ShapeSignatureHeader;
 	
 	public var record(default,null):ByteFormat;							
 	public var shape(default,null):ByteFormat;							
@@ -26,7 +26,7 @@ class ShapeSignatureIndex implements IByteSignature
 	public function new( ?header:ShapeSignatureHeader, isWithShape:Bool = false ) 
 	{
 		this.header = header != null ? header : new ShapeSignatureHeader();		
-		this.record = new ByteFormat( ByteType.INT, 2, true );		// ID, length
+		this.record = new ByteFormat( ByteType.INT, 2, true );		// position, length
 		
 		if( isWithShape )
 			this.shape 	= new ByteFormat( ByteType.INT, 1, false );	// record shape

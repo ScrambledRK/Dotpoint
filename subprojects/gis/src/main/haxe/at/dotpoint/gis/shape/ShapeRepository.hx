@@ -1,4 +1,5 @@
 package at.dotpoint.gis.shape;
+import at.dotpoint.gis.shape.records.ARecordRepresentation;
 
 /**
  * ...
@@ -17,4 +18,14 @@ class ShapeRepository
 		this.record = record;
 	}
 	
+	// ************************************************************************ //
+	// Repository
+	// ************************************************************************ //	
+	
+	//
+	public function getRecord( record:Int, output:ARecordRepresentation ):Void
+	{
+		output.position = this.index.getPosition( record );
+		output.readBytes( this.record );
+	}
 }
