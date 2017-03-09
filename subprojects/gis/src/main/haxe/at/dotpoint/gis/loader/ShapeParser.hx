@@ -68,7 +68,7 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 		//
 		var position:Int = this.signatureIndex.header.getSizeTotal( 1 );
 		
-		while( position < this.bytesRecord.length )
+		while( position + 12 < this.bytesRecord.length )
 			position = this.parse( position );
 		
 		//
@@ -134,7 +134,7 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 			this.bytesIndex.addInt32( type );
 		
 		//
-		return position + length;
+		return position + length + 4;
 	}
 	
 	//
@@ -149,14 +149,14 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 		this.bytesRecord.position = index + 4;
 		this.bytesRecord.bigEndian = true;
 		
-		return this.bytesRecord.readInt32();
+		return this.bytesRecord.readInt32() * 2;
 	}	
 	
 	//
 	private function getIndexShapeType( index:Int ):Int
 	{
 		this.bytesRecord.position = index + 8;
-		this.bytesRecord.bigEndian = true;
+		this.bytesRecord.bigEndian = false;
 		
 		return this.bytesRecord.readInt32();
 	}
@@ -189,7 +189,7 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 	{
 		for( entry in entries )
 		{
-			var value:Int = this.getEntryValue( position, entry.source );
+			var value:Int = this.getEntryValue( position, entry.source + 8 );	// header not included in docs where i copied from
 			
 			for( target in entry.targets )
 				signature.entries[ target ] = value;

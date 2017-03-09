@@ -40,17 +40,17 @@ class ShapeRecordRepository implements IByteRepository<ShapeSignatureRecords>
 	//
 	public function getIndex( position:Int ):Int
 	{
-		this.data.bigEndian = false;
-		this.data.position = position; // [index], length, type
+		this.data.bigEndian = true;
+		this.data.position = position; 		// [index], length, type
 		
-		return this.data.readInt32();
+		return this.data.readInt32() - 1; 	// 1 based for some reason
 	}
 	
 	//
 	public function getType( position:Int ):Int
 	{
 		this.data.bigEndian = false;
-		this.data.position = position + 8; // index, length, [type]
+		this.data.position = position + 8; 	// index, length, [type]
 		
 		return this.data.readInt32();
 	}
@@ -137,12 +137,14 @@ class ShapeRecordRepository implements IByteRepository<ShapeSignatureRecords>
 		var shape:Int = this.getType( position );
 		var component:Int = ShapeComponentType.getComponentType( shape, ShapeComponentType.POINTS );
 		
+		var size:Int = this.signature.records[record].entries[component];
+		
 		//
 		this.data.bigEndian = false;
 		this.data.position = position + this.signature.getEntryIndex( record, component );
 		
 		//
-		var output:Vector<IVector3> = new Vector<IVector3>( this.signature.records[record].entries[component] );
+		var output:Vector<IVector3> = new Vector<IVector3>( size );
 		
 		for( j in 0...output.length )
 		{

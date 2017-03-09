@@ -34,7 +34,7 @@ class ShapeIndexRepository implements IByteRepository<ShapeSignatureIndex>
 	public function getPosition( record:Int ):Int
 	{
 		this.data.position = this.signature.getEntryIndex( record, ShapeTypesIndex.RECORD );
-		this.data.bigEndian = this.signature.record.isBigEndian;
+		this.data.bigEndian = false; // this.signature.record.isBigEndian;
 		
 		return this.data.readInt32();
 	}
