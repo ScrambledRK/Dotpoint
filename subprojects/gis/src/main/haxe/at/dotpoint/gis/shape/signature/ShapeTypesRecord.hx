@@ -79,6 +79,23 @@ class ShapeTypesRecord
 	}
 	
 	//
+	public static function isPoint( type:Int ):Bool
+	{
+		switch( type )
+		{
+			case 	ShapeTypesRecord.NULL, 
+					ShapeTypesRecord.POINT, 
+					ShapeTypesRecord.POINT_M, 
+					ShapeTypesRecord.POINT_Z:
+			{							
+				return true;
+			}			
+		}
+		
+		return false;
+	}
+	
+	//
 	public static function is3D( type:Int ):Bool
 	{
 		switch( type )

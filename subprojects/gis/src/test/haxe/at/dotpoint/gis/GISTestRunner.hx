@@ -4,9 +4,11 @@ import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.gis.loader.ShapeDataRequest;
 import at.dotpoint.gis.shape.ShapeRepository;
+import at.dotpoint.gis.shape.records.ARecordRepresentation;
 import at.dotpoint.gis.shape.records.ARecordRepresentationPoints;
 import at.dotpoint.gis.shape.records.IPointCollection;
 import at.dotpoint.gis.shape.records.RecordPoint;
+import at.dotpoint.gis.shape.signature.ShapeTypesRecord;
 import at.dotpoint.loader.URLRequest;
 import at.dotpoint.loader.event.ProgressEvent;
 import at.dotpoint.math.tensor.vector.IVector3;
@@ -72,7 +74,10 @@ class GISTestRunner extends TestRunner
 		super();
 
 		//
-		var url:URLRequest = new URLRequest( "res/ne_10m_land.shp" );
+		this.initGUI();
+		
+		//
+		var url:URLRequest = new URLRequest( "res/ne_10m_roads.shp" );
 		
 		var request:ShapeDataRequest = new ShapeDataRequest( url );
 			request.addStatusListener( this.onComplete, this.onProgress, this.onError );
@@ -87,14 +92,28 @@ class GISTestRunner extends TestRunner
 		var request:ShapeDataRequest = cast event.target;
 		var repository:ShapeRepository = cast request.result;
 		
-		var record:ARecordRepresentationPoints = new ARecordRepresentationPoints();
+		var record:ARecordRepresentation = null;
+		var recordList:ARecordRepresentationPoints = new ARecordRepresentationPoints();
+		var recordSingle:RecordPoint = new RecordPoint();
 		
-		repository.getRecord( 0, record );
+		var length:Int = repository.record.signature.records.length;
 		
-		trace( record + ": " + record.boundings + " - " + record.points.length );
-		
-		this.initGUI();
-		this.draw( record.points );
+		for( j in 0...length )
+		{
+			var type:Int = repository.getType( j );
+			
+			trace( j + "/" + length );
+			
+			if( ShapeTypesRecord.isPoint( type ) )	record = recordSingle;
+			else 									record = recordList;
+			
+			repository.getRecord( j, record );
+			
+			var coll:IPointCollection = cast record;
+			
+			//trace( record + ": " + coll.getBounds() + " - " + coll.getPoints().length );
+			this.draw( coll.getPoints() );
+		}
 	}
 	
 	/**
@@ -107,8 +126,8 @@ class GISTestRunner extends TestRunner
 	//
 	private function initGUI()
 	{
-		var w:Int = 800;
-		var h:Int = 600;
+		var w:Int = 1200;
+		var h:Int = 900;
 		
 		this.jframe = new JFrame( "GIS FUN!" );
 		this.jframe.setSize( w, h );
@@ -148,10 +167,10 @@ class GISTestRunner extends TestRunner
 		
 		for( point in list )
 		{
-			var x:Int = 400 + Std.int( point.x *  2 );
-			var y:Int = 300 + Std.int( point.y * -2 );
+			var x:Int = 800 + Std.int( point.x *  8 );
+			var y:Int = 600 + Std.int( point.y * -8 );
 			
-			this.articleCanvas.fillOval( x, y, 3, 3 );
+			this.articleCanvas.fillOval( x, y, 2, 2 );
 		}
 	}
 	

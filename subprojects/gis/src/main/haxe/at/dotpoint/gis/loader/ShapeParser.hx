@@ -134,7 +134,7 @@ class ShapeParser extends ADataProcessor implements IDataProcessor<Bytes,ShapeRe
 			this.bytesIndex.addInt32( type );
 		
 		//
-		return position + length + 4;
+		return position + length + 8;
 	}
 	
 	//

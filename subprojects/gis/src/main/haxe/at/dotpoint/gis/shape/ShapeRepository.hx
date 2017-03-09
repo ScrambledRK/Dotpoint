@@ -23,6 +23,12 @@ class ShapeRepository
 	// ************************************************************************ //	
 	
 	//
+	public function getType( record:Int ):Int
+	{
+		return this.record.getType( this.index.getPosition( record ) );
+	}
+	
+	//
 	public function getRecord( record:Int, output:ARecordRepresentation ):Void
 	{
 		output.position = this.index.getPosition( record );
