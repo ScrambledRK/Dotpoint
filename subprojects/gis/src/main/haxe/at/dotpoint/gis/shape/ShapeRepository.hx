@@ -1,5 +1,6 @@
 package at.dotpoint.gis.shape;
 import at.dotpoint.gis.shape.records.ARecordRepresentation;
+import at.dotpoint.spatial.geometry.primitive.cube.ICube;
 
 /**
  * ...
@@ -33,5 +34,17 @@ class ShapeRepository
 	{
 		output.position = this.index.getPosition( record );
 		output.readBytes( this.record );
+	}
+	
+	//
+	public function getHeaderBounds():ICube
+	{
+		return this.record.getBoundingBox( -1, -1 );
+	}
+	
+	//
+	public function getNumRecords():Int
+	{
+		return this.record.signature.records.length;
 	}
 }

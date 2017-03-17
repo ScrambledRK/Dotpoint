@@ -1,6 +1,7 @@
 package at.dotpoint.gis.shape;
 
 import at.dotpoint.datastructure.bytes.IByteRepository;
+import at.dotpoint.datastructure.bytes.IByteSignature;
 import at.dotpoint.gis.shape.signature.ShapeSignatureRecords;
 import at.dotpoint.gis.shape.signature.ShapeTypesRecord;
 import at.dotpoint.math.tensor.vector.IVector2;
@@ -85,12 +86,25 @@ class ShapeRecordRepository implements IByteRepository<ShapeSignatureRecords>
 	//
 	public function getBoundingBox( position:Int, record:Int ):ICube
 	{
-		var shape:Int = this.getType( position );
-		var component:Int = ShapeComponentType.getComponentType( shape, ShapeComponentType.BOX );
+		var shape:Int = -1;											// irrelevant for header
+		var component:Int = 5;										// header box
+		var signature:IByteSignature = this.signature.header;		// header
+		
+		//
+		if( position >= 0 && record >= 0 )
+		{
+			shape = this.getType( position );
+			component = ShapeComponentType.getComponentType( shape, ShapeComponentType.BOX );
+			signature = this.signature;
+		}
+		else
+		{
+			position = 0;
+		}
 		
 		//
 		this.data.bigEndian = false;
-		this.data.position = position + this.signature.getEntryIndex( record, component );
+		this.data.position = position + signature.getEntryIndex( record, component );
 		
 		//
 		var output:ICube = new Cube();
@@ -107,7 +121,7 @@ class ShapeRecordRepository implements IByteRepository<ShapeSignatureRecords>
 		if( ShapeTypesRecord.is3D( shape ) )
 		{
 			component = ShapeComponentType.getComponentType( shape, ShapeComponentType.M_RANGE );
-			this.data.position = position + this.signature.getEntryIndex( record, component );			
+			this.data.position = position + signature.getEntryIndex( record, component );			
 			
 			min.w = this.data.readDouble();			
 			max.w = this.data.readDouble();			
@@ -117,7 +131,7 @@ class ShapeRecordRepository implements IByteRepository<ShapeSignatureRecords>
 		if( ShapeTypesRecord.is4D( shape ) )
 		{
 			component = ShapeComponentType.getComponentType( shape, ShapeComponentType.Z_RANGE );
-			this.data.position = position + this.signature.getEntryIndex( record, component );			
+			this.data.position = position + signature.getEntryIndex( record, component );			
 			
 			min.z = this.data.readDouble();			
 			max.z = this.data.readDouble();			

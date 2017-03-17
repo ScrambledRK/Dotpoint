@@ -224,6 +224,6 @@ class ShapeComponentType
 			}
 		}
 		
-		return -1;
+		return component;
 	}
 }
