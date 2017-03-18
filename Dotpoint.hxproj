@@ -29,10 +29,13 @@
     <class path="subprojects\loader\src\main\haxe" />
     <class path="subprojects\loader\src\main\sys" />
     <class path="subprojects\loader\src\test\haxe" />
+    <class path="subprojects\loader\src\test\resources" />
+    <class path="subprojects\display\src\main\haxe" />
+    <class path="subprojects\display\src\test\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="" />
+    <option directives="-dce no&#xA;--macro &quot;include('at.dotpoint')&quot;" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="Main" />

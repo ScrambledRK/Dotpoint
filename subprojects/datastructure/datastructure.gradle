@@ -20,6 +20,31 @@ model
 					platform "haxe"					
 				}	
 			}	
+			
+			tests
+			{
+				unit(ITestComponent)
+				{
+					main = "at.dotpoint.datastructure.DatastructureTestRunner";
+				
+					sources
+					{	
+						test(ISourceSet)
+						{		
+							dependencies
+							{
+								library( ":unit", "main" );
+							}
+						
+							source.srcDir file('src/test/haxe')
+							source.srcDir file('src/test/resources')
+							source.include '**/*'
+							
+							platform "haxe"					
+						}
+					}						
+				}
+			}	
 		}
 	}	
 }

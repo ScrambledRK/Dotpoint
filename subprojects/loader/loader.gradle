@@ -13,7 +13,12 @@ model
 			sources
 			{		
 				compile(ISourceSet)
-				{				
+				{	
+					dependencies
+					{
+						library( ":datastructure", "main" );
+					}
+				
 					source.srcDir file('src/main/haxe')
 					source.srcDir file('src/main/sys')
 					source.include '**/*.hx'
@@ -26,7 +31,7 @@ model
 			{
 				unit(ITestComponent)
 				{
-					main = "at.dotpoint.math.LoaderTestRunner";
+					main = "at.dotpoint.loader.LoaderTestRunner";
 				
 					sources
 					{	

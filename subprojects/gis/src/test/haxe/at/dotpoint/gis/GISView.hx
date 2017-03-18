@@ -72,7 +72,7 @@ class GISView
 		this.translation = new Vector2();
 		this.scale = new Vector2( 1.0, -1.0 );
 		
-		this.initialize( w, h );
+		//this.initialize( w, h );
 	}
 	
 	//
@@ -152,6 +152,9 @@ class GISView
 	//
 	public function draw( list:Vector<IVector3> ):Void
 	{
+		return;
+		
+		//
 		this.canvas.setColor( new Color( 0.5, 0.2, 0.8, 1 ) );
 		
 		for( point in list )

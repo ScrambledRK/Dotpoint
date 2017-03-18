@@ -59,7 +59,7 @@ class GISTestRunner extends TestRunner
 	//
 	private function onProgress( event:ProgressEvent ):Void
 	{
-		trace("onProgress: " + event.ratio );
+		//trace("onProgress: " + event.ratio );
 	}
 	
 	//
@@ -70,9 +70,7 @@ class GISTestRunner extends TestRunner
 	
 	//
 	private function onComplete( event:StatusEvent ):Void
-	{
-		trace("DONE!");
-		
+	{		
 		var request:ShapeDataRequest = cast event.target;
 		var repository:ShapeRepository = cast request.result;		
 		
@@ -81,6 +79,9 @@ class GISTestRunner extends TestRunner
 		this.logic = new GISLogic( repository, this.view );
 		
 		this.logic.initialize();
+		
+		//
+		trace("DONE!");
 	}	
 	
 }

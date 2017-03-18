@@ -1,5 +1,8 @@
-include ":spatial";
+include ":datastructure";
+include ":display";
+include ":loader";
 include ":math";
+include ":spatial";
 include ":unit";
 
 //

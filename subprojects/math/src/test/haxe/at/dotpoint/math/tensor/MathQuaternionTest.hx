@@ -26,10 +26,10 @@ class MathQuaternionTest extends TestCase
 	
 	private function createQuaternion():IQuaternion
 	{
-		throw return new Quaternion();
+		return new Quaternion();
 	}
 	
-		//
+	//
 	private function createQuaternionA():IQuaternion
 	{
 		var a:IQuaternion = this.createQuaternion();
