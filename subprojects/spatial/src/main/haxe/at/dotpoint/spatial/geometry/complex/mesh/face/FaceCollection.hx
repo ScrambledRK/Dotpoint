@@ -1,7 +1,6 @@
 package at.dotpoint.spatial.geometry.complex.mesh.face;
 
 import at.dotpoint.datastructure.bytes.IByteRepository;
-import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexTriangle;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
 import haxe.ds.Vector;

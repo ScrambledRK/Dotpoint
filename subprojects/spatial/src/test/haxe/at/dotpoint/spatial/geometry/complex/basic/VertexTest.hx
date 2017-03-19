@@ -1,11 +1,10 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.basic;
 
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
 import at.dotpoint.spatial.geometry.complex.basic.Vertex;
 import at.dotpoint.spatial.geometry.complex.basic.VertexType;
-import haxe.ds.Vector;
 import haxe.unit.TestCase;
 
 /**

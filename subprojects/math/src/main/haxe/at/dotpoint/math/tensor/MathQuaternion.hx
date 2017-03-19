@@ -55,6 +55,12 @@ class MathQuaternion
 
 		return a;
 	}
+
+	//
+	inline public static function setZero( a:IQuaternion ):IQuaternion
+	{
+		return MathQuaternion.set( a, 0, 0, 0, 1 );
+	}
 	
 	// ************************************************************************ //
 	// unary operations

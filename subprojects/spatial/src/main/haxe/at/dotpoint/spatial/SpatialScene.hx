@@ -1,12 +1,13 @@
 package at.dotpoint.spatial;
+
 import at.dotpoint.math.tensor.matrix.IMatrix44;
 import at.dotpoint.math.tensor.matrix.Matrix44;
 import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.transformation.graph.TransformationType;
-import at.dotpoint.spatial.transformation.graph.TransformationGraph;
+import at.dotpoint.spatial.transformation.local.TransformationType;
+import at.dotpoint.spatial.transformation.world.TransformationGraph;
 
 /**
  * keeps transformation, boundings, geometry consistent to each other. e.g. a

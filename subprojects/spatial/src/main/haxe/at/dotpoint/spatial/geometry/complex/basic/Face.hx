@@ -1,10 +1,9 @@
 package at.dotpoint.spatial.geometry.complex.basic;
 
+import at.dotpoint.spatial.geometry.complex.basic.FaceType;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexTriangle;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
-import at.dotpoint.spatial.geometry.complex.basic.FaceType;
 import at.dotpoint.spatial.geometry.complex.mesh.face.FaceCollection;
-import at.dotpoint.spatial.geometry.complex.mesh.face.FaceRepository;
 import at.dotpoint.spatial.geometry.complex.mesh.face.FaceSignature;
 import at.dotpoint.spatial.geometry.complex.mesh.face.IFace;
 import haxe.ds.Vector;

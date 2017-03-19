@@ -1,7 +1,7 @@
-package at.dotpoint.spatial.transformation.graph;
+package at.dotpoint.spatial.transformation.local;
 
 import at.dotpoint.datastructure.validation.IValidationTable;
-import at.dotpoint.spatial.transformation.graph.TransformationType;
+import at.dotpoint.spatial.transformation.local.TransformationType;
 import haxe.ds.Vector;
 
 /**

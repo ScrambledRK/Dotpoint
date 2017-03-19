@@ -1,14 +1,15 @@
-package at.dotpoint.spatial.transformation.graph;
+package at.dotpoint.spatial.transformation.local;
 
 import at.dotpoint.datastructure.ITensor;
-import at.dotpoint.datastructure.graph.IGraphRepository;
+import at.dotpoint.datastructure.bytes.IByteRepository;
 import at.dotpoint.math.tensor.matrix.IMatrix44;
 import at.dotpoint.math.tensor.matrix.Matrix44;
 import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.transformation.graph.TransformationType;
+import at.dotpoint.spatial.transformation.local.TransformationSignature;
+import at.dotpoint.spatial.transformation.local.TransformationType;
 
 /**
  * keeps data internally consistent. e.g. a component (say rotation quaternion) updates,
@@ -17,8 +18,11 @@ import at.dotpoint.spatial.transformation.graph.TransformationType;
  *
  * @author RK
  */
-class TransformationCollection
+class TransformationCollection implements IByteRepository<TransformationSignature>
 {
+
+	//
+	public var signature(default, null):TransformationSignature;
 
 	private var repository:TransformationRepository;
 	private var validation:TransformationValidation;
@@ -27,9 +31,12 @@ class TransformationCollection
 	// Constructor
 	// ************************************************************************ //
 
+	//
 	public function new( numEntries:Int )
 	{
-		this.repository = new TransformationRepository( numEntries );
+		this.signature = new TransformationSignature();
+
+		this.repository = new TransformationRepository( this.signature, numEntries );
 		this.validation = new TransformationValidation( numEntries );
 	}
 
@@ -74,7 +81,13 @@ class TransformationCollection
 	private function invalidate( index:Int, type:Int )
 	{
 		if ( type != TransformationType.TRANSLATION )
-			this.validation.invalidate( index, type != TransformationType.MATRIX ? TransformationType.MATRIX : TransformationType.TRANSLATION );
+			this.validation.invalidate( index, this.getValidationTarget( type ) );
+	}
+
+	//
+	inline private function getValidationTarget( type:Int ):Int
+	{
+		return type != TransformationType.MATRIX ? TransformationType.MATRIX : TransformationType.TRANSLATION;
 	}
 
 	//
@@ -82,16 +95,13 @@ class TransformationCollection
 	{
 		if ( this.validation.isInvalid( index, type ) )
 		{
-			var rotation:IQuaternion = new Quaternion();
+			var rotation:IQuaternion = new Quaternion();	// TODO: prevent object allocation
 			var matrix:IMatrix44 = new Matrix44();
 			var scale:IVector3 = new Vector3();
 
 			//
 			if ( type == TransformationType.MATRIX )
 			{
-				trace("update matrix by components" );
-
-				//
 				this.repository.readTensor( index, TransformationType.ROTATION, rotation );
 				this.repository.readTensor( index, TransformationType.SCALE, scale );
 
@@ -102,9 +112,6 @@ class TransformationCollection
 			}
 			else
 			{
-				trace("update components by matrix; requested component: " + type );
-
-				//
 				this.repository.readTensor( index, TransformationType.MATRIX, matrix );
 
 				MathTransformation.getRotation( matrix, rotation );

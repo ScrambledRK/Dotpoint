@@ -1,4 +1,4 @@
-package at.dotpoint.spatial.geometry.complex.vertex;
+package at.dotpoint.spatial.geometry.complex.mesh.vertex;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
@@ -9,11 +9,10 @@ import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 import at.dotpoint.spatial.geometry.complex.basic.Vertex;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
 import at.dotpoint.spatial.geometry.complex.basic.VertexType;
-import haxe.ds.Vector;
+import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
 import haxe.unit.TestCase;
 
 /**

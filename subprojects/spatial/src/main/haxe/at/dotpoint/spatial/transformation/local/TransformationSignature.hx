@@ -1,8 +1,7 @@
-package at.dotpoint.spatial.transformation.graph;
+package at.dotpoint.spatial.transformation.local;
 
-import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.IByteSignature;
-import at.dotpoint.spatial.transformation.graph.TransformationType.TransformationTypeHelper;
+import at.dotpoint.spatial.transformation.local.TransformationType;
 
 /**
  * ...
@@ -27,7 +26,7 @@ class TransformationSignature implements IByteSignature
 	 */
 	public function getNumValues( type:Int ):Int
 	{
-		return TransformationTypeHelper.getByteFormat( type ).numValues;
+		return TransformationType.getByteFormat( type ).numValues;
 	}
 	
 	/**
@@ -36,7 +35,7 @@ class TransformationSignature implements IByteSignature
 	 */	
 	public function getSizeValue( type:Int ):Int
 	{
-		return TransformationTypeHelper.getByteFormat( type ).sizeValue;
+		return TransformationType.getByteFormat( type ).sizeValue;
 	}	
 	
 	/**

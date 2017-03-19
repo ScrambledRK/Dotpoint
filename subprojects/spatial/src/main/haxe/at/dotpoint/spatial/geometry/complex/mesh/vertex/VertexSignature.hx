@@ -2,7 +2,6 @@ package at.dotpoint.spatial.geometry.complex.mesh.vertex;
 
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
 import at.dotpoint.datastructure.bytes.ByteSignature;
-import haxe.ds.Vector;
 
 /**
  * ...

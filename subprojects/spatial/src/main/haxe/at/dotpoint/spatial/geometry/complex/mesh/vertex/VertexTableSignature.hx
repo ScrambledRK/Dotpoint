@@ -4,7 +4,6 @@ import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteLayoutType;
 import at.dotpoint.datastructure.bytes.ByteSignature;
 import at.dotpoint.datastructure.bytes.ByteType;
-import at.dotpoint.spatial.geometry.complex.mesh.MeshSignature;
 
 /**
  * ...

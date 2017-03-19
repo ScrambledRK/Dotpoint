@@ -1,12 +1,11 @@
 package at.dotpoint.spatial.geometry.complex.basic;
 
 import at.dotpoint.datastructure.bytes.ByteFormat;
+import at.dotpoint.spatial.geometry.complex.basic.Face;
 import at.dotpoint.spatial.geometry.complex.basic.Vertex;
 import at.dotpoint.spatial.geometry.complex.basic.VertexData;
 import at.dotpoint.spatial.geometry.complex.basic.VertexType;
 import at.dotpoint.spatial.geometry.complex.builder.IMeshFactory;
-import at.dotpoint.spatial.geometry.complex.basic.Face;
-import haxe.ds.Vector;
 
 /**
  * ...

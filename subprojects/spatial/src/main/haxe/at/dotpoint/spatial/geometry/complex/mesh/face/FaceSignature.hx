@@ -3,7 +3,6 @@ package at.dotpoint.spatial.geometry.complex.mesh.face;
 import at.dotpoint.datastructure.bytes.ByteFormat;
 import at.dotpoint.datastructure.bytes.ByteType;
 import at.dotpoint.datastructure.bytes.IByteSignature;
-import at.dotpoint.spatial.geometry.complex.mesh.IMeshStatistic;
 
 /**
  * ...

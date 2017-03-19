@@ -9,10 +9,8 @@ import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexVertex;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertex;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
-import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexRepository;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexSignature;
 import haxe.ds.Vector;
-import haxe.io.Bytes;
 
 /**
  * ...

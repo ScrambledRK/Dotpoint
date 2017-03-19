@@ -1,6 +1,6 @@
 package at.dotpoint.spatial.transformation;
+
 import at.dotpoint.math.tensor.MathMatrix33;
-import at.dotpoint.math.tensor.MathMatrix44;
 import at.dotpoint.math.tensor.MathQuaternion;
 import at.dotpoint.math.tensor.matrix.IMatrix33;
 import at.dotpoint.math.tensor.matrix.IMatrix44;
@@ -17,6 +17,27 @@ import at.dotpoint.math.tensor.vector.Vector3;
  */
 class MathTransformation 
 {
+
+	//
+	public static function getMatrix( translation:IVector3, rotation:IQuaternion, scale:IVector3, ?output:IMatrix44 ):IMatrix44
+	{
+		if( output == null )
+			output = new Matrix44();
+
+		MathTransformation.setTranslation( output, translation );
+		MathTransformation.setRotation( output, rotation );
+		MathTransformation.setScale( output, scale );
+
+		return output;
+	}
+
+	//
+	public static function getComponents( translation:IVector3, rotation:IQuaternion, scale:IVector3, input:IMatrix44 ):Void
+	{
+		MathTransformation.getTranslation( input, translation );
+		MathTransformation.getRotation( input, rotation );
+		MathTransformation.getScale( input, scale );
+	}
 
 	// ------------------------------------------------ //
 	// ------------------------------------------------ //

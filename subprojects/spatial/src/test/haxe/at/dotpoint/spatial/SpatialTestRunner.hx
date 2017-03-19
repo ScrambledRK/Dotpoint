@@ -1,10 +1,10 @@
 package at.dotpoint.spatial;
 
+import at.dotpoint.spatial.geometry.complex.basic.VertexTest;
 import at.dotpoint.spatial.geometry.complex.builder.MeshBuilderTest;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexCollectionTest;
-import at.dotpoint.spatial.geometry.complex.vertex.VertexTest;
+import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollectionTest;
 import at.dotpoint.spatial.geometry.primitive.cube.CubeTest;
-import at.dotpoint.spatial.transformation.TransformationTest;
+import at.dotpoint.spatial.transformation.local.TransformationCollectionTest;
 import haxe.unit.TestRunner;
 
 /**
@@ -30,7 +30,7 @@ class SpatialTestRunner extends TestRunner
 		super();
 
 		this.add( new CubeTest() );
-		this.add( new TransformationTest() );
+		this.add( new TransformationCollectionTest() );
 		this.add( new VertexCollectionTest() );
 		this.add( new VertexTest() );
 		this.add( new MeshBuilderTest() );

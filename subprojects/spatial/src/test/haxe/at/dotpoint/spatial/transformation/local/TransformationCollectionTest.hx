@@ -1,6 +1,5 @@
-package at.dotpoint.spatial.transformation;
+package at.dotpoint.spatial.transformation.local;
 
-import at.dotpoint.math.MathBasic;
 import at.dotpoint.math.tensor.MathMatrix44;
 import at.dotpoint.math.tensor.MathQuaternion;
 import at.dotpoint.math.tensor.MathVector3;
@@ -10,17 +9,18 @@ import at.dotpoint.math.tensor.quaternion.IQuaternion;
 import at.dotpoint.math.tensor.quaternion.Quaternion;
 import at.dotpoint.math.tensor.vector.IVector3;
 import at.dotpoint.math.tensor.vector.Vector3;
-import at.dotpoint.spatial.transformation.graph.TransformationType;
-import at.dotpoint.spatial.transformation.graph.TransformationCollection;
-import haxe.io.Bytes;
+import at.dotpoint.spatial.transformation.local.TransformationCollection;
+import at.dotpoint.spatial.transformation.local.TransformationType;
 import haxe.unit.TestCase;
+
+//
 using at.dotpoint.unit.TestCaseHelper;
 
 /**
  * ...
  * @author RK
  */
-class TransformationTest extends TestCase 
+class TransformationCollectionTest extends TestCase
 {
 	
 	//

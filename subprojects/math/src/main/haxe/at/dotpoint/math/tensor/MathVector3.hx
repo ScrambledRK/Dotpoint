@@ -53,6 +53,12 @@ class MathVector3
 		return a;
 	}
 
+	//
+	inline public static function setZero( a:IVector3 ):IVector3
+	{
+		return MathVector3.set( a, 0, 0, 0, 1 );
+	}
+
 	// ************************************************************************ //
 	// unary operations
 	// ************************************************************************ //

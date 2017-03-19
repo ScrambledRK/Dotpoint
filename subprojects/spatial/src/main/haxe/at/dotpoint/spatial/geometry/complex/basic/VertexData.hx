@@ -1,7 +1,6 @@
 package at.dotpoint.spatial.geometry.complex.basic;
 
 import at.dotpoint.datastructure.ITensor;
-import at.dotpoint.spatial.geometry.complex.basic.VertexType;
 import at.dotpoint.spatial.geometry.complex.mesh.MeshIndices.MeshIndexData;
 import at.dotpoint.spatial.geometry.complex.mesh.vertex.IVertexData;
 
