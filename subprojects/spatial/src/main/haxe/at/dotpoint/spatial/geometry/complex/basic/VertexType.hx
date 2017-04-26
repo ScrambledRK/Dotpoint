@@ -14,10 +14,10 @@ import at.dotpoint.math.tensor.vector.Vector3;
  */
 class VertexType 
 {
-	public static var POSITION(default,never) = 0;
-	public static var NORMAL(default,never) = 1;
-	public static var UV(default,never) = 2;
-	public static var COLOR(default, never) = 3;
+	public static var POSITION(default,never) 	= 0;
+	public static var NORMAL(default,never) 	= 1;
+	public static var UV(default,never) 		= 2;
+	public static var COLOR(default, never) 	= 3;
 	
 	//
 	public static function getTypeSize():Int
@@ -29,9 +29,9 @@ class VertexType
 	// --------------------------- //
 	
 	private static var f_position:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );
-	private static var f_normal:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );
-	private static var f_uv:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 2 );
-	private static var f_color:ByteFormat 	= new ByteFormat( ByteType.FLOAT, 3 );
+	private static var f_normal:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 3 );
+	private static var f_uv:ByteFormat 			= new ByteFormat( ByteType.FLOAT, 2 );
+	private static var f_color:ByteFormat 		= new ByteFormat( ByteType.FLOAT, 3 );
 	
 	//
 	public static function getByteFormat( type:Int ):ByteFormat

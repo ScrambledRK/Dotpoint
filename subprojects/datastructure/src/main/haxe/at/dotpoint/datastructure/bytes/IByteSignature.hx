@@ -12,7 +12,7 @@ package at.dotpoint.datastructure.bytes;
  */
 interface IByteSignature
 {
-	
+
 	/**
 	 * @param	type identifier associated with the requested ByteFormat
 	 * @return 	number of components the byte format consists of
@@ -45,4 +45,5 @@ interface IByteSignature
 	 * @return	byte position the requested entry + type must be located
 	 */
 	public function getEntryIndex( index:Int, type:Int ):Int;
+
 }

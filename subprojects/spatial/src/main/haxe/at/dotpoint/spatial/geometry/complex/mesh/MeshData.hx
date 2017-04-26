@@ -9,7 +9,7 @@ import at.dotpoint.spatial.geometry.complex.mesh.vertex.VertexCollection;
  * ...
  * @author RK
  */
-class MeshData
+class MeshData implements IMeshData
 {
 
 	//

@@ -5,7 +5,7 @@ import at.dotpoint.math.tensor.vector.IVector3;
 /**
  * min, max representation of an axis aligned cube, useful for bounding box. <br/>
  */
-interface ICube
+interface ICube extends IGeometry
 {
 
 	/**

@@ -24,7 +24,8 @@ class MeshSignature implements IMeshStatistic
 	// ************************************************************************ //
 	
 	//
-	public function new( numTypes:Int, numVertices:Int, numTriangles:Int, ?vertexLayout:ByteLayoutType, ?faceLayout:FaceLayoutType ) 
+	public function new( numTypes:Int, numVertices:Int, numTriangles:Int,
+						 ?vertexLayout:ByteLayoutType, ?faceLayout:FaceLayoutType )
 	{
 		//
 		this.numVertices  = numVertices;
