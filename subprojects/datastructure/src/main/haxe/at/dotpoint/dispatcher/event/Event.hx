@@ -1,7 +1,7 @@
 package at.dotpoint.dispatcher.event;
 
 /**
- *
+ * TODO: inline static event types (e.g. "COMPLETE")
  */
 class Event
 {
