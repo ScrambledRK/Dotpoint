@@ -1,26 +1,26 @@
 package at.dotpoint.logger.logger;
 
-import at.dotpoint.logger.formatter.IndentationFormatter;
-import at.dotpoint.logger.Log;
-import at.dotpoint.logger.LoggerSettings;
-import at.dotpoint.logger.LogType;
+import sys.io.File;
 import haxe.PosInfos;
+import at.dotpoint.logger.formatter.IndentationFormatter;
 
 /**
  * ...
  * @author RK
  */
-class TraceLogger extends BaseLogger implements ILogger
+class FileLogger extends BaseLogger implements ILogger
 {
-
+	//
+	private var path:String;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?settings:LoggerSettings )
+	public function new( ?settings:LoggerSettings, ?path:String )
 	{
-		super( settings, new IndentationFormatter() );
+		super( settings, new IndentationFormatter( true ) );
+		this.path = path != null ? path : "./log.txt";
 	}
 
 	// ************************************************************************ //
@@ -35,6 +35,11 @@ class TraceLogger extends BaseLogger implements ILogger
 	 */
 	public function log( type:LogType, msg:Dynamic, info:PosInfos ):Void
 	{
-		Log.nativeTrace( this.formatter.format( type, msg ), info );
+		var now:String = Date.now().toString();
+
+		var result:String = this.formatter.format( type, msg, info );
+			result += "\n";
+
+		File.append( this.path, false ).writeString( now + " - " + result );
 	}
 }

@@ -1,4 +1,4 @@
-package at.dotpoint.logger;
+package at.dotpoint.logger.logger;
 
 import at.dotpoint.logger.LoggerSettings;
 import at.dotpoint.logger.LogType;
