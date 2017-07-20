@@ -3,9 +3,7 @@ package at.dotpoint.math;
 import at.dotpoint.math.tensor.MathVector3;
 import at.dotpoint.math.tensor.vector.IVector2;
 import at.dotpoint.math.tensor.vector.IVector3;
-import at.dotpoint.math.tensor.vector.Vector2;
 import at.dotpoint.math.tensor.vector.Vector3;
-import haxe.ds.Vector;
 
 /**
  *
@@ -13,6 +11,21 @@ import haxe.ds.Vector;
  */
 class Trigonometry
 {
+
+	/**
+	 * interpolate
+	 */
+	public static function interpolate( a:IVector3, b:IVector3, delta:Float, ?output:IVector3 ):IVector3
+	{
+		if( output == null )
+			output = new Vector3();
+
+		output.x = a.x + (b.x - a.x) * delta;
+		output.y = a.y + (b.y - a.y) * delta;
+		output.z = a.z + (b.z - a.z) * delta;
+
+		return output;
+	}
 
 	/**
 	 * normal of a triangle
@@ -27,9 +40,9 @@ class Trigonometry
 	 */
 	public static function calculatetArea( v1:IVector3, v2:IVector3, v3:IVector3 ):Float
 	{
-		return MathVector3.length( Trigonometry.crossTriangle( v1, v2, v3 )  ) * 0.5;
+		return MathVector3.length( Trigonometry.crossTriangle( v1, v2, v3 ) ) * 0.5;
 	}
-	
+
 	//
 	inline private static function crossTriangle( v1:IVector3, v2:IVector3, v3:IVector3 ):IVector3
 	{
@@ -41,7 +54,7 @@ class Trigonometry
 
 	// ************************************************************************ //
 	// ************************************************************************ //
-	
+
 	/**
 	 *
 	 * @param	v1
@@ -80,13 +93,13 @@ class Trigonometry
 	 */
 	public static function getRadianAngle( a:IVector3, b:IVector3, ?n:IVector3 ):Float
 	{
-		var fc:IVector3  = MathVector3.cross( a, b );
-		var fd:Float 	= MathVector3.dot( a, b );
+		var fc:IVector3 = MathVector3.cross( a, b );
+		var fd:Float = MathVector3.dot( a, b );
 
 		var angle:Float = Math.atan2( MathVector3.length( fc ), fd );
 
-		if( n != null )		
-			angle *= MathBasic.getSign( MathVector3.dot( n, fc ) );		
+		if( n != null )
+			angle *= MathBasic.getSign( MathVector3.dot( n, fc ) );
 
 		return angle;
 	}
@@ -105,7 +118,7 @@ class Trigonometry
 			output = new Vector3();
 
 		var l:Float = a.x * a.x + a.y * a.y + a.z * a.z;
-		if ( l == 0 ) throw "undefined result";
+		if( l == 0 ) throw "undefined result";
 
 		var d:Float = MathVector3.dot( a, b );
 		var div:Float = d / l;
@@ -118,11 +131,11 @@ class Trigonometry
 	 */
 	public static function orthoNormalize( vectors:Array<IVector3> ):Void
 	{
-		for ( i in 0...vectors.length )
+		for( i in 0...vectors.length )
 		{
 			var sum:Vector3 = new Vector3();
 
-			for ( j in 0...i )
+			for( j in 0...i )
 			{
 				var projected:IVector3 = Trigonometry.project( vectors[i], vectors[j] );
 				MathVector3.add( sum, projected, sum );

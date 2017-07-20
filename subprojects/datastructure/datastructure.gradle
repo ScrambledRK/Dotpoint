@@ -4,7 +4,7 @@ model
 	{
 		main(IApplicationComponent)
 		{
-			platform "java","neko"			
+			platform "java","neko","javascript"			
 			buildType "release"
 
 			options.add("macro",'include("at.dotpoint")');

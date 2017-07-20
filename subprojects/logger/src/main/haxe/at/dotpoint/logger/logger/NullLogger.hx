@@ -1,6 +1,5 @@
 package at.dotpoint.logger.logger;
 
-import at.dotpoint.logger.ILogger;
 import at.dotpoint.logger.LoggerSettings;
 import at.dotpoint.logger.LogType;
 import haxe.PosInfos;
