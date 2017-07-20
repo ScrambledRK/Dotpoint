@@ -11,7 +11,10 @@ rootProject.name = 'dotpoint';
 //
 rootProject.children.each { project ->
 
-    project.projectDir = new File( settingsDir, "subprojects/" + project.name );
+    String proot = project.projectDir;
+    proot = proot[0..-(project.name.length()+1)];
+
+    project.projectDir = new File( proot, "subprojects/" + project.name );
     project.buildFileName  = project.name + ".gradle";
 
     assert project.projectDir.isDirectory();

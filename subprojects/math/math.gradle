@@ -1,54 +1,54 @@
 model
 {
 	components
-	{	
+	{
 		main(IApplicationComponent)
 		{
-			platform "java"			
+			platform "java","neko"			
 			buildType "release"
-			
+
 			options.add("macro",'include("at.dotpoint")');
 			options.add("hxml",'-dce no');
-			
+
 			sources
-			{		
+			{
 				compile(ISourceSet)
-				{	
+				{
 					dependencies
 					{
 						library( ":datastructure", "main" );
 					}
-				
+
 					source.srcDir file('src/main/haxe')
 					source.include '**/*.hx'
-					
-					platform "haxe"					
-				}	
-			}	
+
+					platform "haxe"
+				}
+			}
 
 			tests
 			{
 				unit(ITestComponent)
 				{
 					main = "at.dotpoint.math.MathTestRunner";
-				
+
 					sources
-					{	
+					{
 						test(ISourceSet)
-						{		
+						{
 							dependencies
 							{
 								library( ":unit", "main" );
 							}
-						
+
 							source.srcDir file('src/test/haxe')
 							source.include '**/*.hx'
-							
-							platform "haxe"					
+
+							platform "haxe"
 						}
-					}						
+					}
 				}
-			}			
+			}
 		}
-	}	
+	}
 }

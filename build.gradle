@@ -1,11 +1,11 @@
-buildscript 
+buildscript
 {
-    repositories 
+    repositories
 	{
         mavenLocal()
 		mavenCentral()
     }
-    dependencies 
+    dependencies
 	{
         classpath group: 'at.dotpoint', name: 'gradle-haxe-plugin', version: '1.0-SNAPSHOT'
     }
@@ -24,9 +24,19 @@ allprojects
 	version = "0.1-SNAPSHOT";
 
 	//
-	repositories 
+	repositories
 	{
 		mavenLocal()
 		mavenCentral()
 	}
+
+  //
+  buildDir = new File( rootProject.projectDir, "build/" + project.name );
+}
+
+task wizard {
+    subprojects.each
+    {
+      dependsOn it.task(":assemble");
+    }
 }
