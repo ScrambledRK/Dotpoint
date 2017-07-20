@@ -66,7 +66,7 @@ class IndentationFormatter implements ILoggerFormatter
 
 		//
 		if( this.isIncludingPosInfo )
-			result = Std.string( info ) + ":" result;
+			result = Std.string( info ) + ":" + result;
 
 		return result;
 	}

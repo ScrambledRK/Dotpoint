@@ -4,6 +4,7 @@ include ":loader";
 include ":math";
 include ":spatial";
 include ":unit";
+include ":utils";
 
 //
 rootProject.name = 'dotpoint';

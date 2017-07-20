@@ -35,6 +35,6 @@ class TraceLogger extends BaseLogger implements ILogger
 	 */
 	public function log( type:LogType, msg:Dynamic, info:PosInfos ):Void
 	{
-		Log.nativeTrace( this.formatter.format( type, msg ), info );
+		Log.nativeTrace( this.formatter.format( type, msg, info ), info );
 	}
 }

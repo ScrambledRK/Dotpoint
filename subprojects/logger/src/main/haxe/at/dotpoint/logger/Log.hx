@@ -1,6 +1,6 @@
 package at.dotpoint.logger;
 
-import at.dotpoint.logger.ILogger;
+import at.dotpoint.logger.logger.ILogger;
 import at.dotpoint.logger.logger.TraceLogger;
 import haxe.CallStack;
 import haxe.PosInfos;
