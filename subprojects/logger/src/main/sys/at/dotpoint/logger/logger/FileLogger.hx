@@ -1,5 +1,6 @@
 package at.dotpoint.logger.logger;
 
+import sys.io.FileOutput;
 import sys.io.File;
 import haxe.PosInfos;
 import at.dotpoint.logger.formatter.IndentationFormatter;
@@ -40,6 +41,8 @@ class FileLogger extends BaseLogger implements ILogger
 		var result:String = this.formatter.format( type, msg, info );
 			result += "\n";
 
-		File.append( this.path, false ).writeString( now + " - " + result );
+		var output:FileOutput = File.append( this.path, false );
+			output.writeString( now + " - " + result );
+			output.close();
 	}
 }
