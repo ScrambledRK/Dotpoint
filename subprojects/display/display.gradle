@@ -1,18 +1,15 @@
 model
 {
 	components
-	{	
-		main(IApplicationComponent)
+	{
+		main
 		{
-			platform "java"			
-			buildType "release"
-			
 			options.add("macro",'include("at.dotpoint")');
 			options.add("hxml",'-dce no');
-			
+
 			sources
-			{		
-				compile(ISourceSet)
+			{
+				all
 				{
 					dependencies
 					{
@@ -20,13 +17,8 @@ model
 						library( ":spatial", "main" );
 						library( ":math", "main" );
 					}
-
-					source.srcDir file('src/main/haxe')
-					source.include '**/*.hx'
-					
-					platform "haxe"					
-				}	
-			}	
-		}
-	}	
+				}
+			}
+		} // main
+	}
 }

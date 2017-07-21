@@ -2,24 +2,10 @@ model
 {
 	components
 	{
-		main(IApplicationComponent)
+		main
 		{
-			platform "java","neko","javascript"
-			buildType "release"
-
 			options.add("macro",'include("at.dotpoint")');
 			options.add("hxml",'-dce no');
-
-			sources
-			{
-				compile(ISourceSet)
-				{
-					source.srcDir file('src/main/haxe')
-					source.include '**/*.hx'
-
-					platform "haxe"
-				}
-			}
 		}
 	}
 }

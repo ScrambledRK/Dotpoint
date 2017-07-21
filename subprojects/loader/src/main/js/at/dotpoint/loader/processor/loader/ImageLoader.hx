@@ -4,7 +4,6 @@ import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.loader.processor.ADataProcessor;
 import at.dotpoint.loader.processor.loader.IDataLoader;
 import at.dotpoint.loader.URLRequest;
-import at.dotpoint.logger.Log;
 import js.html.ImageElement;
 
 /**
@@ -66,9 +65,6 @@ class ImageLoader extends ADataProcessor implements IDataLoader<ImageElement>
 
 		this.loader.onerror 	= null;
 		this.loader.onload 		= null;
-
-		if( this.isProcessing )
-			Log.warn( "Image still loading, cannot abort it" );
 
 		this.loader = null;
 	}

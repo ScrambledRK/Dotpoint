@@ -5,7 +5,6 @@ import at.dotpoint.loader.event.ProgressEvent;
 import at.dotpoint.loader.processor.ADataProcessor;
 import at.dotpoint.loader.processor.loader.IDataLoader;
 import at.dotpoint.loader.URLRequest;
-import at.dotpoint.logger.Log;
 import js.html.AudioElement;
 
 /**
@@ -69,9 +68,6 @@ class AudioLoader extends ADataProcessor implements IDataLoader<AudioElement>
 		this.loader.onerror = null;
 		this.loader.removeEventListener( "progress", this.onProgress );
 		this.loader.removeEventListener( "canplaythrough", this.onComplete );
-
-		if( this.isProcessing )
-			Log.warn( "Audio still loading, cannot abort it" );
 
 		this.loader = null;
 	}

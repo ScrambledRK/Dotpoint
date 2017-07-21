@@ -1,20 +1,20 @@
 buildscript
 {
-    repositories
+  repositories
 	{
-        mavenLocal()
+    mavenLocal()
 		mavenCentral()
-    }
-    dependencies
+  }
+  dependencies
 	{
-        classpath group: 'at.dotpoint', name: 'gradle-haxe-plugin', version: '1.0-SNAPSHOT'
-    }
+    classpath group: 'at.dotpoint', name: 'gradle-haxe-plugin', version: '1.0-SNAPSHOT'
+  }
 }
 
 // /////////////////////////////////////////////// //
 // /////////////////////////////////////////////// //
 
-allprojects
+subprojects
 {
 	apply plugin: 'haxe';
 	apply plugin: 'idea';
@@ -32,11 +32,15 @@ allprojects
 
   //
   buildDir = new File( rootProject.projectDir, "build/" + project.name );
-}
 
-task wizard {
-    subprojects.each
+  //
+  model
+  {
+    platformContainer
     {
-      dependsOn it.task(":assemble");
+     javascript(IPlatform)
+     neko(IPlatform)
+     java(IPlatform)
     }
+  }
 }

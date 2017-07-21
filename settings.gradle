@@ -1,6 +1,7 @@
 include ":datastructure";
 include ":display";
 include ":loader";
+include ":logger";
 include ":math";
 include ":spatial";
 include ":unit";
