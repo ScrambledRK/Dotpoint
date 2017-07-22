@@ -11,16 +11,14 @@ class IndentationFormatter implements ILoggerFormatter
 	 *
 	 */
 	private var step:Int;
-	private var isIncludingPosInfo:Bool;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( isIncludingPosInfo:Bool = false )
+	public function new()
 	{
 		this.step = 0;
-		this.isIncludingPosInfo = false;
 	}
 
 	// ************************************************************************ //
@@ -64,10 +62,6 @@ class IndentationFormatter implements ILoggerFormatter
 			}
 		}
 
-		//
-		if( this.isIncludingPosInfo )
-			result = Std.string( info ) + ":" + result;
-
 		return result;
 	}
 
@@ -76,12 +70,7 @@ class IndentationFormatter implements ILoggerFormatter
 	 */
 	public function message( type:LogType, msg:Dynamic, info:PosInfos ):String
 	{
-		var result:String = Std.string( msg );
-
-		if( type == LogType.INFO )
-			return result;
-
-		return type + " :: " + result;
+		return Std.string( msg );
 	}
 
 	/**

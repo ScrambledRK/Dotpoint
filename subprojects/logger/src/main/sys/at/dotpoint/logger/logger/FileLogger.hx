@@ -20,7 +20,7 @@ class FileLogger extends BaseLogger implements ILogger
 
 	public function new( ?settings:LoggerSettings, ?path:String )
 	{
-		super( settings, new IndentationFormatter( true ) );
+		super( settings, new IndentationFormatter() );
 		this.path = path != null ? path : "./log.txt";
 	}
 
