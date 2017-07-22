@@ -1,29 +1,21 @@
 package at.dotpoint.logger.logger;
 
-import sys.io.FileOutput;
-import sys.io.File;
 import haxe.PosInfos;
 import at.dotpoint.logger.formatter.IndentationFormatter;
 
-// TODO: log file might not exist (or directory, so create it first)
-
 /**
- * ...
- * @author RK
+ *
  */
-class FileLogger extends BaseLogger implements ILogger
+class ConsoleLogger extends BaseLogger implements ILogger
 {
-	//
-	private var path:String;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?settings:LoggerSettings, ?path:String )
+	public function new( ?settings:LoggerSettings )
 	{
 		super( settings, new IndentationFormatter() );
-		this.path = path != null ? path : "./log.txt";
 	}
 
 	// ************************************************************************ //
@@ -38,13 +30,16 @@ class FileLogger extends BaseLogger implements ILogger
 	 */
 	public function log( type:LogType, msg:Dynamic, info:PosInfos ):Void
 	{
-		var now:String = Date.now().toString();
-
 		var result:String = this.formatter.format( type, msg, info );
-			result += "\n";
 
-		var output:FileOutput = File.append( this.path, false );
-			output.writeString( now + " - " + result );
-			output.close();
+		switch( type )
+		{
+			case LogType.ERROR:
+				js.Browser.console.error( result );
+
+			default:
+				js.Browser.console.info( result );
+		}
+
 	}
 }
