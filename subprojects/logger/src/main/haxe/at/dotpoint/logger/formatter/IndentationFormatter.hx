@@ -70,7 +70,10 @@ class IndentationFormatter implements ILoggerFormatter
 	 */
 	public function message( type:LogType, msg:Dynamic, info:PosInfos ):String
 	{
-		return Std.string( msg );
+		var result:String = Std.string( msg );
+		var padding:String = this.getPrefix();
+
+		return result.split("\n").join("\n" + padding);
 	}
 
 	/**

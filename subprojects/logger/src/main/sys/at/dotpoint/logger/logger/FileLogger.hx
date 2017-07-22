@@ -38,13 +38,28 @@ class FileLogger extends BaseLogger implements ILogger
 	 */
 	public function log( type:LogType, msg:Dynamic, info:PosInfos ):Void
 	{
-		var now:String = Date.now().toString();
-
+		var prefix:String = Date.now().toString() + " - ";
 		var result:String = this.formatter.format( type, msg, info );
-			result += "\n";
+
+		result = prefix + result;
+		result = result.split( "\n" ).join( "\n" + this.getPadding( prefix.length ) );
 
 		var output:FileOutput = File.append( this.path, false );
-			output.writeString( now + " - " + result );
+			output.writeString( result += "\n" );
 			output.close();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	private function getPadding( length:Int ):String
+	{
+		var prefix:String = "";
+
+		for( j in 0...length )
+			prefix += " ";
+
+		return prefix;
 	}
 }
