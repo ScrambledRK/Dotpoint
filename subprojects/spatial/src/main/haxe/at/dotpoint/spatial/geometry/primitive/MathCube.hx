@@ -25,7 +25,7 @@ class MathCube
 	 * @param	output 	optional cube the result will be stored into or new instance if none provided
 	 * @return			provided `output` cube or a new one with the computational result
 	 */
-	inline public static function clone( from:ICube, ?output:ICube ):ICube
+	public static function clone( from:ICube, ?output:ICube ):ICube
 	{
 		if( output == null )
 			output = new Cube();
@@ -49,7 +49,7 @@ class MathCube
 	 * @param 	axis X for width, Y for height, Z for length
 	 * @return 	span between min.x/y/z and max.x/y/z; never negative unless unset (empty cube)
 	 */
-	inline public static function getSpan( a:ICube, axis:AxisEuler ):Float
+	public static function getSpan( a:ICube, axis:AxisEuler ):Float
 	{
 		switch( axis )
 		{
@@ -68,7 +68,7 @@ class MathCube
 	 * @param	pivot used as a center to change the dimension from, default is center
 	 * @return	new width
 	 */
-	inline public static function setSpan( a:ICube, axis:AxisEuler, value:Float, ?pivot:IVector3 ):Float
+	public static function setSpan( a:ICube, axis:AxisEuler, value:Float, ?pivot:IVector3 ):Float
 	{
 		if( value < 0 )
 			throw "dimension must be positive but " + value + " given";
@@ -122,7 +122,7 @@ class MathCube
 	 * @param 	value new min in euler coordinate system 
 	 * @return 	given cube 'a' for chaining
 	 */
-	inline public static function setMin( a:ICube, axis:AxisEuler, value:Float ):ICube
+	public static function setMin( a:ICube, axis:AxisEuler, value:Float ):ICube
 	{		
 		switch( axis )
 		{
@@ -161,7 +161,7 @@ class MathCube
 	 * @param 	axis X for width, Y for height, Z for length
 	 * @return 	min.x/y/z
 	 */
-	inline public static function getMin( a:ICube, axis:AxisEuler ):Float
+	public static function getMin( a:ICube, axis:AxisEuler ):Float
 	{ 
 		switch( axis )
 		{
@@ -179,7 +179,7 @@ class MathCube
 	 * @param 	value new max in euler coordinate system 
 	 * @return 	given cube 'a' for chaining
 	 */
-	inline public static function setMax( a:ICube, axis:AxisEuler, value:Float ):ICube
+	public static function setMax( a:ICube, axis:AxisEuler, value:Float ):ICube
 	{		
 		switch( axis )
 		{
@@ -218,7 +218,7 @@ class MathCube
 	 * @param 	axis X for width, Y for height, Z for length
 	 * @return 	max.x/y/z
 	 */
-	inline public static function getMax( a:ICube, axis:AxisEuler ):Float
+	public static function getMax( a:ICube, axis:AxisEuler ):Float
 	{ 
 		switch( axis )
 		{
@@ -243,7 +243,7 @@ class MathCube
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	inline public static function getPoint( a:ICube, point:IVector3, ?output:IVector3 ):IVector3
+	public static function getPoint( a:ICube, point:IVector3, ?output:IVector3 ):IVector3
 	{
 		if( output == null )
 			output = new Vector3();
