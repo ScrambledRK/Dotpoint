@@ -1,12 +1,11 @@
 package at.dotpoint.datastructure.graph.iterator;
 
 import at.dotpoint.datastructure.iterator.IIterator;
-import Bool;
 
 /**
 *
 **/
-class NeighborTraversalNodes extends ANeighborsTraversal<GraphNode> implements IIterator<GraphNode>
+class NeighborTraversalNodes extends ANeighborsTraversal implements IIterator<GraphNode>
 {
 
 	//

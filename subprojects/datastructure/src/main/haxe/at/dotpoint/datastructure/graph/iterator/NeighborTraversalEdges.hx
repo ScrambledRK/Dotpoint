@@ -5,7 +5,7 @@ import at.dotpoint.datastructure.iterator.IIterator;
 /**
 *
 **/
-class NeighborTraversalEdges extends ANeighborsTraversal<GraphEdge> implements IIterator<GraphEdge>
+class NeighborTraversalEdges extends ANeighborsTraversal implements IIterator<GraphEdge>
 {
 
 	//
@@ -97,7 +97,7 @@ class NeighborTraversalEdges extends ANeighborsTraversal<GraphEdge> implements I
 	}
 
 	//
-	private function pullNextEdge():GraphNode
+	private function pullNextEdge():GraphEdge
 	{
 		var id:Int = this.isBreathFirst ? this.buffered.shift() : this.buffered.pop();
 		return this.container.getEdgeByID( id );

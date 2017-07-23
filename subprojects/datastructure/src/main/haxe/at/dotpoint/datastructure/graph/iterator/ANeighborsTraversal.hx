@@ -53,6 +53,8 @@ class ANeighborsTraversal
 	{
 		if( this.buffered.length == 0 )
 			return false;
+
+		return true;
 	}
 
 }

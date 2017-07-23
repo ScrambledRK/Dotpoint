@@ -39,5 +39,7 @@ class GraphEdge
 
 		if( this.bNodeID != nodeID )
 			return this.bNodeID;
+
+		return -1;
 	}
 }
