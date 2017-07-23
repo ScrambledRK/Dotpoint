@@ -31,5 +31,13 @@ class GraphEdge
 	// Methods
 	// ************************************************************************ //
 
+	//
+	public function getNeighborNode( nodeID:Int ):Int
+	{
+		if( this.aNodeID != nodeID )
+			return this.aNodeID;
 
+		if( this.bNodeID != nodeID )
+			return this.bNodeID;
+	}
 }

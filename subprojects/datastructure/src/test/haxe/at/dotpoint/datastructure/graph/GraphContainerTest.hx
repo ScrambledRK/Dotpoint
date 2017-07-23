@@ -172,7 +172,7 @@ class GraphContainerTest extends TestCase
 		container.createEdge( 1, node1, node3 );
 		container.createEdge( 1, node1, node4 );
 
-		var iterator:IIterator<GraphNode> = container.iteratorNeighbors( node1, 1 );
+		var iterator:IIterator<GraphNode> = container.iterNeighborNodes( node1, 1 );
 		var counter:Int = 0;
 
 		while( iterator.hasNext() )

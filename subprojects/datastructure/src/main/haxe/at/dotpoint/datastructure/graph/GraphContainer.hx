@@ -1,6 +1,7 @@
 package at.dotpoint.datastructure.graph;
 
-import at.dotpoint.datastructure.graph.iterator.IterGraphNodeNeighbors;
+import at.dotpoint.datastructure.graph.iterator.NeighborEdges;
+import at.dotpoint.datastructure.graph.iterator.NeighborNodes;
 import at.dotpoint.datastructure.iterator.IIterator;
 
 /**
@@ -202,9 +203,15 @@ class GraphContainer
 	// ************************************************************************ //
 
 	//
-	public function iteratorNeighbors( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphNode>
+	public function iterNeighborNodes( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphNode>
 	{
-		return new IterGraphNodeNeighbors( this, node, edgeType );
+		return new NeighborNodes( this, node, edgeType );
+	}
+
+	//
+	public function iterNeighborEdges( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphEdge>
+	{
+		return new NeighborEdges( this, node, edgeType );
 	}
 
 }

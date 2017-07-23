@@ -1,15 +1,23 @@
 package at.dotpoint.datastructure.graph.iterator;
 
-import at.dotpoint.datastructure.iterator.IIterator;
-
-class IterGraphNodeNeighbors implements IIterator<GraphNode>
+/**
+*
+**/
+class ANeighbors<T>
 {
+	//
 	private var container:GraphContainer;
 
+	//
 	private var node:GraphNode;
 	private var edgeType:Int;
 
+	//
 	private var index:Int;
+
+	// ************************************************************************ //
+	// Constructor
+	// ************************************************************************ //
 
 	//
 	public function new( container:GraphContainer, node:GraphNode, edgeType:Int = -1 )
@@ -22,10 +30,18 @@ class IterGraphNodeNeighbors implements IIterator<GraphNode>
 		this.reset();
 	}
 
+	// ************************************************************************ //
+	// Basic
+	// ************************************************************************ //
+
+	//
 	public function reset():Void
 	{
 		this.index = 0;
 	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
 
 	//
 	public function hasNext():Bool
@@ -56,23 +72,6 @@ class IterGraphNodeNeighbors implements IIterator<GraphNode>
 	}
 
 	//
-	public function next():GraphNode
-	{
-		if( !this.hasNext() )
-			return null;
-
-		var edge:GraphEdge = this.container.getEdgeByID( node.edges[ this.index++ ] );
-
-		if( edge.aNodeID != this.node.ID )
-			return this.container.getNodeByID( edge.aNodeID );
-
-		if( edge.bNodeID != this.node.ID )
-			return this.container.getNodeByID( edge.bNodeID );
-
-		return null;
-	}
-
-	//
 	private function filter( edgeID:Int ):Bool
 	{
 		var edge:GraphEdge = this.container.getEdgeByID( edgeID );
@@ -82,4 +81,5 @@ class IterGraphNodeNeighbors implements IIterator<GraphNode>
 
 		return edge.type == this.edgeType;
 	}
+
 }
