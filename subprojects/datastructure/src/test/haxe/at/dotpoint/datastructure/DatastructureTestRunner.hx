@@ -1,5 +1,6 @@
 package at.dotpoint.datastructure;
 
+import at.dotpoint.datastructure.graph.GraphContainerTest;
 import at.dotpoint.datastructure.bytes.ByteSignatureTest;
 import at.dotpoint.datastructure.pooling.ObjectPoolRegisterTest;
 import haxe.unit.TestRunner;
@@ -28,6 +29,7 @@ class DatastructureTestRunner extends TestRunner
 
 		this.add( new ObjectPoolRegisterTest() );
 		this.add( new ByteSignatureTest() );
+		this.add( new GraphContainerTest() );
 		this.run();
 	}
 

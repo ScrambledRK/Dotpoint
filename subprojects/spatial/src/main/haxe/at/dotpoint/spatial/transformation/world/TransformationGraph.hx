@@ -19,7 +19,6 @@ class TransformationGraph
 	private var register:IObjectPoolRegister;
 	
 	//
-	private var structure:TransformationRelation;
 	private var repository:TransformationCollection;
 	
 	// ************************************************************************ //
@@ -30,7 +29,6 @@ class TransformationGraph
 	{
 		this.register = new ObjectPoolRegister( size );
 		
-		this.structure = new TransformationRelation( size );
 		this.repository = new TransformationCollection( size );
 	}
 	

@@ -47,14 +47,14 @@ class TestCaseHelper
 	/**
 	 *
 	 */
-	public static function aEquals<T>( test:TestCase, expected:T , actual:T, msg:String = "", ?c : PosInfos ):Void
+	public static function aEquals<T>( test:TestCase, a:T , b:T, msg:String = "", ?c : PosInfos ):Void
 	{
 		test.currentTest.done = true;
 
-		if (actual != expected)
+		if (a != b)
 		{
 			test.currentTest.success = false;
-			test.currentTest.error   = "expected '" + expected + "' but was '" + actual + "': " + msg;
+			test.currentTest.error   = '"$a != $b" :: $msg';
 			test.currentTest.posInfos = c;
 
 			throw test.currentTest;

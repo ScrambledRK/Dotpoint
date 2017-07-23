@@ -1,12 +1,10 @@
 package at.dotpoint.spatial.transformation.world;
 
-import at.dotpoint.datastructure.graph.IGraphStructure;
-
 /**
  * ...
  * @author RK
  */
-class TransformationRelation implements IGraphStructure<RelationType> 
+class TransformationRelation
 {
 
 	// ************************************************************************ //
