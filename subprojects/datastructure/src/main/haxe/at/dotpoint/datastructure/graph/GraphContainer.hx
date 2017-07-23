@@ -3,6 +3,10 @@ package at.dotpoint.datastructure.graph;
 /**
  *
  */
+import at.dotpoint.datastructure.graph.iterator.IterGraphNodeNeighbors;
+import at.dotpoint.datastructure.iterator.IIterator;
+import at.dotpoint.datastructure.graph.GraphContainer;
+import at.dotpoint.datastructure.iterator.ArrayIterator;
 class GraphContainer
 {
 
@@ -46,7 +50,16 @@ class GraphContainer
 	 */
 	public function createEdge( type:Int, a:GraphNode, b:GraphNode ):GraphEdge
 	{
-		var edge:GraphEdge = new GraphEdge( this.edges.length, type, a.ID, b.ID );
+		var edge:GraphEdge = this.getEdgeByNodes( type, a, b );
+
+		if( edge != null )
+			return edge;
+
+		//
+		edge = new GraphEdge( this.edges.length, type, a.ID, b.ID );
+
+		a.edges.push( edge.ID );
+		b.edges.push( edge.ID );
 
 		this.edges.push( edge );
 		this.addEdgeType( type );
@@ -99,6 +112,24 @@ class GraphContainer
 	}
 
 	//
+	private function getEdgeByNodes( edgeType:Int, a:GraphNode, b:GraphNode ):GraphEdge
+	{
+		for( edge in this.edges )
+		{
+			if( edge.type != edgeType )
+				continue;
+
+			if( edge.aNodeID == a.ID && edge.bNodeID == b.ID )
+				return edge;
+
+			if( edge.aNodeID == b.ID && edge.bNodeID == a.ID )	// not directed ...
+				return edge;
+		}
+
+		return null;
+	}
+
+	//
 	public function getNumEdges( edgeType:Int ):Int
 	{
 		var typeIndex:Int = this.edgeTypes.indexOf( edgeType );
@@ -116,14 +147,8 @@ class GraphContainer
 	/**
 	 *
 	 */
-	public function removeNode( node:GraphNode, validateGraph:Bool = true ):Void
+	public function removeNode( node:GraphNode ):Void
 	{
-		this.nodes.remove( node );
-
-		if( !validateGraph )
-			return;
-
-		//
 		var toRemove:Array<GraphEdge> = new Array<GraphEdge>();
 
 		for( edge in this.edges )
@@ -135,6 +160,9 @@ class GraphContainer
 		//
 		for( edge in toRemove )
 			this.removeEdge( edge );
+
+		//
+		this.nodes.remove( node );	// must be last, because removeEdge may need it ...
 	}
 
 	/**
@@ -143,6 +171,13 @@ class GraphContainer
 	public function removeEdge( edge:GraphEdge ):Void
 	{
 		this.edges.remove( edge );
+
+		var a:GraphNode = this.getNodeByID( edge.aNodeID );
+		var b:GraphNode = this.getNodeByID( edge.bNodeID );
+
+		a.edges.remove( edge.ID );
+		b.edges.remove( edge.ID );
+
 		this.removeEdgeType( edge.type );
 	}
 
@@ -162,4 +197,17 @@ class GraphContainer
 			}
 		}
 	}
+
+	// ************************************************************************ //
+	// ITERATOR
+	// ************************************************************************ //
+
+	//
+	public function iteratorNeighbors( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphNode>
+	{
+		return new IterGraphNodeNeighbors( this, node, edgeType );
+	}
+
 }
+
+

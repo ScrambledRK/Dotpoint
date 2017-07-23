@@ -6,10 +6,10 @@ package at.dotpoint.datastructure.graph;
 class GraphNode
 {
 	//
-	public var ID(default,null):Int;
+	public var ID(default, null):Int;
 
 	//
-	@:isVar public var edges(get,set):Array<Int>;
+	@:isVar public var edges(get, set):Array<Int>;
 
 	// ************************************************************************ //
 	// Constructor
@@ -21,11 +21,11 @@ class GraphNode
 	}
 
 	// ************************************************************************ //
-	// Methods
+	// getter / setter
 	// ************************************************************************ //
 
 	//
-	private function get_edges():Array<Int>
+	private function get_edges( ):Array<Int>
 	{
 		if( this.edges == null )
 			this.edges = new Array<Int>();
@@ -38,4 +38,5 @@ class GraphNode
 	{
 		return this.edges = value;
 	}
+
 }
