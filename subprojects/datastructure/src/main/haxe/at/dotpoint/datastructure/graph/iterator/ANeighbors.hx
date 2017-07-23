@@ -48,7 +48,7 @@ class ANeighbors<T>
 	{
 		var list:Array<Int> = this.node.edges;
 
-		if( list.length < this.index )
+		if( this.index >= list.length )
 			return false;
 
 		if( this.edgeType == -1 )

@@ -5,10 +5,15 @@ import at.dotpoint.datastructure.iterator.IIterator;
 /**
 *
 **/
-class NeighborTraversalNodes extends ANeighborsTraversal implements IIterator<GraphNode>
+class TraversalEdges extends ANeighborsTraversal implements IIterator<GraphEdge>
 {
 
 	//
+	private var nodes:Array<Int>;
+
+	/**
+	 *
+	 */
 	public function new( container:GraphContainer, node:GraphNode, edgeType:Int = -1 )
 	{
 		super( container, node, edgeType );
@@ -21,14 +26,15 @@ class NeighborTraversalNodes extends ANeighborsTraversal implements IIterator<Gr
 	//
 	override public function reset():Void
 	{
-		super.reset();
+		super.reset( );
 
 		//
-		this.visit( this.node.ID );
+		this.nodes = new Array<Int>();
+		this.visit( this.node );
 	}
 
 	//
-	public function next():GraphNode
+	public function next():GraphEdge
 	{
 		if( !this.hasNext() )
 			return null;
@@ -40,28 +46,37 @@ class NeighborTraversalNodes extends ANeighborsTraversal implements IIterator<Gr
 	// ------------------------------------------------------------------------ //
 
 	//
-	private function bufferNext():GraphNode
+	private function bufferNext():GraphEdge
 	{
 		if( !this.hasNext() )
 			return null;
 
 		//
 		var node:GraphNode = this.pullNextNode();
-		var iter:IIterator<GraphNode> = this.container.iterNeighborNodes( node, this.edgeType );
+		var edge:GraphEdge = this.pullNextEdge();
 
-		while( iter.hasNext() )
-			this.visit( iter.next().ID );
+		this.visit( node );
 
-		return node;
+		return edge;
 	}
 
 	//
-	private function visit( ID:Int ):Void
+	private function visit( node:GraphNode ):Void
 	{
-		if( !this.beenVisited( ID ) )
+		var iter:IIterator<GraphEdge> = this.container.iterNeighborEdges( node, this.edgeType );
+
+		//
+		while( iter.hasNext() )
 		{
-			this.buffered.push( ID );
-			this.visited.push( ID );
+			var edge:GraphEdge = iter.next( );
+
+			if( !this.beenVisited( edge.ID ) )
+			{
+				this.nodes.push( edge.getNeighborNode( node.ID ) );
+
+				this.buffered.push( edge.ID );
+				this.visited.push( edge.ID );
+			}
 		}
 	}
 
@@ -77,8 +92,14 @@ class NeighborTraversalNodes extends ANeighborsTraversal implements IIterator<Gr
 	//
 	private function pullNextNode():GraphNode
 	{
-		var id:Int = this.isBreathFirst ? this.buffered.shift() : this.buffered.pop();
+		var id:Int = this.isBreathFirst ? this.nodes.shift() : this.nodes.pop();
 		return this.container.getNodeByID( id );
 	}
 
+	//
+	private function pullNextEdge():GraphEdge
+	{
+		var id:Int = this.isBreathFirst ? this.buffered.shift() : this.buffered.pop();
+		return this.container.getEdgeByID( id );
+	}
 }

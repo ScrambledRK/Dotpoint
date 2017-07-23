@@ -1,5 +1,7 @@
 package at.dotpoint.datastructure.graph;
 
+import at.dotpoint.datastructure.graph.iterator.TraversalNodes;
+import at.dotpoint.datastructure.graph.iterator.TraversalEdges;
 import at.dotpoint.datastructure.graph.iterator.NeighborEdges;
 import at.dotpoint.datastructure.graph.iterator.NeighborNodes;
 import at.dotpoint.datastructure.iterator.IIterator;
@@ -214,6 +216,17 @@ class GraphContainer
 		return new NeighborEdges( this, node, edgeType );
 	}
 
+	//
+	public function iterTraversalNodes( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphNode>
+	{
+		return new TraversalNodes( this, node, edgeType );
+	}
+
+	//
+	public function iterTraversalEdges( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphEdge>
+	{
+		return new TraversalEdges( this, node, edgeType );
+	}
 }
 
 
