@@ -1,18 +1,17 @@
 package at.dotpoint.datastructure.graph;
 
+import at.dotpoint.datastructure.graph.iterator.IterGraphNodeNeighbors;
+import at.dotpoint.datastructure.iterator.IIterator;
+
 /**
  *
  */
-import at.dotpoint.datastructure.graph.iterator.IterGraphNodeNeighbors;
-import at.dotpoint.datastructure.iterator.IIterator;
-import at.dotpoint.datastructure.graph.GraphContainer;
-import at.dotpoint.datastructure.iterator.ArrayIterator;
 class GraphContainer
 {
 
 	//
-	public var nodes(default,null):List<GraphNode>;
-	public var edges(default,null):List<GraphEdge>;
+	public var nodes(default,null):Array<GraphNode>;
+	public var edges(default,null):Array<GraphEdge>;
 
 	public var edgeTypes(default,null):Array<Int>;
 	public var edgeTypesSize(default,null):Array<Int>;
@@ -23,8 +22,8 @@ class GraphContainer
 
 	public function new( )
 	{
-		this.nodes = new List<GraphNode>();
-		this.edges = new List<GraphEdge>();
+		this.nodes = new Array<GraphNode>();
+		this.edges = new Array<GraphEdge>();
 
 		this.edgeTypes = new Array<Int>();
 		this.edgeTypesSize = new Array<Int>();
