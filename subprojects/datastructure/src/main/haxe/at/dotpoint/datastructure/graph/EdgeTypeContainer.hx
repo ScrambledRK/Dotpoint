@@ -6,8 +6,8 @@ package at.dotpoint.datastructure.graph;
 class EdgeTypeContainer
 {
 
-	public var edgeTypes(default,null):Array<Int>;
-	public var edgeTypesSize(default,null):Array<Int>;
+	//
+	public var types(default,null):Array<GraphEdgeType>;
 
 	// ************************************************************************ //
 	// Constructor
@@ -15,8 +15,7 @@ class EdgeTypeContainer
 
 	public function new()
 	{
-		this.edgeTypes = new Array<Int>();
-		this.edgeTypesSize = new Array<Int>();
+		this.types = new Array<GraphEdgeType>();
 	}
 
 	// ************************************************************************ //
@@ -24,55 +23,44 @@ class EdgeTypeContainer
 	// ************************************************************************ //
 
 	//
-	public function addEdgeType( type:Int ):Void
+	public function addEdgeType( type:GraphEdgeType ):Bool
 	{
-		var typeIndex:Int = this.edgeTypes.indexOf( type );
+		var existing:GraphEdgeType = this.getType( type.ID );
 
-		if( typeIndex == -1 )
-		{
-			typeIndex = this.edgeTypes.length;
+		if( existing != null )
+			return false;
 
-			this.edgeTypes.push( typeIndex );
-			this.edgeTypesSize.push( 0 );
-		}
+		this.types.push( type );
 
-		this.edgeTypesSize[typeIndex]++;
+		//
+		return true;
 	}
 
 	//
-	public function removeEdgeType( type:Int ):Void
+	public function removeEdgeType( type:GraphEdgeType ):Bool
 	{
-		var typeIndex:Int = this.edgeTypes.indexOf( type );
-
-		if( typeIndex != -1 )
-		{
-			this.edgeTypesSize[typeIndex]--;
-
-			if( this.edgeTypesSize[typeIndex] <= 0 )
-			{
-				this.edgeTypes.splice( typeIndex, 1 );
-				this.edgeTypesSize.splice( typeIndex, 1 );
-			}
-		}
+		return this.types.remove( type );
 	}
 
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getNumEdges( edgeType:Int ):Int
+	public function getType( ID:Int ):GraphEdgeType
 	{
-		var typeIndex:Int = this.edgeTypes.indexOf( edgeType );
+		for( type in this.types )
+		{
+			if( type.ID == ID )
+				return type;
+		}
 
-		if( typeIndex == -1 )
-			return 0;
-
-		return this.edgeTypesSize[typeIndex];
+		return null;
 	}
 
 	//
 	public function getNumTypes():Int
 	{
-		return this.edgeTypes.length;
+		return this.types.length;
 	}
+
 }

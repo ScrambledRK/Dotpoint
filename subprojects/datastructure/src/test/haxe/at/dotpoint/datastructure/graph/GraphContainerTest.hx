@@ -20,6 +20,7 @@ class GraphContainerTest extends TestCase
 
 		//
 		var container:GraphContainer = new GraphContainer();
+			container.addEdgeType( new GraphEdgeType( 0 ) );
 
 		//
 		i++; j = 0;
@@ -63,6 +64,8 @@ class GraphContainerTest extends TestCase
 		// ------------ //
 
 		var container:GraphContainer = new GraphContainer();
+			container.addEdgeType( new GraphEdgeType( 0 ) );
+			container.addEdgeType( new GraphEdgeType( 1 ) );
 
 		// 1
 		i++; j = 0;
@@ -156,6 +159,8 @@ class GraphContainerTest extends TestCase
 		// ------------ //
 
 		var container:GraphContainer = new GraphContainer();
+			container.addEdgeType( new GraphEdgeType( 0 ) );
+			container.addEdgeType( new GraphEdgeType( 1 ) );
 
 		// 1
 		i++; j = 0;

@@ -48,23 +48,40 @@ class GraphContainer
 	/**
 	 *
 	 */
-	public function createEdge( type:Int, a:GraphNode, b:GraphNode ):GraphEdge
+	public function createEdge( typeID:Int, a:GraphNode, b:GraphNode ):GraphEdge
 	{
+		var type:GraphEdgeType = this.getEdgeTypeByID( typeID );
+
+		if( type == null )
+			throw 'invalid edge type $type';
+
+		//
 		var edge:GraphEdge = this.getEdgeByNodes( type, a, b );
 
 		if( edge != null )
 			return edge;
 
-		//
-		edge = new GraphEdge( this.edges.length, type, a.ID, b.ID );
+		// -------------- //
 
-		a.edges.push( edge.ID );
-		b.edges.push( edge.ID );
+		edge = new GraphEdge( this.edges.length, typeID, a.ID, b.ID );
 
 		this.edges.push( edge );
-		this.types.addEdgeType( type );
+		type.size++;
 
+		//
+		a.edges.push( edge.ID );
+
+		if( !type.isDirected )
+			b.edges.push( edge.ID );
+
+		//
 		return edge;
+	}
+
+	//
+	public function addEdgeType( type:GraphEdgeType ):Bool
+	{
+		return this.types.addEdgeType( type );
 	}
 
 	// ************************************************************************ //
@@ -96,21 +113,31 @@ class GraphContainer
 	}
 
 	//
-	private function getEdgeByNodes( edgeType:Int, a:GraphNode, b:GraphNode ):GraphEdge
+	private function getEdgeByNodes( type:GraphEdgeType, a:GraphNode, b:GraphNode ):GraphEdge
 	{
 		for( edge in this.edges )
 		{
-			if( edge.type != edgeType )
+			if( edge.type != type.ID )
 				continue;
 
 			if( edge.aNodeID == a.ID && edge.bNodeID == b.ID )
 				return edge;
+
+			//
+			if( type.isDirected )
+				continue;
 
 			if( edge.aNodeID == b.ID && edge.bNodeID == a.ID )	// not directed ...
 				return edge;
 		}
 
 		return null;
+	}
+
+	//
+	public function getEdgeTypeByID( ID:Int ):GraphEdgeType
+	{
+		return this.types.getType( ID );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -128,7 +155,12 @@ class GraphContainer
 		if( edgeType == -1 )
 			return this.edges.length;
 
-		return this.types.getNumEdges( edgeType );
+		var type:GraphEdgeType = this.getEdgeTypeByID( edgeType );
+
+		if( type == null )
+			return -1;
+
+		return type.size;
 	}
 
 	//
@@ -144,7 +176,7 @@ class GraphContainer
 	/**
 	 *
 	 */
-	public function removeNode( node:GraphNode ):Void
+	public function removeNode( node:GraphNode ):Bool
 	{
 		var toRemove:Array<GraphEdge> = new Array<GraphEdge>();
 
@@ -159,23 +191,39 @@ class GraphContainer
 			this.removeEdge( edge );
 
 		//
-		this.nodes.remove( node );	// must be last, because removeEdge may need it ...
+		return this.nodes.remove( node );	// must be last, because removeEdge may need it ...
 	}
 
 	/**
 	 *
 	 */
-	public function removeEdge( edge:GraphEdge ):Void
+	public function removeEdge( edge:GraphEdge ):Bool
 	{
-		this.edges.remove( edge );
+		var type:GraphEdgeType = this.getEdgeTypeByID( edge.type );
 
+		if( type == null )
+			throw 'invalid edge type $type';
+
+		//
+		var success:Bool = this.edges.remove( edge );
+
+		//
 		var a:GraphNode = this.getNodeByID( edge.aNodeID );
 		var b:GraphNode = this.getNodeByID( edge.bNodeID );
 
 		a.edges.remove( edge.ID );
 		b.edges.remove( edge.ID );
 
-		this.types.removeEdgeType( edge.type );
+		type.size--;
+
+		//
+		return success;
+	}
+
+	//
+	public function removeEdgeType( type:GraphEdgeType ):Bool
+	{
+		return this.types.removeEdgeType( type );
 	}
 
 	// ************************************************************************ //
