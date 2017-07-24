@@ -16,8 +16,7 @@ class GraphContainer
 	public var nodes(default,null):Array<GraphNode>;
 	public var edges(default,null):Array<GraphEdge>;
 
-	public var edgeTypes(default,null):Array<Int>;
-	public var edgeTypesSize(default,null):Array<Int>;
+	public var types(default,null):EdgeTypeContainer;
 
 	// ************************************************************************ //
 	// Constructor
@@ -28,8 +27,7 @@ class GraphContainer
 		this.nodes = new Array<GraphNode>();
 		this.edges = new Array<GraphEdge>();
 
-		this.edgeTypes = new Array<Int>();
-		this.edgeTypesSize = new Array<Int>();
+		this.types = new EdgeTypeContainer();
 	}
 
 	// ************************************************************************ //
@@ -64,25 +62,9 @@ class GraphContainer
 		b.edges.push( edge.ID );
 
 		this.edges.push( edge );
-		this.addEdgeType( type );
+		this.types.addEdgeType( type );
 
 		return edge;
-	}
-
-	//
-	private function addEdgeType( type:Int ):Void
-	{
-		var typeIndex:Int = this.edgeTypes.indexOf( type );
-
-		if( typeIndex == -1 )
-		{
-			typeIndex = this.edgeTypes.length;
-
-			this.edgeTypes.push( typeIndex );
-			this.edgeTypesSize.push( 0 );
-		}
-
-		this.edgeTypesSize[typeIndex]++;
 	}
 
 	// ************************************************************************ //
@@ -131,15 +113,28 @@ class GraphContainer
 		return null;
 	}
 
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
 	//
-	public function getNumEdges( edgeType:Int ):Int
+	public function getNumNodes():Int
 	{
-		var typeIndex:Int = this.edgeTypes.indexOf( edgeType );
+		return this.nodes.length;
+	}
 
-		if( typeIndex == -1 )
-			return 0;
+	//
+	public function getNumEdges( edgeType:Int = -1 ):Int
+	{
+		if( edgeType == -1 )
+			return this.edges.length;
 
-		return this.edgeTypesSize[typeIndex];
+		return this.types.getNumEdges( edgeType );
+	}
+
+	//
+	public function getNumTypes():Int
+	{
+		return this.types.getNumTypes();
 	}
 
 	// ************************************************************************ //
@@ -180,24 +175,7 @@ class GraphContainer
 		a.edges.remove( edge.ID );
 		b.edges.remove( edge.ID );
 
-		this.removeEdgeType( edge.type );
-	}
-
-	//
-	private function removeEdgeType( type:Int ):Void
-	{
-		var typeIndex:Int = this.edgeTypes.indexOf( type );
-
-		if( typeIndex != -1 )
-		{
-			this.edgeTypesSize[typeIndex]--;
-
-			if( this.edgeTypesSize[typeIndex] <= 0 )
-			{
-				this.edgeTypes.splice( typeIndex, 1 );
-				this.edgeTypesSize.splice( typeIndex, 1 );
-			}
-		}
+		this.types.removeEdgeType( edge.type );
 	}
 
 	// ************************************************************************ //
