@@ -25,7 +25,7 @@ class GraphNode
 	// ************************************************************************ //
 
 	//
-	private function get_edges( ):Array<Int>
+	private function get_edges():Array<Int>
 	{
 		if( this.edges == null )
 			this.edges = new Array<Int>();

@@ -150,23 +150,72 @@ class GraphContainer
 	}
 
 	//
-	public function getNumEdges( edgeType:Int = -1 ):Int
+	public function getNumEdges( ?node:GraphNode, type:Int = -1 ):Int
 	{
-		if( edgeType == -1 )
-			return this.edges.length;
+		if( node != null )
+		{
+			var result:Int = 0;
 
-		var type:GraphEdgeType = this.getEdgeTypeByID( edgeType );
+			for( edge in this.iterNeighborEdges( node, type ) )
+				result++;
 
-		if( type == null )
-			return -1;
+			return result;
+		}
+		else
+		{
+			if( type == -1 )
+				return this.edges.length;
 
-		return type.size;
+			var type:GraphEdgeType = this.getEdgeTypeByID( type );
+
+			if( type == null )
+				return 0;
+
+			return type.size;
+		}
 	}
 
 	//
 	public function getNumTypes():Int
 	{
 		return this.types.getNumTypes();
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	public function getEdgesAsArray( ?node:GraphNode, type:Int = -1 ):Array<GraphEdge>
+	{
+		var result:Array<GraphEdge> = new Array<GraphEdge>();
+
+		if( node != null )
+		{
+			for( edge in this.iterNeighborEdges( node, type ) )
+				result.push( edge );
+		}
+		else
+		{
+			for( edge in this.edges )
+			{
+				if( type == -1 || edge.type == type )
+					result.push( edge );
+			}
+		}
+
+		return result;
+	}
+
+	//
+	public function getNodesAsArray( node:GraphNode, type:Int = -1 ):Array<GraphNode>
+	{
+		var result:Array<GraphNode> = new Array<GraphNode>();
+
+		//
+		for( node in this.iterNeighborNodes( node, type ) )
+			result.push( node );
+
+		return result;
 	}
 
 	// ************************************************************************ //
