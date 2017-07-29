@@ -10,6 +10,8 @@ class ANeighbors<T>
 
 	//
 	private var node:GraphNode;
+
+	private var edges:Array<Int>;
 	private var edgeType:Int;
 
 	//
@@ -25,6 +27,8 @@ class ANeighbors<T>
 		this.container = container;
 
 		this.node = node;
+
+		this.edges = this.node.edges.concat( new Array<Int>() );
 		this.edgeType = edgeType;
 
 		this.reset();
@@ -46,7 +50,7 @@ class ANeighbors<T>
 	//
 	public function hasNext():Bool
 	{
-		var list:Array<Int> = this.node.edges;
+		var list:Array<Int> = this.edges;
 
 		if( this.index >= list.length )
 			return false;

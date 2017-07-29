@@ -7,7 +7,7 @@ import at.dotpoint.datastructure.graph.iterator.NeighborNodes;
 import at.dotpoint.datastructure.iterator.IIterator;
 
 /**
- *
+ * TODO: use ObjectPoolRegister for IDs ...
  */
 class GraphContainer
 {
@@ -91,6 +91,12 @@ class GraphContainer
 	//
 	public function getNodeByID( ID:Int ):GraphNode
 	{
+		var guess:GraphNode = this.guessNodeByID( ID );
+
+		if( guess != null )
+			return guess;
+
+		//
 		for( node in this.nodes )
 		{
 			if( node.ID == ID )
@@ -101,12 +107,46 @@ class GraphContainer
 	}
 
 	//
+	private function guessNodeByID( ID:Int ):GraphNode
+	{
+		if( this.nodes.length > ID )
+		{
+			var guess:GraphNode = this.nodes[ID];
+
+			if( guess.ID == ID )
+				return guess;
+		}
+
+		return null;
+	}
+
+	//
 	public function getEdgeByID( ID:Int ):GraphEdge
 	{
+		var guess:GraphEdge = this.guessEdgeByID( ID );
+
+		if( guess != null )
+			return guess;
+
+		//
 		for( edge in this.edges )
 		{
 			if( edge.ID == ID )
 				return edge;
+		}
+
+		return null;
+	}
+
+	//
+	private function guessEdgeByID( ID:Int ):GraphEdge
+	{
+		if( this.edges.length > ID )
+		{
+			var guess:GraphEdge = this.edges[ID];
+
+			if( guess.ID == ID )
+				return guess;
 		}
 
 		return null;

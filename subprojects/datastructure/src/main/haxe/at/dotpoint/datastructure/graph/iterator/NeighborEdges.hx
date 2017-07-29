@@ -24,7 +24,7 @@ class NeighborEdges extends ANeighbors<GraphEdge> implements IIterator<GraphEdge
 		if( !this.hasNext() )
 			return null;
 
-		return this.container.getEdgeByID( node.edges[ this.index++ ] );
+		return this.container.getEdgeByID( this.node.edges[ this.index++ ] );
 	}
 
 }

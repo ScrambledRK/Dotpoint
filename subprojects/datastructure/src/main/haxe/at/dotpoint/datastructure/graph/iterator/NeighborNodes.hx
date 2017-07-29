@@ -24,7 +24,7 @@ class NeighborNodes extends ANeighbors<GraphNode> implements IIterator<GraphNode
 		if( !this.hasNext() )
 			return null;
 
-		var edge:GraphEdge = this.container.getEdgeByID( node.edges[ this.index++ ] );
+		var edge:GraphEdge = this.container.getEdgeByID( this.edges[ this.index++ ] );
 		return this.container.getNodeByID( edge.getNeighborNode( this.node.ID ) );
 	}
 
