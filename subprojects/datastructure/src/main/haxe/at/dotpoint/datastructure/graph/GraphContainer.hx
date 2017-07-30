@@ -1,5 +1,6 @@
 package at.dotpoint.datastructure.graph;
 
+import at.dotpoint.datastructure.iterator.ArrayIterator;
 import at.dotpoint.datastructure.graph.iterator.TraversalNodes;
 import at.dotpoint.datastructure.graph.iterator.TraversalEdges;
 import at.dotpoint.datastructure.graph.iterator.NeighborEdges;
@@ -13,10 +14,13 @@ class GraphContainer
 {
 
 	//
-	public var nodes(default,null):Array<GraphNode>;
-	public var edges(default,null):Array<GraphEdge>;
+	private var nodes(default,null):Array<GraphNode>;
+	private var edges(default,null):Array<GraphEdge>;
+	private var types(default,null):EdgeTypeContainer;
 
-	public var types(default,null):EdgeTypeContainer;
+	//
+	public var numNodes(default,null):Int;
+	public var numEdges(default,null):Int;
 
 	// ************************************************************************ //
 	// Constructor
@@ -28,6 +32,38 @@ class GraphContainer
 		this.edges = new Array<GraphEdge>();
 
 		this.types = new EdgeTypeContainer();
+
+		//
+		this.numNodes = 0;
+		this.numEdges = 0;
+	}
+
+	// ************************************************************************ //
+	// LISTENER
+	// ************************************************************************ //
+
+	//
+	private function onCreateNode( node:GraphNode ):Bool
+	{
+		return true;
+	}
+
+	//
+	private function onCreateEdge( node:GraphEdge ):Bool
+	{
+		return true;
+	}
+
+	//
+	private function onRemoveNode( node:GraphNode ):Bool
+	{
+		return true;
+	}
+
+	//
+	private function onRemoveEdge( node:GraphEdge ):Bool
+	{
+		return true;
 	}
 
 	// ************************************************************************ //
@@ -40,7 +76,13 @@ class GraphContainer
 	public function createNode():GraphNode
 	{
 		var node:GraphNode = new GraphNode( this.nodes.length );
-		this.nodes.push( node );
+
+		if( !this.onCreateNode( node ) )
+			throw 'failed to create node $node';
+
+		//
+		this.nodes[node.ID] = node;
+		this.numNodes++;
 
 		return node;
 	}
@@ -59,13 +101,19 @@ class GraphContainer
 		var edge:GraphEdge = this.getEdgeByNodes( type, a, b );
 
 		if( edge != null )
-			return edge;
+			throw 'edge of type $type between $a and $b exists already';
 
 		// -------------- //
 
 		edge = new GraphEdge( this.edges.length, typeID, a.ID, b.ID );
 
-		this.edges.push( edge );
+		if( !this.onCreateEdge( edge ) )
+			throw 'failed to create edge $edge';
+
+		//
+		this.edges[edge.ID] = edge;
+		this.numEdges++;
+
 		type.size++;
 
 		//
@@ -79,9 +127,86 @@ class GraphContainer
 	}
 
 	//
-	public function addEdgeType( type:GraphEdgeType ):Bool
+	// should be called in extending class
+	//
+	private function addEdgeType( type:GraphEdgeType ):Bool
 	{
 		return this.types.addEdgeType( type );
+	}
+
+	// ************************************************************************ //
+	// REMOVE
+	// ************************************************************************ //
+
+	/**
+	 *
+	 */
+	public function removeNode( node:GraphNode ):Bool
+	{
+		if( !this.onRemoveNode( node ) )
+			throw 'failed to remove node $node';
+
+		//
+		var toRemove:Array<GraphEdge> = new Array<GraphEdge>();
+
+		for( edge in this.edges )
+		{
+			if( edge == null )
+				continue;
+
+			if( edge.aNodeID == node.ID || edge.bNodeID == node.ID )
+				toRemove.push( edge );
+		}
+
+		//
+		for( edge in toRemove )
+			this.removeEdge( edge );
+
+		//
+		this.nodes[node.ID] = null;
+		this.numNodes--;
+
+		//
+		return true; // must be last, because removeEdge may need it ...
+	}
+
+	/**
+	 *
+	 */
+	public function removeEdge( edge:GraphEdge ):Bool
+	{
+		if( !this.onRemoveEdge( edge ) )
+			throw 'failed to remove edge $edge';
+
+		//
+		var type:GraphEdgeType = this.getEdgeTypeByID( edge.type );
+
+		if( type == null )
+			throw 'invalid edge type $type';
+
+		//
+		this.edges[edge.ID] = null;
+		this.numEdges--;
+
+		//
+		var a:GraphNode = this.getNodeByID( edge.aNodeID );
+		var b:GraphNode = this.getNodeByID( edge.bNodeID );
+
+		a.edges.remove( edge.ID );
+		b.edges.remove( edge.ID );
+
+		type.size--;
+
+		//
+		return true;
+	}
+
+	//
+	// should be called in extending class; TODO: remove edge type safly
+	//
+	private function removeEdgeType( type:GraphEdgeType ):Bool
+	{
+		return this.types.removeEdgeType( type );
 	}
 
 	// ************************************************************************ //
@@ -99,6 +224,9 @@ class GraphContainer
 		//
 		for( node in this.nodes )
 		{
+			if( node == null )
+				continue;
+
 			if( node.ID == ID )
 				return node;
 		}
@@ -131,6 +259,9 @@ class GraphContainer
 		//
 		for( edge in this.edges )
 		{
+			if( edge == null )
+				continue;
+
 			if( edge.ID == ID )
 				return edge;
 		}
@@ -157,7 +288,7 @@ class GraphContainer
 	{
 		for( edge in this.edges )
 		{
-			if( edge.type != type.ID )
+			if( edge == null || edge.type != type.ID )
 				continue;
 
 			if( edge.aNodeID == a.ID && edge.bNodeID == b.ID )
@@ -186,7 +317,7 @@ class GraphContainer
 	//
 	public function getNumNodes():Int
 	{
-		return this.nodes.length;
+		return this.numNodes;
 	}
 
 	//
@@ -204,7 +335,7 @@ class GraphContainer
 		else
 		{
 			if( type == -1 )
-				return this.edges.length;
+				return this.numEdges;
 
 			var type:GraphEdgeType = this.getEdgeTypeByID( type );
 
@@ -219,100 +350,6 @@ class GraphContainer
 	public function getNumTypes():Int
 	{
 		return this.types.getNumTypes();
-	}
-
-	// ------------------------------------------------------------------------ //
-	// ------------------------------------------------------------------------ //
-
-	//
-	public function getEdgesAsArray( ?node:GraphNode, type:Int = -1 ):Array<GraphEdge>
-	{
-		var result:Array<GraphEdge> = new Array<GraphEdge>();
-
-		if( node != null )
-		{
-			for( edge in this.iterNeighborEdges( node, type ) )
-				result.push( edge );
-		}
-		else
-		{
-			for( edge in this.edges )
-			{
-				if( type == -1 || edge.type == type )
-					result.push( edge );
-			}
-		}
-
-		return result;
-	}
-
-	//
-	public function getNodesAsArray( node:GraphNode, type:Int = -1 ):Array<GraphNode>
-	{
-		var result:Array<GraphNode> = new Array<GraphNode>();
-
-		//
-		for( node in this.iterNeighborNodes( node, type ) )
-			result.push( node );
-
-		return result;
-	}
-
-	// ************************************************************************ //
-	// REMOVE
-	// ************************************************************************ //
-
-	/**
-	 *
-	 */
-	public function removeNode( node:GraphNode ):Bool
-	{
-		var toRemove:Array<GraphEdge> = new Array<GraphEdge>();
-
-		for( edge in this.edges )
-		{
-			if( edge.aNodeID == node.ID || edge.bNodeID == node.ID )
-				toRemove.push( edge );
-		}
-
-		//
-		for( edge in toRemove )
-			this.removeEdge( edge );
-
-		//
-		return this.nodes.remove( node );	// must be last, because removeEdge may need it ...
-	}
-
-	/**
-	 *
-	 */
-	public function removeEdge( edge:GraphEdge ):Bool
-	{
-		var type:GraphEdgeType = this.getEdgeTypeByID( edge.type );
-
-		if( type == null )
-			throw 'invalid edge type $type';
-
-		//
-		var success:Bool = this.edges.remove( edge );
-
-		//
-		var a:GraphNode = this.getNodeByID( edge.aNodeID );
-		var b:GraphNode = this.getNodeByID( edge.bNodeID );
-
-		a.edges.remove( edge.ID );
-		b.edges.remove( edge.ID );
-
-		type.size--;
-
-		//
-		return success;
-	}
-
-	//
-	public function removeEdgeType( type:GraphEdgeType ):Bool
-	{
-		return this.types.removeEdgeType( type );
 	}
 
 	// ************************************************************************ //
@@ -341,6 +378,30 @@ class GraphContainer
 	public function iterTraversalEdges( node:GraphNode, edgeType:Int = -1 ):IIterator<GraphEdge>
 	{
 		return new TraversalEdges( this, node, edgeType );
+	}
+
+	//
+	public function iterNodes():IIterator<GraphNode>
+	{
+		var iter:ArrayIterator<GraphNode> = new ArrayIterator<GraphNode>( this.nodes );
+			iter.filter = function( node:GraphNode ):Bool
+			{
+				return node != null;
+			};
+
+		return iter;
+	}
+
+	//
+	public function iterEdges( ):IIterator<GraphEdge>
+	{
+		var iter:ArrayIterator<GraphEdge> = new ArrayIterator<GraphEdge>( this.edges );
+			iter.filter = function( edge:GraphEdge ):Bool
+		{
+			return edge != null;
+		};
+
+		return iter;
 	}
 }
 
