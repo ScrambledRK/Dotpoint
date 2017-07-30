@@ -393,12 +393,18 @@ class GraphContainer
 	}
 
 	//
-	public function iterEdges( ):IIterator<GraphEdge>
+	public function iterEdges( type:Int = -1 ):IIterator<GraphEdge>
 	{
 		var iter:ArrayIterator<GraphEdge> = new ArrayIterator<GraphEdge>( this.edges );
 			iter.filter = function( edge:GraphEdge ):Bool
 		{
-			return edge != null;
+			if( edge == null )
+				return false;
+
+			if( type == -1 )
+				return true;
+
+			return edge.type == type;
 		};
 
 		return iter;
