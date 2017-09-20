@@ -19,7 +19,7 @@ model
 						{
 							dependencies
 							{
-								library( ":unit", "main" );
+								library( ":dotpoint:unit", "main" );
 							}
 						}
 					}

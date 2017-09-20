@@ -13,12 +13,12 @@ model
 				{
 					dependencies
 					{
-						library( ":dotpoint:datastructure", "main" );
-						library( ":dotpoint:spatial", "main" );
-						library( ":dotpoint:math", "main" );
+						library( ":dotpoint:utils", "main" );
+						library( ":dotpoint:loader", "main" );	
+						library( ":dotpoint:datastructure", "main" );					
 					}
 				}
 			}
-		} // main
+		}
 	}
 }

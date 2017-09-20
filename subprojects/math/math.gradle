@@ -13,7 +13,7 @@ model
 				{
 					dependencies
 					{
-						library( ":datastructure", "main" );
+						library( ":dotpoint:datastructure", "main" );
 					}
 				}
 			}
@@ -30,7 +30,7 @@ model
 						{
 							dependencies
 							{
-								library( ":unit", "main" );
+								library( ":dotpoint:unit", "main" );
 							}
 						}
 					}

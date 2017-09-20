@@ -153,12 +153,18 @@ class AFileLoader extends ADataProcessor
 	 */
 	override private function close():Void
 	{
-		this.file.close();
-		this.file = null;
+		if( this.file != null )
+		{
+			this.file.close( );
+			this.file = null;
+		}
 
 		#if !php
-		this.timer.stop();
-		this.timer = null;
+		if( this.timer != null )
+		{
+			this.timer.stop( );
+			this.timer = null;
+		}
 		#end
 
 		this.bytes = null;

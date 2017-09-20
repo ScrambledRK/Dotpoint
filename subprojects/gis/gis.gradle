@@ -16,8 +16,8 @@ model
 				{			
 					dependencies
 					{
-						library( ":datastructure", "main" );
-						library( ":math", "main" );
+						library( ":dotpoint:datastructure", "main" );
+						library( ":dotpoint:math", "main" );
 					}
 				
 					source.srcDir file('src/main/haxe')
@@ -39,7 +39,7 @@ model
 						{		
 							dependencies
 							{
-								library( ":unit", "main" );
+								library( ":dotpoint:unit", "main" );
 							}
 						
 							source.srcDir file('src/test/haxe')
