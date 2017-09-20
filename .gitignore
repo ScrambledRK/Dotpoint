@@ -1,8 +1,4 @@
 .gradle
-*.iml
-*.ipr
-*.iws
-/out
 /build
-build
-bin
+/out
+*.iws
