@@ -1,5 +1,6 @@
 package at.dotpoint.logger.logger;
 
+import sys.FileSystem;
 import sys.io.FileOutput;
 import sys.io.File;
 import haxe.PosInfos;
@@ -15,15 +16,18 @@ class FileLogger extends BaseLogger implements ILogger
 {
 	//
 	private var path:String;
+	private var size:Int;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?settings:LoggerSettings, ?path:String )
+	public function new( ?settings:LoggerSettings, ?path:String, ?size:Int )
 	{
 		super( settings, new IndentationFormatter() );
+
 		this.path = path != null ? path : "./log.txt";
+		this.size = size != null ? size : 0;
 	}
 
 	// ************************************************************************ //
@@ -43,6 +47,13 @@ class FileLogger extends BaseLogger implements ILogger
 
 		result = prefix + result;
 		result = result.split( "\n" ).join( "\n" + this.getPadding( prefix.length ) );
+
+		//
+		if( this.size > 0 && FileSystem.exists( this.path ) )
+		{
+			if( FileSystem.stat( this.path ).size > this.size )
+				FileSystem.deleteFile( this.path );
+		}
 
 		var output:FileOutput = File.append( this.path, false );
 			output.writeString( result += "\n" );
