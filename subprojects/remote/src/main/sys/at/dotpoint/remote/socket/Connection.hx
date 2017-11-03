@@ -1,20 +1,28 @@
-package at.dotpoint.http.service;
+package at.dotpoint.remote.socket;
 
-import at.dotpoint.utils.ApplicationInfo;
+import sys.net.Host;
 
 /**
  *
  */
-class DebugService extends RestService
+class Connection
 {
+	public var host:Host;
+	public var port:Int;
+
+	//
+	public var numConnections:Int;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?settings:ResponseSettings )
+	public function new( host:Host, port:Int, connections:Int = 10 )
 	{
-		super( settings );
+		this.host = host;
+		this.port = port;
+
+		this.numConnections = connections;
 	}
 
 	// ************************************************************************ //
@@ -22,8 +30,8 @@ class DebugService extends RestService
 	// ************************************************************************ //
 
 	//
-	public function doHealthcheck( ):Void
+	public function toString():String
 	{
-		this.respondData( new ApplicationInfo() );
+		return '$host:$port';
 	}
 }
