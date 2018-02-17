@@ -20,7 +20,6 @@ class ObjectPoolRegister implements IObjectPoolRegister
 	private var total:Int;
 	private var next:Int;
 	
-	
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //	

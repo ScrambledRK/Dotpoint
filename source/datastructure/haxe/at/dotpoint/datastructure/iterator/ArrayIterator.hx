@@ -61,9 +61,9 @@ class ArrayIterator<T> implements IIterator<T>
 	}
 
 	//
-	public function next():T
+	public function next( checkHasNext:Bool = true ):Null<T>
 	{
-		if( this.hasNext() )
+		if( !checkHasNext || this.hasNext() )
 			return this.list[this.index++];
 
 		return null;
