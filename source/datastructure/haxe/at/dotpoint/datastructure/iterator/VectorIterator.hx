@@ -63,7 +63,7 @@ class VectorIterator<T> implements IIterator<T>
 	}
 
 	//
-	public function next( checkHasNext:Bool = true ):Null<T>
+	public function getNext( checkHasNext:Bool = true ):Null<T>
 	{
 		if( !checkHasNext || this.hasNext() )
 			return this.list[this.index++];

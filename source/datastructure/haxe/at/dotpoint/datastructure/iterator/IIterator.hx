@@ -7,5 +7,5 @@ interface IIterator<T>
 {
 	public function reset():Void;
 	public function hasNext():Bool;
-	public function next( checkHasNext:Bool = true ):Null<T>;
+	public function getNext( checkHasNext:Bool = true ):Null<T>;
 }
