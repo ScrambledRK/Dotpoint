@@ -4,21 +4,15 @@ import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 
 //
-class CallbackParser<TInput, TResult> extends ADataProcess<TInput, TResult>
+class NullParser<T> extends ADataProcess<T,T>
 {
 
-	//
-	public var callback:TInput -> TResult;
-
 	/**
-	 * is sync - so make it quick ...
+	 *
 	 */
-	public function new( ?proxy:IEventDispatcher, ?callback:TInput -> TResult )
+	public function new( ?proxy:IEventDispatcher )
 	{
 		super( proxy );
-
-		//
-		this.callback = callback;
 	}
 
 	// ************************************************************************ //
@@ -30,15 +24,7 @@ class CallbackParser<TInput, TResult> extends ADataProcess<TInput, TResult>
 	{
 		this.setStatus( StatusEvent.STARTED, true );
 
-		try
-		{
-			this.result = this.callback( this.input );
-		}
-		catch( error:Dynamic )
-		{
-			this.error( Std.string( error ), true );
-			return;
-		}
+		this.result = this.input;
 
 		this.setStatus( StatusEvent.COMPLETE, true );
 	}

@@ -55,6 +55,16 @@ class ATask extends EventDispatcher implements ITask
 			throw "cannot stop an idle process";
 	}
 
+	//
+	private function error( ?message:String, ?errorID:Int, dispatch:Bool = true):Void
+	{
+		if( dispatch )
+			this.dispatch( ErrorEvent.ERROR, new ErrorEvent( ErrorEvent.ERROR, message, errorID ) );
+
+		if( this.isProcessing && !this.isComplete )
+			this.stop();
+	}
+
 	// ************************************************************************ //
 	// Methods
 	// ************************************************************************ //

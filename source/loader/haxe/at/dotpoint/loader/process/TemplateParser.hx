@@ -1,24 +1,26 @@
 package at.dotpoint.loader.process;
 
+import haxe.Template;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 
 //
-class CallbackParser<TInput, TResult> extends ADataProcess<TInput, TResult>
+class TemplateParser extends ADataProcess<String,String>
 {
 
 	//
-	public var callback:TInput -> TResult;
+	private var context:Dynamic;
+	private var macros:Dynamic;
 
 	/**
-	 * is sync - so make it quick ...
+	 *
 	 */
-	public function new( ?proxy:IEventDispatcher, ?callback:TInput -> TResult )
+	public function new( context:Dynamic, ?macros:Dynamic, ?proxy:IEventDispatcher )
 	{
 		super( proxy );
 
-		//
-		this.callback = callback;
+		this.context = context;
+		this.macros = macros;
 	}
 
 	// ************************************************************************ //
@@ -32,7 +34,7 @@ class CallbackParser<TInput, TResult> extends ADataProcess<TInput, TResult>
 
 		try
 		{
-			this.result = this.callback( this.input );
+			this.result = new Template( this.input ).execute( this.context, this.macros );
 		}
 		catch( error:Dynamic )
 		{
