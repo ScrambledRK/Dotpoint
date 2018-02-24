@@ -18,7 +18,7 @@ class TemplateRequest extends DataRequest<Request, String, String>
 	 */
 	public function new( request:Request, ?parser:IDataProcess<String, String>, ratio:Float = 0.9 )
 	{
-		super( request, this, ratio );
+		super( request, ratio );
 
 		//
 		this.parser = parser != null ? parser : new NullParser();

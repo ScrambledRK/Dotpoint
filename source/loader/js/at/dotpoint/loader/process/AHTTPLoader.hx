@@ -193,7 +193,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			else
 			{
 				var error:ErrorEvent = new ErrorEvent( ErrorEvent.ERROR );
-				error.message = Std.string( event );
+					error.message = Std.string( event );
 
 				this.dispatch( ErrorEvent.ERROR, error );
 			}
