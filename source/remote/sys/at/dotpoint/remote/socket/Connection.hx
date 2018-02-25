@@ -7,12 +7,13 @@ import sys.net.Host;
  */
 class Connection
 {
+
+	//
 	public var host:Host;
 	public var port:Int;
 
 	//
 	public var numConnections:Int;
-	public var useBlocking:Bool;
 
 	// ************************************************************************ //
 	// Constructor
@@ -24,7 +25,6 @@ class Connection
 		this.port = port;
 
 		this.numConnections = connections;
-		this.useBlocking = true;
 	}
 
 	// ************************************************************************ //

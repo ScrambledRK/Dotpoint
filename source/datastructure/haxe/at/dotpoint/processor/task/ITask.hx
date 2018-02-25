@@ -13,11 +13,11 @@ interface ITask extends IEventDispatcher
 {
 
 	//
-	public var isProcessing(default,null):Bool;
-	public var isComplete(default,null):Bool;
+	public var weight:Float;
 
 	//
-	public var weight:Float;
+	public var isProcessing(default,null):Bool;
+	public var isComplete(default,null):Bool;
 
 	/**
 	 * starts the actions, fires StatusEvents according to the current state

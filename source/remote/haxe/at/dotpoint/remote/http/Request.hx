@@ -31,7 +31,7 @@ class Request
 	// ************************************************************************ //
 
 	//
-	public static function decode( input:Array<String> ):Request
+	public static function decode( input:Array<String>, ?request:Request ):Request
 	{
 		var line:Array<String> = input.shift().split( " " );
 
@@ -39,7 +39,14 @@ class Request
 			throw "invalid header (first-line): " + line;
 
 		//
-		return new Request( line[1], line[0], Header.decode( input ) );
+		if( request == null )
+			request = new Request("");
+
+		request.url = line[1];
+		request.method = line[0];
+		request.header = Header.decode( input );
+
+		return request;
 	}
 
 	public static function encode( input:Request ):Array<String>
