@@ -1,4 +1,4 @@
-package at.dotpoint.remote.http;
+package at.dotpoint.remote.http.header;
 
 /**
  * 
@@ -12,7 +12,9 @@ abstract Status(Int) from Int to Int
 		this = i;
 	}
 
+	//
 	@to
+	//
 	public function toString():String
 	{
 		var i:Int = this;

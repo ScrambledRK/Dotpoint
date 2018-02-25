@@ -1,27 +1,19 @@
 package at.dotpoint.remote.http;
+
+import at.dotpoint.remote.http.header.Host;
+import at.dotpoint.remote.http.header.Protocol;
 import haxe.ds.StringMap;
 using StringTools;
 
 /**
-	Host: localhost:8080
-	Connection: keep-alive
-	Pragma: no-cache
-	Cache-Control: no-cache
-	Upgrade-Insecure-Requests: 1
-	User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
-	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng;q = 0.8
-	Accept-Encoding: gzip, deflate, br
-	Accept-Language: en-US, en;q = 0.8
-	Cookie: XDEBUG_SESSION=PHPSTORM
+
  */
 class Header extends StringMap<String>
 {
 
-	public var host(get,set):{host:String,port:Int};
-
-	public var accept(get, set):Array<MimeType>;
-	public var acceptEncoding(get, set):Array<EncodingType>;
-	public var acceptLanguage(get, set):Array<LanguageType>;
+	//
+	public var host(get,set):Host;
+	public var protocol(get,set):Protocol;
 
 	// ************************************************************************ //
 	// Constructor
@@ -37,29 +29,16 @@ class Header extends StringMap<String>
 	// ************************************************************************ //
 
 	//
-	inline private function get_host():{host:String, port:Int}
+	inline private function get_host():Host
 	{
-		var value:String = this.get( "host" );
-
-		if( value != null )
-		{
-			var split:Array<String> = value.split( ":" );
-
-			var result:Dynamic = {host:null, port:-1};
-				result.host = split[0];
-				result.port = split.length >= 1 ? Std.parseInt( split[1] ) : -1;
-
-			return result;
-		}
-
-		return null;
+		return this.get( "host" );
 	}
 
-	inline private function set_host( value:{host:String, port:Int} ):{host:String, port:Int}
+	inline private function set_host( value:Host ):Host
 	{
 		if( value != null )
 		{
-			this.set( "host", value.host + ":" + value.port );
+			this.set( "host", value );
 		}
 		else
 		{
@@ -70,75 +49,20 @@ class Header extends StringMap<String>
 	}
 
 	//
-	inline private function get_accept():Array<MimeType>
+	inline private function get_protocol( ):Protocol
 	{
-		var value:String = this.get( "accept" );
-
-		if( value != null )
-			return value.split( "," );
-
-		return null;
+		return this.get( "protocol" );
 	}
 
-	inline private function set_accept( value:Array<MimeType> ):Array<MimeType>
+	inline private function set_protocol( value:Protocol ):Protocol
 	{
 		if( value != null )
 		{
-			this.set( "accept", value.join( "," ) );
+			this.set( "protocol", value );
 		}
 		else
 		{
-			this.remove( "accept" );
-		}
-
-		return value;
-	}
-
-	//
-	inline private function get_acceptEncoding( ):Array<EncodingType>
-	{
-		var value:String = this.get( "accept-encoding" );
-
-		if( value != null )
-			return value.split( "," );
-
-		return null;
-	}
-
-	inline private function set_acceptEncoding( value:Array<EncodingType> ):Array<EncodingType>
-	{
-		if( value != null )
-		{
-			this.set( "accept-encoding", value.join( "," ) );
-		}
-		else
-		{
-			this.remove( "accept-encoding" );
-		}
-
-		return value;
-	}
-
-	//
-	inline private function get_acceptLanguage( ):Array<LanguageType>
-	{
-		var value:String = this.get( "accept-language" );
-
-		if( value != null )
-			return value.split( "," );
-
-		return null;
-	}
-
-	inline private function set_acceptLanguage( value:Array<LanguageType> ):Array<LanguageType>
-	{
-		if( value != null )
-		{
-			this.set( "accept-language", value.join( "," ) );
-		}
-		else
-		{
-			this.remove( "accept-language" );
+			this.remove( "protocol" );
 		}
 
 		return value;
@@ -149,9 +73,10 @@ class Header extends StringMap<String>
 	// ************************************************************************ //
 
 	//
-	public static function decode( input:Array<String> ):Header
+	public static function decode( input:Array<String>, ?output:Header ):Header
 	{
-		var result:Header = new Header();
+		if( output == null )
+			output = new Header();
 
 		for( line in input )
 		{
@@ -161,10 +86,10 @@ class Header extends StringMap<String>
 			var value:String = line.substring( idxColon + 1 ).trim( );
 
 			//
-			result.set( param, value );
+			output.set( param, value );
 		}
 
-		return result;
+		return output;
 	}
 
 	//
@@ -180,14 +105,4 @@ class Header extends StringMap<String>
 		return result;
 	}
 
-	//
-	public static function parseQualityFactor( input:String ):Float
-	{
-		var idx:Int = input.indexOf( ";q=" );
-
-		if( idx != -1 )
-			return Std.parseFloat( input.substring( idx + 1 ) );
-
-		return 1;
-	}
 }

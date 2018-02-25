@@ -1,23 +1,24 @@
 package at.dotpoint.remote.http;
 
+import at.dotpoint.remote.http.response.ResponseHeader;
+
 /**
  *
  */
 class Response
 {
 
-	public var status:Status;
-	public var header:Header;
-
+	public var header:ResponseHeader;
+	public var body:Dynamic;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?status:Status, ?header:Header )
+	public function new( header:ResponseHeader, ?body:Dynamic )
 	{
-		this.status = status != null ? status : 200;
 		this.header = header;
+		this.body = body;
 	}
 
 	// ************************************************************************ //

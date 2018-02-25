@@ -1,5 +1,9 @@
 package at.dotpoint.remote.http;
 
+import at.dotpoint.remote.http.request.RequestHeader;
+import at.dotpoint.remote.http.request.Method;
+import at.dotpoint.remote.http.request.Parameters;
+
 /**
  * GET / HTTP/1.1
  */
@@ -9,7 +13,7 @@ class Request
 	public var url:String;
 	public var parameter:Parameters;
 
-	public var header:Header;
+	public var header:RequestHeader;
 	public var method:Method;
 
 	// ************************************************************************ //
@@ -17,13 +21,13 @@ class Request
 	// ************************************************************************ //
 
 	//
-	public function new( url:String, ?method:Method, ?header:Header )
+	public function new( url:String, ?method:Method, ?header:RequestHeader )
 	{
 		this.url = url;
 		this.parameter = url != null ? Parameters.decode( this.url ) : null;
 
 		this.method = method != null ? method : Method.GET;
-		this.header = header != null ? header : new Header();
+		this.header = header != null ? header : new RequestHeader();
 	}
 
 	// ************************************************************************ //
@@ -44,7 +48,7 @@ class Request
 
 		request.url = line[1];
 		request.method = line[0];
-		request.header = Header.decode( input );
+		request.header = cast Header.decode( input, new RequestHeader() );
 
 		return request;
 	}

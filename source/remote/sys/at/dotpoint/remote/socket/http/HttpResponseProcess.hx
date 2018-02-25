@@ -1,5 +1,6 @@
 package at.dotpoint.remote.socket.http;
 
+import at.dotpoint.remote.http.response.ResponseHeader;
 import at.dotpoint.remote.http.Response;
 import at.dotpoint.remote.http.Header;
 import haxe.io.Bytes;
@@ -27,7 +28,7 @@ class HttpResponseProcess implements ISocketProcess<Output>
 	public function new( request:Request )
 	{
 		this.request = request;
-		this.response = new Response();
+		this.response = new Response( new ResponseHeader() );
 	}
 
 	// ************************************************************************ //

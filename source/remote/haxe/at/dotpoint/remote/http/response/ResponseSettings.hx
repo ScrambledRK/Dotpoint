@@ -1,4 +1,4 @@
-package at.dotpoint.remote.http;
+package at.dotpoint.remote.http.response;
 
 /**
  *

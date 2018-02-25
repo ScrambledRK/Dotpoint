@@ -1,6 +1,6 @@
 package at.dotpoint.loader.process;
 
-import at.dotpoint.remote.http.Parameters;
+import at.dotpoint.remote.http.request.Parameters;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
