@@ -17,16 +17,10 @@ class SocketListener
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( connection:Connection, handler:Void->ISocketHandler )
+	public function new( socket:Socket, handler:Void->ISocketHandler )
 	{
-		trace("connection", connection );
-
+		this.socket = socket;
 		this.handler = handler;
-
-		//
-		this.socket = new Socket();
-		this.socket.bind( connection.host, connection.port );
-		this.socket.listen( connection.numConnections );
 
 		//
 		this.bundle = {
