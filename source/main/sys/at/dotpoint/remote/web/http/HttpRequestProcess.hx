@@ -8,9 +8,11 @@ import at.dotpoint.remote.http.Request;
 import haxe.io.Input;
 
 #if neko
-typedef Web = neko.Web;
+private typedef Web = neko.Web;
+private typedef Lib = neko.Lib;
 #elseif php
-typedef Web = php.Web;
+private typedef Web = php.Web;
+private typedef Lib = php.Lib;
 #end
 
 /**

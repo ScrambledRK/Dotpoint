@@ -1,11 +1,16 @@
 package at.dotpoint.remote.web.http;
 
-import at.dotpoint.remote.http.Header;
-import at.dotpoint.remote.http.Request;
-import at.dotpoint.remote.http.response.ResponseHeader;
-import at.dotpoint.remote.http.Response;
 import haxe.io.Bytes;
-import haxe.io.Output;
+import at.dotpoint.remote.http.Request;
+import at.dotpoint.remote.http.Response;
+
+#if neko
+private typedef Web = neko.Web;
+private typedef Lib = neko.Lib;
+#elseif php
+private typedef Web = php.Web;
+private typedef Lib = php.Lib;
+#end
 
 /**
  *
@@ -15,17 +20,17 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 
 	//
 	public var request(default, null):Request;
-	public var response(default,null):Request->Response<String>;
+	public var response(default, null):Request->Response<Bytes>;
 
 	//
-	private var resolve:Void -> Void;
-	private var reject:Dynamic -> Void;
+	private var resolve:Void->Void;
+	private var reject:Dynamic->Void;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( request:Request, response:Request->Response<String> )
+	public function new( request:Request, response:Request->Response<Bytes> )
 	{
 		this.request = request;
 		this.response = response;
@@ -38,13 +43,26 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 	//
 	public function process( stream:Dynamic ):Void
 	{
-		var response:Response<String> = this.response( this.request );
+		var response:Response<Bytes> = this.response( this.request );
 
-		this.resolve();
+		//
+		Web.setReturnCode( response.header.code );
+
+		//
+		for( key in response.header.keys() )
+			Web.setHeader( key, response.header.get( key ) );
+
+		//
+		if( response.body != null)
+			Lib.println( response.body );
+
+		//
+		this.resolve( );
 	}
 
+
 	//
-	public function then( resolve:Void -> Void, ?reject:Dynamic -> Void ):Void
+	public function then( resolve:Void->Void, ?reject:Dynamic->Void ):Void
 	{
 		this.resolve = resolve;
 		this.reject = reject;
