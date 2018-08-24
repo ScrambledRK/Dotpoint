@@ -5,17 +5,17 @@ import at.dotpoint.remote.http.response.ResponseHeader;
 /**
  *
  */
-class Response
+class Response<TBody:Dynamic>
 {
 
 	public var header:ResponseHeader;
-	public var body:Dynamic;
+	public var body:TBody;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( header:ResponseHeader, ?body:Dynamic )
+	public function new( header:ResponseHeader, ?body:TBody )
 	{
 		this.header = header;
 		this.body = body;

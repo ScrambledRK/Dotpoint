@@ -6,7 +6,7 @@ import haxe.io.Input;
 /**
  *
  */
-class HttpRequestProcess implements ISocketProcess<Input>
+class HttpRequestProcess implements IRemoteProcess<Input>
 {
 
 	//

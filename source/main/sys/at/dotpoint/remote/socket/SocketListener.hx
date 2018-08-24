@@ -1,23 +1,25 @@
 package at.dotpoint.remote.socket;
 
+import haxe.io.Output;
+import haxe.io.Input;
 import sys.net.Socket;
 
 /**
  * blocking read/write
  */
-class SocketListener
+class SocketListener implements IRemoteListener
 {
 
 	private var socket:Socket;
 	private var bundle:ClientBundle;
 
-	private var handler:Void->ISocketHandler;
+	private var handler:Void->IRemoteHandler<Input,Output>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( socket:Socket, handler:Void->ISocketHandler )
+	public function new( socket:Socket, handler:Void->IRemoteHandler<Input,Output> )
 	{
 		this.socket = socket;
 		this.handler = handler;
@@ -34,6 +36,12 @@ class SocketListener
 	// Methods
 	// ************************************************************************ //
 
+	//
+	public function isRunning():Bool
+	{
+		return true;
+	}
+
 	/**
 	 * call in while loop
 	 */
@@ -45,10 +53,10 @@ class SocketListener
 			this.openClient( other );
 
 		for( read in bundle.read )
-			cast( read.custom, ISocketHandler ).request.process( read.input );
+			cast( read.custom, IRemoteHandler<Input,Output> ).request.process(read.input );
 
 		for( write in bundle.write )
-			cast( write.custom, ISocketHandler ).response.process( write.output );
+			cast( write.custom, IRemoteHandler<Input,Output> ).response.process(write.output );
 	}
 
 	//
@@ -62,7 +70,7 @@ class SocketListener
 	}
 
 	//
-	private function setupHandler( socket:Socket ):ISocketHandler
+	private function setupHandler( socket:Socket ):IRemoteHandler<Input,Output>
 	{
 		var onRequestComplete:Void -> Void = function( ):Void
 		{
@@ -79,7 +87,7 @@ class SocketListener
 		};
 
 		//
-		var process:ISocketHandler = this.handler( );
+		var process:IRemoteHandler<Input,Output> = this.handler( );
 			process.request.then( onRequestComplete );
 			process.response.then( onResponseComplete );
 

@@ -1,21 +1,21 @@
-package at.dotpoint.remote.socket.http;
+package at.dotpoint.remote.web.http;
 
+import at.dotpoint.remote.http.Header;
+import at.dotpoint.remote.http.Request;
 import at.dotpoint.remote.http.response.ResponseHeader;
 import at.dotpoint.remote.http.Response;
-import at.dotpoint.remote.http.Header;
 import haxe.io.Bytes;
-import at.dotpoint.remote.http.Request;
 import haxe.io.Output;
 
 /**
  *
  */
-class HttpResponseProcess implements IRemoteProcess<Output>
+class HttpResponseProcess implements IRemoteProcess<Dynamic>
 {
 
 	//
 	public var request(default, null):Request;
-	public var response(default,null):Request->Response<Bytes>;
+	public var response(default,null):Request->Response<String>;
 
 	//
 	private var resolve:Void -> Void;
@@ -25,7 +25,7 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( request:Request, response:Request->Response<Bytes> )
+	public function new( request:Request, response:Request->Response<String> )
 	{
 		this.request = request;
 		this.response = response;
@@ -36,34 +36,11 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 	// ************************************************************************ //
 
 	//
-	public function process( stream:Output ):Void
+	public function process( stream:Dynamic ):Void
 	{
-		var response:Response<Bytes> = this.response( this.request );
-
-		//
-		try
-		{
-			stream.write( this.getHeader(response) );
-			stream.write( this.getBody(response) );
-		}
-		catch( error:Dynamic )
-		{
-			trace("error:", error );
-		}
+		var response:Response<String> = this.response( this.request );
 
 		this.resolve();
-	}
-
-	//
-	private function getHeader( response:Response<Bytes> ):Bytes
-	{
-		return Bytes.ofString( Header.encode( response.header ).join( "\r\n" ) );
-	}
-
-	//
-	private function getBody( response:Response<Bytes> ):Bytes
-	{
-		return response.body;
 	}
 
 	//
@@ -72,5 +49,4 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 		this.resolve = resolve;
 		this.reject = reject;
 	}
-
 }

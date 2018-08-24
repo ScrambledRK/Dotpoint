@@ -10,6 +10,8 @@ import at.dotpoint.loader.DataRequest;
 /**
  *
  */
+@:require(js)
+//
 class TemplateRequest extends DataRequest<Request, String, String>
 {
 
