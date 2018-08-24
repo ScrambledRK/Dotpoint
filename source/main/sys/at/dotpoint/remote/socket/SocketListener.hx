@@ -53,10 +53,10 @@ class SocketListener implements IRemoteListener
 			this.openClient( other );
 
 		for( read in bundle.read )
-			cast( read.custom, IRemoteHandler<Input,Output> ).request.process(read.input );
+			cast( read.custom, IRemoteHandler<Dynamic,Dynamic> ).request.process(read.input );
 
 		for( write in bundle.write )
-			cast( write.custom, IRemoteHandler<Input,Output> ).response.process(write.output );
+			cast( write.custom, IRemoteHandler<Dynamic,Dynamic> ).response.process(write.output );
 	}
 
 	//

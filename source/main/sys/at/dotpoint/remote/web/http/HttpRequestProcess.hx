@@ -3,7 +3,7 @@ package at.dotpoint.remote.web.http;
 import at.dotpoint.remote.http.request.RequestHeader;
 import haxe.ds.StringMap;
 import at.dotpoint.remote.http.request.Parameters;
-import php.Web;
+
 import at.dotpoint.remote.http.Request;
 import haxe.io.Input;
 
@@ -43,7 +43,7 @@ class HttpRequestProcess implements IRemoteProcess<Dynamic>
 	public function process( stream:Dynamic ):Void
 	{
 		this.request.url = haxe.web.Request.getURI();
-		this.request.method = Web.getMethod()
+		this.request.method = Web.getMethod();
 
 		this.setHeader();
 		this.setParameters();

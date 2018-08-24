@@ -43,7 +43,15 @@ class RequestHeader extends Header
 		var value:String = this.get( "accept" );
 
 		if( value != null )
-			return value.split( "," );
+		{
+			var input:Array<String> = value.split( "," );
+			var result:Array<MimeType> = new Array<MimeType>();
+
+			for( type in input )
+				result.push( type );
+
+			return result;
+		}
 
 		return null;
 	}

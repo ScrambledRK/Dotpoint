@@ -1,5 +1,6 @@
 package at.dotpoint.remote.web.http;
 
+import at.dotpoint.remote.http.response.ResponseHeader;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.Header;
 import at.dotpoint.remote.http.Response;
@@ -44,7 +45,7 @@ class HttpDispatchHandler implements IRemoteHandler<Dynamic, Dynamic>
 		var status:String = 'HTTP/1.1. 200\r\n\r\n';
 		var header:String = Header.encode(request.header).join("\r\n");
 
-		var result:Response<String> = new Response<String>();
+		var result:Response<String> = new Response<String>( new ResponseHeader() );
 		result.body = status + header;
 
 		return result;

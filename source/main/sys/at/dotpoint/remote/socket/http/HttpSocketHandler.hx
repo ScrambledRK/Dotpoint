@@ -1,5 +1,6 @@
 package at.dotpoint.remote.socket.http;
 
+import at.dotpoint.remote.http.response.ResponseHeader;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.Header;
 import at.dotpoint.remote.http.Request;
@@ -46,7 +47,7 @@ class HttpSocketHandler implements IRemoteHandler<Input,Output>
 		var status:String = 'HTTP/1.1. 200\r\n\r\n';
 		var header:String = Header.encode( request.header ).join( "\r\n" );
 
-		var result:Response<Bytes> = new Response<Bytes>();
+		var result:Response<Bytes> = new Response<Bytes>( new ResponseHeader() );
 			result.body = Bytes.ofString( status + header );
 
 		return result;

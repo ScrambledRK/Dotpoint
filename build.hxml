@@ -1,0 +1,11 @@
+-cp source\main\haxe 
+--macro "include('at.dotpoint')" 
+-dce no 
+
+--each
+-cp source\main\sys 
+-neko output\neko\library.n
+
+--next
+-cp source\main\js 
+-js output\javascript\library.js
