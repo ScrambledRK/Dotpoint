@@ -24,7 +24,7 @@ class RequestRouter implements IRequestRouter
 	// Constructor
 	// ************************************************************************ //
 
-	public function RequestRouter(list:Array<IRouteOption>, ?e404:ErrorOption, ?e500:ErrorOption )
+	public function new(list:Array<IRouteOption>, ?e404:ErrorOption, ?e500:ErrorOption )
 	{
 		this.list = list;
 

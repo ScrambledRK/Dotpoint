@@ -54,7 +54,7 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 
 		//
 		if( response.body != null)
-			Lib.println( response.body );
+			Lib.println( response.body.toString() );
 
 		//
 		this.resolve( );

@@ -16,7 +16,7 @@ class HttpDispatchHandler implements IRemoteHandler<Dynamic, Dynamic>
 	// Constructor
 	// ************************************************************************ //
 
-	public function HttpDispatchHandler( router:IRequestRouter )
+	public function new( router:IRequestRouter )
 	{
 		var rq:HttpRequestProcess = new HttpRequestProcess();
 
