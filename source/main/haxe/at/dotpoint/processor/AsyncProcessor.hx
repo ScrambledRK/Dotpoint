@@ -50,6 +50,9 @@ class AsyncProcessor extends ATask
 	//
 	public function get_tasks( ):Array<ITask>
 	{
+		if( this.tasks == null )
+			this.tasks = new Array<ITask>();
+
 		return this.tasks;
 	}
 
@@ -66,12 +69,12 @@ class AsyncProcessor extends ATask
 	// Process
 	// ************************************************************************ //
 
-	/**
-	 *
-	 */
+	//
 	override public function start( ):Void
 	{
-		if( this.tasks == null )
+		super.start();
+
+		if( this.tasks == null || this.tasks.length == 0 )
 			throw "task list is null, cannot process";
 
 		// -------------- //
@@ -93,12 +96,19 @@ class AsyncProcessor extends ATask
 		this.next();
 	}
 
-	/**
-	 *
-	 */
+	//
 	override public function stop():Void
 	{
-		if( this.isProcessing )
+		super.stop();
+		this.clear();
+
+		this.setStatus( StatusEvent.STOPPED, true );
+	}
+
+	//
+	override public function clear( ):Void
+	{
+		if( this.current > -1 )
 		{
 			var task:ITask = this.tasks[ this.current ];
 				task.removeListener( StatusEvent.STOPPED,   this.onTaskEvent );
@@ -109,9 +119,7 @@ class AsyncProcessor extends ATask
 				task.stop();
 		}
 
-		//
 		this.current = -1;
-		this.setStatus( StatusEvent.STOPPED, true );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -184,7 +192,10 @@ class AsyncProcessor extends ATask
 
 		// ------------- //
 
-		this.processError( event );
+		var proceed:Bool = this.processError( event );
+
+		if( !proceed && this.hasListener( event.type ) )
+			this.dispatch( event.type, event );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -192,29 +203,43 @@ class AsyncProcessor extends ATask
 	//
 
 	//
-	private function processStop( event ):Void
+	private function processStop( event ):Bool
 	{
 		if( this.stoppedHandler == null )
-			this.stop();
+		{
+			if( this.isProcessing )
+				this.stop();
+
+			return false;
+		}
 
 		//
 		var proceed:Bool = this.stoppedHandler( cast( event, StatusEvent ) );
 
 		if( proceed )  this.next();
 		else           this.stop();
+
+		return proceed;
 	}
 
 	//
-	private function processError( event ):Void
+	private function processError( event ):Bool
 	{
 		if( this.errorHandler == null )
-			this.stop();
+		{
+			if( this.isProcessing )
+				this.clear();
+
+			return false;
+		}
 
 		//
 		var proceed:Bool = this.errorHandler( cast( event, ErrorEvent ) );
 
 		if( proceed )  this.next();
 		else           this.stop();
+
+		return proceed;
 	}
 
 	//

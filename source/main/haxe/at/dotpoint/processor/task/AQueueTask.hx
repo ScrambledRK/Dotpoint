@@ -89,7 +89,7 @@ class AQueueTask extends ATask
 		if( this.processor != null )
 			return;
 
-		this.processor = new AsyncProcessor( this );
+		this.processor = new AsyncProcessor( this.target );
 		this.processor.addListener( StatusEvent.STARTED, this.onStatus );
 		this.processor.addListener( StatusEvent.STOPPED, this.onStatus );
 		this.processor.addListener( StatusEvent.COMPLETE, this.onStatus );

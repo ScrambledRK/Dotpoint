@@ -1,11 +1,10 @@
-package at.dotpoint.loader.request;
+package at.dotpoint.template;
 
-import at.dotpoint.loader.process.TemplateParser;
-import at.dotpoint.loader.process.StringLoader;
-import at.dotpoint.loader.process.NullParser;
-import at.dotpoint.loader.IDataProcess;
-import at.dotpoint.remote.http.Request;
+import at.dotpoint.dispatcher.event.IEventDispatcher;
 import at.dotpoint.loader.DataRequest;
+import at.dotpoint.loader.process.NullParser;
+import at.dotpoint.loader.process.StringLoader;
+import at.dotpoint.remote.http.Request;
 
 /**
  *
@@ -16,9 +15,10 @@ class TemplateRequest extends DataRequest<Request, String, String>
 	/**
 	 *
 	 */
-	public function new( request:Request, ?parser:IDataProcess<String, String>, ratio:Float = 0.9 )
+	public function new( request:Request, ?proxy:IEventDispatcher, ?parser:TemplateParser,
+						 ratio:Float = 0.9, weight:Float = 1 )
 	{
-		super( request, ratio );
+		super( request, proxy, ratio, weight );
 
 		//
 		this.parser = parser != null ? parser : new NullParser();

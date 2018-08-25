@@ -32,9 +32,10 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 	//
 	override public function start( ):Void
 	{
-		this.setStatus( StatusEvent.STARTED, true );
+		super.start();
 
 		//
+		this.setStatus( StatusEvent.STARTED, true );
 		this.onProgress( null );
 
 		//
@@ -48,6 +49,15 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 
 	//
 	override public function stop( ):Void
+	{
+		super.stop();
+		this.clear();
+
+		this.setStatus( StatusEvent.STOPPED, true );
+	}
+
+	//
+	override public function clear( ):Void
 	{
 		if( this.loader.isProcessing )
 		{
@@ -64,8 +74,6 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 			this.parser.removeListener( StatusEvent.COMPLETE,   this.onLoaderEvent );
 			this.parser.removeListener( ErrorEvent.ERROR,       this.onError );
 		}
-
-		this.setStatus( StatusEvent.STOPPED, true );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -102,7 +110,10 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 
 			//
 			case StatusEvent.STOPPED:
-				this.stop();
+			{
+				if( this.isProcessing )
+					this.stop();
+			}
 
 			//
 			default:
@@ -137,7 +148,10 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 
 			//
 			case StatusEvent.STOPPED:
-				this.stop();
+			{
+				if( this.isProcessing )
+					this.stop();
+			}
 
 			//
 			default:
@@ -151,8 +165,10 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 	//
 	private function onError( event:ErrorEvent ):Void
 	{
-		this.dispatch( event.type, event );
-		this.stop();
+		if( this.hasListener( event.type ) )
+			this.dispatch( event.type, event );
+
+		this.clear();
 	}
 
 	//

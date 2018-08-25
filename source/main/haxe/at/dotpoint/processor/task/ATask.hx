@@ -1,10 +1,10 @@
 package at.dotpoint.processor.task;
 
 //
-import at.dotpoint.dispatcher.event.generic.ProgressEvent;
-import at.dotpoint.dispatcher.event.generic.ErrorEvent;
-import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.EventDispatcher;
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import at.dotpoint.dispatcher.event.generic.ProgressEvent;
+import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 
 //
@@ -56,13 +56,18 @@ class ATask extends EventDispatcher implements ITask
 	}
 
 	//
-	private function error( ?message:String, ?errorID:Int, dispatch:Bool = true):Void
+	private function error( ?code:Int, ?message:String, dispatch:Bool = true):Void
 	{
-		if( dispatch )
-			this.dispatch( ErrorEvent.ERROR, new ErrorEvent( ErrorEvent.ERROR, message, errorID ) );
+		if( dispatch && this.hasListener( ErrorEvent.ERROR ) )
+			this.dispatch( ErrorEvent.ERROR, new ErrorEvent( code, message ) );
 
-		if( this.isProcessing && !this.isComplete )
-			this.stop();
+		this.clear();
+	}
+
+	//
+	public function clear():Void
+	{
+		//;
 	}
 
 	// ************************************************************************ //

@@ -1,33 +1,17 @@
 package at.dotpoint.remote.routing;
 
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.remote.http.header.Status;
 
 /**
  *
  */
-class RoutingException
+class RoutingException extends ErrorEvent
 {
 
-	public var code:Status;
-	public var message:String;
-
-	// ************************************************************************ //
-	// Constructor
-	// ************************************************************************ //
-
+	//
 	public function new( code:Status, ?message:String )
 	{
-		this.code = code;
-		this.message = message;
-	}
-
-	// ************************************************************************ //
-	// Methods
-	// ************************************************************************ //
-
-	//
-	public function toString():String
-	{
-		return '$code: $message';
+		super( "RoutingException", code, message );
 	}
 }

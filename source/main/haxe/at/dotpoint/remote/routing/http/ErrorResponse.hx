@@ -1,5 +1,7 @@
 package at.dotpoint.remote.routing.http;
 
+import at.dotpoint.dispatcher.event.generic.ErrorEvent;
+import haxe.CallStack;
 import at.dotpoint.remote.http.header.Status;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.response.ResponseHeader;
@@ -15,8 +17,7 @@ import haxe.io.Bytes;
 class ErrorResponse implements IRouteResponse
 {
 
-	public var code:Status;
-	public var message:String;
+	public var exception:ErrorEvent;
 
 	//
 	private var resolve:Void->Void;
@@ -26,10 +27,9 @@ class ErrorResponse implements IRouteResponse
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( exception:RoutingException )
+	public function new( exception:ErrorEvent )
 	{
-		this.code = exception.code;
-		this.message = exception.message;
+		this.exception = exception;
 	}
 
 	// ************************************************************************ //
@@ -45,10 +45,14 @@ class ErrorResponse implements IRouteResponse
 	//
 	public function process(request:Request, callback:Response<Bytes>->Void ):Void
 	{
-		var status:String = 'HTTP/1.1. $code\n';
+		var code:Int = this.exception.code;
+		var message:String = this.exception.message;
+		var stack:String = this.exception.getCallStack();
 
-		if(this.message == null) status += "\n";
-		else status += '$message\n\n';
+		//
+		var status:String = 'HTTP/1.1. $code\n\n';
+			status += '$message';
+			status += '$stack\n\n';
 
 		//
 		var header:String = Header.encode( request.header ).join( "\n" );
@@ -56,7 +60,7 @@ class ErrorResponse implements IRouteResponse
 		var response:Response<Bytes> = new Response<Bytes>();
 			response.body = Bytes.ofString(status + header);
 			response.header.contentType = MimeType.text;
-			response.header.status = this.code;
+			response.header.status = code;
 
 		callback(response);
 	}

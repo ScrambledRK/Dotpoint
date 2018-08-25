@@ -1,5 +1,6 @@
 package at.dotpoint.loader.process;
 
+import at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.io.Bytes;
 
 /**
@@ -12,9 +13,9 @@ class BinaryLoader extends AFileLoader<Bytes>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( )
+	public function new( ?proxy:IEventDispatcher, isBlocking:Bool = false, readLength:Int = 256)
 	{
-		super();
+		super(proxy, isBlocking, readLength);
 	}
 
 	// ************************************************************************ //

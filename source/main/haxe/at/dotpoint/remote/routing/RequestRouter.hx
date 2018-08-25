@@ -54,9 +54,7 @@ class RequestRouter implements IRequestRouter
 		}
 		catch( ex:Dynamic )
 		{
-			this.e500.message = "\n" + Std.string( ex );
-			this.e500.message += CallStack.toString( CallStack.exceptionStack() );
-
+			this.e500.exception.message = Std.string( ex );
 			this.e500.process( request, callback );
 		}
 
@@ -68,8 +66,6 @@ class RequestRouter implements IRequestRouter
 	{
 		for( option in this.list )
 		{
-			trace("option:", option);
-
 			if( option.accepts( request ) )
 				return option;
 		}

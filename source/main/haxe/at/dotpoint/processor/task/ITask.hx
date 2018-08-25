@@ -29,4 +29,9 @@ interface ITask extends IEventDispatcher
 	 */
 	public function stop( ):Void;
 
+	/**
+	 * removes any dependencies (without an event)
+	 */
+	public function clear( ):Void;
+
 }

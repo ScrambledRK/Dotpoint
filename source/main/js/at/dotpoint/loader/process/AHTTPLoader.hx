@@ -66,7 +66,16 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 	 */
 	override public function stop( ):Void
 	{
-		if( this.isProcessing )
+		super.stop();
+		this.clear();
+
+		this.setStatus( StatusEvent.STOPPED, true );
+	}
+
+	//
+	override public function clear( ):Void
+	{
+		if( this.loader != null )
 		{
 			this.loader.onreadystatechange = null;
 			this.loader.onerror = null;
@@ -76,8 +85,6 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			this.loader.abort( );
 			this.loader = null;
 		}
-
-		this.setStatus( StatusEvent.STOPPED );
 	}
 
 	// ------------------------------------------------------------------------ //
@@ -174,7 +181,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			}
 
 			//
-			this.onError( new ErrorEvent( ErrorEvent.ERROR, msg ) );
+			this.onError( new ErrorEvent( status, msg ) );
 		}
 	}
 
@@ -192,7 +199,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			}
 			else
 			{
-				var error:ErrorEvent = new ErrorEvent( ErrorEvent.ERROR );
+				var error:ErrorEvent = new ErrorEvent();
 					error.message = Std.string( event );
 
 				this.dispatch( ErrorEvent.ERROR, error );
@@ -200,7 +207,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 		}
 
 		//
-		this.stop();
+		this.clear();
 	}
 
 	/**

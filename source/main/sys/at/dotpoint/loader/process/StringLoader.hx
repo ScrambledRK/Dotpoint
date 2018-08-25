@@ -1,5 +1,7 @@
 package at.dotpoint.loader.process;
 
+import at.dotpoint.dispatcher.event.IEventDispatcher;
+
 /**
  *
  */
@@ -10,9 +12,9 @@ class StringLoader extends AFileLoader<String>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new()
+	public function new( ?proxy:IEventDispatcher, isBlocking:Bool = false, readLength:Int = 256)
 	{
-		super();
+		super(proxy, isBlocking, readLength);
 	}
 
 	// ************************************************************************ //

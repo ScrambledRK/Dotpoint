@@ -24,6 +24,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 
 	//
 	private var time:Float;
+	private var isBlocking:Bool;
 	private var readLength:Int;
 	private var readPosition:Int;
 
@@ -32,10 +33,11 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	// ************************************************************************ //
 
 	//
-	public function new( ?proxy:IEventDispatcher, readLength:Int = 256 )
+	public function new( ?proxy:IEventDispatcher, isBlocking:Bool = false, readLength:Int = 256 )
 	{
 		super( proxy );
 
+		this.isBlocking 	= isBlocking;
 		this.readLength 	= readLength;
 		this.readPosition 	= 0;
 	}
@@ -52,23 +54,29 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	{
 		super.start();
 
+		//
+		this.setStatus( StatusEvent.STARTED, true );
+
 		try
 		{
 			var file:String = this.input.url;
-
+			trace("f", file);
+			//
 			if( !FileSystem.exists( file ) || FileSystem.isDirectory( file ) )
 				throw 'file $file does not exist or is a directory';
+
+			trace("f", "k");
 
 			this.file = File.read( file );
 			this.bytes = Bytes.alloc( FileSystem.stat( file ).size );
 
 			//
-			this.setStatus( StatusEvent.STARTED, true );
 			this.read();
 		}
 		catch( error:Dynamic )
 		{
-			this.error( 'FileRead Error: $error' );
+			trace(error);
+			this.error( 'FileRead Error: $error', true );
 		}
 	}
 
@@ -109,6 +117,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 				catch( error:Dynamic )
 				{
 					this.error( 'FileRead Error: $error' );
+					return;
 				}
 			}
 
@@ -122,7 +131,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 			}
 
 			//
-			if( Delay.interrupt( this.time, this.read ) )
+			if( !isBlocking && Delay.interrupt( this.time, this.read ) )
 				break;
 		}
 
@@ -134,6 +143,10 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	 */
 	override public function stop( ):Void
 	{
+		super.stop();
+		this.clear();
+
+		//
 		this.setStatus( StatusEvent.STOPPED, true );
 	}
 
