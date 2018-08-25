@@ -1,5 +1,6 @@
 package at.dotpoint.remote.web.http;
 
+import at.dotpoint.remote.routing.IRequestRouter;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.Request;
 import at.dotpoint.remote.http.Response;
@@ -20,7 +21,7 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 
 	//
 	public var request(default, null):Request;
-	public var response(default, null):Request->Response<Bytes>;
+	public var router(default, null):IRequestRouter;
 
 	//
 	private var resolve:Void->Void;
@@ -30,10 +31,10 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( request:Request, response:Request->Response<Bytes> )
+	public function new( request:Request, router:IRequestRouter )
 	{
 		this.request = request;
-		this.response = response;
+		this.router = router;
 	}
 
 	// ************************************************************************ //
@@ -43,28 +44,28 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 	//
 	public function process( stream:Dynamic ):Void
 	{
-		var response:Response<Bytes> = this.response( this.request );
+		var callback = function( response:Response<Bytes> ):Void
+		{
+			trace(">> response:");
+			trace(response.header.toString());
+			trace(response.body != null ? response.body.toString() : "");
+			trace("<<");
 
-		trace(">> response:");
-		trace(response.header.toString());
-		trace(response.body != null ? response.body.toString() : "");
-		trace("<<");
+			//
+			Web.setReturnCode( response.header.status );
 
-		//
-		Web.setReturnCode( response.header.status );
+			for( key in response.header.keys() )
+				Web.setHeader( key, response.header.get( key ) );
 
-		//
-		for( key in response.header.keys() )
-			Web.setHeader( key, response.header.get( key ) );
+			if( response.body != null)
+				Lib.println( response.body.toString() );
 
-		//
-		if( response.body != null)
-			Lib.println( response.body.toString() );
+			//
+			this.resolve( );
+		};
 
-		//
-		this.resolve( );
+		this.router.process( this.request, callback );
 	}
-
 
 	//
 	public function then( resolve:Void->Void, ?reject:Dynamic->Void ):Void

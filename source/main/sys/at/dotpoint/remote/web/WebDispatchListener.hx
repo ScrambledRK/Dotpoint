@@ -7,14 +7,14 @@ class WebDispatchListener implements IRemoteListener
 {
 
 	//
-	private var handler:IRemoteHandler<Dynamic,Dynamic>;
+	private var handler:IRemoteHandler<Dynamic, Dynamic>;
 	private var running:Bool;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( handler:IRemoteHandler<Dynamic,Dynamic>)
+	public function new( handler:IRemoteHandler<Dynamic, Dynamic> )
 	{
 		this.handler = handler;
 		this.running = true;
@@ -25,20 +25,20 @@ class WebDispatchListener implements IRemoteListener
 	// ************************************************************************ //
 
 	//
-	public function isRunning():Bool
+	public function isRunning( ):Bool
 	{
 		return running;
 	}
 
 	//
-	public function process():Void
+	public function process( ):Void
 	{
-		var onRequestComplete:Void -> Void = function( ):Void
+		var onRequestComplete:Void->Void = function( ):Void
 		{
-			this.handler.response.process(null);
+			this.handler.response.process( null );
 		};
 
-		var onResponseComplete:Void -> Void = function( ):Void
+		var onResponseComplete:Void->Void = function( ):Void
 		{
 			this.running = false;
 		};
@@ -48,7 +48,7 @@ class WebDispatchListener implements IRemoteListener
 		this.handler.response.then( onResponseComplete );
 
 		//
-		this.handler.request.process(null);
+		this.handler.request.process( null );
 	}
 
 }

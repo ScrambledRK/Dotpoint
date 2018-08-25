@@ -14,8 +14,13 @@ import haxe.io.Bytes;
  */
 class ErrorResponse implements IRouteResponse
 {
-	private var code:Status;
-	private var message:String;
+
+	public var code:Status;
+	public var message:String;
+
+	//
+	private var resolve:Void->Void;
+	private var reject:Dynamic->Void;
 
 	// ************************************************************************ //
 	// Constructor
@@ -38,7 +43,7 @@ class ErrorResponse implements IRouteResponse
 	}
 
 	//
-	public function process(request:Request, response:Response<Bytes>):Void
+	public function process(request:Request, callback:Response<Bytes>->Void ):Void
 	{
 		var status:String = 'HTTP/1.1. $code\n';
 
@@ -48,8 +53,18 @@ class ErrorResponse implements IRouteResponse
 		//
 		var header:String = Header.encode( request.header ).join( "\n" );
 
-		response.body = Bytes.ofString(status + header);
-		response.header.contentType = MimeType.text;
-		response.header.status = this.code;
+		var response:Response<Bytes> = new Response<Bytes>();
+			response.body = Bytes.ofString(status + header);
+			response.header.contentType = MimeType.text;
+			response.header.status = this.code;
+
+		callback(response);
+	}
+
+	//
+	public function then( resolve:Void->Void, ?reject:Dynamic->Void ):Void
+	{
+		this.resolve = resolve;
+		this.reject = reject;
 	}
 }

@@ -1,5 +1,6 @@
 package at.dotpoint.remote.socket.http;
 
+import at.dotpoint.remote.routing.IRequestRouter;
 import at.dotpoint.remote.http.response.ResponseHeader;
 import at.dotpoint.remote.http.Response;
 import at.dotpoint.remote.http.Header;
@@ -15,7 +16,7 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 
 	//
 	public var request(default, null):Request;
-	public var response(default,null):Request->Response<Bytes>;
+	public var router(default,null):IRequestRouter;
 
 	//
 	private var resolve:Void -> Void;
@@ -25,10 +26,10 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( request:Request, response:Request->Response<Bytes> )
+	public function new( request:Request, router:IRequestRouter)
 	{
 		this.request = request;
-		this.response = response;
+		this.router = router;
 	}
 
 	// ************************************************************************ //
@@ -38,20 +39,22 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 	//
 	public function process( stream:Output ):Void
 	{
-		var response:Response<Bytes> = this.response( this.request );
-
-		//
-		try
+		var callback = function( response:Response<Bytes> ):Void
 		{
-			stream.write( this.getHeader(response) );
-			stream.write( this.getBody(response) );
-		}
-		catch( error:Dynamic )
-		{
-			trace("error:", error );
+			try
+			{
+				stream.write( this.getHeader(response) );
+				stream.write( this.getBody(response) );
+			}
+			catch( error:Dynamic )
+			{
+				trace("error:", error );
+			}
+
+			this.resolve();
 		}
 
-		this.resolve();
+		this.router.process( this.request, callback );
 	}
 
 	//

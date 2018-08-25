@@ -15,7 +15,7 @@ class ConditionList implements IRouteCondition implements IRouteConditionList
 	// Constructor
 	// ************************************************************************ //
 
-	public function ConditionList( ?options:Array<IRouteCondition>)
+	public function new( ?options:Array<IRouteCondition>)
 	{
 		this.options = options;
 	}
@@ -42,7 +42,7 @@ class ConditionList implements IRouteCondition implements IRouteConditionList
 	//
 	public function accepts(request:Request):Bool
 	{
-		if( this.options != null || this.options.length == 0)
+		if( this.options == null || this.options.length == 0)
 			return true;
 
 		//
@@ -54,4 +54,5 @@ class ConditionList implements IRouteCondition implements IRouteConditionList
 
 		return true;
 	}
+
 }

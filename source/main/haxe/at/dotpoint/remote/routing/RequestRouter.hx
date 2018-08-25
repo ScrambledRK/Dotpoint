@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing;
 
+import haxe.CallStack;
 import at.dotpoint.remote.http.header.Status;
 import at.dotpoint.remote.http.Request;
 import at.dotpoint.remote.http.response.ResponseHeader;
@@ -38,29 +39,28 @@ class RequestRouter implements IRequestRouter
 	// ************************************************************************ //
 
 	//
-	public function process( request:Request ):Response<Bytes>
+	public function process( request:Request, callback:Response<Bytes>->Void ):Void
 	{
 		trace(">> routing");
 
-		var option:IRouteResponse = this.getOption( request );
-		var response:Response<Bytes> = this.getResponse( request );
-
 		try
 		{
-			option.process( request, response );
+			var option:IRouteResponse = this.getOption( request );
+				option.process( request, callback );
 		}
 		catch( re:RoutingException )
 		{
-			new ErrorResponse( re ).process( request, response );
+			new ErrorResponse( re ).process( request, callback );
 		}
 		catch( ex:Dynamic )
 		{
-			this.e500.process( request, response );
+			this.e500.message = "\n" + Std.string( ex );
+			this.e500.message += CallStack.toString( CallStack.exceptionStack() );
+
+			this.e500.process( request, callback );
 		}
 
 		trace("<<");
-
-		return response;
 	}
 
 	//
@@ -77,11 +77,4 @@ class RequestRouter implements IRequestRouter
 		return this.e404;
 	}
 
-	//
-	private function getResponse( request:Request ):Response<Bytes>
-	{
-		var header:ResponseHeader = new ResponseHeader(200);
-
-		return new Response<Bytes>(header);
-	}
 }

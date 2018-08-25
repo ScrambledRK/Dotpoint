@@ -15,9 +15,9 @@ class Response<TBody:Dynamic>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( header:ResponseHeader, ?body:TBody )
+	public function new( ?header:ResponseHeader, ?body:TBody )
 	{
-		this.header = header;
+		this.header = header != null ? header : new ResponseHeader();
 		this.body = body;
 	}
 

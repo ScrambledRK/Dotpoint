@@ -29,7 +29,7 @@ class TemplateRequest extends DataRequest<Request, String, String>
 	public static function from( url:String, ?context:Dynamic, ?macros:Dynamic ):TemplateRequest
 	{
 		if( context != null || macros != null )
-			return new TemplateRequest( new Request( url ), new TemplateParser( null, context, macros ) );
+			return new TemplateRequest( new Request( url ), new TemplateParser( context, macros ) );
 
 		return new TemplateRequest( new Request( url ), null );
 	}

@@ -54,12 +54,21 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 
 		try
 		{
-			this.file = File.read( this.input.url );
-			this.bytes = Bytes.alloc( FileSystem.stat( this.input.url ).size );
+			var file:String = this.input.url;
+
+			if( !FileSystem.exists( file ) || FileSystem.isDirectory( file ) )
+				throw 'file $file does not exist or is a directory';
+
+			this.file = File.read( file );
+			this.bytes = Bytes.alloc( FileSystem.stat( file ).size );
+
+			//
+			this.setStatus( StatusEvent.STARTED, true );
+			this.read();
 		}
 		catch( error:Dynamic )
 		{
-			this.onError( new ErrorEvent( "FileRead Error", Std.string( error ) ) );
+			this.error( 'FileRead Error: $error' );
 		}
 	}
 
@@ -70,7 +79,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	{
 		this.time = Timer.stamp( );
 
-		if( !this.isProcessing )
+		if( !this.isProcessing || this.isComplete )
 			return;
 
 		//
@@ -99,7 +108,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 				}
 				catch( error:Dynamic )
 				{
-					this.onError( new ErrorEvent( "FileRead Error", error ) );
+					this.error( 'FileRead Error: $error' );
 				}
 			}
 
@@ -109,7 +118,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 			if( this.file.eof() || p > this.bytes.length || l <= 0 )
 			{
 				this.onComplete( null );
-				break;
+				return;
 			}
 
 			//
@@ -151,31 +160,6 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 	// Status + Progress
-
-	/**
-	 *
-	 * @param	event
-	 */
-	private function onError( ?event:Dynamic ):Void
-	{
-		if( this.hasListener( ErrorEvent.ERROR ) )
-		{
-			if( Std.is( event, ErrorEvent ) )
-			{
-				this.dispatch( ErrorEvent.ERROR, cast( event, ErrorEvent ) );
-			}
-			else
-			{
-				var error:ErrorEvent = new ErrorEvent( ErrorEvent.ERROR );
-					error.message = Std.string( event );
-
-				this.dispatch( ErrorEvent.ERROR, error );
-			}
-		}
-
-		//
-		this.stop();
-	}
 
 	//
 	private function onProgress():Void

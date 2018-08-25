@@ -26,6 +26,9 @@ class FileResponse extends ConditionList implements IRouteResponse
 
 	public function new( ?root:String )
 	{
+		super();
+
+		//
 		this.root = root != null ? root : ".";
 
 		this.add( new DynamicCondition(this.isFile) );
@@ -44,12 +47,15 @@ class FileResponse extends ConditionList implements IRouteResponse
 	}
 
 	//
-	public function process(request:Request, response:Response<Bytes> ):Void
+	public function process(request:Request, callback:Response<Bytes>->Void ):Void
 	{
 		var file:String = this.getFilePath(request);
 
-		response.body = File.getBytes(file);
-		response.header.contentType = getContentType(file);
+		var response:Response<Bytes> = new Response<Bytes>();
+			response.body = File.getBytes(file);
+			response.header.contentType = getContentType(file);
+
+		callback(response);
 	}
 
 	//
@@ -78,4 +84,5 @@ class FileResponse extends ConditionList implements IRouteResponse
 				throw new RoutingException( Status.UNSUPPORTED_MEDIA_TYPE, 'unknown extension for: $file' );
 		}
 	}
+
 }
