@@ -5,7 +5,7 @@ import at.dotpoint.remote.http.Request;
 /**
  *
  */
-class BasicConditionList implements IRouteCondition implements IRouteConditionList
+class ConditionList implements IRouteCondition implements IRouteConditionList
 {
 
 	//
@@ -15,7 +15,7 @@ class BasicConditionList implements IRouteCondition implements IRouteConditionLi
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?options:Array<IRouteCondition>)
+	public function ConditionList( ?options:Array<IRouteCondition>)
 	{
 		this.options = options;
 	}
@@ -31,6 +31,9 @@ class BasicConditionList implements IRouteCondition implements IRouteConditionLi
 			this.options = new Array<IRouteCondition>();
 
 		this.options.push( option );
+
+		//
+		return this;
 	}
 
 	// ------------------------------------------------------------------------ //

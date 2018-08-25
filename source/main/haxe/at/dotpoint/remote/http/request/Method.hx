@@ -16,6 +16,6 @@ abstract Method(String) from String to String
 	//
 	inline public function new( i:String )
 	{
-		this = StringTools.trim( i ).toUpperCase( i );
+		this = StringTools.trim( i ).toUpperCase();
 	}
 }

@@ -14,7 +14,7 @@ import at.dotpoint.remote.http.Response;
 /**
  *
  */
-class FileResponse extends BasicConditionList implements IRouteResponse
+class FileResponse extends ConditionList implements IRouteResponse
 {
 
 	//
