@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing;
 
+import Std;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import haxe.CallStack;
 import at.dotpoint.remote.http.header.Status;
@@ -33,10 +34,10 @@ class RequestRouter implements IRequestRouter
 
 		this.e404 = e404 != null ? e404 : new ErrorResponse( new RoutingException(Status.NOT_FOUND) );
 		this.e500 = e500 != null ? e500 : new ErrorResponse( new RoutingException(Status.INTERNAL_SERVER_ERROR) );
-		
+
 		if( this.e404.exception.code != Status.NOT_FOUND )
 			throw "404 ErrorResponse instance invalid: Code is not correct ...";
-		
+
 		if( this.e500.exception.code != Status.INTERNAL_SERVER_ERROR )
 			throw "500 ErrorResponse instance invalid: Code is not correct ...";
 	}
@@ -50,17 +51,20 @@ class RequestRouter implements IRequestRouter
 	{
 		trace(">> routing");
 
+		//
+		var option:IRouteResponse = this.getOption( request );
+
 		try
 		{
-			var option:IRouteResponse = this.getOption( request );
-				option.process( request, callback );
+			option.process( request, callback );
 		}
 		catch( re:RoutingException )
 		{
-			new ErrorResponse( re ).process( request, callback );
+			new ErrorResponse( re, Std.string( option ) ).process( request, callback );
 		}
 		catch( ex:Dynamic )
 		{
+			this.e500.context = Std.string( option );
 			this.e500.exception = ErrorEvent.from( ex, Status.INTERNAL_SERVER_ERROR );
 			this.e500.process( request, callback );
 		}

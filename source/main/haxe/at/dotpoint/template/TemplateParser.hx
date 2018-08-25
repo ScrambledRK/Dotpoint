@@ -27,8 +27,8 @@ class TemplateParser extends ADataProcess<String, String>
 	{
 		super( proxy );
 
-		this.context = context;
-		this.macros = macros;
+		this.setContext( context );
+		this.setMacros( macros );
 	}
 
 	// ************************************************************************ //
@@ -40,6 +40,9 @@ class TemplateParser extends ADataProcess<String, String>
 	{
 		if( this.isProcessing )
 			throw "cannot alter processing parser";
+
+		if( template == null )
+			throw "template must not be null";
 
 		if( this.children == null )
 			this.children = new Array<TemplateRequest>();
@@ -63,6 +66,19 @@ class TemplateParser extends ADataProcess<String, String>
 			throw "cannot alter processing parser";
 
 		this.macros = macros;
+
+		//
+		if( this.macros == null )
+		{
+			this.macros = this;
+			return;
+		}
+
+		//
+		if( this.macros.getTemplate != this.getTemplate )
+			throw "macro context is not allowed to define 'getTemplate'";
+
+		this.macros.getTemplate = this.getTemplate;
 	}
 
 	// ************************************************************************ //
@@ -118,7 +134,6 @@ class TemplateParser extends ADataProcess<String, String>
 	//
 	private function onComplete( event:StatusEvent ):Void
 	{
-		this.clear();
 		this.finalize();
 	}
 
@@ -154,5 +169,23 @@ class TemplateParser extends ADataProcess<String, String>
 		}
 
 		this.setStatus( StatusEvent.COMPLETE, true );
+	}
+
+	//
+	private function getTemplate( resolve:String->Dynamic, url:String ):String
+	{
+		if( this.children == null || this.children.length == 0 )
+			throw 'no child templates set, could not find template $url';
+
+		//
+		for( template in this.children )
+		{
+			if( template.input.url != url )
+				continue;
+
+			return template.result;
+		}
+
+		throw 'could not find template $url';
 	}
 }

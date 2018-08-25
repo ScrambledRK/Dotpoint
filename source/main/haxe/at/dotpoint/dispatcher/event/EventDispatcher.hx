@@ -145,7 +145,7 @@ class EventDispatcher implements IEventDispatcher
 		for( key in this.listeners.keys( ) )
 		{
 			if( type == null || key == type )
-				this.listeners.remove( type );
+				this.listeners.remove( key );
 		}
 	}
 

@@ -58,7 +58,7 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 				Web.setHeader( key, response.header.get( key ) );
 
 			if( response.body != null)
-				Lib.println( response.body.toString() );
+				Lib.print( response.body.toString() );
 
 			//
 			this.resolve( );

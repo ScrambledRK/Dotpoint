@@ -108,15 +108,19 @@ class AsyncProcessor extends ATask
 	//
 	override public function clear( ):Void
 	{
-		if( this.current > -1 )
+		if( this.current > -1 && this.current < this.tasks.length )
 		{
 			var task:ITask = this.tasks[ this.current ];
+
+			if(task != null)
+			{
 				task.removeListener( StatusEvent.STOPPED,   this.onTaskEvent );
 				task.removeListener( StatusEvent.COMPLETE,  this.onTaskEvent );
 				task.removeListener( ErrorEvent.ERROR,      this.onTaskEvent );
 
-			if( task.isProcessing )
-				task.stop();
+				if( task.isProcessing )
+					task.stop();
+			}
 		}
 
 		this.current = -1;

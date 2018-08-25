@@ -19,6 +19,7 @@ class ErrorResponse implements IRouteResponse
 {
 
 	public var exception:ErrorEvent;
+	public var context:String;
 
 	//
 	private var resolve:Void->Void;
@@ -28,9 +29,10 @@ class ErrorResponse implements IRouteResponse
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?exception:ErrorEvent )
+	public function new( ?exception:ErrorEvent, ?context:String )
 	{
 		this.exception = exception;
+		this.context = context;
 	}
 
 	// ************************************************************************ //
@@ -49,8 +51,10 @@ class ErrorResponse implements IRouteResponse
 		if( this.exception == null )
 			this.exception = new ErrorEvent();
 
+
 		//
 		var code:Status = this.exception.code;
+		var context:String = this.context != null ? "\tin " + this.context + "\n": "";
 
 		var name:String = Std.string( code );
 		var message:String = this.exception.message;
@@ -58,7 +62,7 @@ class ErrorResponse implements IRouteResponse
 		var position:String = this.exception.getPosition();
 
 		//
-		var status:String = 'HTTP/1.1. $name\n\n';
+		var status:String = 'HTTP/1.1. $name\n$context\n';
 			status += '$message\n\t$position\n';
 			status += '$stack\n\n';
 

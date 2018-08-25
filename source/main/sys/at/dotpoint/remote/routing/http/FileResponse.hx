@@ -85,4 +85,12 @@ class FileResponse extends ConditionList implements IRouteResponse
 		}
 	}
 
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	public function toString():String
+	{
+		return '[FileResponse]';
+	}
 }

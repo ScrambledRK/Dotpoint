@@ -60,4 +60,18 @@ class TemplateResponse extends ConditionList implements IRouteResponse
 	{
 		throw event;
 	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	public function toString():String
+	{
+		var url:String = "unknown";
+
+		if( this.template != null && this.template.input != null)
+			url = this.template.input.url;
+
+		return '[TemplateResponse:$url]';
+	}
 }
