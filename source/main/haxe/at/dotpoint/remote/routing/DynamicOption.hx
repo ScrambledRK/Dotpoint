@@ -1,33 +1,31 @@
 package at.dotpoint.remote.routing;
 
-import at.dotpoint.remote.http.header.Status;
+import at.dotpoint.remote.http.Request;
 
 /**
  *
  */
-class RoutingException
+class DynamicOption implements IRouteOption
 {
 
-	public var code:Status;
-	public var message:String;
+	//
+	private var callback:Request->Bool;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( code:Status, ?message:String )
+	public function new( callback:Request->Bool )
 	{
-		this.code = code;
-		this.message = message;
+		this.callback = callback;
 	}
 
 	// ************************************************************************ //
 	// Methods
 	// ************************************************************************ //
 
-	//
-	public function toString():String
+	public function accepts( request:Request ):Bool
 	{
-		return '$code: $message';
+		return this.callback(request);
 	}
 }

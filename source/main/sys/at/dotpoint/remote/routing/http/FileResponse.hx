@@ -1,5 +1,7 @@
 package at.dotpoint.remote.routing.http;
 
+import at.dotpoint.remote.http.request.Method;
+import at.dotpoint.remote.http.header.Status;
 import String;
 import at.dotpoint.remote.http.header.MimeType;
 import sys.io.File;
@@ -12,7 +14,7 @@ import at.dotpoint.remote.http.Response;
 /**
  *
  */
-class FileOption implements IRouteOption
+class FileResponse extends OptionList implements IRouteResponse
 {
 
 	//
@@ -24,7 +26,10 @@ class FileOption implements IRouteOption
 
 	public function new( ?root:String )
 	{
-		this.root = root != null ? root : "";
+		this.root = root != null ? root : ".";
+
+		this.add( new DynamicOption(this.isFile) );
+		this.add( new RestOption(null, Method.GET) );
 	}
 
 	// ************************************************************************ //
@@ -32,11 +37,9 @@ class FileOption implements IRouteOption
 	// ************************************************************************ //
 
 	//
-	public function accepts(request:Request):Bool
+	private function isFile(request:Request):Bool
 	{
 		var file:String = this.getFilePath(request);
-
-		// TODO: security checks + configuration
 		return FileSystem.exists( file ) && !FileSystem.isDirectory( file );
 	}
 
@@ -72,7 +75,7 @@ class FileOption implements IRouteOption
 			case "png": 	return MimeType.png;
 
 			default:
-				throw new RoutingException(500, 'unsupported contentType', 'unknwon extension for: $file' );
+				throw new RoutingException( Status.UNSUPPORTED_MEDIA_TYPE, 'unknown extension for: $file' );
 		}
 	}
 }

@@ -45,8 +45,13 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 	{
 		var response:Response<Bytes> = this.response( this.request );
 
+		trace(">> response:");
+		trace(response.header.toString());
+		trace(response.body != null ? response.body.toString() : "");
+		trace("<<");
+
 		//
-		Web.setReturnCode( response.header.code );
+		Web.setReturnCode( response.header.status );
 
 		//
 		for( key in response.header.keys() )

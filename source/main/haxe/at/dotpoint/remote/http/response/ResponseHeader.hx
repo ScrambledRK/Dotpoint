@@ -1,5 +1,6 @@
 package at.dotpoint.remote.http.response;
 
+import at.dotpoint.remote.http.header.Status;
 import at.dotpoint.remote.http.header.MimeType;
 import at.dotpoint.remote.http.header.EncodingType;
 
@@ -18,7 +19,9 @@ import at.dotpoint.remote.http.header.EncodingType;
 class ResponseHeader extends Header
 {
 
-	public var code:Int;
+	public var status:Status;
+
+	//
 	public var contentType(get, set):MimeType;
 	//public var contentEncoding(get, set):EncodingType;
 
@@ -26,10 +29,10 @@ class ResponseHeader extends Header
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( code:Int = 200)
+	public function new( code:Status = 200 )
 	{
 		super();
-		this.code = code;
+		this.status = code;
 	}
 
 	// ************************************************************************ //

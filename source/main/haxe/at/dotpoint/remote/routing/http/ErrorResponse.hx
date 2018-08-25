@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing.http;
 
+import at.dotpoint.remote.http.header.Status;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.response.ResponseHeader;
 import at.dotpoint.remote.http.header.MimeType;
@@ -11,10 +12,9 @@ import haxe.io.Bytes;
 /**
  *
  */
-class ErrorOption implements IRouteOption
+class ErrorResponse implements IRouteResponse
 {
-	private var code:Int;
-	private var name:String;
+	private var code:Status;
 	private var message:String;
 
 	// ************************************************************************ //
@@ -24,11 +24,7 @@ class ErrorOption implements IRouteOption
 	public function new( exception:RoutingException )
 	{
 		this.code = exception.code;
-		this.name = exception.name;
 		this.message = exception.message;
-
-		if( this.message == null )
-			this.message = "";
 	}
 
 	// ************************************************************************ //
@@ -44,14 +40,16 @@ class ErrorOption implements IRouteOption
 	//
 	public function process(request:Request, response:Response<Bytes>):Void
 	{
-		var status:String = 'HTTP/1.1. $code\r\n\r\n';
-			status += '$code $name\n$message\n\n';
+		var status:String = 'HTTP/1.1. $code\n';
+
+		if(this.message == null) status += "\n";
+		else status += '$message\n\n';
 
 		//
-		var header:String = Header.encode( request.header ).join( "\r\n" );
+		var header:String = Header.encode( request.header ).join( "\n" );
 
 		response.body = Bytes.ofString(status + header);
-		response.header.contentType = MimeType.html;
-		response.header.code = this.code;
+		response.header.contentType = MimeType.text;
+		response.header.status = this.code;
 	}
 }

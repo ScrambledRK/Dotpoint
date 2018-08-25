@@ -50,6 +50,12 @@ class HttpRequestProcess implements IRemoteProcess<Dynamic>
 		this.setHeader();
 		this.setParameters();
 
+		trace(">> request:");
+		trace(request.url, request.method);
+		trace(request.header.toString());
+		trace(request.parameter.toString());
+		trace("<<");
+
 		this.resolve();
 	}
 
