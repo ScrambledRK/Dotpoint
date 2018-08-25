@@ -36,7 +36,7 @@ class CallbackParser<TInput, TResult> extends ADataProcess<TInput, TResult>
 		}
 		catch( error:Dynamic )
 		{
-			this.error( Std.string( error ), true );
+			this.error( error );
 			return;
 		}
 

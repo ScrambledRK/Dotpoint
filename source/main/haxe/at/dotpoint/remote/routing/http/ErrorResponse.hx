@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing.http;
 
+import Std;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import haxe.CallStack;
 import at.dotpoint.remote.http.header.Status;
@@ -27,7 +28,7 @@ class ErrorResponse implements IRouteResponse
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( exception:ErrorEvent )
+	public function new( ?exception:ErrorEvent )
 	{
 		this.exception = exception;
 	}
@@ -45,13 +46,20 @@ class ErrorResponse implements IRouteResponse
 	//
 	public function process(request:Request, callback:Response<Bytes>->Void ):Void
 	{
-		var code:Int = this.exception.code;
-		var message:String = this.exception.message;
-		var stack:String = this.exception.getCallStack();
+		if( this.exception == null )
+			this.exception = new ErrorEvent();
 
 		//
-		var status:String = 'HTTP/1.1. $code\n\n';
-			status += '$message';
+		var code:Status = this.exception.code;
+
+		var name:String = Std.string( code );
+		var message:String = this.exception.message;
+		var stack:String = this.exception.getCallStack();
+		var position:String = this.exception.getPosition();
+
+		//
+		var status:String = 'HTTP/1.1. $name\n\n';
+			status += '$message\n\t$position\n';
 			status += '$stack\n\n';
 
 		//

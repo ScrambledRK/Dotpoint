@@ -1,6 +1,9 @@
 package at.dotpoint.processor.task;
 
 //
+import haxe.macro.Expr.Error;
+import haxe.PosInfos;
+import haxe.ds.Either;
 import at.dotpoint.dispatcher.event.EventDispatcher;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
@@ -56,10 +59,13 @@ class ATask extends EventDispatcher implements ITask
 	}
 
 	//
-	private function error( ?code:Int, ?message:String, dispatch:Bool = true):Void
+	private function error( message:Dynamic, ?code:Int, ?info:PosInfos ):Void
 	{
-		if( dispatch && this.hasListener( ErrorEvent.ERROR ) )
-			this.dispatch( ErrorEvent.ERROR, new ErrorEvent( code, message ) );
+		var event:ErrorEvent = ErrorEvent.from( message, code, info );
+
+		//
+		if( this.hasListener( event.type ) )
+			this.dispatch( event.type, event );
 
 		this.clear();
 	}

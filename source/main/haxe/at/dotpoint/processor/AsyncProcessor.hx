@@ -184,18 +184,16 @@ class AsyncProcessor extends ATask
 	 */
 	private function onError( event:ErrorEvent ):Void
 	{
-		var task:ITask = this.tasks[ this.current ];
-			task.removeListener( ProgressEvent.PROGRESS, this.onProgress  );
-			task.removeListener( StatusEvent.STOPPED,    this.onTaskEvent );
-			task.removeListener( StatusEvent.COMPLETE,   this.onTaskEvent );
-			task.removeListener( ErrorEvent.ERROR,       this.onError );
-
-		// ------------- //
-
 		var proceed:Bool = this.processError( event );
 
-		if( !proceed && this.hasListener( event.type ) )
+		if( proceed )
+			return;
+
+		//
+		if( this.hasListener( event.type ) )
 			this.dispatch( event.type, event );
+
+		this.clear();
 	}
 
 	// ------------------------------------------------------------------------ //

@@ -22,17 +22,27 @@ class Template<TContext> extends TemplateRequest
 	//
 	private function getParser( ):TemplateParser
 	{
-		var result:TemplateParser = new TemplateParser( this.getContext( ), this.getMacros( ) );
-		var children:Array<TemplateRequest> = this.getChildren();
+		return new TemplateParser( null, null );
+	}
 
-		if( children == null || children.length == 0 )
-			return result;
+	//
+	override public function start( ):Void
+	{
+		var parser:TemplateParser = cast this.parser;	// for possible lazy init/update of context, etc.
+			parser.setContext( this.getContext() );
+			parser.setMacros( this.getMacros() );
 
 		//
-		for( template in children )
-			result.addChild( template );
+		var children:Array<TemplateRequest> = this.getChildren();
 
-		return result;
+		if( children != null && children.length > 0 )
+		{
+			for( template in children )
+				parser.addChild( template );
+		}
+
+		//
+		super.start();
 	}
 
 	// ------------------------------------------------------------------------ //

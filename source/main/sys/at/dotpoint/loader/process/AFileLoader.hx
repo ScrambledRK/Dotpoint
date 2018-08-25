@@ -60,12 +60,11 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 		try
 		{
 			var file:String = this.input.url;
-			trace("f", file);
+
 			//
 			if( !FileSystem.exists( file ) || FileSystem.isDirectory( file ) )
 				throw 'file $file does not exist or is a directory';
 
-			trace("f", "k");
 
 			this.file = File.read( file );
 			this.bytes = Bytes.alloc( FileSystem.stat( file ).size );
@@ -75,8 +74,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 		}
 		catch( error:Dynamic )
 		{
-			trace(error);
-			this.error( 'FileRead Error: $error', true );
+			this.error( error );
 		}
 	}
 
@@ -116,7 +114,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 				}
 				catch( error:Dynamic )
 				{
-					this.error( 'FileRead Error: $error' );
+					this.error( error );
 					return;
 				}
 			}

@@ -38,10 +38,31 @@ class TemplateParser extends ADataProcess<String, String>
 	//
 	public function addChild( template:TemplateRequest ):Void
 	{
+		if( this.isProcessing )
+			throw "cannot alter processing parser";
+
 		if( this.children == null )
 			this.children = new Array<TemplateRequest>();
 
 		this.children.push( template );
+	}
+
+	//
+	public function setContext( context:Dynamic ):Void
+	{
+		if( this.isProcessing )
+			throw "cannot alter processing parser";
+
+		this.context = context;
+	}
+
+	//
+	public function setMacros( macros:Dynamic ):Void
+	{
+		if( this.isProcessing )
+			throw "cannot alter processing parser";
+
+		this.macros = macros;
 	}
 
 	// ************************************************************************ //
@@ -128,7 +149,7 @@ class TemplateParser extends ADataProcess<String, String>
 		}
 		catch( error:Dynamic )
 		{
-			this.error( Std.string( error ), true );
+			this.error( error );
 			return;
 		}
 

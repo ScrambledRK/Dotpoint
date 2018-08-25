@@ -58,6 +58,6 @@ class TemplateResponse extends ConditionList implements IRouteResponse
 	//
 	private function onError( event:ErrorEvent ):Void
 	{
-		throw new RoutingException( event.code, event.message );
+		throw event;
 	}
 }
