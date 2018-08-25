@@ -7,7 +7,7 @@ import haxe.io.Bytes;
 /**
  *
  */
-interface IRouteOption
+interface IRouteCondition
 {
 	public function accepts( request:Request ):Bool;
 }

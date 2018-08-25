@@ -5,17 +5,17 @@ import at.dotpoint.remote.http.Request;
 /**
  *
  */
-class OptionList implements IRouteOption implements IRouteOptionList
+class BasicConditionList implements IRouteCondition implements IRouteConditionList
 {
 
 	//
-	private var options:Array<IRouteOption>;
+	private var options:Array<IRouteCondition>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?options:Array<IRouteOption>)
+	public function new( ?options:Array<IRouteCondition>)
 	{
 		this.options = options;
 	}
@@ -25,10 +25,10 @@ class OptionList implements IRouteOption implements IRouteOptionList
 	// ************************************************************************ //
 
 	//
-	public function add( option:IRouteOption ):IRouteOptionList
+	public function add( option:IRouteCondition ):IRouteConditionList
 	{
 		if( this.options == null )
-			this.options = new Array<IRouteOption>();
+			this.options = new Array<IRouteCondition>();
 
 		this.options.push( option );
 	}

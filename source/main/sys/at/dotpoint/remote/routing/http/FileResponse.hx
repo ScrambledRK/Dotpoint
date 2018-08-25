@@ -14,7 +14,7 @@ import at.dotpoint.remote.http.Response;
 /**
  *
  */
-class FileResponse extends OptionList implements IRouteResponse
+class FileResponse extends BasicConditionList implements IRouteResponse
 {
 
 	//
@@ -28,8 +28,8 @@ class FileResponse extends OptionList implements IRouteResponse
 	{
 		this.root = root != null ? root : ".";
 
-		this.add( new DynamicOption(this.isFile) );
-		this.add( new RestOption(null, Method.GET) );
+		this.add( new DynamicCondition(this.isFile) );
+		this.add( new RestCondition(null, Method.GET) );
 	}
 
 	// ************************************************************************ //

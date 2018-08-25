@@ -7,7 +7,7 @@ import at.dotpoint.remote.http.Response;
 /**
  *
  */
-interface IRouteResponse extends IRouteOption
+interface IRouteResponse extends IRouteCondition
 {
 	public function process( request:Request, response:Response<Bytes> ):Void;
 }

@@ -7,7 +7,7 @@ import at.dotpoint.remote.http.Request;
 /**
  *
  */
-class RestOption implements IRouteOption
+class RestCondition implements IRouteCondition
 {
 
 	private var uri:String;

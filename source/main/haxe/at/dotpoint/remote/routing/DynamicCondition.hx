@@ -5,7 +5,7 @@ import at.dotpoint.remote.http.Request;
 /**
  *
  */
-class DynamicOption implements IRouteOption
+class DynamicCondition implements IRouteCondition
 {
 
 	//
