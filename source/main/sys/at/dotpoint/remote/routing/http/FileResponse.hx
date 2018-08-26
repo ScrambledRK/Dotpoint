@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing.http;
 
+import at.dotpoint.exception.RuntimeException;
 import at.dotpoint.remote.http.request.Method;
 import at.dotpoint.remote.http.header.Status;
 import String;
@@ -81,7 +82,7 @@ class FileResponse extends ConditionList implements IRouteResponse
 			case "png": 	return MimeType.png;
 
 			default:
-				throw new RoutingException( Status.UNSUPPORTED_MEDIA_TYPE, 'unknown extension for: $file' );
+				throw new RuntimeException( Status.UNSUPPORTED_MEDIA_TYPE, 'unknown extension for: $file' );
 		}
 	}
 

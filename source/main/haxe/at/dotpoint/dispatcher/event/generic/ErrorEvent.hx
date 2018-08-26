@@ -1,33 +1,34 @@
 package at.dotpoint.dispatcher.event.generic;
 
+import at.dotpoint.exception.RuntimeException;
+import at.dotpoint.exception.IException;
 import haxe.PosInfos;
-import haxe.ds.Either;
 import haxe.CallStack;
 import haxe.CallStack.StackItem;
-import at.dotpoint.remote.http.header.Status;
 import at.dotpoint.dispatcher.event.Event;
 
-class ErrorEvent extends Event
+class ErrorEvent extends Event implements IException
 {
-
+	
+	//
 	@:isvar public static var ERROR(default,never):String = "ErrorEvent.error";
 
-	// ------------------------------ //
-
-	public var code:Status;
-	public var message:String;
-
 	//
-	private var exceptionStack:Array<StackItem>;
-	private var callStack:Array<StackItem>;
-	private var position:PosInfos;
+	private var exception:IException;
+
+	public var code(get,null):Int;
+	public var message(get,null):String;
+	public var position(get,null):PosInfos;
+
+	public var exceptionStack(get,null):Array<StackItem>;
+	public var callStack(get,null):Array<StackItem>;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
 	//
-	public function new( ?type:String, ?code:Int, ?message:String, ?info:PosInfos )
+	public function new( ?type:String, ?exception:IException )
 	{
 		if( type == null )
 			type = ErrorEvent.ERROR;
@@ -35,36 +36,16 @@ class ErrorEvent extends Event
 		//
 		super( type );
 
-		this.message = message != null ? message : "Unknown Error";
-		this.code = code != null ? code : Status.INTERNAL_SERVER_ERROR;
-
-		this.exceptionStack = CallStack.exceptionStack();
-		this.callStack = CallStack.callStack();
-		this.position = info;
+		this.exception = exception;
 	}
 
 	//
-	public static function from( message:Dynamic, ?code:Int, ?info:PosInfos ):ErrorEvent
+	public static function from( instance:Dynamic, ?code:Int, ?info:PosInfos ):ErrorEvent
 	{
-		var event:ErrorEvent = null;
+		if( instance != null && Std.is( instance, ErrorEvent ) )
+			return cast instance;
 
-		if( message != null )
-		{
-			if( Std.is( message, ErrorEvent ) )
-			{
-				event = cast message;
-			}
-			else
-			{
-				event = new ErrorEvent( ErrorEvent.ERROR, code, Std.string( message ), info );
-			}
-		}
-		else
-		{
-			event = new ErrorEvent( info );
-		}
-
-		return event;
+		return new ErrorEvent( RuntimeException.from( instance, code, info ) );
 	}
 
 	// ************************************************************************ //
@@ -72,19 +53,37 @@ class ErrorEvent extends Event
 	// ************************************************************************ //
 
 	//
-	public function getCallStack( ):String
+	private function get_code( ):Int
 	{
-		var exception = CallStack.toString( this.exceptionStack );
-		var callstack = CallStack.toString( this.callStack );
-
-		return '$exception\n$callstack';
+		return this.exception.code;
 	}
 
 	//
-	public function getPosition( ):String
+	private function get_message( ):String
 	{
-		return this.position.className + "::" + this.position.methodName + " line " + position.lineNumber;
+		return this.exception.message;
 	}
+
+	//
+	private function get_exceptionStack( ):Array<StackItem>
+	{
+		return this.exception.exceptionStack;
+	}
+
+	//
+	private function get_callStack( ):Array<StackItem>
+	{
+		return this.exception.callStack;
+	}
+
+	//
+	private function get_position( ):PosInfos
+	{
+		return this.exception.position;
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
 
 	//
 	override public function toString():String

@@ -49,22 +49,21 @@ class Template<TContext> extends TemplateRequest
 	// ------------------------------------------------------------------------ //
 
 	//
-	public function getChildren():Array<TemplateRequest>
+	public dynamic function getChildren():Array<TemplateRequest>
 	{
 		return null;
 	}
 
 	//
-	public function getMacros( ):Dynamic
+	public dynamic function getMacros( ):Dynamic
 	{
 		return null;
 	}
 
 	//
-	public function getContext( ):TContext
+	public dynamic function getContext( ):TContext
 	{
 		return null;
 	}
-
 
 }

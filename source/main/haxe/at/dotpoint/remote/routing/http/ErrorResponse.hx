@@ -1,16 +1,15 @@
 package at.dotpoint.remote.routing.http;
 
-import Std;
-import at.dotpoint.dispatcher.event.generic.ErrorEvent;
-import haxe.CallStack;
-import at.dotpoint.remote.http.header.Status;
-import haxe.io.Bytes;
-import at.dotpoint.remote.http.response.ResponseHeader;
+import at.dotpoint.exception.IException;
 import at.dotpoint.remote.http.header.MimeType;
+import at.dotpoint.remote.http.header.Status;
 import at.dotpoint.remote.http.Header;
 import at.dotpoint.remote.http.Request;
 import at.dotpoint.remote.http.Response;
+import haxe.CallStack;
 import haxe.io.Bytes;
+import haxe.PosInfos;
+import Std;
 
 /**
  *
@@ -18,7 +17,7 @@ import haxe.io.Bytes;
 class ErrorResponse implements IRouteResponse
 {
 
-	public var exception:ErrorEvent;
+	public var exception:IException;
 	public var context:String;
 
 	//
@@ -29,7 +28,7 @@ class ErrorResponse implements IRouteResponse
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?exception:ErrorEvent, ?context:String )
+	public function new( exception:IException, ?context:String )
 	{
 		this.exception = exception;
 		this.context = context;
@@ -40,26 +39,37 @@ class ErrorResponse implements IRouteResponse
 	// ************************************************************************ //
 
 	//
-	public function accepts(request:Request):Bool
+	public function accepts( request:Request ):Bool
 	{
 		return true;
 	}
 
 	//
-	public function process(request:Request, callback:Response<Bytes>->Void ):Void
+	public function process( request:Request, callback:Response<Bytes>->Void ):Void
 	{
-		if( this.exception == null )
-			this.exception = new ErrorEvent();
+		var body:String = this.getBody( request );
 
+		var response:Response<Bytes> = new Response<Bytes>();
+			response.body = Bytes.ofString( body );
+			response.header.contentType = MimeType.text;
+			response.header.status = this.exception.code;
 
-		//
+		callback( response );
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	private function getBody( request:Request ):String
+	{
 		var code:Status = this.exception.code;
-		var context:String = this.context != null ? "\tin " + this.context + "\n": "";
+		var context:String = this.context != null ? "\tin " + this.context + "\n" : "";
 
 		var name:String = Std.string( code );
 		var message:String = this.exception.message;
-		var stack:String = this.exception.getCallStack();
-		var position:String = this.exception.getPosition();
+		var stack:String = this.getCallStack( );
+		var position:String = this.getPosition( );
 
 		//
 		var status:String = 'HTTP/1.1. $name\n$context\n';
@@ -69,18 +79,23 @@ class ErrorResponse implements IRouteResponse
 		//
 		var header:String = Header.encode( request.header ).join( "\n" );
 
-		var response:Response<Bytes> = new Response<Bytes>();
-			response.body = Bytes.ofString(status + header);
-			response.header.contentType = MimeType.text;
-			response.header.status = code;
-
-		callback(response);
+		//
+		return status + header;
 	}
 
 	//
-	public function then( resolve:Void->Void, ?reject:Dynamic->Void ):Void
+	private function getCallStack( ):String
 	{
-		this.resolve = resolve;
-		this.reject = reject;
+		var exception = CallStack.toString( this.exception.exceptionStack );
+		var callstack = CallStack.toString( this.exception.callStack );
+
+		return '$exception\n$callstack';
+	}
+
+	//
+	private function getPosition( ):String
+	{
+		var pos:PosInfos = this.exception.position;
+		return pos.className + "::" + pos.methodName + " line " + pos.lineNumber;
 	}
 }

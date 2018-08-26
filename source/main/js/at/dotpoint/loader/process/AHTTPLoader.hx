@@ -141,16 +141,6 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 
 		// ----------------------- //
 
-//		if( status != null && this.hasListener( HTTPStatusEvent.HTTP_STATUS ) )
-//		{
-//			var statusEvent:HTTPStatusEvent = new HTTPStatusEvent( HTTPStatusEvent.HTTP_STATUS );
-//				statusEvent.status = status;
-//
-//			this.dispatch( statusEvent );
-//		}
-
-		// ----------------------- //
-
 		if( status != null && status >= 200 && status < 400 )
 		{
 			// complete ...
@@ -181,7 +171,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			}
 
 			//
-			this.onError( new ErrorEvent( status, msg ) );
+			this.error( msg, status );
 		}
 	}
 
@@ -191,23 +181,7 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 	 */
 	private function onError( ?event:Dynamic ):Void
 	{
-		if( this.hasListener( ErrorEvent.ERROR ) )
-		{
-			if( Std.is( event, ErrorEvent ) )
-			{
-				this.dispatch( ErrorEvent.ERROR, cast( event, ErrorEvent ) );
-			}
-			else
-			{
-				var error:ErrorEvent = new ErrorEvent();
-					error.message = Std.string( event );
-
-				this.dispatch( ErrorEvent.ERROR, error );
-			}
-		}
-
-		//
-		this.clear();
+		this.error( event );
 	}
 
 	/**
