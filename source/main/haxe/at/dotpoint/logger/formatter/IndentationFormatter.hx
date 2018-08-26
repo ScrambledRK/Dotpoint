@@ -11,14 +11,16 @@ class IndentationFormatter implements ILoggerFormatter
 	 *
 	 */
 	private var step:Int;
+	private var space:String;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new()
+	public function new( space:String = "\t" )
 	{
 		this.step = 0;
+		this.space = space;
 	}
 
 	// ************************************************************************ //
@@ -99,10 +101,10 @@ class IndentationFormatter implements ILoggerFormatter
 	 */
 	private function getPrefix():String
 	{
-		var prefix:String = "";
+		var prefix:String = space;
 
 		for( j in 0...this.step )
-			prefix += "\t";
+			prefix += space;
 
 		return prefix;
 	}

@@ -169,7 +169,7 @@ class AsyncProcessor extends ATask
 
 		switch( event.type )
 		{
-			case StatusEvent.COMPLETE:
+			case StatusEvent.COMPLETE:		// TODO: can explode the stack
 				this.next();
 
 			//

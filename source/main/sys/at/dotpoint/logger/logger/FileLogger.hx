@@ -6,7 +6,7 @@ import sys.io.File;
 import haxe.PosInfos;
 import at.dotpoint.logger.formatter.IndentationFormatter;
 
-// TODO: log file might not exist (or directory, so create it first)
+// TODO: lock log file, release on exit
 
 /**
  * ...

@@ -8,9 +8,7 @@ class WebDispatchListener implements IRemoteListener
 
 	//
 	private var handler:IRemoteHandler<Dynamic, Dynamic>;
-
 	private var running:Bool;
-	private var closed:Bool;
 
 	// ************************************************************************ //
 	// Constructor
@@ -19,9 +17,7 @@ class WebDispatchListener implements IRemoteListener
 	public function new( handler:IRemoteHandler<Dynamic, Dynamic> )
 	{
 		this.handler = handler;
-
-		this.closed = false;
-		this.running = true;
+		this.running = false;
 	}
 
 	// ************************************************************************ //
@@ -35,17 +31,33 @@ class WebDispatchListener implements IRemoteListener
 	}
 
 	//
+	public function shutdown():Void
+	{
+		//;
+	}
+
+	//
 	public function process( ):Void
 	{
-		if( this.closed ) // while loop hack; webserver re-instantiates (stateless)
-			return;
+		if( this.isRunning() )
+			throw "cannot run already running socket listener";
 
+		//
+		this.running = true;
+
+		this.setupHandler();
+		this.handler.request.process( null );
+	}
+
+	private function setupHandler():Void
+	{
 		//
 		var onRequestComplete:Void->Void = function( ):Void
 		{
 			this.handler.response.process( null );
 		};
 
+		//
 		var onResponseComplete:Void->Void = function( ):Void
 		{
 			this.running = false;
@@ -54,10 +66,5 @@ class WebDispatchListener implements IRemoteListener
 		//
 		this.handler.request.then( onRequestComplete );
 		this.handler.response.then( onResponseComplete );
-
-		//
-		this.handler.request.process( null );
-		this.closed = true;
 	}
-
 }

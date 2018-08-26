@@ -28,10 +28,8 @@ class RequestRouter implements IRequestRouter
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( list:Array<IRouteResponse>, ?e404:ErrorResponse, ?e500:ErrorResponse )
+	public function new( ?e404:ErrorResponse, ?e500:ErrorResponse )
 	{
-		this.list = list;
-
 		this.e404 = e404 != null ? e404 : new ErrorResponse( new RoutingException(Status.NOT_FOUND) );
 		this.e500 = e500 != null ? e500 : new ErrorResponse( new RoutingException(Status.INTERNAL_SERVER_ERROR) );
 
@@ -40,6 +38,8 @@ class RequestRouter implements IRequestRouter
 
 		if( this.e500.exception.code != Status.INTERNAL_SERVER_ERROR )
 			throw "500 ErrorResponse instance invalid: Code is not correct ...";
+
+		this.e404.exception.message = "could not find a suitable response for the given request";
 	}
 
 	// ************************************************************************ //
@@ -75,6 +75,9 @@ class RequestRouter implements IRequestRouter
 	//
 	private function getOption( request:Request ):IRouteResponse
 	{
+		if( this.list == null )
+			this.list = this.createOptions();
+
 		for( option in this.list )
 		{
 			if( option.accepts( request ) )
@@ -82,6 +85,12 @@ class RequestRouter implements IRequestRouter
 		}
 
 		return this.e404;
+	}
+
+	//
+	public dynamic function createOptions():Array<IRouteResponse>
+	{
+		return new Array<IRouteResponse>();
 	}
 
 }

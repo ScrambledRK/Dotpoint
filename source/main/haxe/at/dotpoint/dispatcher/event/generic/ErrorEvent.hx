@@ -76,7 +76,7 @@ class ErrorEvent extends Event
 	{
 		var exception = CallStack.toString( this.exceptionStack );
 		var callstack = CallStack.toString( this.callStack );
-		
+
 		return '$exception\n$callstack';
 	}
 

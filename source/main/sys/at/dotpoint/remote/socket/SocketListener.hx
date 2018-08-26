@@ -5,7 +5,7 @@ import haxe.io.Input;
 import sys.net.Socket;
 
 /**
- * blocking read/write
+ * TODO: use ThreadServer for neko
  */
 class SocketListener implements IRemoteListener
 {
@@ -14,6 +14,7 @@ class SocketListener implements IRemoteListener
 	private var bundle:ClientBundle;
 
 	private var handler:Void->IRemoteHandler<Input,Output>;
+	private var running:Bool;
 
 	// ************************************************************************ //
 	// Constructor
@@ -39,7 +40,13 @@ class SocketListener implements IRemoteListener
 	//
 	public function isRunning():Bool
 	{
-		return true;
+		return this.running;
+	}
+
+	//
+	public function shutdown():Void
+	{
+		this.running = false;
 	}
 
 	/**
@@ -47,16 +54,23 @@ class SocketListener implements IRemoteListener
 	 */
 	public function process():Void
 	{
-		//var bundle:ClientBundle = Socket.select( this.bundle.read, this.bundle.write, this.bundle.others, 0 );
+		if( this.isRunning() )
+			throw "cannot run already running socket listener";
 
-		for( other in bundle.others )
-			this.openClient( other );
+		//
+		this.running = true;
 
-		for( read in bundle.read )
-			cast( read.custom, IRemoteHandler<Dynamic,Dynamic> ).request.process(read.input );
+		while( this.isRunning() )
+		{
+			for( other in bundle.others )
+				this.openClient( other );
 
-		for( write in bundle.write )
-			cast( write.custom, IRemoteHandler<Dynamic,Dynamic> ).response.process(write.output );
+			for( read in bundle.read )
+				cast( read.custom, IRemoteHandler<Dynamic,Dynamic> ).request.process(read.input );
+
+			for( write in bundle.write )
+				cast( write.custom, IRemoteHandler<Dynamic,Dynamic> ).response.process(write.output );
+		}
 	}
 
 	//
