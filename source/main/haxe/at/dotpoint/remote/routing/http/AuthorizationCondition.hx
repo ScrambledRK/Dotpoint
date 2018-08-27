@@ -15,7 +15,7 @@ class AuthorizationCondition implements IRouteCondition
 
 	public function new( )
 	{
-
+		// TODO: Implement Authorization!
 	}
 
 	// ************************************************************************ //

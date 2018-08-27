@@ -74,14 +74,14 @@ abstract MimeType(MimeTypeImpl)
 	@:op(A == B)
 	static public function isEqual( a:MimeType, b:MimeType ):Bool
 	{
-		return a.type == b.type;
+		return a.type.toLowerCase() == b.type.toLowerCase();
 	}
 
 	//
 	@:op(A != B)
 	static public function isNotEqual( a:MimeType, b:MimeType ):Bool
 	{
-		return a.type != b.type;
+		return a.type.toLowerCase() != b.type.toLowerCase();
 	}
 
 	//
