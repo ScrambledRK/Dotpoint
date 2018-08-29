@@ -1,5 +1,5 @@
 package at.dotpoint.math.tensor.vector;
-import at.dotpoint.datastructure.ITensor;
+
 
 /**
  * vector with 2 components (x,y),

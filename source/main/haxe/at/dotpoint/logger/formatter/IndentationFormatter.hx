@@ -17,7 +17,7 @@ class IndentationFormatter implements ILoggerFormatter
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( space:String = "\t" )
+	public function new( space:String = "  " )
 	{
 		this.step = 0;
 		this.space = space;
