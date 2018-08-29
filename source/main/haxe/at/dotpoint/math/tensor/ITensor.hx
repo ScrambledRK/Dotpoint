@@ -1,4 +1,4 @@
-package at.dotpoint.datastructure;
+package at.dotpoint.math.tensor;
 
 
 /**
