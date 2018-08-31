@@ -51,7 +51,7 @@ class ErrorResponse implements IRouteResponse
 
 		var response:Response<Bytes> = new Response<Bytes>();
 			response.body = Bytes.ofString( body );
-			response.header.contentType = MimeType.text;
+			response.header.contentType = MimeType.text.asContentType();
 			response.header.status = this.exception.code;
 
 		callback( response );

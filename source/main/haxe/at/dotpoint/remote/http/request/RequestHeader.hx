@@ -1,5 +1,6 @@
 package at.dotpoint.remote.http.request;
 
+import at.dotpoint.remote.http.header.Accept;
 import at.dotpoint.remote.http.header.LanguageType;
 import at.dotpoint.remote.http.header.EncodingType;
 import at.dotpoint.remote.http.header.MimeType;
@@ -20,7 +21,7 @@ import at.dotpoint.remote.http.header.MimeType;
 class RequestHeader extends Header
 {
 
-	public var accept(get, set):Array<MimeType>;
+	public var accept(get, set):Array<Accept>;
 	public var acceptEncoding(get, set):Array<EncodingType>;
 	public var acceptLanguage(get, set):Array<LanguageType>;
 
@@ -38,12 +39,12 @@ class RequestHeader extends Header
 	// ************************************************************************ //
 
 	//
-	inline private function get_accept( ):Array<MimeType>
+	inline private function get_accept( ):Array<Accept>
 	{
-		return getArray("accept", MimeType.fromString );
+		return getArray("accept", Accept.fromString );
 	}
 
-	inline private function set_accept( value:Array<MimeType> ):Array<MimeType>
+	inline private function set_accept( value:Array<Accept> ):Array<Accept>
 	{
 		return this.setArray( "accept", value );
 	}

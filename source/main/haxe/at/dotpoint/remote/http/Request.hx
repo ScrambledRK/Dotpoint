@@ -1,5 +1,6 @@
 package at.dotpoint.remote.http;
 
+import at.dotpoint.remote.http.header.Accept;
 import at.dotpoint.remote.http.header.MimeType;
 import at.dotpoint.remote.http.request.RequestHeader;
 import at.dotpoint.remote.http.request.Method;
@@ -38,14 +39,16 @@ class Request
 	//
 	public function accepts( mime:MimeType ):Bool
 	{
-		var list:Array<MimeType> = this.header.accept;
+		var list:Array<Accept> = this.header.accept;
+
+		trace("accept:",list);
 
 		if( list == null || list.length == 0 )
 			return false;
 
 		for( v in list )
 		{
-			if( v.type == mime.type )
+			if( v.type == mime )
 				return true;
 		}
 

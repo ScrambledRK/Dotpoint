@@ -1,77 +1,71 @@
 package at.dotpoint.remote.http.header;
 
+import Std;
+import at.dotpoint.exception.NullArgumentException;
+
 /**
- * 
+ * localhost:2007
  */
-typedef HostImpl = { host:String, port:Int }
-//
-abstract Host(HostImpl)
+abstract Host(String) from String to String
 {
 
 	//
-	public var host(get, set):String;
-	public var port(get, set):Int;
+	public var host(get, never):String;
+	public var port(get, never):Int;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
 	//
-	inline public function new( host:String, port:Int )
+	inline public function new( source:String )
 	{
-		this = {
-			host: StringTools.trim( host ).toLowerCase( ),
-			port: port
-		}
+		#if debug
+		if( source == null )
+			throw new NullArgumentException("source");
+
+		if( source.length < 3 || source.indexOf( ":" ) < 0  )
+			throw 'invalid host: $source';
+
+		if( StringTools.trim( source ).toLowerCase() != source )
+			throw 'invalid host formatting: $source';
+
+		//
+		var port = getPort( source );
+
+		if(port == null || port < 0)
+			throw 'invalid host port $port';
+		#end
+
+		//
+		this = source;
 	}
 
 	// ************************************************************************ //
 	// getter/setter
 	// ************************************************************************ //
 
+	//
 	private inline function get_host( ):String
-	{ return this.host; }
+	{
+		return this.split( ":" )[0];
+	}
 
-	private inline function set_host( value:String ):String
-	{ return this.host = StringTools.trim( value ).toLowerCase(); }
-
+	//
 	private inline function get_port( ):Int
-	{ return this.port; }
-
-	private inline function set_port( value:Int ):Int
-	{ return this.port = value; }
-
-	// ************************************************************************ //
-	// Methods
-	// ************************************************************************ //
-
-	//
-	@:op(A == B)
-	static public function isEqual( a:Host, b:Host ):Bool
 	{
-		return a.host == b.host && a.port == b.port;
+		return getPort( this );
 	}
 
 	//
-	@:op(A != B)
-	static public function isNotEqual( a:Host, b:Host ):Bool
+	inline private static function getPort( value:String ):Int
 	{
-		return a.host != b.host || a.port != b.port;
+		return Std.parseInt( value.split( ":" )[1] );
 	}
 
 	//
-	@:from
-	static public function fromString( input:String )
+	static public function fromString( input:String ):Host
 	{
-		var split:Array<String> = input.split( ":" );
-		return new Host( split[0], Std.parseInt( split[1] ) );
+		return new Host( input );
 	}
-
-	//
-	@:to
-	public function toString( ):String
-	{
-		return this.host + ":" + this.port;
-	}
-
 }

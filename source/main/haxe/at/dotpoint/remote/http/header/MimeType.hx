@@ -1,12 +1,12 @@
 package at.dotpoint.remote.http.header;
 
+import at.dotpoint.exception.NullArgumentException;
+
 /**
  * text/html; charset=UTF-8
- * pplication/xhtml+xml,application/xml;q=0.9
+ * application/xhtml+xml,application/xml;q=0.9
  */
-typedef MimeTypeImpl = { type:String, ?q:Float, ?charset:CharSet }
-//
-abstract MimeType(MimeTypeImpl)
+abstract MimeType(String) from String to String
 {
 
 	public static var json(default, never) = new MimeType("application/json");
@@ -22,108 +22,62 @@ abstract MimeType(MimeTypeImpl)
 	public static var all(default, never) = new MimeType("*/*");
 
 	//
-	public var type(get, set):String;
-	public var q(get, set):Float;
-	public var charset(get, set):CharSet;
+	public var type(get, never):String;
+	public var subtype(get, never):String;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
 	//
-	inline public function new( type:String, ?q:Float, ?charset:CharSet )
+	inline public function new( source:String )
 	{
-		this = {
-			type: StringTools.trim( type ).toLowerCase( )
-		};
+		#if debug
+		if( source == null )
+			throw new NullArgumentException("source");
 
-		if( q != null )
-			this.q = q;
+		if( source.length < 3 || source.indexOf( "/" ) < 0  )
+			throw 'invalid mime type: $source';
 
-		if( charset != null )
-			this.charset = charset;
+		if( StringTools.trim( source ).toLowerCase() != source )
+			throw 'invalid mime type formatting: $source';
+		#end
+
+		//
+		this = source;
 	}
 
 	// ************************************************************************ //
 	// getter/setter
 	// ************************************************************************ //
 
-	private inline function get_type( ):String
-	{ return this.type; }
-
-	private inline function set_type( value:String ):String
-	{ return this.type = StringTools.trim( value ).toLowerCase( ); }
-
-	private inline function get_q( ):Float
-	{ return this.q; }
-
-	private inline function set_q( value:Float ):Float
-	{ return this.q = value; }
-
-	private inline function get_charset( ):CharSet
-	{ return this.charset; }
-
-	private inline function set_charset( value:CharSet ):CharSet
-	{ return this.charset = value; }
-
-	// ************************************************************************ //
-	// Methods
-	// ************************************************************************ //
-
 	//
-	@:from
-	static public function fromString( input:String ):MimeType
+	private inline function get_type( ):String
 	{
-		if( input == null )
-			return null;
-
-		//
-		var split:Array<String> = input.split( ";" );
-		var instance:MimeType = new MimeType( split[0] );
-
-		//
-		while( split.length > 0 )
-		{
-			var segment:String = split.shift( );
-			var idx:Int = -1;
-
-			//
-			idx = segment.indexOf( ";q=" );
-
-			if( idx != -1 )
-			{
-				instance.q = Std.parseFloat( segment.substring( idx + 1 ) );
-				continue;
-			}
-
-			//
-			idx = segment.indexOf( "charset=" );
-
-			if( idx != -1 )
-			{
-				instance.charset = input.substring( idx + 1 ).toLowerCase( );
-				continue;
-			}
-		}
-
-		return instance;
+		return this.split( "/" )[0];
 	}
 
 	//
-	@:to
-	public function toString( ):String
+	private inline function get_subtype( ):String
 	{
-		if( this == null )
-			return null;
+		return this.split( "/" )[1];
+	}
 
-		var result:String = this.type;
+	//
+	public function asContentType():ContentType
+	{
+		return new ContentType( this );
+	}
 
-		if( this.q != null && this.q != 1 )
-			result += ";q=" + this.q;
+	//
+	public function asAccept():Accept
+	{
+		return new Accept( this );
+	}
 
-		if( this.charset != null )
-			result += ";charset=" + this.charset;
-
-		return result;
+	//
+	static public function fromString( input:String ):MimeType
+	{
+		return new MimeType( input );
 	}
 }

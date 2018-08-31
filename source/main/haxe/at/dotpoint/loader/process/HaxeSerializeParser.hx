@@ -29,12 +29,11 @@ class HaxeSerializeParser<TResult> extends ADataProcess<String, TResult>
 		try
 		{
 			var unserializer:Unserializer = new Unserializer( this.input );
-			var resolver:TypeResolver = this.getResolver( unserializer.getResolver() );
+			var resolver:TypeResolver = this.getResolver();
 
-			if( resolver == null )
-				throw new NullArgumentException("unserializer-resolver");
+			if( resolver != null )
+				unserializer.setResolver( resolver );
 
-			unserializer.setResolver( resolver );
 			this.result = cast unserializer.unserialize();
 		}
 		catch( error:Dynamic )
@@ -56,8 +55,8 @@ class HaxeSerializeParser<TResult> extends ADataProcess<String, TResult>
 	// ------------------------------------------------------------------------ //
 
 	//
-	public dynamic function getResolver( current:TypeResolver ):TypeResolver
+	public dynamic function getResolver():TypeResolver
 	{
-		return current;
+		return null;
 	}
 }

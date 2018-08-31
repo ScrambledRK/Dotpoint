@@ -54,7 +54,7 @@ class FileResponse extends ConditionList implements IRouteResponse
 
 		var response:Response<Bytes> = new Response<Bytes>();
 			response.body = File.getBytes(file);
-			response.header.contentType = getContentType(file);
+			response.header.contentType = getContentType(file).asContentType();
 
 		callback(response);
 	}

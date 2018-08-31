@@ -1,5 +1,6 @@
 package at.dotpoint.remote.http.response;
 
+import at.dotpoint.remote.http.header.ContentType;
 import at.dotpoint.remote.http.header.Status;
 import at.dotpoint.remote.http.header.MimeType;
 import at.dotpoint.remote.http.header.EncodingType;
@@ -20,7 +21,7 @@ class ResponseHeader extends Header
 {
 
 	public var status:Null<Status>;
-	public var contentType(get, set):MimeType;
+	public var contentType(get, set):ContentType;
 
 	// ************************************************************************ //
 	// Constructor
@@ -39,12 +40,12 @@ class ResponseHeader extends Header
 	// ************************************************************************ //
 
 	//
-	inline private function get_contentType( ):MimeType
+	inline private function get_contentType( ):ContentType
 	{
-		return this.getValue( "content-type", MimeType.fromString );
+		return this.getValue( "content-type", ContentType.fromString );
 	}
 
-	inline private function set_contentType( value:MimeType ):MimeType
+	inline private function set_contentType( value:ContentType ):ContentType
 	{
 		return this.setValue( "content-type", value );
 	}

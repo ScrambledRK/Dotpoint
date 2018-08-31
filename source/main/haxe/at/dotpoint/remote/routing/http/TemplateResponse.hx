@@ -1,5 +1,6 @@
 package at.dotpoint.remote.routing.http;
 
+import at.dotpoint.remote.http.header.ContentType;
 import at.dotpoint.template.TemplateRequest;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.remote.http.header.MimeType;
@@ -17,7 +18,7 @@ class TemplateResponse<TContext> extends ConditionList implements IRouteResponse
 
 	//
 	private var template:Template<TContext>;
-	private var contentType:MimeType;
+	private var contentType:ContentType;
 
 	//
 	public var getChildren(get,set):Void->Array<TemplateRequest>;
@@ -29,13 +30,13 @@ class TemplateResponse<TContext> extends ConditionList implements IRouteResponse
 	// ************************************************************************ //
 
 	//
-	public function new( template:Template<TContext>, ?contentType:MimeType, ?options:Array<IRouteCondition> )
+	public function new( template:Template<TContext>, ?contentType:ContentType, ?options:Array<IRouteCondition> )
 	{
 		super( options );
 
 		//
 		this.template = template;
-		this.contentType = contentType != null ? contentType : MimeType.html;
+		this.contentType = contentType != null ? contentType : MimeType.html.asContentType();
 	}
 
 	// ************************************************************************ //
