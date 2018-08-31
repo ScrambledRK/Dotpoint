@@ -65,7 +65,7 @@ class HttpRequestProcess implements IRemoteProcess<Dynamic>
 		var input:List<{value:String, header:String}> = Web.getClientHeaders();
 
 		for( header in input )
-			this.request.header.set( header.header.toLowerCase(), header.value );
+			this.request.header.set( header.header, header.value );
 	}
 
 	//

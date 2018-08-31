@@ -1,5 +1,6 @@
 package at.dotpoint.remote.http;
 
+import at.dotpoint.remote.http.header.MimeType;
 import at.dotpoint.remote.http.request.RequestHeader;
 import at.dotpoint.remote.http.request.Method;
 import at.dotpoint.remote.http.request.Parameters;
@@ -35,34 +36,20 @@ class Request
 	// ************************************************************************ //
 
 	//
-	public static function decode( input:Array<String>, ?request:Request ):Request
+	public function accepts( mime:MimeType ):Bool
 	{
-		var line:Array<String> = input.shift().split( " " );
+		var list:Array<MimeType> = this.header.accept;
 
-		if( line.length != 3 )
-			throw "invalid header (first-line): " + line;
+		if( list == null || list.length == 0 )
+			return false;
 
-		//
-		if( request == null )
-			request = new Request("");
+		for( v in list )
+		{
+			if( v.type == mime.type )
+				return true;
+		}
 
-		request.url = line[1];
-		request.method = line[0];
-		request.header = cast Header.decode( input, new RequestHeader() );
-
-		return request;
-	}
-
-	public static function encode( input:Request ):Array<String>
-	{
-		var result:Array<String> = new Array<String>();
-			result[0] = input.method + " " + input.url + " HTTP/1.1";
-
-		if( input.header != null )
-			result = result.concat( Header.encode( input.header ) );
-
-		//
-		return result;
+		return false;
 	}
 
 	// ------------------------------------------------------------------------ //

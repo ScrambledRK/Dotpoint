@@ -77,10 +77,7 @@ class ErrorResponse implements IRouteResponse
 			status += '$stack\n\n';
 
 		//
-		var header:String = Header.encode( request.header ).join( "\n" );
-
-		//
-		return status + header;
+		return status + Header.encode( request.header );
 	}
 
 	//

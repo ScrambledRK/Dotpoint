@@ -1,9 +1,9 @@
 package at.dotpoint.remote.web.http;
 
-import at.dotpoint.remote.routing.IRequestRouter;
-import haxe.io.Bytes;
 import at.dotpoint.remote.http.Request;
 import at.dotpoint.remote.http.Response;
+import at.dotpoint.remote.routing.IRequestRouter;
+import haxe.io.Bytes;
 
 #if neko
 private typedef Web = neko.Web;
@@ -46,25 +46,34 @@ class HttpResponseProcess implements IRemoteProcess<Dynamic>
 	{
 		var callback = function( response:Response<Bytes> ):Void
 		{
-			trace(">> response:");
-			trace(response.header.toString());
-			trace(response.body != null ? response.body.toString() : "");
-			trace("<<");
+			trace( ">> response:" );
+			trace( response.header.toString( ) );
 
-			//
-			Web.setReturnCode( response.header.status );
+			if( response.header.status != null )
+				Web.setReturnCode( response.header.status );
 
-			for( key in response.header.keys() )
-				Web.setHeader( key, response.header.get( key ) );
+			for( key in response.header.keys( ) )
+				Web.setHeader( this.getHeaderKey( key ), response.header.get( key ) );
 
-			if( response.body != null)
+			if( response.body != null )
 				Lib.print( response.body.toString() );
+
+			trace( "<<" );
 
 			//
 			this.resolve( );
 		};
 
 		this.router.process( this.request, callback );
+	}
+
+	//
+	inline private function getHeaderKey( key:String ):String
+	{
+		if( key == "content-type" )	 // neko vm: mod_neko issue and/or with the nekotools webserver
+			return "Content-Type";
+
+		return key;
 	}
 
 	//

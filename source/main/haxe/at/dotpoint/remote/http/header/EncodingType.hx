@@ -14,4 +14,9 @@ abstract EncodingType(String) from String to String
 		this = StringTools.trim(i);
 	}
 
+	//
+	static public function fromString( input:String ):EncodingType
+	{
+		return new EncodingType( input );
+	}
 }

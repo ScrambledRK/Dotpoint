@@ -40,83 +40,33 @@ class RequestHeader extends Header
 	//
 	inline private function get_accept( ):Array<MimeType>
 	{
-		var value:String = this.get( "accept" );
-
-		if( value != null )
-		{
-			var input:Array<String> = value.split( "," );
-			var result:Array<MimeType> = new Array<MimeType>();
-
-			for( type in input )
-				result.push( type );
-
-			return result;
-		}
-
-		return null;
+		return getArray("accept", MimeType.fromString );
 	}
 
 	inline private function set_accept( value:Array<MimeType> ):Array<MimeType>
 	{
-		if( value != null )
-		{
-			this.set( "accept", value.join( "," ) );
-		}
-		else
-		{
-			this.remove( "accept" );
-		}
-
-		return value;
+		return this.setArray( "accept", value );
 	}
 
 	//
 	inline private function get_acceptEncoding( ):Array<EncodingType>
 	{
-		var value:String = this.get( "accept-encoding" );
-
-		if( value != null )
-			return value.split( "," );
-
-		return null;
+		return getArray("accept-encoding", EncodingType.fromString );
 	}
 
 	inline private function set_acceptEncoding( value:Array<EncodingType> ):Array<EncodingType>
 	{
-		if( value != null )
-		{
-			this.set( "accept-encoding", value.join( "," ) );
-		}
-		else
-		{
-			this.remove( "accept-encoding" );
-		}
-
-		return value;
+		return setArray("accept-encoding", value );
 	}
 
 	//
 	inline private function get_acceptLanguage( ):Array<LanguageType>
 	{
-		var value:String = this.get( "accept-language" );
-
-		if( value != null )
-			return value.split( "," );
-
-		return null;
+		return getArray("accept-language", LanguageType.fromString );
 	}
 
 	inline private function set_acceptLanguage( value:Array<LanguageType> ):Array<LanguageType>
 	{
-		if( value != null )
-		{
-			this.set( "accept-language", value.join( "," ) );
-		}
-		else
-		{
-			this.remove( "accept-language" );
-		}
-
-		return value;
+		return setArray("accept-language", value );
 	}
 }

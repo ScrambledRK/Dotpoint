@@ -23,7 +23,7 @@ class TemplateParser extends ADataProcess<String, String>
 	/**
 	 *
 	 */
-	public function new( context:Dynamic, ?macros:Dynamic, ?proxy:IEventDispatcher )
+	public function new( ?context:Dynamic, ?macros:Dynamic, ?proxy:IEventDispatcher )
 	{
 		super( proxy );
 

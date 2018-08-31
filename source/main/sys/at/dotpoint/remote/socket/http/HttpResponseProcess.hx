@@ -60,7 +60,8 @@ class HttpResponseProcess implements IRemoteProcess<Output>
 	//
 	private function getHeader( response:Response<Bytes> ):Bytes
 	{
-		return Bytes.ofString( Header.encode( response.header ).join( "\r\n" ) );
+		//return Bytes.ofString( Header.encode( response.header ).join( "\r\n" ) );
+		throw "deprecated method";
 	}
 
 	//

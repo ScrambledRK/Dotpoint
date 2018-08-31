@@ -11,4 +11,9 @@ abstract LanguageType(String) from String to String
 		this = StringTools.trim(i).toLowerCase( );
 	}
 
+	//
+	static public function fromString( input:String ):LanguageType
+	{
+		return new LanguageType( input );
+	}
 }

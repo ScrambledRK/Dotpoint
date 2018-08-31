@@ -1,5 +1,6 @@
 package at.dotpoint.loader;
 
+import at.dotpoint.exception.NullArgumentException;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
@@ -39,6 +40,7 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 		this.onProgress( null );
 
 		//
+		this.loader = this.getLoader();
 		this.loader.input = this.input;
 		this.loader.addListener( ProgressEvent.PROGRESS, this.onProgress );
 		this.loader.addListener( StatusEvent.STOPPED,    this.onLoaderEvent );
@@ -100,6 +102,7 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 				this.onProgress( null );
 
 				//
+				this.parser = this.getParser();
 				this.parser.input = this.loader.result;
 				this.parser.addListener( ProgressEvent.PROGRESS, this.onProgress );
 				this.parser.addListener( StatusEvent.STOPPED,    this.onParserEvent );
@@ -176,19 +179,19 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 	{
 		var current:Float = 0;
 
-		if( this.loader.isComplete || this.parser.isProcessing  )
+		if( this.isLoadingComplete() || this.isParsing() )
 			current = this.ratio;
 
 		if( parent != null )
 		{
-			if( this.loader.isProcessing )
+			if( this.isLoading() )
 				current += parent.getRatio( ) * this.ratio;
 
-			if( this.parser.isProcessing )
+			if( this.isParsing() )
 				current += parent.getRatio( ) * (1 - this.ratio);
 		}
 
-		if( this.parser.isComplete )
+		if( this.isParsingComplete() )
 			current = 1.0;
 
 		//
@@ -197,5 +200,65 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 			event.total = 1;
 
 		this.dispatch( ProgressEvent.PROGRESS, event );
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	public function isLoading():Bool
+	{
+		if( this.loader != null && this.loader.isProcessing )
+			return true;
+
+		return false;
+	}
+
+	//
+	public function isLoadingComplete():Bool
+	{
+		if( this.loader != null && this.loader.isComplete )
+			return true;
+
+		return false;
+	}
+
+	//
+	public function isParsing():Bool
+	{
+		if( this.parser != null && this.parser.isProcessing )
+			return true;
+
+		return false;
+	}
+
+	//
+	public function isParsingComplete():Bool
+	{
+		if( this.parser != null && this.parser.isComplete )
+			return true;
+
+		return false;
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	//
+	private function getLoader():IDataProcess<TInput,TData>
+	{
+		if( this.loader == null )
+			throw new NullArgumentException("loader");
+
+		return this.loader;
+	}
+
+	//
+	private function getParser():IDataProcess<TData,TResult>
+	{
+		if( this.parser == null )
+			throw new NullArgumentException("parser");
+
+		return this.parser;
 	}
 }

@@ -27,7 +27,7 @@ class GraphBuilder<TInput, TOutput>
 	// ************************************************************************ //
 
 	//
-	public function build( table:EdgeTable<TInput>, ?cache:IMap<TInput, TOutput> ):Void
+	public function build( table:GraphEdgeTable<TInput>, ?cache:IMap<TInput, TOutput> ):Void
 	{
 		for( key in table.keys( ) )
 		{

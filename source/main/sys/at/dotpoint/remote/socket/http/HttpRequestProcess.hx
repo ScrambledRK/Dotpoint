@@ -49,7 +49,6 @@ class HttpRequestProcess implements IRemoteProcess<Input>
 				return;
 			}
 
-
 			if( this.isHeaderLine( line ) )
 			{
 				this.buffer.push( line );
@@ -60,7 +59,9 @@ class HttpRequestProcess implements IRemoteProcess<Input>
 			}
 		}
 
-		Request.decode( this.buffer, this.request );
+		//Request.decode( this.buffer, this.request );
+		throw "deprecated method";
+
 		this.resolve();
 	}
 

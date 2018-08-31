@@ -1,21 +1,20 @@
 package at.dotpoint.loader.process;
 
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
-import at.dotpoint.utils.Delay;
-import haxe.Timer;
-import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
-import sys.FileSystem;
-import sys.io.File;
-import haxe.io.Bytes;
-import sys.io.FileInput;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 import at.dotpoint.remote.http.Request;
+import at.dotpoint.utils.Delay;
+import haxe.io.Bytes;
+import haxe.Timer;
+import sys.FileSystem;
+import sys.io.File;
+import sys.io.FileInput;
 
 /**
  *
  */
-class AFileLoader<TResult> extends ADataProcess<Request,TResult>
+class AFileLoader<TResult> extends ADataProcess<Request, TResult>
 {
 
 	//
@@ -37,22 +36,19 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 	{
 		super( proxy );
 
-		this.isBlocking 	= isBlocking;
-		this.readLength 	= readLength;
-		this.readPosition 	= 0;
+		this.isBlocking = isBlocking;
+		this.readLength = readLength;
+		this.readPosition = 0;
 	}
 
 	// ************************************************************************ //
 	// Methodes
 	// ************************************************************************ //
 
-
-	/**
-	 * starts the actions, fires StatusEvents according to the current state
-	 */
+	//
 	override public function start( ):Void
 	{
-		super.start();
+		super.start( );
 
 		//
 		this.setStatus( StatusEvent.STARTED, true );
@@ -68,20 +64,39 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 
 			this.file = File.read( file );
 			this.bytes = Bytes.alloc( FileSystem.stat( file ).size );
-
-			//
-			this.read();
 		}
 		catch( error:Dynamic )
 		{
 			this.error( error );
 		}
+
+		//
+		this.read( );
 	}
+
+	//
+	override public function stop( ):Void
+	{
+		super.stop( );
+		this.clear( );
+
+		this.setStatus( StatusEvent.STOPPED, true );
+	}
+
+	//
+	override public function clear( ):Void
+	{
+		if( this.file != null )
+			this.file.close( );
+	}
+
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
 
 	/**
 	 *
 	 */
-	private function read():Void
+	private function read( ):Void
 	{
 		this.time = Timer.stamp( );
 
@@ -89,7 +104,7 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 			return;
 
 		//
-		this.onProgress();
+		this.onProgress( );
 
 		var p:Int = this.readPosition;
 		var l:Int = this.readLength;
@@ -122,9 +137,9 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 			// --------------------- //
 
 			//
-			if( this.file.eof() || p > this.bytes.length || l <= 0 )
+			if( this.file.eof( ) || p > this.bytes.length || l <= 0 )
 			{
-				this.onComplete( null );
+				this.onComplete();
 				return;
 			}
 
@@ -136,44 +151,11 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 		this.readPosition = p;
 	}
 
-	/**
-	 * stops and removes any dependencies
-	 */
-	override public function stop( ):Void
-	{
-		super.stop();
-		this.clear();
-
-		//
-		this.setStatus( StatusEvent.STOPPED, true );
-	}
-
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
-	// Complete + Error
-
-	/**
-	 *
-	 * @param	event
-	 */
-	private function onComplete( ?event:Dynamic ):Void
-	{
-		this.setResult( );
-		this.setStatus( StatusEvent.COMPLETE, true );
-	}
 
 	//
-	private function setResult( ):Void
-	{
-		throw "must implement setResults method";
-	}
-
-	// ------------------------------------------------------------------------ //
-	// ------------------------------------------------------------------------ //
-	// Status + Progress
-
-	//
-	private function onProgress():Void
+	private function onProgress( ):Void
 	{
 		if( !this.hasListener( ProgressEvent.PROGRESS ) )
 			return;
@@ -185,4 +167,20 @@ class AFileLoader<TResult> extends ADataProcess<Request,TResult>
 
 		this.dispatch( event.type, event );
 	}
+
+	//
+	private function onComplete( ):Void
+	{
+		this.file.close( );
+		this.setResult( );
+
+		this.setStatus( StatusEvent.COMPLETE, true );
+	}
+
+	//
+	private function setResult( ):Void
+	{
+		throw "must implement setResults method";
+	}
+
 }

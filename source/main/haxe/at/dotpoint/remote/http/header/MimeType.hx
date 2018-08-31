@@ -71,26 +71,14 @@ abstract MimeType(MimeTypeImpl)
 	// ************************************************************************ //
 
 	//
-	@:op(A == B)
-	static public function isEqual( a:MimeType, b:MimeType ):Bool
-	{
-		return a.type.toLowerCase() == b.type.toLowerCase();
-	}
-
-	//
-	@:op(A != B)
-	static public function isNotEqual( a:MimeType, b:MimeType ):Bool
-	{
-		return a.type.toLowerCase() != b.type.toLowerCase();
-	}
-
-	//
 	@:from
-	static public function fromString( input:String )
+	static public function fromString( input:String ):MimeType
 	{
-		var split:Array<String> = input.split( ";" );
+		if( input == null )
+			return null;
 
 		//
+		var split:Array<String> = input.split( ";" );
 		var instance:MimeType = new MimeType( split[0] );
 
 		//
@@ -125,9 +113,12 @@ abstract MimeType(MimeTypeImpl)
 	@:to
 	public function toString( ):String
 	{
+		if( this == null )
+			return null;
+
 		var result:String = this.type;
 
-		if( this.q != 1 )
+		if( this.q != null && this.q != 1 )
 			result += ";q=" + this.q;
 
 		if( this.charset != null )

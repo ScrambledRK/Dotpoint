@@ -1,5 +1,7 @@
 package at.dotpoint.loader.process;
 
+import at.dotpoint.remote.http.Header;
+import at.dotpoint.remote.http.response.ResponseHeader;
 import at.dotpoint.remote.http.request.Parameters;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
@@ -15,6 +17,9 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 {
 	//
 	private var loader:XMLHttpRequest;
+
+	public var response:ResponseHeader;
+	public var status:Null<Int>;
 
 	// ************************************************************************ //
 	// Methodes
@@ -54,10 +59,13 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 			url += "?" + Parameters.encode( this.input.parameter );
 
 		//
-		this.setStatus( StatusEvent.STARTED );
+		this.loader.open( this.input.method, url, true );
+
+		for( header in this.input.header.keys() )
+			this.loader.setRequestHeader( header, this.input.header.get( header ) );
 
 		//
-		this.loader.open( this.input.method, url, true );
+		this.setStatus( StatusEvent.STARTED );
 		this.loader.send( );
 	}
 
@@ -97,7 +105,9 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 	 */
 	private function onComplete( ?event:Dynamic ):Void
 	{
+		this.setResponse();
 		this.setResult( );
+
 		this.setStatus( StatusEvent.COMPLETE );
 	}
 
@@ -114,6 +124,13 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 		}
 	}
 
+	//
+	private function setResponse():Void
+	{
+		this.response = new ResponseHeader( this.status );
+		Header.decode( this.loader.getAllResponseHeaders(), this.response );
+	}
+
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 	// Status + Progress
@@ -127,52 +144,20 @@ class AHTTPLoader<TResult> extends ADataProcess<Request,TResult>
 		if( this.loader.readyState != 4 )
 			return;
 
-		//
-		var status:Null<Int> = null;
-
 		try
 		{
-			status = this.loader.status;
+			this.status = this.loader.status;
 		}
 		catch( error:Dynamic )
 		{
-			status = null;
+			this.status = null;
 		}
 
-		// ----------------------- //
+		//
+		if( this.status != null && this.status >= 200 && this.status < 400 )
+			return;
 
-		if( status != null && status >= 200 && status < 400 )
-		{
-			// complete ...
-		}
-		else
-		{
-			var msg:String = "unknown error";
-
-			if( status == null )
-			{
-				msg = "Failed to connect or resolve host";
-			}
-			else if( status == 12029 )
-			{
-				msg = "Failed to connect to host";
-			}
-			else if( status == 12007 )
-			{
-				msg = "Unknown host";
-			}
-			else if( status == 0 )
-			{
-				msg = "Unable to make request (may be blocked due to cross-domain permissions)";
-			}
-			else
-			{
-				msg = "Http Error #" + status;
-			}
-
-			//
-			this.error( msg, status );
-		}
+		this.error( "Unknown XMLHttpRequest Status-Error", this.status );
 	}
 
 	/**

@@ -1,5 +1,8 @@
 package at.dotpoint.template;
 
+import at.dotpoint.loader.IDataProcess;
+import at.dotpoint.loader.process.StringLoader;
+import at.dotpoint.loader.DataRequest;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 import at.dotpoint.remote.http.Request;
 
@@ -12,7 +15,7 @@ class Template<TContext> extends TemplateRequest
 	//
 	public function new( request:Request, ?proxy:IEventDispatcher, ratio:Float = 0.9, weight:Float = 1.0 )
 	{
-		super( request, proxy, this.getParser( ), ratio );
+		super( request, proxy, ratio );
 	}
 
 	// ************************************************************************ //
@@ -20,15 +23,15 @@ class Template<TContext> extends TemplateRequest
 	// ************************************************************************ //
 
 	//
-	private function getParser( ):TemplateParser
+	override private function getLoader():IDataProcess<Request,String>
 	{
-		return new TemplateParser( null, null );
+		return new StringLoader();
 	}
 
 	//
-	override public function start( ):Void
+	override private function getParser( ):IDataProcess<String,String>
 	{
-		var parser:TemplateParser = cast this.parser;	// for possible lazy init/update of context, etc.
+		var parser:TemplateParser = new TemplateParser();
 			parser.setContext( this.getContext() );
 			parser.setMacros( this.getMacros() );
 
@@ -41,8 +44,7 @@ class Template<TContext> extends TemplateRequest
 				parser.addChild( template );
 		}
 
-		//
-		super.start();
+		return parser;
 	}
 
 	// ------------------------------------------------------------------------ //

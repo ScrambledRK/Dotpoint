@@ -19,19 +19,18 @@ import at.dotpoint.remote.http.header.EncodingType;
 class ResponseHeader extends Header
 {
 
-	public var status:Status;
-
-	//
+	public var status:Null<Status>;
 	public var contentType(get, set):MimeType;
-	//public var contentEncoding(get, set):EncodingType;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( code:Status = 200 )
+	public function new( ?code:Status )
 	{
 		super();
+
+		//
 		this.status = code;
 	}
 
@@ -42,20 +41,11 @@ class ResponseHeader extends Header
 	//
 	inline private function get_contentType( ):MimeType
 	{
-		return this.get( "content-type" );
+		return this.getValue( "content-type", MimeType.fromString );
 	}
 
 	inline private function set_contentType( value:MimeType ):MimeType
 	{
-		if( value != null )
-		{
-			this.set( "content-type", value );
-		}
-		else
-		{
-			this.remove( "content-type" );
-		}
-
-		return value;
+		return this.setValue( "content-type", value );
 	}
 }
