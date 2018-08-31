@@ -6,7 +6,7 @@ import haxe.Constraints.IMap;
 /**
  *
  */
-class EdgeTable<TNode> implements IMap<TNode, Array<TNode>>
+class GraphEdgeTable<TNode> implements IMap<TNode, Array<TNode>>
 {
 
 	//
@@ -99,7 +99,7 @@ class EdgeTable<TNode> implements IMap<TNode, Array<TNode>>
 	}
 
 	//
-	public function reverse( output:EdgeTable<TNode> ):EdgeTable<TNode>
+	public function reverse( output:GraphEdgeTable<TNode> ):GraphEdgeTable<TNode>
 	{
 		output.clear( );
 

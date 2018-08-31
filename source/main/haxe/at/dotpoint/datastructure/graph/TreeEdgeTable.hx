@@ -5,7 +5,7 @@ import haxe.Constraints.IMap;
 /**
  *
  */
-class TreeTable<TNode> extends EdgeTable<TNode>
+class TreeEdgeTable<TNode> extends GraphEdgeTable<TNode>
 {
 
 
