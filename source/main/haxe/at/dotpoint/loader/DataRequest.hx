@@ -61,7 +61,7 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 	//
 	override public function clear( ):Void
 	{
-		if( this.loader.isProcessing )
+		if( this.loader != null && this.loader.isProcessing )
 		{
 			this.loader.removeListener( ProgressEvent.PROGRESS, this.onProgress );
 			this.loader.removeListener( StatusEvent.STOPPED,    this.onLoaderEvent );
@@ -69,7 +69,7 @@ class DataRequest<TInput,TData,TResult> extends ADataProcess<TInput,TResult>
 			this.loader.removeListener( ErrorEvent.ERROR,       this.onError );
 		}
 
-		if( this.parser.isProcessing )
+		if( this.parser != null && this.parser.isProcessing )
 		{
 			this.parser.removeListener( ProgressEvent.PROGRESS, this.onProgress );
 			this.parser.removeListener( StatusEvent.STOPPED,    this.onLoaderEvent );

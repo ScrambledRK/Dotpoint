@@ -40,7 +40,7 @@ class ShutdownResponse extends ConditionList implements IRouteResponse
 	public function process(request:Request, callback:Response<Bytes>->Void ):Void
 	{
 		var response:Response<Bytes> = new Response<Bytes>();
-			response.header.contentType = MimeType.text.asContentType();
+			response.header.contentType = MimeType.text;
 
 		callback(response);
 		shutdown(0);

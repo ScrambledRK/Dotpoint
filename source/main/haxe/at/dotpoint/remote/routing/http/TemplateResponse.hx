@@ -36,7 +36,7 @@ class TemplateResponse<TContext> extends ConditionList implements IRouteResponse
 
 		//
 		this.template = template;
-		this.contentType = contentType != null ? contentType : MimeType.html.asContentType();
+		this.contentType = contentType != null ? contentType : MimeType.html;
 	}
 
 	// ************************************************************************ //

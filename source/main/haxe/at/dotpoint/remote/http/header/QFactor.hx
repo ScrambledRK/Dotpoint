@@ -22,4 +22,6 @@ abstract QFactor(Float) from Float to Float
 		this = source;
 	}
 
+	@:op(A > B) static function gt( a:QFactor, b:QFactor ) : Bool;
+	@:op(A < B) static function lt( a:QFactor, b:QFactor ) : Bool;
 }

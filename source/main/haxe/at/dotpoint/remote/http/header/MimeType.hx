@@ -64,12 +64,14 @@ abstract MimeType(String) from String to String
 	}
 
 	//
+	@:to
 	public function asContentType():ContentType
 	{
 		return new ContentType( this );
 	}
 
 	//
+	@:to
 	public function asAccept():Accept
 	{
 		return new Accept( this );

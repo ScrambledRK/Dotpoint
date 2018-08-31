@@ -37,22 +37,35 @@ class Request
 	// ************************************************************************ //
 
 	//
-	public function accepts( mime:MimeType ):Bool
+	public function accepts( possible:Iterable<MimeType> ):MimeType
 	{
 		var list:Array<Accept> = this.header.accept;
 
-		trace("accept:",list);
-
 		if( list == null || list.length == 0 )
-			return false;
+			return null;
 
-		for( v in list )
+		//
+		var st = null;
+		var sq:Float = -1;
+
+		for( p in possible )
 		{
-			if( v.type == mime )
-				return true;
+			for( v in list )
+			{
+				var vq = v.q;
+				var vt = v.type;
+
+				trace(vt+";"+vq);
+
+				if( vt == p && vq > sq )
+				{
+					st = vt;
+					sq = vq;
+				}
+			}
 		}
 
-		return false;
+		return st;
 	}
 
 	// ------------------------------------------------------------------------ //

@@ -1,6 +1,7 @@
 package at.dotpoint.remote.http.header;
 
 import Std;
+import Std;
 import at.dotpoint.exception.NullArgumentException;
 
 /**
@@ -11,7 +12,7 @@ abstract Accept(String) from String to String
 {
 
 	public var type(get, never):MimeType;
-	public var q(get, never):Null<QFactor>;
+	public var q(get, never):QFactor;
 
 	// ************************************************************************ //
 	// Constructor
@@ -24,12 +25,27 @@ abstract Accept(String) from String to String
 		if( source == null )
 			throw new NullArgumentException("source");
 
+		if( source.length < 3 || source.indexOf( "/" ) < 0  )
+			throw 'invalid accept $source';
+
+		if( StringTools.trim( source ).toLowerCase() != source )
+			throw 'invalid accept formatting: $source';
+
 		getType( source );
 		getQFactor( source );
 		#end
 
 		//
 		this = source;
+	}
+
+	//
+	public static function from( type:MimeType, q:QFactor ):Accept
+	{
+		var st:String = Std.string(type);
+		var sq:String = Std.string( q );
+
+		return new Accept( [st,sq].join( ";q=" ) ); // hack to avoid inline and + operation
 	}
 
 	// ************************************************************************ //
@@ -43,7 +59,7 @@ abstract Accept(String) from String to String
 	}
 
 	//
-	inline private function get_q( ):Null<QFactor>
+	inline private function get_q( ):QFactor
 	{
 		return getQFactor( this );
 	}
@@ -51,18 +67,18 @@ abstract Accept(String) from String to String
 	//
 	inline private static function getType( value:String ):MimeType
 	{
-		return new MimeType( value.substring( value.indexOf(";") ) );
+		return new MimeType( value.split(";")[0] );
 	}
 
 	//
-	inline private static function getQFactor( value:String ):Null<QFactor>
+	inline private static function getQFactor( value:String ):QFactor
 	{
 		var idx:Int = value.indexOf( ";q=" );
 
 		if( idx < 0 )
-			return null;
+			return 0;
 
-		return new QFactor( Std.parseFloat( value.substring( idx ) ) );
+		return Std.parseFloat( value.substring( idx + 3 ) );
 	}
 
 	//
