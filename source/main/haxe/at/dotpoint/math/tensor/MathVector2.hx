@@ -95,16 +95,17 @@ class MathVector2
 	 *
 	 * @param	a		vector to use the values from
 	 * @param	b		vector to use the values from
+	 * @param	scale	optional scaling of the given b vector
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	public static function add( a:IVector2, b:IVector2, ?output:IVector2 = null ):IVector2
+	public static function add( a:IVector2, b:IVector2, scale:Float = 1, output:IVector2 = null ):IVector2
 	{
 		if ( output == null )
 			output = new Vector2();
 
-		output.x = a.x + b.x;
-		output.y = a.y + b.y;
+		output.x = a.x + b.x * scale;
+		output.y = a.y + b.y * scale;
 
 		return output;
 	}
@@ -114,16 +115,17 @@ class MathVector2
 	 *
 	 * @param	a		vector to use the values from
 	 * @param	b		vector to use the values from
+	 * @param	scale	optional scaling of the given b vector
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	public static function subtract( a:IVector2, b:IVector2, ?output:IVector2 = null ):IVector2
+	public static function subtract( a:IVector2, b:IVector2, scale:Float = 1, output:IVector2 = null ):IVector2
 	{
 		if ( output == null )
 			output = new Vector2();
 
-		output.x = a.x - b.x;
-		output.y = a.y - b.y;
+		output.x = a.x - b.x * scale;
+		output.y = a.y - b.y * scale;
 
 		return output;
 	}

@@ -106,4 +106,5 @@ class MathBasic
 
 		return value == 1;
 	}
+
 }
