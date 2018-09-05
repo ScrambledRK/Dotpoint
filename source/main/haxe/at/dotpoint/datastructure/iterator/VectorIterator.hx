@@ -5,25 +5,29 @@ import haxe.ds.Vector;
 /**
  *
  */
-class VectorIterator<T> implements IIterator<T>
+class VectorIterator<T> implements IResetIterator<T>
 {
 
 	public var list:Vector<T>;
-	public var filter:T->Bool;
-
-	//
 	private var index:Int;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?list:Vector<T>, ?filter:T->Bool )
+	public function new( list:Vector<T> )
 	{
 		this.list = list;
-		this.filter = filter;
-
 		this.reset();
+	}
+
+	//
+	public function clone():IResetIterator<T>
+	{
+		var result = new VectorIterator<T>( this.list );
+			result.index = this.index;
+
+		return result;
 	}
 
 	// ************************************************************************ //
@@ -39,35 +43,38 @@ class VectorIterator<T> implements IIterator<T>
 	//
 	public function hasNext():Bool
 	{
-		if( this.list.length < this.index )
+		if( this.index >= this.list.length )
 			return false;
 
-		//
-		if( this.filter != null )
+
+		for( j in 0...(list.length - this.index) )
 		{
-			for( j in 0...(list.length - this.index) )
+			var isMatch:Bool = this.filter( list[ this.index + j ] );
+
+			if( isMatch )
 			{
-				var isMatch:Bool = this.filter( list[ this.index + j ] );
-
-				if( isMatch )
-				{
-					this.index += j;	// only set first time, second time j == 0;
-					return true;		// unless list or its items are tempered with ...
-				}
+				this.index += j;	// only set first time, second time j == 0;
+				return true;		// unless list or its items are tempered with ...
 			}
-
-			return false;
 		}
 
-		return true;
+		return false;
 	}
 
 	//
-	public function getNext( checkHasNext:Bool = true ):Null<T>
+	public function next():T
 	{
-		if( !checkHasNext || this.hasNext() )
-			return this.list[this.index++];
+		return this.list[this.index++];
+	}
 
-		return null;
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+
+	/**
+	 * @return true if the given item should be returned on getNext()
+	 */
+	public dynamic function filter( item:T ):Bool
+	{
+		return true;
 	}
 }

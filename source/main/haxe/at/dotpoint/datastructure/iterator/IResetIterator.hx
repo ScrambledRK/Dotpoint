@@ -3,9 +3,11 @@ package at.dotpoint.datastructure.iterator;
 /**
  * 
  */
-interface IIterator<T>
+interface IResetIterator<T>
 {
+	public function clone():IResetIterator<T>;
 	public function reset():Void;
+
 	public function hasNext():Bool;
-	public function getNext( checkHasNext:Bool = true ):Null<T>;
+	public function next():T;
 }

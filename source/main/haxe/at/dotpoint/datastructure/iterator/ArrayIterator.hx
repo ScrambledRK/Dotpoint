@@ -3,25 +3,65 @@ package at.dotpoint.datastructure.iterator;
 /**
  *
  */
-class ArrayIterator<T> implements IIterator<T>
+class ArrayIterator<T> implements IResetIterator<T>
 {
 
 	public var list:Array<T>;
-	public var filter:T->Bool;
 
-	//
+	@:isVar public var startIndex(get,set):Int;
+	@:isVar public var endIndex(get,set):Int;
+
 	private var index:Int;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?list:Array<T>, ?filter:T->Bool )
+	public function new( list:Array<T>, start:Int = 0, end:Int = -1 )
 	{
 		this.list = list;
-		this.filter = filter;
+
+		this.startIndex = start;
+		this.endIndex = end;
 
 		this.reset();
+	}
+
+	//
+	public function clone():IResetIterator<T>
+	{
+		var result = new ArrayIterator<T>( this.list, this.startIndex, this.endIndex );
+			result.index = this.index;
+
+		return result;
+	}
+
+	// ************************************************************************ //
+	// getter / setter
+	// ************************************************************************ //
+
+	//
+	private function get_endIndex( ):Int
+	{
+		return endIndex;
+	}
+
+	//
+	private function set_endIndex( value:Int ):Int
+	{
+		return this.endIndex = value;
+	}
+
+	//
+	private function get_startIndex( ):Int
+	{
+		return startIndex;
+	}
+
+	//
+	private function set_startIndex( value:Int ):Int
+	{
+		return this.startIndex = value;
 	}
 
 	// ************************************************************************ //
@@ -31,41 +71,27 @@ class ArrayIterator<T> implements IIterator<T>
 	//
 	public function reset():Void
 	{
-		this.index = 0;
+		this.index = this.startIndex;
+
+		if( this.index < 0 )
+			this.index = 0;
 	}
 
 	//
 	public function hasNext():Bool
 	{
-		if( this.list.length < this.index )
+		var last:Int = this.endIndex < 0 ? this.list.length : this.endIndex;
+
+		if( this.index >= last )
 			return false;
-
-		//
-		if( this.filter != null )
-		{
-			for( j in 0...(list.length - this.index) )
-			{
-				var isMatch:Bool = this.filter( list[ this.index + j ] );
-
-				if( isMatch )
-				{
-					this.index += j;	// only set first time, second time j == 0;
-					return true;		// unless list or its items are tempered with ...
-				}
-			}
-
-			return false;
-		}
 
 		return true;
 	}
 
 	//
-	public function getNext( checkHasNext:Bool = true ):Null<T>
+	public function next():T
 	{
-		if( !checkHasNext || this.hasNext() )
-			return this.list[this.index++];
-
-		return null;
+		return this.list[this.index++];
 	}
+
 }

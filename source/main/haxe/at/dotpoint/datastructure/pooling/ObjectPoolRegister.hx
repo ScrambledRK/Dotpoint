@@ -90,7 +90,7 @@ class ObjectPoolRegister implements IObjectPoolRegister
 			throw "cannot return index as it is outside bounds: " + index + "(max:" + this.total + ")";
 		
 		if( this.next <= 0 )
-			throw "cannot return index because pool is already empty";
+			throw "cannot return index because pool is already full";
 		
 		#if debug
 			for( i in this.next...this.total )

@@ -119,17 +119,18 @@ class MathVector3
 	 *
 	 * @param	a		vector to use the values from
 	 * @param	b		vector to use the values from
+	 * @param	scale	optional scaling of the given b vector
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	public static function add( a:IVector3, b:IVector3, ?output:IVector3 = null ):IVector3
+	public static function add( a:IVector3, b:IVector3, scale:Float = 1, output:IVector3 = null ):IVector3
 	{
 		if ( output == null )
 			output = new Vector3();
 
-		output.x = a.x + b.x;
-		output.y = a.y + b.y;
-		output.z = a.z + b.z;
+		output.x = a.x + b.x * scale;
+		output.y = a.y + b.y * scale;
+		output.z = a.z + b.z * scale;
 
 		return output;
 	}
@@ -140,17 +141,18 @@ class MathVector3
 	 *
 	 * @param	a		vector to use the values from
 	 * @param	b		vector to use the values from
+	 * @param	scale	optional scaling of the given b vector
 	 * @param	output 	optional vector the result will be stored into or new instance if none provided
 	 * @return			provided `output` vector or a new one with the computational result
 	 */
-	public static function subtract( a:IVector3, b:IVector3, ?output:IVector3 = null ):IVector3
+	public static function subtract( a:IVector3, b:IVector3, scale:Float = 1, output:IVector3 = null ):IVector3
 	{
 		if ( output == null )
 			output = new Vector3();
 
-		output.x = a.x - b.x;
-		output.y = a.y - b.y;
-		output.z = a.z - b.z;
+		output.x = a.x - b.x * scale;
+		output.y = a.y - b.y * scale;
+		output.z = a.z - b.z * scale;
 
 		return output;
 	}
