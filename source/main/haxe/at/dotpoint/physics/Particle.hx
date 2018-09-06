@@ -14,7 +14,7 @@ class Particle implements IParticle
 {
 
 	public var position:IVector3;
-	public var mass:Float;
+	public var properties:ParticleProperties;
 
 	public var velocity:IVector3;
 	public var acceleration:IVector3;
@@ -25,10 +25,10 @@ class Particle implements IParticle
 	// ************************************************************************ //
 
 	//
-	public function new( mass = 0.25 )
+	public function new( ?properties:ParticleProperties )
 	{
 		this.position = new Vector3();
-		this.mass = mass;
+		this.properties = properties != null ? properties : new ParticleProperties();
 
 		this.velocity = new Vector3();
 		this.acceleration = new Vector3();
@@ -45,7 +45,7 @@ class Particle implements IParticle
 		into.position = MathVector3.clone( from.position, into.position );
 		into.velocity = MathVector3.clone( from.velocity, into.velocity );
 		into.force = MathVector3.clone( from.force, into.force );
-		into.mass = from.mass;
+		into.properties = from.properties;
 
 		return into;
 	}
@@ -57,9 +57,12 @@ class Particle implements IParticle
 	//
 	public function update( delta:Float, ?dampening:Float = 0.95 ):Void
 	{
-		MathVector3.add( position, velocity, delta, position ); 		// pos = pos + vel * time
-		MathVector3.add( acceleration, force, mass, acceleration ); 	// acc = acc + force * mass
-		MathVector3.add( velocity, acceleration, delta, velocity ); 	// vel = vel + acc * time;
+		MathVector3.truncate( velocity, this.properties.maxVelocity );
+		MathVector3.truncate( force, this.properties.maxForce );
+
+		MathVector3.add( position, velocity, delta, position ); 						// pos = pos + vel * time
+		MathVector3.add( acceleration, force, this.properties.mass, acceleration ); 	// acc = acc + force * mass
+		MathVector3.add( velocity, acceleration, delta, velocity ); 					// vel = vel + acc * time;
 		MathVector3.scale( velocity, dampening, velocity );
 
 		this.clearForce();

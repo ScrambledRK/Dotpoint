@@ -87,6 +87,17 @@ class MathVector3
 		return a;
 	}
 
+	//
+	inline public static function truncate( a:IVector3, maxLength:Float, ?output:IVector3 ):IVector3
+	{
+		output = MathVector3.clone( a, output );
+
+		if( MathVector3.length( a ) > maxLength )
+			MathVector3.scale( MathVector3.normalize( output ), maxLength, output );
+
+		return output;
+	}
+
 	/**
 	 * squareroot(x^2 + y^2 + z^2) of the given vector.
 	 * does nothing with homogenous w component.
