@@ -14,7 +14,7 @@ class ParticleProperties
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( mass:Float = 0.25, maxVelocity:Float = 100, maxForce:Float = 100 )
+	public function new( mass:Float = 0.25, maxVelocity:Float = 20, maxForce:Float = 20 )
 	{
 		this.mass = mass;
 		this.maxVelocity = maxVelocity;

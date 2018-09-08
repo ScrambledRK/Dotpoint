@@ -36,16 +36,16 @@ class Particle implements IParticle
 	}
 
 	//
-	public static function clone( from:Particle, ?into:Particle ):Particle
+	public function clone( ?into:Particle ):Particle
 	{
 		if( into == null )
 			into = new Particle();
 
-		into.acceleration = MathVector3.clone( from.acceleration, into.acceleration );
-		into.position = MathVector3.clone( from.position, into.position );
-		into.velocity = MathVector3.clone( from.velocity, into.velocity );
-		into.force = MathVector3.clone( from.force, into.force );
-		into.properties = from.properties;
+		into.acceleration = MathVector3.clone( this.acceleration, into.acceleration );
+		into.position = MathVector3.clone( this.position, into.position );
+		into.velocity = MathVector3.clone( this.velocity, into.velocity );
+		into.force = MathVector3.clone( this.force, into.force );
+		into.properties = this.properties;
 
 		return into;
 	}
@@ -55,10 +55,13 @@ class Particle implements IParticle
 	// ************************************************************************ //
 
 	//
-	public function update( delta:Float, ?dampening:Float = 0.95 ):Void
+	public function update( duration:Float, delta:Float, ?dampening:Float = 0.95 ):Void
 	{
-		MathVector3.truncate( velocity, this.properties.maxVelocity );
-		MathVector3.truncate( force, this.properties.maxForce );
+		if( this.properties.mass <= 0 )
+			return;
+
+		//MathVector3.truncate( velocity, this.properties.maxVelocity );
+		//MathVector3.truncate( force, this.properties.maxForce );
 
 		MathVector3.add( position, velocity, delta, position ); 						// pos = pos + vel * time
 		MathVector3.add( acceleration, force, this.properties.mass, acceleration ); 	// acc = acc + force * mass

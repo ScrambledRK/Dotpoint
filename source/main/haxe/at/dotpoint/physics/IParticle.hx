@@ -12,6 +12,6 @@ interface IParticle
 	public var velocity:IVector3;
 	public var force:IVector3;
 
-	public function update( delta:Float, ?dampening:Float ):Void;
+	public function update( duration:Float, delta:Float, ?dampening:Float ):Void;
 	public function stop():Void;
 }

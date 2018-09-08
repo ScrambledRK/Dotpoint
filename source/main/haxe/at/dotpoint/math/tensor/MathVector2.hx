@@ -67,6 +67,17 @@ class MathVector2
 
 		return a;
 	}
+	
+	//
+	inline public static function truncate( a:IVector2, maxLength:Float, ?output:IVector2 ):IVector2
+	{
+		output = MathVector2.clone( a, output );
+
+		if( MathVector2.length( a ) > maxLength )
+			MathVector2.scale( MathVector2.normalize( output ), maxLength, output );
+
+		return output;
+	}
 
 	/**
 	 * squareroot(x^2 + y^2) of the given vector
