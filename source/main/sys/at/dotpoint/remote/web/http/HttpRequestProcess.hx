@@ -44,7 +44,7 @@ class HttpRequestProcess implements IRemoteProcess<Dynamic>
 	//
 	public function process( stream:Dynamic ):Void
 	{
-		this.request.url = haxe.web.Request.getURI();
+		this.request.url = Web.getURI();
 		this.request.method = Web.getMethod();
 
 		this.setHeader();

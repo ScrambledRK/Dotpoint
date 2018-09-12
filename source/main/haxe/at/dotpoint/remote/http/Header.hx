@@ -23,9 +23,9 @@ class Header implements haxe.Constraints.IMap<String,String>
 	// Constructor
 	// ************************************************************************ //
 
-	public function new()
+	public function new( ?table:StringMap<String> )
 	{
-		this.table = new StringMap<String>();
+		this.table = table != null ? table : new StringMap<String>();
 	}
 
 	// ************************************************************************ //
@@ -166,6 +166,12 @@ class Header implements haxe.Constraints.IMap<String,String>
 	public function keys( ):Iterator<String>
 	{
 		return this.table.keys();
+	}
+
+	//
+	public function copy( ):Header
+	{
+		return new Header(this.table.copy() );
 	}
 
 	//

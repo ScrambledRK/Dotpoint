@@ -1,8 +1,8 @@
 package at.dotpoint;
 
-import at.dotpoint.spatial.SpatialTestRunner;
-import at.dotpoint.datastructure.DatastructureTestRunner;
-import at.dotpoint.math.MathTestRunner;
+import utest.ui.Report;
+import at.dotpoint.math.tensor.Vector3Test;
+import at.dotpoint.math.tensor.Vector2Test;
 
 /**
  * ...
@@ -13,12 +13,15 @@ class Main {
 	/**
 	 * 
 	 */
-	static function main() {
-		var math:MathTestRunner = new MathTestRunner();
-		var spatial:SpatialTestRunner = new SpatialTestRunner();
-//		var loader:LoaderTestRunner = new LoaderTestRunner();
-		var byte:DatastructureTestRunner = new DatastructureTestRunner();
-		//var gis:GISTestRunner = new GISTestRunner();
+	static function main()
+	{
+		var runner = new utest.Runner();
+			runner.addCase( new Vector2Test() );
+			runner.addCase( new Vector3Test() );
+
+		Report.create(runner);
+
+		runner.run();
 	}
 
 }

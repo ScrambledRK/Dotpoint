@@ -42,4 +42,10 @@ class TreeEdgeTable<TNode> extends GraphEdgeTable<TNode>
 				throw "tree-graphs are not allowed to have cycles";
 		}
 	}
+
+	//
+	override public function copy( ):TreeEdgeTable<TNode>
+	{
+		return new TreeEdgeTable<TNode>( this.table.copy() );
+	}
 }

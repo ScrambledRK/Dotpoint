@@ -1,8 +1,7 @@
 package at.dotpoint.template;
 
-import at.dotpoint.loader.IDataProcess;
-import at.dotpoint.loader.process.StringLoader;
-import at.dotpoint.loader.DataRequest;
+import at.dotpoint.processor.loader.StringLoader;
+import at.dotpoint.processor.IDataProcess;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 import at.dotpoint.remote.http.Request;
 

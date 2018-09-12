@@ -1,0 +1,17 @@
+-cp source\main\haxe
+-cp source\main\sys
+--each
+
+# library
+--macro "include('at.dotpoint')"
+-dce no
+-neko output\neko\library.n
+--next
+
+# test
+-cp source\test\haxe
+-main at.dotpoint.Main
+-debug
+-lib utest
+-neko output\neko\test.n
+-cmd neko .\output\neko\test.n

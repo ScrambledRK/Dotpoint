@@ -29,7 +29,7 @@ class TickTask extends ATask
 	// ************************************************************************ //
 
 	public function new( ?proxy:IEventDispatcher, ?weight:Float,
-						 ?init:Float->Bool, ?exe:Float->Bool, ?final:Float->Bool )
+						 ?init:Float->Bool, ?exe:Float->Bool, ?finalize:Float->Bool )
 	{
 		super( proxy, weight );
 
@@ -38,7 +38,7 @@ class TickTask extends ATask
 
 		this.onInitialize = init;
 		this.onExecute = exe;
-		this.onFinalize = final;
+		this.onFinalize = finalize;
 	}
 
 	// ************************************************************************ //

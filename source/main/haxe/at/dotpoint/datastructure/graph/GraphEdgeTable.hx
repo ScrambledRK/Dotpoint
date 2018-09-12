@@ -1,5 +1,6 @@
 package at.dotpoint.datastructure.graph;
 
+import at.dotpoint.remote.http.Header;
 import at.dotpoint.exception.NullArgumentException;
 import haxe.Constraints.IMap;
 
@@ -140,6 +141,12 @@ class GraphEdgeTable<TNode> implements IMap<TNode, Array<TNode>>
 	public function exists( k:TNode ):Bool
 	{
 		return this.table.exists( k );
+	}
+
+	//
+	public function copy( ):GraphEdgeTable<TNode>
+	{
+		return new GraphEdgeTable<TNode>(this.table.copy() );
 	}
 
 	//

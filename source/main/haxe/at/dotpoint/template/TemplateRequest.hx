@@ -1,10 +1,11 @@
 package at.dotpoint.template;
 
-import at.dotpoint.loader.IDataProcess;
+
+import at.dotpoint.processor.parser.NullParser;
+import at.dotpoint.processor.loader.StringLoader;
+import at.dotpoint.processor.IDataProcess;
+import at.dotpoint.processor.DataRequest;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
-import at.dotpoint.loader.DataRequest;
-import at.dotpoint.loader.process.NullParser;
-import at.dotpoint.loader.process.StringLoader;
 import at.dotpoint.remote.http.Request;
 
 /**

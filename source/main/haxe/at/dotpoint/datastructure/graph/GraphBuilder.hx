@@ -1,6 +1,6 @@
 package at.dotpoint.datastructure.graph;
 
-import at.dotpoint.exception.AbstractMethodException;
+import at.dotpoint.exception.UnsupportedMethodException;
 import haxe.Constraints.IMap;
 
 /**
@@ -42,13 +42,13 @@ class GraphBuilder<TInput, TOutput>
 	//
 	public dynamic function createNode( input:TInput ):TOutput
 	{
-		throw new AbstractMethodException();
+		throw new UnsupportedMethodException();
 	}
 
 	//
 	public dynamic function connectNodes( a:TOutput, b:TOutput ):Void
 	{
-		throw new AbstractMethodException();
+		throw new UnsupportedMethodException();
 	}
 
 	// ------------------------------------------------------------------------ //

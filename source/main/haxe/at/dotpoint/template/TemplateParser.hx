@@ -1,11 +1,11 @@
 package at.dotpoint.template;
 
+import at.dotpoint.processor.ADataProcess;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.processor.AsyncProcessor;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
-import at.dotpoint.loader.ADataProcess;
 import haxe.Template;
 
 //
