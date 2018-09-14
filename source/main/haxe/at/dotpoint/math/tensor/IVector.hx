@@ -1,5 +1,6 @@
 package at.dotpoint.math.tensor;
 
+import at.dotpoint.math.spatial.Point;
 import at.dotpoint.math.tensor.ITensor.TTensor;
 
 /**
@@ -87,5 +88,6 @@ interface IVector<T:IVector<T>> extends ITensor<T>
 	 */
 	public function reflect( normal:T):T;
 
-
+	//
+	public function distance( b:Point<T>, squared:Bool = false ):Float;
 }

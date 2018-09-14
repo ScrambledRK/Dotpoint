@@ -1,5 +1,6 @@
 package at.dotpoint.math.tensor;
 
+import at.dotpoint.math.spatial.Point;
 import at.dotpoint.math.tensor.Vector2.TVector2;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.exception.RuntimeException;
@@ -360,4 +361,14 @@ class DVector3 implements IVector<Vector3>
 		return sub( project(normal), 2 );
 	}
 
+	//
+	public function distance( b:Point<Vector3>, squared:Bool = false ):Float
+	{
+		var x = this.x - b.x;
+		var y = this.y - b.y;
+		var z = this.z - b.z;
+
+		if( squared )	return x * x + y * y + z * z;
+		else			return Math.sqrt( x * x + y * y + z * z );
+	}
 }
