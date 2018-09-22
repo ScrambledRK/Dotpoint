@@ -36,30 +36,4 @@ class ADataProcess<TInput,TResult> extends ATask implements IDataProcess<TInput,
 		super.start();
 	}
 
-	// ------------------------------------------------------------------------ //
-	// ------------------------------------------------------------------------ //
-
-	//
-	public function then( resolve:TResult -> Void, ?reject:Dynamic -> Void ):Void
-	{
-		var onComplete = function( event:StatusEvent )
-		{
-			resolve( this.result );
-		};
-
-		var onError = function( event:ErrorEvent )
-		{
-			if( reject != null )
-				reject( event );
-		};
-
-		//
-		if( this.isComplete )
-		{
-			resolve( this.result );
-			return;
-		}
-
-		this.addStatusListener( onComplete, onError );
-	}
 }

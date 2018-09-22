@@ -1,15 +1,18 @@
 package at.dotpoint.processor.task;
 
 //
-import haxe.macro.Expr.Error;
-import haxe.PosInfos;
-import haxe.ds.Either;
+import at.dotpoint.dispatcher.StatusPromise;
 import at.dotpoint.dispatcher.event.EventDispatcher;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
+import haxe.PosInfos;
 
+/**
+ *
+ */
+@:access(at.dotpoint.dispatcher.StatusPromise)
 //
 class ATask extends EventDispatcher implements ITask
 {
@@ -73,7 +76,7 @@ class ATask extends EventDispatcher implements ITask
 	//
 	public function clear():Void
 	{
-		//;
+		this.clearListener();
 	}
 
 	// ************************************************************************ //
@@ -127,12 +130,7 @@ class ATask extends EventDispatcher implements ITask
 	// Helper
 	// ************************************************************************ //
 
-	/**
-	 *
-	 * @param	?complete
-	 * @param	?progress
-	 * @param	?error
-	 */
+	//
 	public function addStatusListener( ?complete:StatusEvent -> Void,
 									   ?progress:ProgressEvent -> Void,
 									   ?error:ErrorEvent -> Void ):Void
@@ -143,12 +141,7 @@ class ATask extends EventDispatcher implements ITask
 		if( error != null ) this.addListener( ErrorEvent.ERROR, error );
 	}
 
-	/**
-	 *
-	 * @param	?complete
-	 * @param	?progress
-	 * @param	?error
-	 */
+	//
 	public function removeStatusListener( ?complete:StatusEvent -> Void,
 										  ?progress:ProgressEvent -> Void,
 										  ?error:ErrorEvent -> Void ):Void
@@ -156,5 +149,17 @@ class ATask extends EventDispatcher implements ITask
 		if( complete != null ) this.removeListener( StatusEvent.COMPLETE, complete );
 		if( progress != null ) this.removeListener( ProgressEvent.PROGRESS, progress );
 		if( error != null ) this.removeListener( ErrorEvent.ERROR, error );
+	}
+
+	//
+	public function addStatusPromise( promise:StatusPromise ):Void
+	{
+		this.addStatusListener( promise.complete, promise.progress, promise.error );
+	}
+
+	//
+	public function removeStatusPromise( promise:StatusPromise ):Void
+	{
+		this.removeStatusListener( promise.complete, promise.progress, promise.error );
 	}
 }

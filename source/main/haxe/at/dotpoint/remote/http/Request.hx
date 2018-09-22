@@ -32,6 +32,17 @@ class Request
 		this.header = header != null ? header : new RequestHeader();
 	}
 
+	//
+	public function clone():Request
+	{
+		var header:RequestHeader = cast this.header.copy();
+
+		var result = new Request( this.url, this.method, header );
+			result.parameter = cast this.parameter != null ? this.parameter.copy() : null;
+
+		return result;
+	}
+
 	// ************************************************************************ //
 	// Methods
 	// ************************************************************************ //

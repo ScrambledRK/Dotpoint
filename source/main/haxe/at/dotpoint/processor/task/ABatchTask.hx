@@ -1,5 +1,7 @@
 package at.dotpoint.processor.task;
 
+import at.dotpoint.processor.batch.ITaskProcessor;
+import at.dotpoint.processor.batch.SerialProcessor;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
@@ -8,18 +10,20 @@ import at.dotpoint.dispatcher.event.generic.StatusEvent;
 /**
  *
  */
-class AQueueTask extends ATask
+class ABatchTask extends ATask
 {
 	//
-	private var processor:AsyncProcessor;
+	private var processor:ITaskProcessor;
 
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( ?proxy:IEventDispatcher, ?weight:Float )
+	//
+	public function new( ?processor:ITaskProcessor, ?proxy:IEventDispatcher, ?weight:Float )
 	{
 		super( proxy, weight );
+		this.processor = processor;
 	}
 
 	// ************************************************************************ //
@@ -49,13 +53,22 @@ class AQueueTask extends ATask
 			this.processor.stop( );
 	}
 
+	//
+	override public function clear( ):Void
+	{
+		if( this.processor == null )
+			return;
+
+		this.processor.clear();
+	}
+
 	// ------------------------------------------------------------------------ //
 	// ------------------------------------------------------------------------ //
 
 	//
 	private function initialize( ):Void
 	{
-		this.createProcessor( );
+		this.createProcessor( this.processor );
 	}
 
 	//
@@ -78,12 +91,12 @@ class AQueueTask extends ATask
 	// ************************************************************************ //
 
 	//
-	private function createProcessor( ):Void
+	private function createProcessor( processor:ITaskProcessor ):Void
 	{
-		if( this.processor != null )
-			return;
+		if( processor == null )
+			processor = new SerialProcessor();
 
-		this.processor = new AsyncProcessor( this.target );
+		this.processor = processor;
 		this.processor.addListener( StatusEvent.STARTED, this.onStatus );
 		this.processor.addListener( StatusEvent.STOPPED, this.onStatus );
 		this.processor.addListener( StatusEvent.COMPLETE, this.onStatus );

@@ -1,4 +1,4 @@
-package at.dotpoint.processor;
+package at.dotpoint.processor.batch;
 
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
 import at.dotpoint.processor.task.ITask;
@@ -11,7 +11,7 @@ import at.dotpoint.dispatcher.event.IEventDispatcher;
  * ...
  * @author RK
  */
-class AsyncProcessor extends ATask
+class SerialProcessor extends ATask implements ITaskProcessor
 {
 
 	/**
@@ -124,6 +124,7 @@ class AsyncProcessor extends ATask
 		}
 
 		this.current = -1;
+		this.clearListener();
 	}
 
 	// ------------------------------------------------------------------------ //

@@ -1,9 +1,9 @@
 package at.dotpoint.template;
 
+import at.dotpoint.processor.batch.SerialProcessor;
 import at.dotpoint.processor.ADataProcess;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.dispatcher.event.generic.ProgressEvent;
-import at.dotpoint.processor.AsyncProcessor;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import at.dotpoint.dispatcher.event.IEventDispatcher;
 import haxe.Template;
@@ -18,7 +18,7 @@ class TemplateParser extends ADataProcess<String, String>
 
 	//
 	private var children:Array<TemplateRequest>;
-	private var loader:AsyncProcessor;
+	private var loader:SerialProcessor;
 
 	/**
 	 *
@@ -95,7 +95,7 @@ class TemplateParser extends ADataProcess<String, String>
 
 		if( this.children != null && this.children.length > 0 )
 		{
-			this.loader = new AsyncProcessor();
+			this.loader = new SerialProcessor();
 			this.loader.addStatusListener( this.onComplete, this.onProgress, this.onError );
 
 			for( template in this.children )

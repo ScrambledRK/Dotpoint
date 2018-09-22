@@ -64,7 +64,7 @@ class EventDispatcher implements IEventDispatcher
 	public function dispatch<T:(Event)>( type:String, event:T ):Void
 	{
 		if( event.target == null )
-			event.target = this.target;
+			event.target = this;
 
 		event.currentTarget = this.target;
 
