@@ -1,6 +1,5 @@
 package at.dotpoint.math.tensor;
 
-import at.dotpoint.math.spatial.Point;
 
 /**
  *
@@ -90,5 +89,5 @@ interface IVector<T:IVector<T>> extends ITensor<T>
 	/**
 	 * calculates the (squared) distance between two points
      */
-	public function distance( b:Point<T>, squared:Bool = false ):Float;
+	public function distance( b:T, squared:Bool = false ):Float;
 }

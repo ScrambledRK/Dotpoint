@@ -1,9 +1,7 @@
 package at.dotpoint.math.tensor;
 
-import at.dotpoint.math.spatial.Point;
-import at.dotpoint.exception.RuntimeException;
-import at.dotpoint.math.tensor.ITensor.TTensor;
 import at.dotpoint.exception.IndexBoundsException;
+import at.dotpoint.math.tensor.ITensor.TTensor;
 
 /**
  *
@@ -332,7 +330,7 @@ class DVector2 implements IVector<Vector2>
 	}
 
 	//
-	public function distance( b:Point<Vector2>, squared:Bool = false ):Float
+	public function distance( b:Vector2, squared:Bool = false ):Float
 	{
 		var x = this.x - b.x;
 		var y = this.y - b.y;

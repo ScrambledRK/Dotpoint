@@ -1,8 +1,8 @@
 package at.dotpoint.math.tensor;
 
+import at.dotpoint.math.tensor.Matrix3x3.TMatrix3x3;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.math.tensor.ITensor.TTensor;
-import at.dotpoint.math.tensor.Matrix3x3.TMatrix3x3;
 
 /**
  *

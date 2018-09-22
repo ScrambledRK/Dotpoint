@@ -13,9 +13,6 @@ class AQueueTask extends ATask
 	//
 	private var processor:AsyncProcessor;
 
-	private var time:Float;
-	private var step:Int;
-
 	// ************************************************************************ //
 	// Constructor
 	// ************************************************************************ //
@@ -23,9 +20,6 @@ class AQueueTask extends ATask
 	public function new( ?proxy:IEventDispatcher, ?weight:Float )
 	{
 		super( proxy, weight );
-
-		//
-		this.step = 0;
 	}
 
 	// ************************************************************************ //
@@ -142,8 +136,8 @@ class AQueueTask extends ATask
 	}
 
 	//
-	private function onError( event:ProgressEvent ):Void
+	private function onError( event:ErrorEvent ):Void
 	{
-		this.dispatch( event.type, event );
+		this.error( event );
 	}
 }

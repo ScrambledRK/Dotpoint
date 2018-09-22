@@ -1,5 +1,6 @@
 package at.dotpoint.math.tensor;
 
+import at.dotpoint.exception.RuntimeException;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.math.tensor.ITensor.TTensor;
 
