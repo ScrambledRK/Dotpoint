@@ -52,7 +52,7 @@ class Request
 	{
 		var list:Array<Accept> = this.header.accept;
 
-		if( list == null || list.length == 0 )
+		if( list == null || list.length == 0 )	// TODO: guess accept type by url?
 			return null;
 
 		//
@@ -65,8 +65,6 @@ class Request
 			{
 				var vq = v.q;
 				var vt = v.type;
-
-				trace(vt+";"+vq);
 
 				if( vt == p && vq > sq )
 				{
