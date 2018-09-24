@@ -7,12 +7,12 @@
 --macro "include('at.dotpoint')"
 -dce no
 -js output\javascript\library.js
---next
+#--next
 
 # test
--cp source\test\haxe
--main at.dotpoint.Main
--debug
--lib utest
--js output\javascript\test.js
--cmd node .\output\javascript\test.js
+#-cp source\test\haxe
+#-main at.dotpoint.Main
+#-debug
+#-lib utest
+#-js output\javascript\test.js
+#-cmd node .\output\javascript\test.js

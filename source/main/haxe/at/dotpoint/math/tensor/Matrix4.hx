@@ -1,14 +1,14 @@
 package at.dotpoint.math.tensor;
 
-import at.dotpoint.math.tensor.Matrix3x3.TMatrix3x3;
+import at.dotpoint.math.tensor.Matrix3.TMatrix3;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.math.tensor.ITensor.TTensor;
 
 /**
  *
  */
-typedef TMatrix4x4 = {
-    > TMatrix3x3,
+typedef TMatrix4 = {
+    > TMatrix3,
 
     public var m14:Float;
     public var m24:Float;
@@ -25,12 +25,12 @@ typedef TMatrix4x4 = {
  *
  */
 @:forward
-abstract Matrix4x4(DMatrix4x4) from DMatrix4x4 to DMatrix4x4
+abstract Matrix4(DMatrix4) from DMatrix4 to DMatrix4
 {
 //
     inline public function new()
     {
-        this = new DMatrix4x4();
+        this = new DMatrix4();
     }
 
     // ************************************************************************ //
@@ -39,14 +39,14 @@ abstract Matrix4x4(DMatrix4x4) from DMatrix4x4 to DMatrix4x4
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromDMatrix4x4( from:DMatrix4x4 ):Matrix4x4
+    inline public static function fromDMatrix4x4( from:DMatrix4 ):Matrix4
     {
         return from;
     }
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromIMatrix( from:IMatrix<Matrix4x4> ):Matrix4x4
+    inline public static function fromIMatrix( from:IMatrix<Matrix4> ):Matrix4
     {
 //		#if debug
 //			if( !Std.is( from, Matrix4x4 ) )
@@ -58,9 +58,9 @@ abstract Matrix4x4(DMatrix4x4) from DMatrix4x4 to DMatrix4x4
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromTMatrix( from:TMatrix4x4 ):Matrix4x4
+    inline public static function fromTMatrix( from:TMatrix4 ):Matrix4
     {
-        var result:Matrix4x4 = new Matrix4x4();
+        var result:Matrix4 = new Matrix4();
             result.m11 = from.m11;
             result.m12 = from.m12;
             result.m13 = from.m13;
@@ -83,14 +83,14 @@ abstract Matrix4x4(DMatrix4x4) from DMatrix4x4 to DMatrix4x4
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromArray( from:Array<Float> ):Matrix4x4
+    inline public static function fromArray( from:Array<Float> ):Matrix4
     {
         #if debug
         if( from.length != 9 )
             throw new IndexBoundsException( from.length, 0, 16 );
         #end
 
-        var result:Matrix4x4 = new Matrix4x4();
+        var result:Matrix4 = new Matrix4();
             result.m11 = from[0];
             result.m12 = from[1];
             result.m13 = from[2];
@@ -158,7 +158,7 @@ abstract Matrix4x4(DMatrix4x4) from DMatrix4x4 to DMatrix4x4
 /**
  *
  */
-class DMatrix4x4 implements IMatrix<Matrix4x4>
+class DMatrix4 implements IMatrix<Matrix4>
 {
     public var numComponents(get,never):Float;
     inline private function get_numComponents(){ return 16; }
@@ -179,10 +179,10 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function clone( ?into:Matrix4x4 ):Matrix4x4
+    public function clone( ?into:Matrix4 ):Matrix4
     {
         if( into != null )
-            into = new Matrix4x4();
+            into = new Matrix4();
 
         into.m11 = this.m11; into.m21 = this.m21; into.m31 = this.m31; into.m41 = this.m41;
         into.m12 = this.m12; into.m22 = this.m22; into.m32 = this.m32; into.m42 = this.m42;
@@ -193,7 +193,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function copy( from:TTensor ):Matrix4x4
+    public function copy( from:TTensor ):Matrix4
     {
         m11 = from.get(0); m21 = from.get(4); m31 = from.get(8);  m41 = from.get(12);
         m12 = from.get(1); m22 = from.get(5); m32 = from.get(9);  m42 = from.get(13);
@@ -204,7 +204,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function zero( ):Matrix4x4
+    public function zero( ):Matrix4
     {
         m11 = 0; m21 = 0; m31 = 0; m41 = 0;
         m12 = 0; m22 = 0; m32 = 0; m42 = 0;
@@ -215,7 +215,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function identity( ):Matrix4x4
+    public function identity( ):Matrix4
     {
         m11 = 1; m21 = 0; m31 = 0; m41 = 0;
         m12 = 0; m22 = 1; m32 = 0; m42 = 0;
@@ -226,7 +226,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function transpose():Matrix4x4
+    public function transpose():Matrix4
     {
         var t:Float;
 
@@ -302,7 +302,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function equals( b:Matrix4x4 ):Bool
+    public function equals( b:Matrix4 ):Bool
     {
         return    BasicMath.equals( b.m11, this.m11 )
                && BasicMath.equals( b.m12, this.m12 )
@@ -326,7 +326,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     // -------------------------------------- //
 
     //
-    inline public function add( b:Matrix4x4, scale:Float = 1 ):Matrix4x4
+    inline public function add( b:Matrix4, scale:Float = 1 ):Matrix4
     {
         this.m11 += b.m11 * scale;
         this.m12 += b.m12 * scale;
@@ -352,7 +352,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    inline public function sub( b:Matrix4x4, scale:Float = 1 ):Matrix4x4
+    inline public function sub( b:Matrix4, scale:Float = 1 ):Matrix4
     {
         this.m11 -= b.m11 * scale;
         this.m12 -= b.m12 * scale;
@@ -378,7 +378,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    inline public function scale( scale:Float ):Matrix4x4
+    inline public function scale( scale:Float ):Matrix4
     {
         this.m11 *= scale;
         this.m12 *= scale;
@@ -420,10 +420,10 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function multiply( other:Matrix4x4, asLeft:Bool ):Matrix4x4
+    public function multiply( other:Matrix4, asLeft:Bool ):Matrix4
     {
-        var a:Matrix4x4;
-        var b:Matrix4x4;
+        var a:Matrix4;
+        var b:Matrix4;
 
         //
         if( asLeft )
@@ -464,7 +464,7 @@ class DMatrix4x4 implements IMatrix<Matrix4x4>
     }
 
     //
-    public function inverse():Matrix4x4
+    public function inverse():Matrix4
     {
         var d:Float = determinant();
 

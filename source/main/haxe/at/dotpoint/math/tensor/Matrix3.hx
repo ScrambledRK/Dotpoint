@@ -7,7 +7,7 @@ import at.dotpoint.math.tensor.ITensor.TTensor;
 /**
  *
  */
-typedef TMatrix3x3 = {
+typedef TMatrix3 = {
     > TTensor,
 
     public var m11:Float;
@@ -28,12 +28,12 @@ typedef TMatrix3x3 = {
  *
  */
 @:forward
-abstract Matrix3x3(DMatrix3x3) from DMatrix3x3 to DMatrix3x3
+abstract Matrix3(DMatrix3) from DMatrix3 to DMatrix3
 {
 //
     inline public function new()
     {
-        this = new DMatrix3x3();
+        this = new DMatrix3();
     }
 
     // ************************************************************************ //
@@ -42,14 +42,14 @@ abstract Matrix3x3(DMatrix3x3) from DMatrix3x3 to DMatrix3x3
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromDMatrix3x3( from:DMatrix3x3 ):Matrix3x3
+    inline public static function fromDMatrix3x3( from:DMatrix3 ):Matrix3
     {
         return from;
     }
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromIMatrix( from:IMatrix<Matrix3x3> ):Matrix3x3
+    inline public static function fromIMatrix( from:IMatrix<Matrix3> ):Matrix3
     {
 //		#if debug
 //			if( !Std.is( from, Matrix3x3 ) )
@@ -61,9 +61,9 @@ abstract Matrix3x3(DMatrix3x3) from DMatrix3x3 to DMatrix3x3
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromTMatrix( from:TMatrix3x3 ):Matrix3x3
+    inline public static function fromTMatrix( from:TMatrix3 ):Matrix3
     {
-        var result:Matrix3x3 = new Matrix3x3();
+        var result:Matrix3 = new Matrix3();
             result.m11 = from.m11;
             result.m12 = from.m12;
             result.m13 = from.m13;
@@ -79,14 +79,14 @@ abstract Matrix3x3(DMatrix3x3) from DMatrix3x3 to DMatrix3x3
 
     //
     @:from @:noDoc @:noCompletion
-    inline public static function fromArray( from:Array<Float> ):Matrix3x3
+    inline public static function fromArray( from:Array<Float> ):Matrix3
     {
         #if debug
         if( from.length != 9 )
             throw new IndexBoundsException( from.length, 0, 9 );
         #end
 
-        var result:Matrix3x3 = new Matrix3x3();
+        var result:Matrix3 = new Matrix3();
             result.m11 = from[0];
             result.m12 = from[1];
             result.m13 = from[2];
@@ -140,7 +140,7 @@ abstract Matrix3x3(DMatrix3x3) from DMatrix3x3 to DMatrix3x3
 /**
  *
  */
-class DMatrix3x3 implements IMatrix<Matrix3x3>
+class DMatrix3 implements IMatrix<Matrix3>
 {
     public var numComponents(get,never):Float;
     inline private function get_numComponents(){ return 9; }
@@ -160,10 +160,10 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function clone( ?into:Matrix3x3 ):Matrix3x3
+    public function clone( ?into:Matrix3 ):Matrix3
     {
-        if( into != null )
-            into = new Matrix3x3();
+        if( into == null )
+            into = new Matrix3();
 
         into.m11 = this.m11; into.m21 = this.m21; into.m31 = this.m31;
         into.m12 = this.m12; into.m22 = this.m22; into.m32 = this.m32;
@@ -173,7 +173,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function copy( from:TTensor ):Matrix3x3
+    public function copy( from:TTensor ):Matrix3
     {
         m11 = from.get(0); m21 = from.get(3); m31 = from.get(6);
         m12 = from.get(1); m22 = from.get(4); m32 = from.get(7);
@@ -183,7 +183,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function zero( ):Matrix3x3
+    public function zero( ):Matrix3
     {
         m11 = 0; m21 = 0; m31 = 0;
         m12 = 0; m22 = 0; m32 = 0;
@@ -193,7 +193,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function identity( ):Matrix3x3
+    public function identity( ):Matrix3
     {
         m11 = 1; m21 = 0; m31 = 0;
         m12 = 0; m22 = 1; m32 = 0;
@@ -203,7 +203,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function transpose():Matrix3x3
+    public function transpose():Matrix3
     {
         var t:Float;
 
@@ -263,7 +263,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function equals( b:Matrix3x3 ):Bool
+    public function equals( b:Matrix3 ):Bool
     {
         return    BasicMath.equals( b.m11, this.m11 )
                && BasicMath.equals( b.m12, this.m12 )
@@ -280,7 +280,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     // -------------------------------------- //
 
     //
-    inline public function add( b:Matrix3x3, scale:Float = 1 ):Matrix3x3
+    inline public function add( b:Matrix3, scale:Float = 1 ):Matrix3
     {
         this.m11 += b.m11 * scale;
         this.m12 += b.m12 * scale;
@@ -298,7 +298,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    inline public function sub( b:Matrix3x3, scale:Float = 1 ):Matrix3x3
+    inline public function sub( b:Matrix3, scale:Float = 1 ):Matrix3
     {
         this.m11 -= b.m11 * scale;
         this.m12 -= b.m12 * scale;
@@ -316,7 +316,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    inline public function scale( scale:Float ):Matrix3x3
+    inline public function scale( scale:Float ):Matrix3
     {
         this.m11 *= scale;
         this.m12 *= scale;
@@ -348,10 +348,10 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function multiply( other:Matrix3x3, asLeft:Bool ):Matrix3x3
+    public function multiply( other:Matrix3, asLeft:Bool ):Matrix3
     {
-        var a:Matrix3x3;
-        var b:Matrix3x3;
+        var a:Matrix3;
+        var b:Matrix3;
 
         //
         if( asLeft )
@@ -384,7 +384,7 @@ class DMatrix3x3 implements IMatrix<Matrix3x3>
     }
 
     //
-    public function inverse():Matrix3x3
+    public function inverse():Matrix3
     {
         var d:Float = determinant();
 

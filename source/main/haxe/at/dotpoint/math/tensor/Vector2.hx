@@ -38,7 +38,7 @@ abstract Vector2(DVector2) from DVector2 to DVector2
 
 	//
 	@:from @:noDoc @:noCompletion
-	inline public static function fromIVector( from:IVector<Vector2> ):Vector2
+	inline public static function fromIVector( from:IVector<Vector2,Matrix3> ):Vector2
 	{
 //		#if debug
 //			if( !Std.is( from, DVector2 ) )
@@ -97,7 +97,7 @@ abstract Vector2(DVector2) from DVector2 to DVector2
 /**
  *
  */
-class DVector2 implements IVector<Vector2>
+class DVector2 implements IVector<Vector2,Matrix3>
 {
 
 	public var numComponents(get,never):Float;
@@ -338,4 +338,17 @@ class DVector2 implements IVector<Vector2>
 		if( squared )	return x * x + y * y;
 		else			return Math.sqrt( x * x + y * y );
 	}
+
+	//
+	public function transform( b:Matrix3 ):Vector2
+	{
+		var x = this.x;
+		var y = this.y;
+
+		this.x = b.m11 * x + b.m21 * y + b.m31;
+		this.y = b.m12 * x + b.m22 * y + b.m32;
+
+		return this;
+	}
+
 }

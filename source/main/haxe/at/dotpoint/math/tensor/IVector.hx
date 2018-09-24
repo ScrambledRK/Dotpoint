@@ -4,7 +4,7 @@ package at.dotpoint.math.tensor;
 /**
  *
  */
-interface IVector<T:IVector<T>> extends ITensor<T>
+interface IVector<T:IVector<T,M>,M:IMatrix<M>> extends ITensor<T>
 {
 
 	/**
@@ -90,4 +90,10 @@ interface IVector<T:IVector<T>> extends ITensor<T>
 	 * calculates the (squared) distance between two points
      */
 	public function distance( b:T, squared:Bool = false ):Float;
+
+	/**
+	 * row vector multiplication. 'this' will change.
+	 * @return self for chain-method calling
+	 */
+	public function transform( b:M ):T;
 }
