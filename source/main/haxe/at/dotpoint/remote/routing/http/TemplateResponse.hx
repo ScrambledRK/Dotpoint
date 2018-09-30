@@ -1,14 +1,14 @@
 package at.dotpoint.remote.routing.http;
 
 import at.dotpoint.remote.http.header.ContentType;
-import at.dotpoint.template.TemplateRequest;
+import at.dotpoint.datastructure.template.TemplateRequest;
 import at.dotpoint.dispatcher.event.generic.ErrorEvent;
 import at.dotpoint.remote.http.header.MimeType;
 import at.dotpoint.dispatcher.event.generic.StatusEvent;
 import haxe.io.Bytes;
 import at.dotpoint.remote.http.Response;
 import at.dotpoint.remote.http.Request;
-import at.dotpoint.template.Template;
+import at.dotpoint.datastructure.template.Template;
 
 /**
  *

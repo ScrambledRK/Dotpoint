@@ -30,16 +30,6 @@ class FileOperations
 			recursion = FileRecursion.NONE;
 
 		//
-		var getFileName:String->String = function( path:String ):String
-		{
-			var c1:Int = path.indexOf( "/" );
-			var c2:Int = path.indexOf( "\\" );
-			var index:Int = c2 > c1 ? c2 : c1;
-
-			return path.substring( index + 1 );
-		}
-
-		//
 		switch( recursion )
 		{
 			case FileRecursion.DEPTH_FIRST:
@@ -50,7 +40,7 @@ class FileOperations
 					var isDirectory:Bool = FileSystem.isDirectory( path );
 
 					//
-					if( !callback( getFileName(file), isDirectory ) )
+					if( !callback( path, isDirectory ) )
 						return;
 
 					if( isDirectory )
@@ -66,7 +56,7 @@ class FileOperations
 					var isDirectory:Bool = FileSystem.isDirectory( path );
 
 					//
-					if( !callback( getFileName(file), isDirectory ) )
+					if( !callback( path, isDirectory ) )
 						return;
 				}
 			}
@@ -81,8 +71,8 @@ class FileOperations
 
 		var onFile = function( file:String, isDirectory:Bool ):Bool
 		{
-			var s:String = Path.join( [source, file] );
-			var t:String = Path.join( [target, file] );
+			var s:String = file;
+			var t:String = Path.join( [target, relativeTo( file, source ) ] );
 
 			FileOperations.assertExistence( s, isDirectory );
 
@@ -115,40 +105,56 @@ class FileOperations
 		}
 
 		//
+		var files:Array<String> = [];
+		var directories:Array<String> = [];
+
 		var onFile = function( file:String, isDirectory:Bool ):Bool
 		{
-			if( isDirectory )
-				return true;
-
-			//
-			var target:String = Path.join( [directory, file] );
-
-			FileOperations.assertExistence( target, false );
-			FileSystem.deleteFile( target );
-
-			return true;
-		};
-
-		//
-		var onDirectory = function( file:String, isDirectory:Bool ):Bool
-		{
-			var target:String = Path.join( [directory, file] );
-
-			FileOperations.assertExistence( target, true );
-			FileSystem.deleteDirectory( target );
+			if( isDirectory ) directories.unshift( file );
+			else files.push( file );
 
 			return true;
 		};
 
 		FileOperations.iterate( directory, onFile, FileRecursion.DEPTH_FIRST );
-		FileOperations.iterate( directory, onDirectory, FileRecursion.DEPTH_FIRST );
+
+		//
+		for( file in files )
+		{
+			FileOperations.assertExistence( file, false );
+			FileSystem.deleteFile( file );
+		}
+
+		//
+		for( dir in directories )
+		{
+			FileOperations.assertExistence( dir, true );
+			FileSystem.deleteDirectory( dir );
+		}
+	}
+
+	//
+	public static function relativeTo( file:String, base:String ):String
+	{
+		var index = file.lastIndexOf( base );
+
+		if( index < 0 )
+			throw '$file does not share $base';
+
+		return file.substring( index + base.length, file.length );
 	}
 
 	//
 	public static function assertExistence( file:String, asDirectory:Bool ):Void
 	{
-		if( !FileSystem.exists( file ) || FileSystem.isDirectory( file ) != asDirectory )
-			throw 'File $file does not exist or should have been a directory ($asDirectory)';
+		if( !FileSystem.exists( file ) )
+			throw 'File $file does not exist (directory: $asDirectory)';
+
+		if( FileSystem.isDirectory( file ) != asDirectory )
+		{
+			var type = asDirectory ? "directory" : "file";
+			throw '$file should have been a $type';
+		}
 	}
 }
 

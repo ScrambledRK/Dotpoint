@@ -11,9 +11,9 @@ class UnsupportedMethodException extends RuntimeException
 	// Constructor
 	// ************************************************************************ //
 
-	public function new( isAbstract:Bool = true )
+	public function new( ?message:String )
 	{
-		super( isAbstract ? 'must override the method' : 'method call is not allowed' );
+		super( message != null ? message : 'method call is not allowed' );
 	}
 
 	// ************************************************************************ //

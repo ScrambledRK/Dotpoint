@@ -6,8 +6,8 @@ package at.dotpoint.datastructure.iterator;
 class TransformIterator<TFrom,TTo> implements IResetIterator<TTo>
 {
 
-	public var proxy:IResetIterator<TFrom>;
-	public var transform:TFrom->TTo;
+	public var proxy(default,null):IResetIterator<TFrom>;
+	public var transform(default,null):TFrom->TTo;
 
 	// ************************************************************************ //
 	// Constructor

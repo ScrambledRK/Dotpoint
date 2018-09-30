@@ -19,6 +19,7 @@ abstract MimeType(String) from String to String
 	public static var javascript(default, never) = new MimeType("text/javascript");
 	public static var webp(default, never) = new MimeType("image/webp");
 	public static var png(default, never) = new MimeType("image/apng");
+	public static var jpg(default, never) = new MimeType("image/jpg");
 	public static var all(default, never) = new MimeType("*/*");
 
 	//

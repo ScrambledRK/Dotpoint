@@ -356,7 +356,7 @@ class DMatrix3 implements IMatrix<Matrix3>
         //
         if( asLeft )
         {
-            a = this.clone();
+            a = this.clone();   // TODO: performance stack vs. heap
             b = other;
         }
         else

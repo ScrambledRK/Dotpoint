@@ -1,4 +1,4 @@
-package at.dotpoint.template;
+package at.dotpoint.datastructure.template;
 
 import at.dotpoint.processor.loader.StringLoader;
 import at.dotpoint.processor.IDataProcess;

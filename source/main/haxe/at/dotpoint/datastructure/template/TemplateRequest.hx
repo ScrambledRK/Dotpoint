@@ -1,4 +1,4 @@
-package at.dotpoint.template;
+package at.dotpoint.datastructure.template;
 
 
 import at.dotpoint.processor.parser.NullParser;

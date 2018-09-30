@@ -31,6 +31,15 @@ class SysOutputLogger extends BaseLogger implements ILogger
 	 */
 	public function log( type:LogType, msg:Dynamic, info:PosInfos ):Void
 	{
-		Sys.println( this.formatter.format( type, msg, info ) );
+		var output = this.formatter.format( type, msg, info ) + "\n\r";
+
+		switch( type )
+		{
+			case LogType.ERROR:
+				Sys.stdout().writeString( output );
+
+			default:
+				Sys.stdout().writeString( output );
+		}
 	}
 }

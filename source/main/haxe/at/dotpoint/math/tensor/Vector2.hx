@@ -120,7 +120,7 @@ class DVector2 implements IVector<Vector2,Matrix3>
 	//
 	public function clone( ?into:Vector2 ):Vector2
 	{
-		if( into != null )
+		if( into == null )
 			into = new Vector2();
 
 		into.x = this.x;
