@@ -38,6 +38,12 @@ interface ITensor<T:ITensor<T>>
 	 * @return new tensor
 	 */
 	public function clone( ?into:T):T;
+	
+	/**
+	 * copy values from given vector into this
+	 * @return new tensor
+	 */
+	public function from( from:T):T;
 
 	/**
 	 * copy values from given tensor into this

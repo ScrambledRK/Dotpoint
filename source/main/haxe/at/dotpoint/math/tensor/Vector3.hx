@@ -131,6 +131,16 @@ class DVector3 implements IVector<Vector3,Matrix3>
 
 		return into;
 	}
+	
+	//
+	public function from( from:Vector3 ):Vector3
+	{
+		this.x = from.x;
+		this.y = from.y;
+		this.z = from.z;
+
+		return this;
+	}
 
 	//
 	public function copy( from:TTensor ):Vector3

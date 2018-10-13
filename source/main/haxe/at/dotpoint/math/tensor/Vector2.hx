@@ -92,6 +92,20 @@ abstract Vector2(DVector2) from DVector2 to DVector2
 		return this.set( index, value );
 	}
 
+	// ------------------------------------------------------------------------ //
+	// ------------------------------------------------------------------------ //
+	// etc
+
+	//
+	public function flip():Vector2
+	{
+		var x = this.x;
+		var y = this.y;
+		this.x = y;
+		this.y = x;
+
+		return this;
+	}
 }
 
 /**
@@ -115,6 +129,15 @@ class DVector2 implements IVector<Vector2,Matrix3>
 	{
 		this.x = x;
 		this.y = y;
+	}
+
+	//
+	public function from( from:Vector2 ):Vector2
+	{
+		this.x = from.x;
+		this.y = from.y;
+
+		return this;
 	}
 
 	//
@@ -351,4 +374,9 @@ class DVector2 implements IVector<Vector2,Matrix3>
 		return this;
 	}
 
+	//
+	public function toString():String
+	{
+		return '{$x,$y}';
+	}
 }

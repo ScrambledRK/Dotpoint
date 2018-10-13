@@ -1,8 +1,8 @@
 package at.dotpoint.math.tensor;
 
-import at.dotpoint.math.tensor.Matrix3.TMatrix3;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.math.tensor.ITensor.TTensor;
+import at.dotpoint.math.tensor.Matrix3.TMatrix3;
 
 /**
  *
@@ -199,6 +199,17 @@ class DMatrix4 implements IMatrix<Matrix4>
         m12 = from.get(1); m22 = from.get(5); m32 = from.get(9);  m42 = from.get(13);
         m13 = from.get(2); m23 = from.get(6); m33 = from.get(10); m43 = from.get(14);
         m14 = from.get(3); m24 = from.get(7); m34 = from.get(11); m44 = from.get(15);
+
+        return this;
+    }
+
+    //
+    public function from( from:Matrix4 ):Matrix4
+    {
+        m11 = from.m11; m21 = from.m21; m31 = from.m31; m41 = from.m41;
+        m12 = from.m12; m22 = from.m22; m32 = from.m32; m42 = from.m42;
+        m13 = from.m13; m23 = from.m23; m33 = from.m33; m43 = from.m43;
+        m14 = from.m14; m24 = from.m24; m34 = from.m34; m44 = from.m44;
 
         return this;
     }

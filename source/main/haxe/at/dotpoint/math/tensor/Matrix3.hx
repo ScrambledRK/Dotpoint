@@ -1,6 +1,5 @@
 package at.dotpoint.math.tensor;
 
-import at.dotpoint.exception.RuntimeException;
 import at.dotpoint.exception.IndexBoundsException;
 import at.dotpoint.math.tensor.ITensor.TTensor;
 
@@ -170,6 +169,16 @@ class DMatrix3 implements IMatrix<Matrix3>
         into.m13 = this.m13; into.m23 = this.m23; into.m33 = this.m33;
 
         return into;
+    }
+
+    //
+    public function from( from:Matrix3 ):Matrix3
+    {
+        m11 = from.m11; m21 = from.m21; m31 = from.m31;
+        m12 = from.m12; m22 = from.m22; m32 = from.m32;
+        m13 = from.m13; m23 = from.m23; m33 = from.m33;
+
+        return this;
     }
 
     //
